@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Android 逆向,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于Android逆向所需的密码学基础进行简单总结。">
+<meta name="keywords" content="Android 逆向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学基础">
+<meta property="og:url" content="http://yoursite.com/2019/04/29/密码学基础/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于Android逆向所需的密码学基础进行简单总结。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/1.webp">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/15.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/16.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/17.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/18.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/29/密码学基础/19.png">
+<meta property="og:updated_time" content="2019-07-09T13:55:13.780Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="密码学基础">
+<meta name="twitter:description" content="对于Android逆向所需的密码学基础进行简单总结。">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/29/密码学基础/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/29/密码学基础/">
+
+
+
+
+
+  <title>密码学基础 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/29/密码学基础/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">密码学基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-29T20:42:49+08:00">
+                2019-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/29/密码学基础/" class="leancloud_visitors" data-flag-title="密码学基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于Android逆向所需的密码学基础进行简单总结。</p>
+<a id="more"></a>
+<h2 id="1-密码学基本概念"><a href="#1-密码学基本概念" class="headerlink" title="1.密码学基本概念"></a>1.密码学基本概念</h2><ul>
+<li>明文M：原始数据，待加密的数据</li>
+<li>密文C：对明文进行某种伪装或变换后的输出</li>
+<li>密钥K：加密或解密中所使用的专门工具</li>
+<li>加密E：用某种方法将明文变成密文的过程</li>
+<li>解密D：将密文恢复成明文的过程</li>
+</ul>
+<hr>
+<p>密码学（Cryptography）一般可分为古典密码学和现代密码学。</p>
+<p>其中，古典密码学，作为一种实用性艺术存在，其编码和破译通常依赖于设计者和敌手的创造力与技巧，并没有对密码学原件进行清晰的定义。古典密码学主要包含以下几个方面：</p>
+<ul>
+<li>单表替换加密（Monoalphabetic Cipher）</li>
+<li>多表替换加密（Polyalphabetic Cipher）</li>
+<li>奇奇怪怪的加密方式</li>
+</ul>
+<p>而现代密码学则起源于 20 世纪中后期出现的大量相关理论，1949 年香农（C. E. Shannon）发表了题为《保密系统的通信理论》的经典论文标志着现代密码学的开始。现代密码学主要包含以下几个方面：</p>
+<ul>
+<li>对称加密（Symmetric Cryptography），以 DES，AES，RC4 为代表。</li>
+<li>非对称加密（Asymmetric Cryptography），以 RSA，ElGamal，椭圆曲线加密为代表。</li>
+<li>哈希函数（Hash Function），以 MD5，SHA-1，SHA-512 等为代表。</li>
+<li>数字签名（Digital Signature），以 RSA 签名，ElGamal 签名，DSA 签名为代表。</li>
+</ul>
+<p>其中，对称加密体制主要分为两种方式：</p>
+<ul>
+<li>分组密码（Block Cipher），又称为块密码。</li>
+<li>序列密码（Stream Cipher），又称为流密码。</li>
+</ul>
+<p>一般来说，密码设计者的根本目标是保障信息及信息系统的</p>
+<ul>
+<li>机密性（Confidentiality）</li>
+<li>完整性（Integrity）</li>
+<li>可用性（Availability）</li>
+<li>认证性（Authentication）</li>
+<li>不可否认性（Non-repudiation）</li>
+</ul>
+<p>其中，前三者被称为信息安全的 CIA 三要素 。</p>
+<h2 id="2-古典密码学"><a href="#2-古典密码学" class="headerlink" title="2.古典密码学"></a>2.古典密码学</h2><p>古典密码是密码学中的其中一个类型，其大部分加密方式都是利用替换式密码或移项式密码，有时则是两者的混合。其于历史中经常使用，但现代已经很少使用，大部分的已经不再使用了。</p>
+<h3 id="1-替换式密码"><a href="#1-替换式密码" class="headerlink" title="(1)替换式密码"></a>(1)替换式密码</h3><p>又名取代加密法，是密码学中按规律将文字加密的一种方式。替换式密码中可以用不同字母数为一单元，例如每一个或两个字母为一单元，然后再作加密。密文接收者解密时需用原加密方式解码才可取得原文本。由于拼音文字中字的组成为有限的字母，以英语为例只有26个字母，组成可能的单元数较少，因此使用替换式密码相对较为容易，而且亦可使用简单机械进行加密；相反，非拼音文字如中文则因单元数非常大难以使用一般加密方式，必需建立密码本，然后逐字替换。</p>
+<ul>
+<li>凯撒密码</li>
+<li>维吉尼亚密码</li>
+</ul>
+<h3 id="2-移项式密码"><a href="#2-移项式密码" class="headerlink" title="(2)移项式密码"></a>(2)移项式密码</h3><p>移位式密码，它们字母本身不变，但它们在消息中顺序是依照一个定义明确的项目改变。许多移位式密码是基于几何而设计的。一个简单的加密（也易被破解），可以将字母向右移1位。例如，明文”Hello my name is Alice.”将变成”olleH ym eman si ecilA.”。</p>
+<h2 id="3-现代密码学基础"><a href="#3-现代密码学基础" class="headerlink" title="3.现代密码学基础"></a>3.现代密码学基础</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h3><h4 id="1-密码学的分类"><a href="#1-密码学的分类" class="headerlink" title="(1)密码学的分类"></a>(1)密码学的分类</h4><ul>
+<li>密码编码学——设计和研究密码通信系统，使其传递的信息具有很强的保密性和认证性的学科。</li>
+<li>密码分析学——研究如何从密文推出明文、密钥或解密算法的学科。</li>
+<li>密钥管理学——研究密钥的产生、分配、存储、传递、装入、丢失、销毁以及保护等内容的学科。</li>
+</ul>
+<h4 id="2-密码理论与技术"><a href="#2-密码理论与技术" class="headerlink" title="(2)密码理论与技术"></a>(2)密码理论与技术</h4><ol>
+<li>基于数学的密码理论与技术——公钥密码、分组密码、序列密码、认证码、数字签名、Hash函数、身份识别、密钥管理、PKI 技术、VPN  技术等。</li>
+<li>非数学的密码理论与技术——信息隐藏、量子密码、基于生物特征的识别理论与技术等。</li>
+</ol>
+<h4 id="3-通用密码系统"><a href="#3-通用密码系统" class="headerlink" title="(3)通用密码系统"></a>(3)通用密码系统</h4><p>一个密码系统由五元组（M、C、K、E、D）组成，如图所示——</p>
+<p><img src="/2019/04/29/密码学基础/1.png" alt=""><br><img src="/2019/04/29/密码学基础/2.png" alt=""></p>
+<p><strong>特点：除用安全信道传送K密钥外，其他都是可以公开的。</strong></p>
+<h4 id="4-密码分析攻击的类型（抗攻击强度由弱到强）"><a href="#4-密码分析攻击的类型（抗攻击强度由弱到强）" class="headerlink" title="(4)密码分析攻击的类型（抗攻击强度由弱到强）"></a>(4)密码分析攻击的类型（抗攻击强度由弱到强）</h4><ol>
+<li>未知算法攻击：仅从密文进行破译；</li>
+<li>惟密文攻击(Ciphertext only)：仅已知密码算法和密文进行破译；</li>
+<li>已知明文( 密文) 攻击(Known plaintext)：攻击者拥有一些明文/密文对；</li>
+<li>选择明文攻击(Chosen plaintext) ：攻击者可以有选择地一些对攻击有利的特定明文，并产生与之对应的密文。相当于攻击者已拥有装有加密密钥的加密装置，但还无法获得密钥，这时的攻击目标是能解读截获的密文。（窃听）</li>
+<li>选择密文攻击(Chosen ciphertext) ：攻击者可以有选择地一些对攻击有利的特定密文，并能得到与之对应的明文。相当于攻击者已拥有装有解密密钥的解密装置（已能窃听），但还无法获得密钥，这时的攻击目标是能够伪造密文。（伪造）</li>
+<li>其中，（2）~（5）均假设攻击者已知算法和已有密文。</li>
+</ol>
+<h4 id="5-密码体制的分类"><a href="#5-密码体制的分类" class="headerlink" title="(5)密码体制的分类"></a>(5)密码体制的分类</h4><p>密码体制的分类方法有很多，常用的分类方法是——</p>
+<p><img src="/2019/04/29/密码学基础/3.png" alt=""></p>
+<h3 id="2-分组密码体制"><a href="#2-分组密码体制" class="headerlink" title="2.分组密码体制"></a>2.分组密码体制</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="(1)概述"></a>(1)概述</h4><p>分组密码体制是在密钥控制下一次变换一个明文数据块（又称为分组）的密码体制。对分组加密算法的一般要求如下——</p>
+<ul>
+<li>分组长度足够大。防止攻击者通过收集不同的密文/明文对来进行穷举明文空间攻击。</li>
+<li>如分组长度仅为8bit时，若收集256个不同的密文/明文对就可破译整个分组密文。</li>
+<li>密钥空间应足够大。防止攻击者穷举密钥空间的攻击。</li>
+<li>密码算法足够复杂。是破译者除了采用强行攻击（穷举法）外，找不到其它密码分析方法（当然社会学方法除外）。 </li>
+</ul>
+<h4 id="2-分组密码算法举例"><a href="#2-分组密码算法举例" class="headerlink" title="(2)分组密码算法举例"></a>(2)分组密码算法举例</h4><ul>
+<li>DES</li>
+<li>三重DES </li>
+<li>IDEA </li>
+<li>RC5   </li>
+<li>AES </li>
+<li>…</li>
+</ul>
+<h4 id="3-总结比较分组密码的几种操作方式"><a href="#3-总结比较分组密码的几种操作方式" class="headerlink" title="(3)总结比较分组密码的几种操作方式"></a>(3)总结比较分组密码的几种操作方式</h4><p><img src="/2019/04/29/密码学基础/4.png" alt=""></p>
+<h3 id="3-序列密码体制"><a href="#3-序列密码体制" class="headerlink" title="3.序列密码体制"></a>3.序列密码体制</h3><h4 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="(1)概述"></a>(1)概述</h4><p>序列密码又称为流密码（stream cipher ），它是对称密码算法的一种。序列密码具有软件实现简单、便于硬件实现、加解密处理速度快、没有或只有有限的错误传播特点，因此在实际应用中，特别是专用或机密机构中保持着优势，典型的应用领域包括无线通信和外交通信。</p>
+<p>序列密码分为同步序列密码（如分组加密的OFB模式）和自同步序列密码两种</p>
+<h4 id="2-实例"><a href="#2-实例" class="headerlink" title="(2)实例"></a>(2)实例</h4><ul>
+<li>基于LFSR 的序列密码</li>
+<li>序列密码算法RC4</li>
+<li>…… </li>
+</ul>
+<h3 id="4-分组密码与序列密码的对比"><a href="#4-分组密码与序列密码的对比" class="headerlink" title="4.分组密码与序列密码的对比"></a>4.分组密码与序列密码的对比</h3><ol>
+<li>分组密码以一定大小的分组作为每次处理的基本单元，而序列密码则以一个元素（如一个字母或一个比特）作为基本的处理单元。</li>
+<li>序列密码使用一个随时间变化的加密变换，具有转换速度快、低错误传播的优点，硬件实现电路更简单；其缺点是：低扩散（意味着混乱不够）、插入及修改的不敏感性。</li>
+<li>分组密码使用的是一个不随时间变化的固定变换，具有扩散性好、插入敏感等优点；其缺点是：加密处理速度慢、存在错误传播。</li>
+</ol>
+<h3 id="5-非对称密码体制-（公钥密码体制）"><a href="#5-非对称密码体制-（公钥密码体制）" class="headerlink" title="5.非对称密码体制 （公钥密码体制）"></a>5.非对称密码体制 （公钥密码体制）</h3><h4 id="1-公钥密码体制模型"><a href="#1-公钥密码体制模型" class="headerlink" title="(1)公钥密码体制模型"></a>(1)公钥密码体制模型</h4><p><img src="/2019/04/29/密码学基础/5.png" alt=""></p>
+<h4 id="2-算法-实例"><a href="#2-算法-实例" class="headerlink" title="(2)算法/实例"></a>(2)算法/实例</h4><ul>
+<li>RSA</li>
+<li>ElGamal</li>
+<li>背包密码体制</li>
+<li>椭圆曲线密码体制（Menezes-Vanstone 公钥密码体制）</li>
+<li>Rabin 密码体制</li>
+</ul>
+<h4 id="3-公钥密码体制的应用"><a href="#3-公钥密码体制的应用" class="headerlink" title="(3)公钥密码体制的应用"></a>(3)公钥密码体制的应用</h4><ul>
+<li>密钥交换</li>
+<li>数字签名</li>
+<li>加密/解密(不推荐用公钥密码对消息直接进行加密)</li>
+</ul>
+<h4 id="4-两种密码体制的比较"><a href="#4-两种密码体制的比较" class="headerlink" title="(4)两种密码体制的比较"></a>(4)两种密码体制的比较</h4><p>1.对称密码体制</p>
+<ul>
+<li>对明文/密文变换时，加解密密钥相同，或可相互导出；</li>
+<li>双方在通信前需要安全地协商共享密钥；</li>
+<li>加解密算法效率较公开密码算法高；</li>
+<li>系统开放性差，密钥管理复杂；</li>
+<li>不能提供抗抵赖服务。</li>
+</ul>
+<p>2.非对称密码体制</p>
+<ul>
+<li>对明文/密文变换时，加解密密钥不相同，且不能由公钥导出私钥；</li>
+<li>公钥应公开，私钥保密；</li>
+<li>系统开放性好，密钥管理较容易；</li>
+<li>可提供抗抵赖服务（数字签名）</li>
+<li>加解密运算复杂，效率低，不宜作数据加密；</li>
+<li>存在特有的，“可能报文攻击”的威胁。</li>
+</ul>
+<h3 id="6-密钥管理"><a href="#6-密钥管理" class="headerlink" title="6.密钥管理"></a>6.密钥管理</h3><h4 id="1-密钥分配"><a href="#1-密钥分配" class="headerlink" title="(1)密钥分配"></a>(1)密钥分配</h4><p>保密通信中的一方利用此机制生成并选择秘密密钥，然后将其传送给通信的另一方或通信的其他多方。<strong>典型协议：Kerboros密钥分配协议、Blom密钥预分配。</strong></p>
+<h4 id="2-密钥协商"><a href="#2-密钥协商" class="headerlink" title="(2)密钥协商"></a>(2)密钥协商</h4><p>通常是一种协议，利用该协议，通信双方可以在一个公开的信道上通过相互传送一些消息来共同建立一个共享的秘密密钥。在密钥协商中，双方共同建立的秘密密钥通常是双方输入消息的一个函数。<strong>典型协议：Diffie-Hellman密钥交换协议。</strong></p>
+<h3 id="7-网络通信的加密方式"><a href="#7-网络通信的加密方式" class="headerlink" title="7.网络通信的加密方式"></a>7.网络通信的加密方式</h3><h4 id="1-分类"><a href="#1-分类" class="headerlink" title="(1)分类"></a>(1)分类</h4><ul>
+<li>链路加密(Link encryption)</li>
+<li>端- 端加密(End-to-End encryption)</li>
+<li>端对端加密 + 链路加密</li>
+</ul>
+<h3 id="8-报文鉴别与散列函数"><a href="#8-报文鉴别与散列函数" class="headerlink" title="8.报文鉴别与散列函数"></a>8.报文鉴别与散列函数</h3><h4 id="1-报文鉴别"><a href="#1-报文鉴别" class="headerlink" title="(1)报文鉴别"></a>(1)报文鉴别</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><p>报文鉴别是指在两个通信者之间建立通信联系后，每个通信者对收到信息进行验证，以保证所收到信息的真实性的过程。确保——</p>
+<ul>
+<li>报文是由确认的发送方产生的；</li>
+<li>报文内容没有被篡改过；</li>
+<li>报文是按与发送时的相同顺序收到的。</li>
+</ul>
+<h5 id="如何实现报文鉴别？"><a href="#如何实现报文鉴别？" class="headerlink" title="如何实现报文鉴别？"></a>如何实现报文鉴别？</h5><p><strong>鉴别符</strong>：附加在报文上的额外信息。当报文必须经过签别才能被接受时，鉴别符可使接收端验证该报文。鉴别符可以在功能上与报文本身的内容无关(例如，仅用一次的标识符或信源标识符），也可以是报文内容的一个函数。</p>
+<h5 id="产生报文鉴别符的三类方法"><a href="#产生报文鉴别符的三类方法" class="headerlink" title="产生报文鉴别符的三类方法"></a>产生报文鉴别符的三类方法</h5><ol>
+<li><strong>报文加密</strong>：报文用对称密钥算法加密后的密文作为鉴别符。</li>
+<li><strong>散列函数</strong>：是一个将任意长度的报文映射为定长的散列值的公共函数，以散列值作为鉴别符。</li>
+<li><strong>报文鉴别码(MAC,Message Authentication)</strong>：使用一个通信双方共享的秘密信息(如密钥)产生一个定长数据分组，并将它附加在报文中作为鉴别符。即所谓的密码检验(MAC)。</li>
+</ol>
+<h4 id="2-散列函数-Hash-Function"><a href="#2-散列函数-Hash-Function" class="headerlink" title="(2)散列函数(Hash Function)"></a>(2)散列函数(Hash Function)</h4><h5 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h5><ol>
+<li>单向散列函数H( )是一种单向密码体制，它是一个从明文到密文的不可逆函数，也就是说，是无法解密的。</li>
+<li>密码学上的Hash函数是一种将任意长度的消息M映射为较短的、固定长度的一个值H(M)的函数 ，称函数值H(M)为消息摘要MD(Message Digest)或散列码。 MD可作为报文鉴别的鉴别符。</li>
+</ol>
+<h5 id="主要应用"><a href="#主要应用" class="headerlink" title="主要应用"></a>主要应用</h5><ul>
+<li>保证数据的完整性；</li>
+<li>单向数据加密：如口令表加密；</li>
+<li>数字签名。</li>
+</ul>
+<h5 id="基本性质"><a href="#基本性质" class="headerlink" title="基本性质"></a>基本性质</h5><p><img src="/2019/04/29/密码学基础/6.png" alt=""></p>
+<h5 id="单向散列函数"><a href="#单向散列函数" class="headerlink" title="单向散列函数"></a>单向散列函数</h5><ol>
+<li>基于分组密码的Hash函数（基于分组密码的CBC工作模式的Hash函数、基于分组密码的CFB工作模式的Hash函数）；</li>
+<li>无密钥散列函数；</li>
+<li>直接设计单向散列函数——这类单向散列函数并不基于任何假设和密码体制，它通过直接构造复杂的非线性关系达到单向性要求。这类算法是目前比较流行的一种设计方法，典型的有：MD2、MD4、MD5、SHA－1、PIPE－MD、HAVAL等算法。</li>
+</ol>
+<h5 id="对单向散列函数的攻击"><a href="#对单向散列函数的攻击" class="headerlink" title="对单向散列函数的攻击"></a>对单向散列函数的攻击</h5><p>对单向散列函数的攻击是指<strong>攻击者寻找一对产生碰撞消息的过程</strong>。评价单向散列函数的最好的方法就是<strong>看一个攻击者找到一对碰撞消息所花的代价有多高</strong>。通常在讨论单向散列函数的安全性时，我们都假设敌手已经知道单向散列函数算法（遵循Korchoffs假设）。目前对单向散列函数的攻击方法可以分为以下几类——</p>
+<ul>
+<li>强力攻击(或穷举攻击)：典型方法如生日攻击。</li>
+<li>利用单向散列函数的的弱性质（结构和代数性质），如中间相遇攻击、修正分组攻击和差分分析等。</li>
+<li>另外，若使用其他密码算法来构造单向散列函数，还可能因为所用的密码算法的弱点而引起攻击(例如，DES的一些众所周知的弱点，如互补性、弱密钥与半弱密钥等，都可用来攻击基于DES构造的单向散列函数)。</li>
+</ul>
+<h5 id="单向散列函数SHA"><a href="#单向散列函数SHA" class="headerlink" title="单向散列函数SHA"></a>单向散列函数SHA</h5><ol>
+<li>基础是MD4，SHA不基于任何假设和密码体制，它采用了直接构造的办法，速度很快(除了加法之外，算法中并没有大的运算)，非常实用。</li>
+<li>SHA系列算法的比较如下——SHA-1，SHA-256，SHA-384，SHA-512这些散列函数的主要差别在于填充方法、字长、初始常数、基本函数等部分，它们的基本运算结构大体是相同的。</li>
+</ol>
+<p><img src="/2019/04/29/密码学基础/9.png" alt=""></p>
+<h5 id="MD5消息摘要算法"><a href="#MD5消息摘要算法" class="headerlink" title="MD5消息摘要算法"></a><a href="https://zh.wikipedia.org/wiki/MD5" target="_blank" rel="noopener">MD5消息摘要算法</a></h5><p>一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。</p>
+<h5 id="SHA与MD5的比较-均由MD4演化而来"><a href="#SHA与MD5的比较-均由MD4演化而来" class="headerlink" title="SHA与MD5的比较(均由MD4演化而来)"></a>SHA与MD5的比较(均由MD4演化而来)</h5><p><img src="/2019/04/29/密码学基础/7.png" alt=""><br><img src="/2019/04/29/密码学基础/8.png" alt=""></p>
+<h4 id="3-数字签名"><a href="#3-数字签名" class="headerlink" title="(3)数字签名"></a>(3)数字签名</h4><h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>数字签名的主要作用——将消息和拥有消息的实体可信地联系起来。</p>
+<p><img src="/2019/04/29/密码学基础/10.png" alt=""></p>
+<h5 id="过程与示意图"><a href="#过程与示意图" class="headerlink" title="过程与示意图"></a><a href="https://www.jianshu.com/p/68274c364781" target="_blank" rel="noopener">过程与示意图</a></h5><p><img src="/2019/04/29/密码学基础/1.webp" alt=""></p>
+<ol>
+<li>发送方要发送消息运用散列函数（MD5、SHA-1等）形成消息摘要；</li>
+<li>发送方用自己的私钥对消息摘要进行加密，形成数字签名；</li>
+<li>发送方将数字签名附加在消息后发送给接收方；</li>
+<li>接受方用发送方的公钥对签名信息进行解密，得到消息摘要；</li>
+<li>接收方以相同的散列函数对接收到的消息进行散列，也得到一份消息摘要；</li>
+<li>接收方比较两个消息摘要，如果完全一致，说明数据没有被篡改，签名真实有效；否则拒绝该签名。</li>
+</ol>
+<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><ul>
+<li>RSA数字签名体制</li>
+<li>ElGamal数字签名体制</li>
+<li>基于椭圆曲线密码的数字签名算法ECDSA</li>
+<li>数字签名标准（DSS, Digital Signature Standard），DSS中所采用算法通常称为DSA(Digital Signature Algorithm)。</li>
+<li>特殊数字签名方案</li>
+</ul>
+<h5 id="特殊数字签名的实例"><a href="#特殊数字签名的实例" class="headerlink" title="特殊数字签名的实例"></a>特殊数字签名的实例</h5><ul>
+<li>盲签名——D.Chaum 盲签名（RSA）方案</li>
+<li>不可否认签名——D.Chaum不可否认签名</li>
+<li>代理签名——M-U-O代理签名方案</li>
+<li>门限签名——HAN 可验证门限签名方案</li>
+<li>群签名</li>
+<li>……</li>
+</ul>
+<h3 id="9-身份鉴别技术"><a href="#9-身份鉴别技术" class="headerlink" title="9.身份鉴别技术"></a>9.身份鉴别技术</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="(1)概念"></a>(1)概念</h4><p>身份鉴别也称为“身份验证”或“身份认证”，是指在计算机及计算机网络系统中确认操作者身份的过程，从而确定该用户是否具有对某种资源的访问和使用权限，进而使计算机和网络系统的访问策略能够可靠、有效地执行，防止攻击者假冒合法用户获得资源的访问权限，保证系统和数据的安全，以及授权访问者的合法利益。</p>
+<ol>
+<li>身份认证协议一般在两个通信方之间进行，一方按照协议向另一方发出认证请求，对方按照协议规定作出响应，协议执行成功后，双方应能确信对方身份。</li>
+<li>身份认证也可以依靠双方都信任的第三方，如密钥分发中心，或证书签发权威来执行。</li>
+<li>身份认证协议中验证身份所用密钥称为认证密钥，可以使用对称密钥，也可使用公钥。身份认证协议分为基于对称密钥和基于公钥两类。</li>
+</ol>
+<h4 id="2-针对身份鉴别的主要威胁和攻击手段"><a href="#2-针对身份鉴别的主要威胁和攻击手段" class="headerlink" title="(2)针对身份鉴别的主要威胁和攻击手段"></a>(2)针对身份鉴别的主要威胁和攻击手段</h4><p><img src="/2019/04/29/密码学基础/11.png" alt=""></p>
+<h4 id="3-常用身份鉴别技术"><a href="#3-常用身份鉴别技术" class="headerlink" title="(3)常用身份鉴别技术"></a>(3)常用身份鉴别技术</h4><ul>
+<li>静态口令鉴别(PAP; Password Authentication Protocol)</li>
+<li>一次性口令鉴别 (OTP: One time Password)</li>
+<li>双因子身份鉴别（如基于智能卡）</li>
+<li>生物特征鉴别</li>
+<li>利用对称加密算法实现身份鉴别</li>
+<li>利用公钥技术实现身份鉴别</li>
+<li>基于证书的身份认证</li>
+<li>基于密码算法的鉴别协议</li>
+<li>零知识证明</li>
+</ul>
+<h5 id="基于证书的身份认证"><a href="#基于证书的身份认证" class="headerlink" title="基于证书的身份认证"></a>基于证书的身份认证</h5><p>目前国内外普遍使用的、技术成熟的、可实际使用的还是基于证书的数字签名技术的认证。公钥基础设施PKI(Public Key Infrastructure)可提供多种网上安全服务，主要是认证、授权、数据保密性、数据完整性和不可否认性。</p>
+<p>在网络环境中公钥以电子证书的形式签发，由所谓的证书权威机构CA生成和签发。CA是大家都信任的第三方。</p>
+<p><img src="/2019/04/29/密码学基础/12.png" alt=""></p>
+<p>关键——<strong>CA 证书＋“三趟消息”</strong></p>
+<h3 id="10-总结"><a href="#10-总结" class="headerlink" title="10.总结"></a>10.总结</h3><p>提供机密性、完整性和身份鉴别的安全通信示例（发送端）</p>
+<p><img src="/2019/04/29/密码学基础/13.png" alt=""></p>
+<h2 id="4-密码攻击理论"><a href="#4-密码攻击理论" class="headerlink" title="4.密码攻击理论"></a>4.密码攻击理论</h2><p>在我们攻击一个密码学系统时，我们或多或少会得到关于这个系统的一些信息。根据得到信息量的不同，我们可以采用的方法就可能不同。在当今的密码学分析时，一般我们都会假设攻击者知道密码学算法，获取算法的方式多重多样，比如间谍，逆向工程等。</p>
+<h3 id="1-攻击模式"><a href="#1-攻击模式" class="headerlink" title="1.攻击模式"></a>1.攻击模式</h3><p>根据攻击者获取密码学系统的信息的多少将攻击模式分为以下几类。</p>
+<ol>
+<li><strong>唯密文攻击</strong>：攻击者仅能获得一些加密过的密文。</li>
+<li><strong>已知明文攻击</strong>：攻击者有一些密文对应的明文。</li>
+<li><strong>选择明文攻击</strong>：攻击者在开始攻击时可以选择一些明文，并获取加密后的密文。如果攻击者在攻击中途可以根据已经获取的信息选择新的明文并获取对应的密文，则称为适应性选择明文攻击。</li>
+<li><strong>选择密文攻击</strong>：攻击者在开始攻击之前可以选择一些密文，并获取解密后的明文。如果攻击者在攻击图中可以根据已经获取的信息选择一些新的密文并获取对应的明文，则称为适应性选择密文攻击。</li>
+<li><strong>相关密钥攻击</strong>：攻击者可以获得两个或多个相关密钥的加密或解密后的密文或明文。但是攻击者不知道这些密钥。</li>
+</ol>
+<h3 id="2-常见攻击方法"><a href="#2-常见攻击方法" class="headerlink" title="2.常见攻击方法"></a>2.常见攻击方法</h3><p>根据不同的攻击模式，可能会有不同的攻击方法，目前常见的攻击方法主要有——</p>
+<ul>
+<li>暴力攻击</li>
+<li>中间相遇攻击</li>
+<li>线性分析</li>
+<li>差分分析</li>
+<li>不可能差分分析</li>
+<li>积分分析</li>
+<li>代数分析</li>
+<li>相关密钥攻击</li>
+<li>侧信道攻击</li>
+</ul>
+<h2 id="5-密码学库的识别"><a href="#5-密码学库的识别" class="headerlink" title="5.密码学库的识别"></a>5.密码学库的识别</h2><h3 id="1-Android平台"><a href="#1-Android平台" class="headerlink" title="1.Android平台"></a>1.Android平台</h3><h4 id="1-概述-3"><a href="#1-概述-3" class="headerlink" title="(1)概述"></a>(1)概述</h4><p>Android App开发过程中，加解密功能主要是利用Android SDK提供的加密相关的API进行编程实现的。</p>
+<p>Android SDK使用的加密相关的API和JAVA提供的基本相似，由Java Cryptography Architecture(JCA，java加密体系结构)，Java Cryptography Extension(JCE，Java加密扩展包)，Java Secure Sockets Extension(JSSE，Java安全套接字扩展包)，Java Authentication and Authentication Service(JAAS，Java 鉴别与安全服务)组成。</p>
+<ol>
+<li>JCA提供基本的加密框架，如证书、数字签名、消息摘要和密钥对产生器，对应的Android API中的以下几个包：<strong><em>java.security、java.security.acl、java.security.cert、java.security.interfaces、java.security.spec</em></strong>。</li>
+<li>JCE扩展了JCA，提供了各种加密算法、摘要算法、密钥管理等功能，对应的Android API中的以下几个包：<strong><em>javax.crypto、javax.crypto.interfaces、javax.crypto.spec</em></strong>。</li>
+<li>JSSE提供了SSL（基于安全套接层）的加密功能，使用HTTPS加密传输使用，对应的Android API主要在<strong><em>java.net.ssl</em></strong>包中。</li>
+<li>JAAS 提供了在Java平台上进行用户身份鉴别的功能。对应的Android API主要在以下几个包：<strong><em>javax.security.auth、javax.security.auth.login、javax.security.auth.callback、javax.security.auth.x500</em></strong>。</li>
+<li>此外Android API还提供了<strong><em>android.security</em></strong>和<strong><em>android.security.keystore（API 23新增）</em></strong>来管理keychain和keystore。</li>
+</ol>
+<h4 id="2-分类与总结"><a href="#2-分类与总结" class="headerlink" title="(2)分类与总结"></a>(2)分类与总结</h4><p>各种常用的加解密算法与对应的Android API所在的包如下——</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>相关包名</th>
+<th>补充说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base64编码算法</td>
+<td><strong>android.util.Base64</strong></td>
+<td>base64只是一种编码方式，并不是一种加密算法，不要使用base64来加密数据。</td>
+</tr>
+<tr>
+<td>Hash算法（如SHA、MD5等）</td>
+<td><strong>java.security.MessageDigest</strong></td>
+<td>……</td>
+</tr>
+<tr>
+<td>对称加密算法（如AES）</td>
+<td><strong><a href="https://blog.csdn.net/wuwenlong527/article/details/2037931" target="_blank" rel="noopener">javax.crypto.Cipher</a>（提供加密解密的API）</strong>、<strong><a href="https://doc.yonyoucloud.com/doc/jdk6-api-zh/javax/crypto/spec/SecretKeySpec.html" target="_blank" rel="noopener">javax.crypto.spec.SecretKeySpec</a>（提供key管理的API）</strong></td>
+<td>还可能出现以下包——<em>javax.crypto.KeyGenerator</em>、<em>javax.crypto.SecretKey</em></td>
+</tr>
+<tr>
+<td>非对称加密算法（如RSA用于数字签名或加密）</td>
+<td>主要的包如下图中红框标注所示</td>
+<td>还有一些相关包如下图所示</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/2019/04/29/密码学基础/15.png" alt=""></p>
+<p><em>注意——逆向分析Android App时可根据上述特征识别判断对应的加解密算法。</em></p>
+<h3 id="2-其他（主要参考自密码学软件博物馆）"><a href="#2-其他（主要参考自密码学软件博物馆）" class="headerlink" title="2.其他（主要参考自密码学软件博物馆）"></a>2.其他（主要参考自<a href="https://www.zybuluo.com/romangol/note/41111" target="_blank" rel="noopener">密码学软件博物馆</a>）</h3><h4 id="1-常见密码学库"><a href="#1-常见密码学库" class="headerlink" title="(1)常见密码学库"></a>(1)常见密码学库</h4><h5 id="high-level-crypto-library"><a href="#high-level-crypto-library" class="headerlink" title="high-level crypto library"></a>high-level crypto library</h5><ul>
+<li>cryptlib</li>
+<li>GPGME</li>
+<li>Keyczar</li>
+<li>NaCL</li>
+<li>libsodium</li>
+</ul>
+<h5 id="low-level-crypto-library"><a href="#low-level-crypto-library" class="headerlink" title="low-level crypto library:"></a>low-level crypto library:</h5><ul>
+<li>botan</li>
+<li>crypto++</li>
+<li>tomcrypt</li>
+<li>nettle</li>
+<li>gcrypt</li>
+<li>Windows Crypto APIs</li>
+</ul>
+<h5 id="Java-Crypto"><a href="#Java-Crypto" class="headerlink" title="Java Crypto"></a>Java Crypto</h5><ul>
+<li><a href="https://commons.apache.org/proper/commons-crypto/" target="_blank" rel="noopener">Apache Commons Crypto</a></li>
+</ul>
+<h5 id="SSL库"><a href="#SSL库" class="headerlink" title="SSL库"></a>SSL库</h5><ul>
+<li>OpenSSL/BoringSSL/LibreSSL/GMSSL</li>
+<li>GnuTLS</li>
+<li>NSS</li>
+<li>CyaSSL/WolfSSL</li>
+<li>XySSL/PolarSSL/TropicSSL/mBed TLS</li>
+<li>axTLS</li>
+<li>MatrixSSL</li>
+<li>BearSSL</li>
+</ul>
+<h5 id="Lightweight-Crypto"><a href="#Lightweight-Crypto" class="headerlink" title="Lightweight Crypto"></a>Lightweight Crypto</h5><ul>
+<li>Tinycrypt</li>
+<li>Libhydrogen</li>
+<li>Arduino Cryptography Library</li>
+<li>TinyECC</li>
+<li>A modified version of TinyECC</li>
+<li>TinyECDH</li>
+<li>MicroECC</li>
+<li>Lightweight Crypto Lib</li>
+</ul>
+<h5 id="python-crypto"><a href="#python-crypto" class="headerlink" title="python crypto"></a>python crypto</h5><ul>
+<li>Welcome to pyca/cryptography</li>
+<li>fastecdsa · PyPI</li>
+</ul>
+<h5 id="JS-crypto"><a href="#JS-crypto" class="headerlink" title="JS crypto"></a>JS crypto</h5><ul>
+<li>bitwiseshiftleft/sjcl: Stanford Javascript Crypto Library</li>
+</ul>
+<h5 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h5><ul>
+<li>Fast, simple, cryptographically strong random numbers in C++. Experimental.</li>
+</ul>
+<h5 id="Obsolete"><a href="#Obsolete" class="headerlink" title="Obsolete"></a>Obsolete</h5><ul>
+<li>RSAREF</li>
+</ul>
+<h5 id="Proprietary-Crypto"><a href="#Proprietary-Crypto" class="headerlink" title="Proprietary Crypto"></a>Proprietary Crypto</h5><ul>
+<li>A Brief Look At North Korean Cryptography</li>
+</ul>
+<h4 id="2-常见密码学软件"><a href="#2-常见密码学软件" class="headerlink" title="(2)常见密码学软件"></a>(2)常见密码学软件</h4><ul>
+<li>putty</li>
+<li>Truecrypt 7.2 (已经停止开发，但是依然很经典)</li>
+<li>Keepass</li>
+<li>OpenVPN</li>
+<li>OpenSSH</li>
+</ul>
+<h2 id="6-关于Android-加密与在开发时使用设备管理策略"><a href="#6-关于Android-加密与在开发时使用设备管理策略" class="headerlink" title="6.关于Android-加密与在开发时使用设备管理策略"></a>6.关于Android-加密与在开发时使用设备管理策略</h2><p>这一部分内容主要讨论<strong>如何正确的使用加密技术，在Android设备上安全的存储数据</strong>。我们首先要引入自己实现的加密算法库，使较老的设备上也能实现较高强度的加密算法，为后续的各种策略提供稳固的基础。</p>
+<h3 id="1-概述-4"><a href="#1-概述-4" class="headerlink" title="(1)概述"></a>(1)概述</h3><ul>
+<li>使用加密库（如开源库<a href="https://github.com/rtyley/spongycastle/#downloads" target="_blank" rel="noopener">Spongy Castle</a>）</li>
+<li>生成对称加密密钥</li>
+<li>保护SharedPreferences数据（通过对应的开源加密库<a href="https://github.com/scottyab/secure-preferences" target="_blank" rel="noopener">secure-preferences</a>）</li>
+<li>基于口令的加密(PBE)</li>
+<li>用<a href="https://github.com/sqlcipher/android-database-sqlcipher" target="_blank" rel="noopener">SQLCiper</a>加密数据库（类似的还有用于加密APP中各个文件的项目<a href="https://guardianproject.info/code/iocipher/" target="_blank" rel="noopener">IOCiper</a>）</li>
+<li>AndroidKeyStore provider（<em>在 Android4.3中，添加了一个新的功能，它使得app能把加密私钥保存在一个名为“ Android KeyStore”的系统 KeyStore中。“Android KeyStore”只能被创建它的app访问，并由设备pin码保护。具体而言， Android KeyStore是个证书存储(certificate store)，所以只有公钥私钥可以存放在其中。</em>）</li>
+<li>在开发时使用设备管理策略</li>
+</ul>
+<h3 id="2-主要内容"><a href="#2-主要内容" class="headerlink" title="(2)主要内容"></a>(2)主要内容</h3><h4 id="1-生成对称加密密钥"><a href="#1-生成对称加密密钥" class="headerlink" title="1.生成对称加密密钥"></a>1.生成对称加密密钥</h4><p>接下来显示如何正确初始化SecurityRandom类，以及如何用其初始化一个AES加密密钥。AES是继DES之后的新一代加密标准，通常使用长度为128位和256位的密钥。</p>
+<h5 id="具体实现示例"><a href="#具体实现示例" class="headerlink" title="具体实现示例"></a>具体实现示例</h5><p><img src="/2019/04/29/密码学基础/16.png" alt=""></p>
+<h5 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h5><p><img src="/2019/04/29/密码学基础/17.png" alt=""></p>
+<h4 id="2-基于口令的加密"><a href="#2-基于口令的加密" class="headerlink" title="2.基于口令的加密"></a>2.基于口令的加密</h4><p>在运行时，用通常是由用户提供的口令/passcode去创建（推导出）加密密钥。</p>
+<h5 id="具体实现示例-1"><a href="#具体实现示例-1" class="headerlink" title="具体实现示例"></a>具体实现示例</h5><p><img src="/2019/04/29/密码学基础/18.png" alt=""></p>
+<h5 id="补充说明-1"><a href="#补充说明-1" class="headerlink" title="补充说明"></a>补充说明</h5><p><img src="/2019/04/29/密码学基础/19.png" alt=""></p>
+<h4 id="3-在开发时使用设备管理策略"><a href="#3-在开发时使用设备管理策略" class="headerlink" title="3.在开发时使用设备管理策略"></a>3.在开发时使用设备管理策略</h4><p>设备管理策略在 Android2.2中被首次引入(<em>但这个功能及设备加密相关的具体限制却要到Android3.0以上版本才被加上</em>)，它能授权app获取更高级别的设备控制能力。这些特性主要针对企业级app的开发人员，给予他们控制、限制和潜在的破坏能力，同时还为他们提供了可选的第三方移动设备管理(MDM)解决方案。一般来说，除非已经建立了相应的信任关系，比如，银行和银行app，它并不面向消费类app( consumer app)。这个实验将定义以下两个旨在加强设备安全性的设备策略，此外它们也可以成为企业移动安全策略的一部分。</p>
+<ul>
+<li>设备强制加密(这也将确保使用pin码/口令)。</li>
+<li>强制执行最大超时锁屏时间。</li>
+</ul>
+<p>除了以上策略，设备管理员还可以执行以下操作。</p>
+<ul>
+<li>强制使用密码</li>
+<li>规定密码的复杂度</li>
+<li>3.0及后续版本中，记录用户曾经输入过的口令</li>
+<li>恢复出厂设置前密码验证失败的最大次数</li>
+<li>恢复出厂设置</li>
+<li>锁定设备</li>
+<li>禁用锁屏小部件（4.2以上版本）</li>
+<li>禁用摄像头（4.0以上版本）</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.51cto.com/aiilive/1718579" target="_blank" rel="noopener">[Android学习笔记七] 设备管理服务示例开发</a><br><a href="https://my.oschina.net/AlexZhuang/blog/54307" target="_blank" rel="noopener">设备管理应用程序的实现（Device Administration ）</a></p>
+</blockquote>
+<h2 id="7-参考链接"><a href="#7-参考链接" class="headerlink" title="7.参考链接"></a>7.参考链接</h2><h3 id="古典密码学"><a href="#古典密码学" class="headerlink" title="古典密码学"></a>古典密码学</h3><blockquote>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A2%BC#%E7%A7%BB%E4%BD%8D%E5%BC%8F%E5%AF%86%E7%A2%BC" target="_blank" rel="noopener">古典密码</a><br><a href="https://uuzdaisuki.com/2017/12/22/%E5%AF%86%E7%A0%81%E5%AD%A6-%E4%B8%80-%E2%80%94%E2%80%94%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81-%E4%B8%8A/" target="_blank" rel="noopener">密码学(一)——古典密码</a></p>
+</blockquote>
+<h3 id="Android加密相关"><a href="#Android加密相关" class="headerlink" title="Android加密相关"></a>Android加密相关</h3><blockquote>
+<p><a href="https://www.freebuf.com/articles/terminal/99868.html" target="_blank" rel="noopener">Android应用安全开发之浅谈加密算法的坑</a><br><a href="https://blog.csdn.net/eyishion/article/details/51308786" target="_blank" rel="noopener">Android代码中加解密方式(各种加密算法的具体实现)</a><br><a href="https://blog.csdn.net/try_zp_catch/article/details/72358008" target="_blank" rel="noopener">Android几种加密解密的方法（仅代码）</a><br><a href="https://blog.csdn.net/WHB20081815/article/details/73997645" target="_blank" rel="noopener">Android 最全的AES加密算法及其实现</a><br><a href="https://blog.csdn.net/fukaimei/article/details/78290750" target="_blank" rel="noopener">Android移动开发-Android数据加密与解密的实现</a><br><a href="https://benx.iteye.com/blog/1047151" target="_blank" rel="noopener">java加解密例子</a><br><a href="https://www.cnblogs.com/lianghui66/archive/2013/03/07/2948494.html" target="_blank" rel="noopener">对称加密—-AES和DES加密、解密</a></p>
+</blockquote>
+<h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><blockquote>
+<p><a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="noopener">数字签名是什么？</a></p>
+</blockquote>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><blockquote>
+<p><a href="https://www.jianshu.com/p/68274c364781" target="_blank" rel="noopener">一篇文章搞定密码学基础</a><br><a href="https://ctf-wiki.github.io/ctf-wiki/crypto/introduction/" target="_blank" rel="noopener">密码学简介</a><br><a href="https://cryptopals.com/" target="_blank" rel="noopener">密码算法编程练习网站——the cryptopals crypto challenges</a><br><a href="http://ctf.ssleye.com/" target="_blank" rel="noopener">ctf在线工具-包括各种常用的加密算法的在线解密</a><br><a href="https://www.zybuluo.com/romangol/note/41111" target="_blank" rel="noopener">密码学软件博物馆 (CryptoZoo)-列出了各种经典的用于实现加解密的第三方库和软件</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android-逆向/" rel="tag"># Android 逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/26/逆向练习10/" rel="next" title="逆向练习10">
+                <i class="fa fa-chevron-left"></i> 逆向练习10
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/03/数据结构之链表、二叉树、队列/" rel="prev" title="数据结构之链表、二叉树、队列">
+                数据结构之链表、二叉树、队列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-密码学基本概念"><span class="nav-number">1.</span> <span class="nav-text">1.密码学基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-古典密码学"><span class="nav-number">2.</span> <span class="nav-text">2.古典密码学</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-替换式密码"><span class="nav-number">2.1.</span> <span class="nav-text">(1)替换式密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-移项式密码"><span class="nav-number">2.2.</span> <span class="nav-text">(2)移项式密码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-现代密码学基础"><span class="nav-number">3.</span> <span class="nav-text">3.现代密码学基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概述"><span class="nav-number">3.1.</span> <span class="nav-text">1.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-密码学的分类"><span class="nav-number">3.1.1.</span> <span class="nav-text">(1)密码学的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-密码理论与技术"><span class="nav-number">3.1.2.</span> <span class="nav-text">(2)密码理论与技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-通用密码系统"><span class="nav-number">3.1.3.</span> <span class="nav-text">(3)通用密码系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-密码分析攻击的类型（抗攻击强度由弱到强）"><span class="nav-number">3.1.4.</span> <span class="nav-text">(4)密码分析攻击的类型（抗攻击强度由弱到强）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-密码体制的分类"><span class="nav-number">3.1.5.</span> <span class="nav-text">(5)密码体制的分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-分组密码体制"><span class="nav-number">3.2.</span> <span class="nav-text">2.分组密码体制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-概述-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">(1)概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-分组密码算法举例"><span class="nav-number">3.2.2.</span> <span class="nav-text">(2)分组密码算法举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-总结比较分组密码的几种操作方式"><span class="nav-number">3.2.3.</span> <span class="nav-text">(3)总结比较分组密码的几种操作方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-序列密码体制"><span class="nav-number">3.3.</span> <span class="nav-text">3.序列密码体制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-概述-2"><span class="nav-number">3.3.1.</span> <span class="nav-text">(1)概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-实例"><span class="nav-number">3.3.2.</span> <span class="nav-text">(2)实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-分组密码与序列密码的对比"><span class="nav-number">3.4.</span> <span class="nav-text">4.分组密码与序列密码的对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-非对称密码体制-（公钥密码体制）"><span class="nav-number">3.5.</span> <span class="nav-text">5.非对称密码体制 （公钥密码体制）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-公钥密码体制模型"><span class="nav-number">3.5.1.</span> <span class="nav-text">(1)公钥密码体制模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-算法-实例"><span class="nav-number">3.5.2.</span> <span class="nav-text">(2)算法/实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-公钥密码体制的应用"><span class="nav-number">3.5.3.</span> <span class="nav-text">(3)公钥密码体制的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-两种密码体制的比较"><span class="nav-number">3.5.4.</span> <span class="nav-text">(4)两种密码体制的比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-密钥管理"><span class="nav-number">3.6.</span> <span class="nav-text">6.密钥管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-密钥分配"><span class="nav-number">3.6.1.</span> <span class="nav-text">(1)密钥分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-密钥协商"><span class="nav-number">3.6.2.</span> <span class="nav-text">(2)密钥协商</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-网络通信的加密方式"><span class="nav-number">3.7.</span> <span class="nav-text">7.网络通信的加密方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-分类"><span class="nav-number">3.7.1.</span> <span class="nav-text">(1)分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-报文鉴别与散列函数"><span class="nav-number">3.8.</span> <span class="nav-text">8.报文鉴别与散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-报文鉴别"><span class="nav-number">3.8.1.</span> <span class="nav-text">(1)报文鉴别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#定义"><span class="nav-number">3.8.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#如何实现报文鉴别？"><span class="nav-number">3.8.1.2.</span> <span class="nav-text">如何实现报文鉴别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#产生报文鉴别符的三类方法"><span class="nav-number">3.8.1.3.</span> <span class="nav-text">产生报文鉴别符的三类方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-散列函数-Hash-Function"><span class="nav-number">3.8.2.</span> <span class="nav-text">(2)散列函数(Hash Function)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#定义-1"><span class="nav-number">3.8.2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#主要应用"><span class="nav-number">3.8.2.2.</span> <span class="nav-text">主要应用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基本性质"><span class="nav-number">3.8.2.3.</span> <span class="nav-text">基本性质</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单向散列函数"><span class="nav-number">3.8.2.4.</span> <span class="nav-text">单向散列函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对单向散列函数的攻击"><span class="nav-number">3.8.2.5.</span> <span class="nav-text">对单向散列函数的攻击</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单向散列函数SHA"><span class="nav-number">3.8.2.6.</span> <span class="nav-text">单向散列函数SHA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MD5消息摘要算法"><span class="nav-number">3.8.2.7.</span> <span class="nav-text">MD5消息摘要算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SHA与MD5的比较-均由MD4演化而来"><span class="nav-number">3.8.2.8.</span> <span class="nav-text">SHA与MD5的比较(均由MD4演化而来)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-数字签名"><span class="nav-number">3.8.3.</span> <span class="nav-text">(3)数字签名</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述"><span class="nav-number">3.8.3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过程与示意图"><span class="nav-number">3.8.3.2.</span> <span class="nav-text">过程与示意图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实例"><span class="nav-number">3.8.3.3.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特殊数字签名的实例"><span class="nav-number">3.8.3.4.</span> <span class="nav-text">特殊数字签名的实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-身份鉴别技术"><span class="nav-number">3.9.</span> <span class="nav-text">9.身份鉴别技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-概念"><span class="nav-number">3.9.1.</span> <span class="nav-text">(1)概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-针对身份鉴别的主要威胁和攻击手段"><span class="nav-number">3.9.2.</span> <span class="nav-text">(2)针对身份鉴别的主要威胁和攻击手段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-常用身份鉴别技术"><span class="nav-number">3.9.3.</span> <span class="nav-text">(3)常用身份鉴别技术</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基于证书的身份认证"><span class="nav-number">3.9.3.1.</span> <span class="nav-text">基于证书的身份认证</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-总结"><span class="nav-number">3.10.</span> <span class="nav-text">10.总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-密码攻击理论"><span class="nav-number">4.</span> <span class="nav-text">4.密码攻击理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-攻击模式"><span class="nav-number">4.1.</span> <span class="nav-text">1.攻击模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-常见攻击方法"><span class="nav-number">4.2.</span> <span class="nav-text">2.常见攻击方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-密码学库的识别"><span class="nav-number">5.</span> <span class="nav-text">5.密码学库的识别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Android平台"><span class="nav-number">5.1.</span> <span class="nav-text">1.Android平台</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-概述-3"><span class="nav-number">5.1.1.</span> <span class="nav-text">(1)概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-分类与总结"><span class="nav-number">5.1.2.</span> <span class="nav-text">(2)分类与总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-其他（主要参考自密码学软件博物馆）"><span class="nav-number">5.2.</span> <span class="nav-text">2.其他（主要参考自密码学软件博物馆）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-常见密码学库"><span class="nav-number">5.2.1.</span> <span class="nav-text">(1)常见密码学库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#high-level-crypto-library"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">high-level crypto library</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#low-level-crypto-library"><span class="nav-number">5.2.1.2.</span> <span class="nav-text">low-level crypto library:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java-Crypto"><span class="nav-number">5.2.1.3.</span> <span class="nav-text">Java Crypto</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SSL库"><span class="nav-number">5.2.1.4.</span> <span class="nav-text">SSL库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Lightweight-Crypto"><span class="nav-number">5.2.1.5.</span> <span class="nav-text">Lightweight Crypto</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#python-crypto"><span class="nav-number">5.2.1.6.</span> <span class="nav-text">python crypto</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JS-crypto"><span class="nav-number">5.2.1.7.</span> <span class="nav-text">JS crypto</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#misc"><span class="nav-number">5.2.1.8.</span> <span class="nav-text">misc</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Obsolete"><span class="nav-number">5.2.1.9.</span> <span class="nav-text">Obsolete</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Proprietary-Crypto"><span class="nav-number">5.2.1.10.</span> <span class="nav-text">Proprietary Crypto</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-常见密码学软件"><span class="nav-number">5.2.2.</span> <span class="nav-text">(2)常见密码学软件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-关于Android-加密与在开发时使用设备管理策略"><span class="nav-number">6.</span> <span class="nav-text">6.关于Android-加密与在开发时使用设备管理策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概述-4"><span class="nav-number">6.1.</span> <span class="nav-text">(1)概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-主要内容"><span class="nav-number">6.2.</span> <span class="nav-text">(2)主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-生成对称加密密钥"><span class="nav-number">6.2.1.</span> <span class="nav-text">1.生成对称加密密钥</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#具体实现示例"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">具体实现示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#补充说明"><span class="nav-number">6.2.1.2.</span> <span class="nav-text">补充说明</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-基于口令的加密"><span class="nav-number">6.2.2.</span> <span class="nav-text">2.基于口令的加密</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#具体实现示例-1"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">具体实现示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#补充说明-1"><span class="nav-number">6.2.2.2.</span> <span class="nav-text">补充说明</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-在开发时使用设备管理策略"><span class="nav-number">6.2.3.</span> <span class="nav-text">3.在开发时使用设备管理策略</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-参考链接"><span class="nav-number">7.</span> <span class="nav-text">7.参考链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#古典密码学"><span class="nav-number">7.1.</span> <span class="nav-text">古典密码学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android加密相关"><span class="nav-number">7.2.</span> <span class="nav-text">Android加密相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字签名"><span class="nav-number">7.3.</span> <span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">7.4.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

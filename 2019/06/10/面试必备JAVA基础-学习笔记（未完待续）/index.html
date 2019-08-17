@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="技术面试基础知识——Java相关基础的学习笔记整理。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试必备JAVA基础-学习笔记（未完待续）">
+<meta property="og:url" content="http://yoursite.com/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="技术面试基础知识——Java相关基础的学习笔记整理。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/4.png">
+<meta property="og:updated_time" content="2019-07-30T13:21:14.293Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试必备JAVA基础-学习笔记（未完待续）">
+<meta name="twitter:description" content="技术面试基础知识——Java相关基础的学习笔记整理。">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/">
+
+
+
+
+
+  <title>面试必备JAVA基础-学习笔记（未完待续） | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面试必备JAVA基础-学习笔记（未完待续）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-10T20:56:39+08:00">
+                2019-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/" class="leancloud_visitors" data-flag-title="面试必备JAVA基础-学习笔记（未完待续）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>技术面试基础知识——Java相关基础的学习笔记整理。</p>
+<a id="more"></a>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h1><p>这里是对于<a href="https://github.com/CyC2018/CS-Notes" target="_blank" rel="noopener">CS-Notes</a>中整理的与JAVA相关的基础知识的学习和补充记录。</p>
+<h1 id="2-Java基础"><a href="#2-Java基础" class="headerlink" title="2.Java基础"></a>2.<a href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Java%20%E5%9F%BA%E7%A1%80.md#%E4%B8%83%E5%8F%8D%E5%B0%84" target="_blank" rel="noopener">Java基础</a></h1><h2 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="(1)数据类型"></a>(1)数据类型</h2><h3 id="基本类型与包装类型"><a href="#基本类型与包装类型" class="headerlink" title="基本类型与包装类型"></a>基本类型与包装类型</h3><blockquote>
+<p><a href="https://blog.csdn.net/u011480603/article/details/75364931" target="_blank" rel="noopener">Java基本类型和包装类型总结</a></p>
+</blockquote>
+<h3 id="缓存池"><a href="#缓存池" class="headerlink" title="缓存池"></a>缓存池</h3><blockquote>
+<p><a href="http://www.blogfshare.com/java-auto-box.html" target="_blank" rel="noopener">Java自动装箱、拆箱及缓存池</a></p>
+</blockquote>
+<h2 id="2-String"><a href="#2-String" class="headerlink" title="(2)String"></a>(2)String</h2><h3 id="String-StringBuffer-and-StringBuilder"><a href="#String-StringBuffer-and-StringBuilder" class="headerlink" title="String, StringBuffer and StringBuilder"></a>String, StringBuffer and StringBuilder</h3><blockquote>
+<p><a href="https://stackoverflow.com/questions/2971315/string-stringbuffer-and-stringbuilder" target="_blank" rel="noopener">String，StringBuffer和StringBuilder</a></p>
+</blockquote>
+<h3 id="javap反编译java语言"><a href="#javap反编译java语言" class="headerlink" title="javap反编译java语言"></a>javap反编译java语言</h3><blockquote>
+<p><a href="http://www.importnew.com/18398.html" target="_blank" rel="noopener">Java命令学习系列（7）：Javap</a><br><a href="https://www.jianshu.com/p/6a8997560b05" target="_blank" rel="noopener">通过javap命令分析java汇编指令</a></p>
+</blockquote>
+<h3 id="Java字节码基础"><a href="#Java字节码基础" class="headerlink" title="Java字节码基础"></a>Java字节码基础</h3><blockquote>
+<p><a href="https://juejin.im/post/5aca2c366fb9a028c97a5609" target="_blank" rel="noopener">轻松看懂Java字节码</a></p>
+</blockquote>
+<h3 id="关于Kotlin"><a href="#关于Kotlin" class="headerlink" title="关于Kotlin"></a>关于Kotlin</h3><p><strong>一种与Java、Android 100%兼容的编程语言，简洁。</strong></p>
+<blockquote>
+<p><a href="https://www.jianshu.com/p/0098bd70759c" target="_blank" rel="noopener">Kotlin是什么</a><br><a href="https://www.kotlincn.net/docs/reference/android-overview.html" target="_blank" rel="noopener">使用 Kotlin 进行 Android 开发</a></p>
+</blockquote>
+<h2 id="3-运算"><a href="#3-运算" class="headerlink" title="(3)运算"></a>(3)运算</h2><h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p><strong>Java 的参数是以值传递的形式传入方法中，而不是引用传递。</strong>关于这一点，详细的解释见下图。</p>
+<p><img src="/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/1.png" alt=""></p>
+<blockquote>
+<p><a href="https://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value" target="_blank" rel="noopener">Is Java “pass-by-reference” or “pass-by-value”?</a></p>
+</blockquote>
+<h2 id="4-继承"><a href="#4-继承" class="headerlink" title="(4)继承"></a>(4)继承</h2><h3 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h3><p><strong>Java 中有三个访问权限修饰符：private、protected 以及 public，如果不加访问修饰符，表示包级可见。</strong></p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/starhu/p/5143983.html" target="_blank" rel="noopener">浅析Java中的访问权限控制</a></p>
+</blockquote>
+<h3 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h3><blockquote>
+<p><a href="https://blog.csdn.net/qq_34966814/article/details/79475977" target="_blank" rel="noopener">六大设计原则之里氏替换原则（LSP）</a></p>
+</blockquote>
+<h3 id="抽象类与接口"><a href="#抽象类与接口" class="headerlink" title="抽象类与接口"></a>抽象类与接口</h3><h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><ol>
+<li>抽象类和抽象方法都使用 abstract 关键字进行声明。如果一个类中包含抽象方法，那么这个类必须声明为抽象类。</li>
+<li>抽象类和普通类最大的区别是，抽象类不能被实例化，需要继承抽象类才能实例化其子类。</li>
+</ol>
+<p><img src="/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/2.png" alt=""></p>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><ol>
+<li>接口是抽象类的延伸，在 Java 8 之前，它可以看成是一个完全抽象的类，也就是说它不能有任何的方法实现。</li>
+<li>从 Java 8 开始，接口也可以拥有默认的方法实现，这是因为不支持默认方法的接口的维护成本太高了。在 Java 8 之前，如果一个接口想要添加新的方法，那么要修改所有实现了该接口的类。</li>
+<li>接口的成员（字段 + 方法）默认都是 <code>public</code> 的，并且不允许定义为 <code>private</code> 或者 <code>protected</code>。</li>
+<li>接口的字段默认都是 <code>static</code> 和 <code>final</code> 的。</li>
+</ol>
+<h4 id="比较二者"><a href="#比较二者" class="headerlink" title="比较二者"></a>比较二者</h4><ul>
+<li>从设计层面上看，抽象类提供了一种 IS-A 关系，那么就必须满足里式替换原则，即子类对象必须能够替换掉所有父类对象。而接口更像是一种 LIKE-A 关系，它只是提供一种方法实现契约，并不要求接口和实现接口的类具有 IS-A 关系。</li>
+<li>从使用上来看，一个类可以实现多个接口，但是不能继承多个抽象类。</li>
+<li>接口的字段只能是 static 和 final 类型的，而抽象类的字段没有这种限制。</li>
+<li>接口的成员只能是 public 的，而抽象类的成员可以有多种访问权限。</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_23835497/article/details/75333350" target="_blank" rel="noopener">java 面向对象关系is-a has-a like-a</a></p>
+</blockquote>
+<p>在很多情况下，<strong>接口优先于抽象类</strong>。因为接口没有抽象类严格的类层次结构要求，可以灵活地为一个类添加行为。并且从 Java 8 开始，接口也可以有默认的方法实现，使得修改接口的成本也变的很低。</p>
+<h3 id="super"><a href="#super" class="headerlink" title="super"></a>super</h3><blockquote>
+<p><a href="https://docs.oracle.com/javase/tutorial/java/IandI/super.html" target="_blank" rel="noopener">Using the Keyword super</a></p>
+</blockquote>
+<h3 id="重写与重载"><a href="#重写与重载" class="headerlink" title="重写与重载"></a>重写与重载</h3><h4 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h4><p><strong>存在于继承体系中，指子类实现了一个与父类在方法声明上完全相同的一个方法。</strong></p>
+<p>为了满足里式替换原则，重写有以下三个限制：</p>
+<ul>
+<li>子类方法的访问权限必须大于等于父类方法。</li>
+<li>子类方法的返回类型必须是父类方法返回类型或为其子类型。</li>
+<li>子类方法抛出的异常类型必须是父类抛出异常类型或为其子类型。</li>
+</ul>
+<p>使用 @Override 注解，可以让编译器帮忙检查是否满足上面的三个限制条件。</p>
+<p>在调用一个方法时，先从本类中查找看是否有对应的方法，如果没有查找到再到父类中查看，看是否有继承来的方法。否则就要对参数进行转型，转成父类之后看是否有对应的方法。总的来说，方法调用的优先级为：</p>
+<ul>
+<li>this.func(this)</li>
+<li>super.func(this)</li>
+<li>this.func(super)</li>
+<li>super.func(super)</li>
+</ul>
+<h4 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h4><ol>
+<li>存在于同一个类中，指一个方法与已经存在的方法名称上相同，但是参数类型、个数、顺序至少有一个不同。</li>
+<li>应该注意的是，返回值不同，其它都相同不算是重载。</li>
+</ol>
+<h2 id="5-Object-通用方法"><a href="#5-Object-通用方法" class="headerlink" title="5.Object 通用方法"></a>5.Object 通用方法</h2><p><code>Java</code>类层次结构的顶层是<code>Object</code>类，所有的其他类都隐式的继承于它。因此，所有的类也都从<code>Object</code>中继承了方法,其中最重要的几个方法如下。</p>
+<ul>
+<li>public native int hashCode()</li>
+<li>public boolean equals(Object obj)</li>
+<li>protected native Object clone() throws CloneNotSupportedException</li>
+<li>public String toString()</li>
+<li>public final native Class&lt;?&gt; getClass()</li>
+<li>protected void finalize() throws Throwable {}</li>
+<li>public final native void notify()</li>
+<li>public final native void notifyAll()</li>
+<li>public final native void wait(long timeout) throws InterruptedException</li>
+<li>public final void wait(long timeout, int nanos) throws InterruptedException</li>
+<li>public final void wait() throws InterruptedException</li>
+</ul>
+<blockquote>
+<p><a href="https://segmentfault.com/a/1190000004420059" target="_blank" rel="noopener">Java进阶2 —— 使用Object的通用方法</a></p>
+</blockquote>
+<h2 id="6-关键字"><a href="#6-关键字" class="headerlink" title="6.关键字"></a>6.关键字</h2><h3 id="1-final"><a href="#1-final" class="headerlink" title="(1)final"></a>(1)final</h3><h4 id="一、数据"><a href="#一、数据" class="headerlink" title="一、数据"></a>一、数据</h4><p><strong>声明数据为常量，可以是编译时常量，也可以是在运行时被初始化后不能被改变的常量。</strong></p>
+<ul>
+<li>对于基本类型，final 使数值不变；</li>
+<li>对于引用类型，final 使引用不变，也就不能引用其它对象，但是被引用的对象本身是可以修改的。</li>
+</ul>
+<h4 id="二、方法"><a href="#二、方法" class="headerlink" title="二、方法"></a>二、方法</h4><p><strong>声明方法不能被子类重写。</strong></p>
+<p>private 方法隐式地被指定为 final，如果在子类中定义的方法和基类中的一个 private 方法签名相同，此时子类的方法不是重写基类方法，而是在子类中定义了一个新的方法。</p>
+<h4 id="三、类"><a href="#三、类" class="headerlink" title="三、类"></a>三、类</h4><p><strong>声明类不允许被继承。</strong></p>
+<h3 id="2-static"><a href="#2-static" class="headerlink" title="(2)static"></a>(2)static</h3><p><img src="/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/3.png" alt=""></p>
+<h2 id="7-反射"><a href="#7-反射" class="headerlink" title="7.反射"></a>7.反射</h2><p><strong>反射最重要的用途就是开发各种通用框架。</strong></p>
+<p><img src="/2019/06/10/面试必备JAVA基础-学习笔记（未完待续）/4.png" alt=""></p>
+<blockquote>
+<p><a href="https://docs.oracle.com/javase/tutorial/reflect/index.html" target="_blank" rel="noopener">Trail: The Reflection API</a><br><a href="https://www.sczyh30.com/posts/Java/java-reflection-1/" target="_blank" rel="noopener">深入解析Java反射（1） - 基础</a></p>
+</blockquote>
+<h2 id="8-异常"><a href="#8-异常" class="headerlink" title="8.异常"></a>8.异常</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/10/教我兄弟学Android逆向05-课后作业（未完待续）/" rel="next" title="教我兄弟学Android逆向05-课后作业（未完待续）">
+                <i class="fa fa-chevron-left"></i> 教我兄弟学Android逆向05-课后作业（未完待续）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/11/漏洞复现及利用-学习笔记1/" rel="prev" title="漏洞复现及利用-学习笔记1">
+                漏洞复现及利用-学习笔记1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-前言"><span class="nav-number">1.</span> <span class="nav-text">1.前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Java基础"><span class="nav-number">2.</span> <span class="nav-text">2.Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">(1)数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型与包装类型"><span class="nav-number">2.1.1.</span> <span class="nav-text">基本类型与包装类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存池"><span class="nav-number">2.1.2.</span> <span class="nav-text">缓存池</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-String"><span class="nav-number">2.2.</span> <span class="nav-text">(2)String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-StringBuffer-and-StringBuilder"><span class="nav-number">2.2.1.</span> <span class="nav-text">String, StringBuffer and StringBuilder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javap反编译java语言"><span class="nav-number">2.2.2.</span> <span class="nav-text">javap反编译java语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java字节码基础"><span class="nav-number">2.2.3.</span> <span class="nav-text">Java字节码基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Kotlin"><span class="nav-number">2.2.4.</span> <span class="nav-text">关于Kotlin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-运算"><span class="nav-number">2.3.</span> <span class="nav-text">(3)运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数传递"><span class="nav-number">2.3.1.</span> <span class="nav-text">参数传递</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-继承"><span class="nav-number">2.4.</span> <span class="nav-text">(4)继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#访问权限"><span class="nav-number">2.4.1.</span> <span class="nav-text">访问权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#里氏替换原则"><span class="nav-number">2.4.2.</span> <span class="nav-text">里氏替换原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象类与接口"><span class="nav-number">2.4.3.</span> <span class="nav-text">抽象类与接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象类"><span class="nav-number">2.4.3.1.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接口"><span class="nav-number">2.4.3.2.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较二者"><span class="nav-number">2.4.3.3.</span> <span class="nav-text">比较二者</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super"><span class="nav-number">2.4.4.</span> <span class="nav-text">super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重写与重载"><span class="nav-number">2.4.5.</span> <span class="nav-text">重写与重载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重写"><span class="nav-number">2.4.5.1.</span> <span class="nav-text">重写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重载"><span class="nav-number">2.4.5.2.</span> <span class="nav-text">重载</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Object-通用方法"><span class="nav-number">2.5.</span> <span class="nav-text">5.Object 通用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-关键字"><span class="nav-number">2.6.</span> <span class="nav-text">6.关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-final"><span class="nav-number">2.6.1.</span> <span class="nav-text">(1)final</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、数据"><span class="nav-number">2.6.1.1.</span> <span class="nav-text">一、数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、方法"><span class="nav-number">2.6.1.2.</span> <span class="nav-text">二、方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、类"><span class="nav-number">2.6.1.3.</span> <span class="nav-text">三、类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-static"><span class="nav-number">2.6.2.</span> <span class="nav-text">(2)static</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-反射"><span class="nav-number">2.7.</span> <span class="nav-text">7.反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-异常"><span class="nav-number">2.8.</span> <span class="nav-text">8.异常</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

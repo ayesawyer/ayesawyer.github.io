@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Android,paper,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于Android 安全（漏洞挖掘与利用）相关综述论文的阅读记录。">
+<meta name="keywords" content="Android,paper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paper Reading-1">
+<meta property="og:url" content="http://yoursite.com/2019/02/20/Paper-Reading-1/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于Android 安全（漏洞挖掘与利用）相关综述论文的阅读记录。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/1.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/2.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/4.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/3.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/5.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/6.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/9.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/10.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/11.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/12.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/13.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/14.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/15.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/16.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/19.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/20.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/21.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/22.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/23.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/24.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/25.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/26.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/29.PNG">
+<meta property="og:updated_time" content="2019-04-09T03:54:30.973Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Paper Reading-1">
+<meta name="twitter:description" content="对于Android 安全（漏洞挖掘与利用）相关综述论文的阅读记录。">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/20/Paper-Reading-1/1.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/20/Paper-Reading-1/">
+
+
+
+
+
+  <title>Paper Reading-1 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Paper-Reading-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Paper Reading-1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T09:36:21+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/20/Paper-Reading-1/" class="leancloud_visitors" data-flag-title="Paper Reading-1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于Android 安全（漏洞挖掘与利用）相关综述论文的阅读记录。</p>
+<a id="more"></a>
+<h3 id="一、”ANALYSIS-OF-ANDROID-VULNERABILITIES-AND-MODERN-EXPLOITATION-TECHNIQUES”——ICTACT-JOURNAL-ON-COMMUNICATION-TECHNOLOGY-MARCH-2014-VOLUME-05-ISSUE-01"><a href="#一、”ANALYSIS-OF-ANDROID-VULNERABILITIES-AND-MODERN-EXPLOITATION-TECHNIQUES”——ICTACT-JOURNAL-ON-COMMUNICATION-TECHNOLOGY-MARCH-2014-VOLUME-05-ISSUE-01" class="headerlink" title="一、”ANALYSIS OF ANDROID VULNERABILITIES AND MODERN EXPLOITATION TECHNIQUES”——ICTACT JOURNAL ON COMMUNICATION TECHNOLOGY, MARCH 2014, VOLUME: 05, ISSUE: 01"></a>一、”ANALYSIS OF ANDROID VULNERABILITIES AND MODERN EXPLOITATION TECHNIQUES”——ICTACT JOURNAL ON COMMUNICATION TECHNOLOGY, MARCH 2014, VOLUME: 05, ISSUE: 01</h3><h5 id="1-主要内容"><a href="#1-主要内容" class="headerlink" title="1.主要内容"></a>1.主要内容</h5><blockquote>
+<p> This paper focuses on understanding and analyzing the vulnerabilities present in android platform;<br> firstly study the android architecture, analyze the existing threats and security weaknesses;<br> Then identify various exploit mitigation techniques to mitigate known vulnerabilities.</p>
+</blockquote>
+<h5 id="2-Android漏洞"><a href="#2-Android漏洞" class="headerlink" title="2.Android漏洞"></a>2.Android漏洞</h5><ul>
+<li><p>We classified the vulnerabilities found in android according to various layers of the android architecture from which they originated. The categories are: </p>
+<blockquote>
+<p>Linux Kernel Layer,<br>Libraries Layer,<br>Application Framework Layer,<br>Applications Layer,<br>External Drivers. </p>
+</blockquote>
+</li>
+<li><p>从部分样本（样本空间大小为30）来看，the Application Framework Layer包含的可利用漏洞数目最多。</p>
+</li>
+</ul>
+<p><img src="/2019/02/20/Paper-Reading-1/1.PNG" alt=""></p>
+<ul>
+<li>应用层攻击主要通过浏览器发生，允许攻击者执行任意代码并提供对某些受保护资源的未经身份验证的访问。</li>
+</ul>
+<h5 id="3-Android安全防护"><a href="#3-Android安全防护" class="headerlink" title="3.Android安全防护"></a>3.Android安全防护</h5><ul>
+<li>对Android 1.5——Android 4.4 的操作系统的安全防护机制进行了总结和介绍。</li>
+<li>ICS 4.0中的ASLR保护功能显着提高了Android的安全级别。这主要强化了应用程序框架层（the Application Framework Layer），因为源自该层的漏洞已经减少到几乎为零，并且执行缓冲区溢出，DoS攻击和代码执行变得非常困难。</li>
+</ul>
+<h5 id="4-结论"><a href="#4-结论" class="headerlink" title="4.结论"></a>4.结论</h5><p>在详细研究了各种Android漏洞之后，很明显它的影响是多么危险。 为了解决不断增加的漏洞数量，Android必须及时引入新的安全实施并利用缓解技术。 Linux操作系统本身的内核非常脆弱，每周都会发现新的漏洞。 为这些漏洞修复程序发布的漏洞修复程序也应该在Android的Linux内核中修补，以避免再次复制相同的漏洞。 要远离恶意软件，用户需要了解在安装期间查看授予应用程序的权限以及从官方Google Play商店下载应用程序的重要性。 在未来几年，我们认为Android是一个非常安全的操作系统，用户可以信任甚至可以从智能手机进行银行交易。</p>
+<h3 id="二、Parnika-Bhat-and-Kamlesh-Dutta-2019-“A-Survey-on-Various-Threats-and-Current-State-of-Security-in-Android-Platform-”-ACM-Comput-Surv-52-1-Article-21-February-2019-35-pages"><a href="#二、Parnika-Bhat-and-Kamlesh-Dutta-2019-“A-Survey-on-Various-Threats-and-Current-State-of-Security-in-Android-Platform-”-ACM-Comput-Surv-52-1-Article-21-February-2019-35-pages" class="headerlink" title="二、Parnika Bhat and Kamlesh Dutta.2019. “A Survey on Various Threats and Current State of Security in Android Platform.” ACM Comput. Surv. 52, 1, Article 21 (February 2019), 35 pages."></a>二、Parnika Bhat and Kamlesh Dutta.2019. “A Survey on Various Threats and Current State of Security in Android Platform.” ACM Comput. Surv. 52, 1, Article 21 (February 2019), 35 pages.</h3><h5 id="1-摘要"><a href="#1-摘要" class="headerlink" title="1.摘要"></a>1.摘要</h5><p>Android系统的出现将智能手机技术带到了大众的家门口。最新技术使社会各个部门都能负担得起。然而，Android平台的出现也通过移动平台升级了网络犯罪的增长。它的开源操作系统使其成为攻击者的吸引力中心。本文提供了对Android安全域状态的全面研究。本文将对Android系统的攻击分为四类：（i）基于硬件的攻击，（ii）基于内核的攻击，（iii）基于硬件抽象层的攻击，以及（iv）基于应用程序的攻击。该研究涉及与这些类别相关的各种威胁和安全措施，并对Android安全域中的潜在问题进行深入分析。本文还强调了Android应用程序开发人员在实现更安全的Android环境中的作用。本文试图对各种恶意软件检测技术的方法和局限性进行比较分析。该研究可以帮助研究人员从各个方面获得Android安全域的知识，并为Android面临的威胁构建更全面，强大，高效的解决方案。</p>
+<blockquote>
+<p>我主要关注基于应用程序的攻击这部分内容。</p>
+</blockquote>
+<h5 id="2-介绍"><a href="#2-介绍" class="headerlink" title="2.介绍"></a>2.介绍</h5><blockquote>
+<p>勒索软件不再仅限于Windows或PC;它正逐渐成为智能手机和物联网设备的威胁;<br>除勒索软件外，受欢迎的Android恶意软件系列包括间谍软件，僵尸程序，广告软件，可能不需要的应用程序（PUA），特洛伊木马程序和特洛伊木马间谍软件;<br>PUA是Quick Heal检测到的最顶级的Android恶意软件。攻击者使用第三方应用程序存储和重新打包的应用程序来传播这些恶意程序。他们在未经他/她同意的情况下提取用户的私人信息，然后将其发送到服务器;之后，他们将此信息用于黑色营销和社会工程目的;<br>在所有恶意软件中，特洛伊木马在传播恶意内容方面占有很大份额。</p>
+</blockquote>
+<h5 id="3-对Android系统进行攻击"><a href="#3-对Android系统进行攻击" class="headerlink" title="3.对Android系统进行攻击"></a>3.对Android系统进行攻击</h5><p>本文将Android系统的攻击面分为4个：</p>
+<ul>
+<li>Hardware-based attacks</li>
+<li>Kernel-based attacks</li>
+<li>Hardware abstraction layer-based attacks</li>
+<li>Applications-based attacks(系统级应用以及用户安装的第三方应用)</li>
+</ul>
+<p><img src="/2019/02/20/Paper-Reading-1/2.PNG" alt=""></p>
+<h6 id="3-4-Applications-based-attacks"><a href="#3-4-Applications-based-attacks" class="headerlink" title="3.4 Applications-based attacks"></a>3.4 Applications-based attacks</h6><p><img src="/2019/02/20/Paper-Reading-1/4.PNG" alt=""></p>
+<ol>
+<li>恶意软件开发人员利用Play商店和网站中的默认应用程序以及安装到系统中的应用程序的漏洞。应用程序在安装时从系统请求权限，以便以后顺利运行。各种研究人员都建议用户从网站安装的应用程序请求不必要的权限，这些权限不需要他们执行工作。</li>
+</ol>
+<ol start="2">
+<li>攻击者利用这种情况并使用特权升级等攻击，以便在不同级别上利用目标系统。攻击者也在滥用本机库和应用程序中的第三方库中的漏洞。他们使用这些库来请求组合权限。升级的权限权限使攻击者可以访问受害者系统的任何组件，包括内核。攻击者甚至可以获得root权限，并可能对系统造成无法挽回的损害。潜入系统后，攻击者可以监视用户的数据以获取个人动机，也可以将其出售给第三方以获取资金。特权升级攻击和基于库的攻击都将Android安全性置于其中。攻击者使用恶意应用程序攻击Android系统并窃取重要细节。</li>
+</ol>
+<ol start="3">
+<li>运行时信息收集攻击（RIG）是一种攻击，通过该攻击，攻击者可以在恶意应用程序的运行时期间从受害者的系统中累积信息。恶意应用程序利用授予应用程序的权限在安装时执行此攻击。研究人员已经展示了这种攻击如何对由Android管理的物联网构成严重威胁。他们还实施了名为App Guardian的技术，该技术有助于防止RIG攻击。</li>
+</ol>
+<ol start="4">
+<li>App Guardian会检查正在运行的可疑应用程序，并停止在后台运行的所有其他进程。一旦进程停止执行，它将重新启动已停止的进程并清除可疑应用程序在运行时期间使用的内存，以便不会留下任何信息痕迹供攻击者从系统中窃取。基于应用程序的攻击针对的是资源。 Android系统就像内存，CPU，文件，磁盘，电池一样损坏系统。</li>
+</ol>
+<ol start="5">
+<li>恶意应用程序可以比常规应用程序消耗更多的内存，电池和处理能力。恶意应用程序可能耗尽系统并使其停止运行。攻击者可以使用多媒体来定位系统电池。设计精良的多媒体文件仍然是隐蔽的，攻击者会利用这些文件进行此类攻击。这些文件消耗更多的电池电量，系统将很快耗尽，其处理能力将会降低。它将无法执行任何正常操作并最终崩溃。这种攻击是基于能量的攻击的例子。</li>
+</ol>
+<ol start="6">
+<li>Library-based Attacks。用于支持保护Android环境的安全功能的库不能完全信任，因为即使它们也没有完美无瑕。代码中存在错误，使用时可能会造成严重的安全问题。 2017年3月，Android安全公告发布了安全更新和漏洞列表，其中将OpenSSL和BoringSSL中的远程执行代码漏洞列为关键，因为它允许攻击者在处理数据时损坏内存作为文件。攻击者使用精心设计的文件完成了这项任务。不时发布补丁和更新版本，以提供漏洞解决方案。 OpenSSL发布了包含错误修复的OpenSSL 1.1.0f和OpenSSL 1.0.2lf。毫无疑问，应用程序的安全性取决于编程中包含的库。库中的任何漏洞都将包含在利用应用程序中。</li>
+</ol>
+<ol start="7">
+<li>Third-party Library Attacks。最近，第三方图书馆极易受到攻击。对于这种漏洞，糟糕的开发人员实践是重要原因之一。 2016年，getaddrinfo（）函数报告了缓冲区溢出漏洞;此函数用于搜索GNU C库中包含的域名。该问题的解决方案是在其首次报告后7个月发布的，这为攻击者提供了足够的时间来窥视系统内部并造成严重损害，这有时是无法恢复的。根据研究人员的说法，这个安全漏洞对系统来说是致命的，它甚至允许攻击者从远程系统执行恶意活动（CVE-2015-7547）。软件公司已经面临第三方库造成的漏洞的后果。</li>
+</ol>
+<p><img src="/2019/02/20/Paper-Reading-1/3.PNG" alt=""></p>
+<blockquote>
+<p>补充知识：关于Android Library；<br>Android 库（Library）在结构上与 Android 应用模块相同；<br>应用模块所可以包含的东西，在库中都允许存在，包括代码文件、资源文件和manifest文件等；<br>应用模块编译后生成的是一个apk文件，可以直接在设备上运行；<br>但是，库模块编译后生成的是一个Android Archive文件，简称AAR；<br>AAR文件无法像apk文件一样直接在设备上运行，我们一般用它作为Android app的依赖；<br>普通JAR文件只能包含代码文件(java)和清单文件，而ARR文件不仅可以包含代码文件，还可以包含Android的资源文件和manifest文件；<br>这样，我们就可以把资源文件像布局文件、图片文件等和Java代码文件一起分享出去；<br>可以说ARR文件是真正专属于Android的“JAR”包。</p>
+</blockquote>
+<h5 id="4-导致Android恶意软件增加的因素"><a href="#4-导致Android恶意软件增加的因素" class="headerlink" title="4.导致Android恶意软件增加的因素"></a>4.导致Android恶意软件增加的因素</h5><p>ndroid恶意软件大规模增长背后的主要原因之一是Android系统的底层架构及其不断增长的应用市场。 Android操作系统提供了一个开源平台，开发人员可以在其中开发应用程序。这种Android的开源特性使其更容易受到恶意软件开发人员的攻击和攻击。</p>
+<blockquote>
+<p>Permission System Exploitation<br>Lack of Awareness Regarding Security Protocols and Poor Developer Practices<br>Non-Verification of SSL Certificate<br>Android Application Security Vulnerabilities</p>
+</blockquote>
+<h5 id="5-用于保护Android系统免受各种攻击和恶意活动的防御工具和技术"><a href="#5-用于保护Android系统免受各种攻击和恶意活动的防御工具和技术" class="headerlink" title="5.用于保护Android系统免受各种攻击和恶意活动的防御工具和技术"></a>5.用于保护Android系统免受各种攻击和恶意活动的防御工具和技术</h5><p>本节将详细阐述各种防御机制和工具。 检测和预防恶意活动或应用程序有两种主要方法。 第一种机制是静态的，其中工具可以在执行应用程序之前检测恶意软件或恶意活动。 第二种机制是动态的，它在运行时检测恶意活动。</p>
+<p><img src="/2019/02/20/Paper-Reading-1/5.PNG" alt=""></p>
+<p><img src="/2019/02/20/Paper-Reading-1/6.PNG" alt=""></p>
+<blockquote>
+<p>这些反病毒应用的检测机制大致可分为四类;<br>API based;<br>Dataflow based;<br>Interaction based;<br>Signature based.</p>
+</blockquote>
+<p><img src="/2019/02/20/Paper-Reading-1/9.PNG" alt=""></p>
+<h5 id="6-FUTURE-SCOPE-AND-DISCUSSION"><a href="#6-FUTURE-SCOPE-AND-DISCUSSION" class="headerlink" title="6.FUTURE SCOPE AND DISCUSSION"></a>6.FUTURE SCOPE AND DISCUSSION</h5><p>正如本文所讨论的，Android平台仍然存在需要改进的安全漏洞。以下是可以为其用户提供更安全的Android环境的一些角度。</p>
+<blockquote>
+<p>开发者；<br>用户；<br>恶意软件检测+机器学习。</p>
+</blockquote>
+<h5 id="7-结论"><a href="#7-结论" class="headerlink" title="7.结论"></a>7.结论</h5><p>本文的主要思想是介绍Android安全域的当前状态。研究人员和开发人员正在制定新技术来保护Android系统，以防止其遭到恶意攻击。本文详细介绍了对Android不同层次的攻击及其现有解决方案，这将有助于研究人员和软件开发人员制定未来恶意软件检测和预防的策略。本文包括各种威胁的表格解释和检测方法，以提供更好的理解和比较分析。本文的一些重要发现包括使用原始硬件产品来保证系统安全的必要性;需要强大的两步恶意软件检测方法;采用静态和动态检测策略，可以检测已知和未知的攻击;并使开发人员必须遵守重要的安全协议。与其他调查不同，本文还对攻击者利用的Android系统中的各种漏洞进行了深入分析。由于多种原因，Android操作系统将随着时间的推移而不断发展，因此将在其上运行各种应用程序。两者之间总是存在巨大差距。这导致研究差距，目前的工具没有提供完整的解决方案。该领域需要不断的研究和创新来应对最新的威胁。</p>
+<h3 id="三、”Open-Source-Android-Vulnerability-DetectionTools-A-Survey”——2018年"><a href="#三、”Open-Source-Android-Vulnerability-DetectionTools-A-Survey”——2018年" class="headerlink" title="三、”Open Source Android Vulnerability DetectionTools: A Survey”——2018年"></a>三、”Open Source Android Vulnerability DetectionTools: A Survey”——2018年</h3><h5 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h5><p>自上个十年以来，智能手机已成为每个人生活中不可或缺的一部分。智能手机具有处理许多有用和有吸引力的应用程序的能力，具有完美无瑕的功能和小尺寸，可实现指数式增长。此外，由于庞大的用户群和广泛的功能，这些移动平台已经通过DHS公民应用程序目录提供的几个应用程序成为公众的主要信息来源。这个平台的广泛受众也使其成为网络攻击的巨大目标。虽然Android是最受欢迎的开源移动平台，它拥有保护设备和资源的基本权限集，但它没有提供防御任何攻击的安全框架。本文针对Android平台调查威胁，漏洞和安全分析工具，这些工具本质上是开源的，并且系统化了Android安全机制的知识。此外，还介绍了三种流行工具的比较。</p>
+<h5 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h5><ul>
+<li>移动安全，</li>
+<li>恶意软件分析，</li>
+<li>Android，</li>
+<li>静态分析。</li>
+</ul>
+<h5 id="关键内容"><a href="#关键内容" class="headerlink" title="关键内容"></a>关键内容</h5><ol>
+<li>STRIDE是一种用于识别威胁并对其进行分类的威胁模型。表I描述了移动模型以及分类威胁。对智能手机的攻击可以区分为——</li>
+</ol>
+<ul>
+<li>恶意软件；</li>
+<li>灰色软件；</li>
+<li>间谍软件。</li>
+</ul>
+<p><img src="/2019/02/20/Paper-Reading-1/10.PNG" alt=""></p>
+<ol start="2">
+<li>如下表——</li>
+</ol>
+<p><img src="/2019/02/20/Paper-Reading-1/11.PNG" alt=""></p>
+<h3 id="四、”Profiling-Android-Vulnerabilities”-2016-IEEE-International-Conference-on-Software-Quality-Reliability-and-Security"><a href="#四、”Profiling-Android-Vulnerabilities”-2016-IEEE-International-Conference-on-Software-Quality-Reliability-and-Security" class="headerlink" title="四、”Profiling Android Vulnerabilities”,2016 IEEE International Conference on Software Quality, Reliability and Security"></a>四、”Profiling Android Vulnerabilities”,2016 IEEE International Conference on Software Quality, Reliability and Security</h3><h5 id="摘要-1"><a href="#摘要-1" class="headerlink" title="摘要"></a>摘要</h5><p>在广泛使用的移动操作系统中，单个漏洞可能会威胁数十亿用户的安全和隐私。 因此，识别漏洞和强化软件系统需要不断的关注和努力。 然而，这是昂贵的，并且几乎不可能分析整个代码库。 因此，有必要优先考虑最可能的脆弱地区的努力。 识别这些区域的第一步是根据先前报告的漏洞分析漏洞。 为了对此进行调查，我们对2008年至2014年国家漏洞数据库中报告的Android漏洞进行了手动分析。在我们的分析中，我们确定了导致Android漏洞的全面问题列表。 我们还指出了漏洞所在位置的特征，这些位置的复杂性以及修复漏洞的复杂性。 为了实现未来的研究，我们提供了所有数据。</p>
+<h5 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h5><ul>
+<li>软件安全性，</li>
+<li>复杂性，</li>
+<li>Android，</li>
+<li>漏洞，</li>
+<li>常见的漏洞披露。</li>
+</ul>
+<h5 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h5><ol>
+<li>本研究做出以下贡献：</li>
+</ol>
+<ul>
+<li>我们对Android漏洞进行分析，分类和呈现某些特征。</li>
+<li>我们提供了一系列在NVD数据库中报告的Android漏洞，这些漏洞已经在NVD之外挖掘出来。该系列可在<a href="http://www.jimenez.lu/Research/获得。" target="_blank" rel="noopener">http://www.jimenez.lu/Research/获得。</a></li>
+<li>我们提供改善NVD的指南，以便进行系统性meta-analysis和其他与脆弱性相关的分析研究。</li>
+</ul>
+<ol start="2">
+<li>本文的其余部分安排如下：第二部分介绍Android和漏洞。第三节激励我们的工作。第四节描述了用于获得我们结果的方法，见第五节。方法及其可能的改进在第六节中讨论。最后，在第VIII节结束之前，我们将在第VII节中研究相关工作。</li>
+</ol>
+<h5 id="2-背景"><a href="#2-背景" class="headerlink" title="2.背景"></a>2.背景</h5><p>在本研究中，我们关注与Android系统相关的漏洞，即第二层（库和DVM）和第三层（内置应用程序）层（图1中以灰色突出显示）。由于这些漏洞分别报告为Linux或特定于应用程序，因此未考虑影响其他两个层（即内核或应用程序）的漏洞。</p>
+<p><img src="/2019/02/20/Paper-Reading-1/12.PNG" alt=""></p>
+<h5 id="3-研究方法"><a href="#3-研究方法" class="headerlink" title="3.研究方法"></a>3.研究方法</h5><ol>
+<li><p>我们的分析基于NVD数据库中2008年和2014年之间报告的所有漏洞，并与Android相关。 我们总共有42个漏洞。 我们的分析方法可以归纳为以下步骤。 我们首先手动挖掘NVD数据库，以查找实际报告的问题及其相应的补丁。 然后我们对漏洞进行分类。 最后，我们分析了漏洞。 所描述的过程旨在回答以下三个研究问题（RQ）：</p>
+<blockquote>
+<p>RQ1：哪种问题会导致漏洞？ 我们可以将它们分类吗？<br>RQ2：Android漏洞所在的组件是什么？<br>RQ3：如何修复漏洞？</p>
+</blockquote>
+</li>
+<li><p>补充：在浏览我们的CVE集合中的所有链接时，我们发现大约20％的链接已经死亡，72％的链接指向补丁或错误报告。 经过一些实验，我们意识到这个问题不仅限于Android。 实际上，在所有CVE中声明的链接中只有30％仍然有效，并且仅在研究补丁链接时这个数字甚至更低。这使数据挖掘过程变得复杂，因为它意味着找到资源的新位置。 我们通过对相关存储库进行广泛的手动搜索来解决了这个问题，即浏览git提交历史，寻找漏洞描述中存在的关键字。 这使我们能够检索31个漏洞的补丁。</p>
+<blockquote>
+<p>思考：考虑建立cve漏洞及对应的补丁库。</p>
+</blockquote>
+</li>
+</ol>
+<h5 id="4-实验结果"><a href="#4-实验结果" class="headerlink" title="4.实验结果"></a>4.实验结果</h5><p>本节介绍在应用第IV节中介绍的方法时获得的结果。 如前所述，从总共42个漏洞中，我们设法检索了其中31个漏洞的相关补丁。 我们首先确定了漏洞的原因并引入了分类法（V-A）。 然后，我们报告有关易受攻击组件（V-B）性质的信息。 最后，在第V-C节中，我们详细介绍了与修补Android漏洞所需的更改相关的调查结果。</p>
+<h6 id="4-1-RQ1-Categorizing-the-Causes-of-Android-Vulnerabilities"><a href="#4-1-RQ1-Categorizing-the-Causes-of-Android-Vulnerabilities" class="headerlink" title="4.1  RQ1: Categorizing the Causes of Android Vulnerabilities"></a>4.1  RQ1: Categorizing the Causes of Android Vulnerabilities</h6><p><img src="/2019/02/20/Paper-Reading-1/13.PNG" alt=""></p>
+<p><img src="/2019/02/20/Paper-Reading-1/14.PNG" alt=""></p>
+<h6 id="4-2-RQ2-Vulnerable-Components"><a href="#4-2-RQ2-Vulnerable-Components" class="headerlink" title="4.2 RQ2: Vulnerable Components"></a>4.2 RQ2: Vulnerable Components</h6><p><img src="/2019/02/20/Paper-Reading-1/15.PNG" alt=""></p>
+<h6 id="4-3-RQ3-Fix-Analysis"><a href="#4-3-RQ3-Fix-Analysis" class="headerlink" title="4.3 RQ3: Fix Analysis"></a>4.3 RQ3: Fix Analysis</h6><p><img src="/2019/02/20/Paper-Reading-1/16.PNG" alt=""></p>
+<h5 id="5-讨论"><a href="#5-讨论" class="headerlink" title="5.讨论"></a>5.讨论</h5><p>本节总结了我们研究的结果并讨论了其局限性。 具体而言，</p>
+<blockquote>
+<p>第VI-A节提供了一套指导方针，可用于未来的漏洞研究和meta-analysis;<br> 第VI-B和VI-C节分别讨论了我们可行的调查结果和有效性威胁。</p>
+</blockquote>
+<h5 id="6-相关工作"><a href="#6-相关工作" class="headerlink" title="6.相关工作"></a>6.相关工作</h5><ol>
+<li>所有这些研究都使用代码或存储库属性来预测脆弱的文件。相比之下，本文旨在直接研究为修复已知和可能的严重漏洞所做的代码更改。此外，我们的重点是特定于Android系统的漏洞预测文献中缺乏工作。对我们来说最相关的工作可能是Bosu等人[34]，他们研究了易受攻击的代码变化的特征。然而，我们的研究在以下三个方面与它不同：a）我们研究修复漏洞而不是引入漏洞的修改，b）我们研究已知的，严重的和可利用的漏洞而不是代码审查发现的漏洞c）我们旨在分类和描述Android漏洞的起源，而不是可能表明引入漏洞的一般性更改。</li>
+</ol>
+<ol start="2">
+<li>其他密切相关的工作归功于莫里森等人。 [35]和Fonseca等人。 [36]。这些研究探索漏洞并分析其补丁。但是，它们都专注于与Android无关的特定漏洞。</li>
+</ol>
+<h5 id="7-结论-1"><a href="#7-结论-1" class="headerlink" title="7.结论"></a>7.结论</h5><ol>
+<li><p>本文介绍了与Android漏洞相关的问题，组件和补丁的分析。 我们的研究是针对CVE-NVD数据库中报告的Android漏洞进行的。 我们确定了涉及的问题并建立了他们的分类。</p>
+</li>
+<li><p>我们的分析得出以下结论：1）易受攻击的Android组件属于9个不同的顶级类别，2）漏洞往往出现在最复杂的功能中; 3）导致这些漏洞的13种不同类型的问题和4） 他们需要进行复杂的更改才能被删除。 最后，我们提供了一些改进CVE的指南。</p>
+</li>
+<li><p>为了进一步研究和重现我们的结果，这些漏洞及其详细分析和手动收集的补丁可在<a href="http://www.jimenez.lu/Research/上公开获取。" target="_blank" rel="noopener">http://www.jimenez.lu/Research/上公开获取。</a></p>
+</li>
+</ol>
+<h3 id="五、”Automated-Testing-of-Android-Apps-A-Systematic-Literature-Review”，2018"><a href="#五、”Automated-Testing-of-Android-Apps-A-Systematic-Literature-Review”，2018" class="headerlink" title="五、”Automated Testing of Android Apps: A Systematic Literature Review”，2018"></a>五、”Automated Testing of Android Apps: A Systematic Literature Review”，2018</h3><h5 id="摘要-2"><a href="#摘要-2" class="headerlink" title="摘要"></a>摘要</h5><p>Android应用程序的自动测试对于应用程序用户，应用程序开发人员和市场维护者社区都至关重要。鉴于Android的广泛采用及其开发模型的特殊性，文献提出了各种测试方法，以确保不仅满足功能要求而且满足非功能要求。在本文中，我们旨在提供围绕Android应用程序测试主题的最新工作的清晰概述，以突出主要趋势，确定所应用的主要方法，并列举所面临的挑战Android测试方法以及仍然需要社区工作的方向。为此，我们进行了系统的文献回顾，期间我们最终确定了在领先的会议和期刊上发表的103篇相关研究论文，直到2016年。我们对相关文献进行了全面的研究，得出了一些结论，并强调了Android测试研究人员应该努力的挑战。在将来解决。之后，我们进一步提出了一些具体的研究方向，其中需要测试方法来解决应用更新中的重复问题，应用程序大小的不断增加以及Android生态系统碎片化。</p>
+<h5 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h5><ul>
+<li>Android，</li>
+<li>自动化测试，</li>
+<li>文献综述，</li>
+<li>调查。</li>
+</ul>
+<h5 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h5><p>关键内容：</p>
+<ol>
+<li>Android应用测试旨在测试在Android设备上运行的应用的功能性，可用性和兼容性。</li>
+</ol>
+<p><img src="/2019/02/20/Paper-Reading-1/19.PNG" alt=""></p>
+<ol start="2">
+<li>图1说明了典型的工作过程。</li>
+</ol>
+<ul>
+<li>在步骤（1），目标应用程序安装在Android设备上。</li>
+<li>然后，在步骤（2）中，分析app以生成测试用例。我们提醒读者，这一步（虚线）是可选的，一些测试技术，如自动随机测试，不需要获取生成测试用例的预知。随后，</li>
+<li>在步骤（3）中，将这些测试用例发送到Android设备以运行该应用程序。</li>
+<li>在步骤（4）中，从各种观点观察并收集执行行为。</li>
+<li>最后，在步骤（5）中，卸载应用程序并擦除相关数据。</li>
+</ul>
+<p>目标app的安装有时并不是必需的，例如，像Robolectric这样的框架允许测试直接在JVM中运行。实际上，可以借用图1来描述测试除Android应用程序之外的几乎任何软件的工作流程。相反，Android应用程序测试属于独特的环境，并且通常无法使用通用测试技术。传统（例如，Java）应用程序测试存在若干差异，这些测试激发了对Android应用程序测试的研究。我们列举并考虑了一些常见的挑战。</p>
+<p>（1）首先，尽管应用程序是用Java开发的，但传统的基于Java的测试工具并不能立即用于Android应用程序，因为Android中的大多数控制流交互都受特定的基于事件的机制（如组件间通信（ICC）的控制。为了解决这一第一个挑战，我们专门设计了几种新的测试工具，以便将Android特性考虑在内。例如，RERAN被提议用于通过定时和触摸敏感的记录和重放机制来测试Android应用程序，试图捕获，表示和重放复杂的非离散手势，例如圆形鸟类滑动，增加弹弓张力在愤怒的小鸟。</p>
+<p>（2）其次，就可用操作系统版本和目标设备（例如，屏幕尺寸变化）的多样性而言，Android碎片正变得越来越精细，因为现在测试策略必须考虑不同的执行环境。</p>
+<p>（3）第三，Android生态系统吸引了大量需要可扩展测试方法的应用程序。此外，这些应用程序通常不带有开源代码，这可能会限制测试场景。</p>
+<p>（4）最后，为了找到Android应用程序中的错误，生成完整的测试用例覆盖率是一项挑战。基于符号执行和Symbolic Pathfinder等工具的传统测试用例生成方法受到以下事实的挑战：Android应用程序在Dalvik字节码中可用，与Java字节码不同。换句话说，传统的基于Java的符号执行方法无法直接应用于解决Android应用程序。此外，事件驱动的功能以及框架库为系统的生成测试用例带来了进一步的障碍。</p>
+<ol start="3">
+<li>本文的主要贡献如下。</li>
+</ol>
+<ul>
+<li>我们建立了一个全面的存储库，跟踪研究社区的工作，以解决测试Android应用程序的挑战。为了能够轻松导航最先进的技术，从而使研究人员能够推动Android应用测试的当前前沿，我们将所有收集和构建的信息公开在 <a href="http://lilicoding.github.io/TA2Repo/。" target="_blank" rel="noopener">http://lilicoding.github.io/TA2Repo/。</a></li>
+<li>我们详细分析了测试Android应用程序的关键方面，并提供了一个分类，用于清晰地总结和分类所有相关的研究工作。</li>
+<li>最后，我们研究了当前的最新技术，列举了显着的局限性，并指出了一些方向，以进一步推动Android测试的研究。</li>
+</ul>
+<ol start="4">
+<li>本文的其余部分安排如下：第二部分描述了该SLR的方法，包括我们方法的总体概述和详细的审查过程。 在第三部分，我们介绍了我们选定的主要出版物的结果，以及对这些出版物的初步趋势和统计分析。 稍后，我们将在以下两个部分介绍我们的数据提取策略及其相应的发现：第四部分和第五部分。之后，我们将在第VI部分中讨论我们观察到的趋势以及社区应该尝试解决的挑战，并在第七节中列举对此SLR有效性的威胁。 第八部分给出了本文与文献研究的比较，最后我们在第九部分总结了这篇SLR。</li>
+</ol>
+<h5 id="2-和3-和7-和8"><a href="#2-和3-和7-和8" class="headerlink" title="2.和3.和7.和8."></a>2.和3.和7.和8.</h5><p>这四部分的内容并不是很相关，略过。</p>
+<h5 id="4-Android测试研究的分类"><a href="#4-Android测试研究的分类" class="headerlink" title="4.Android测试研究的分类"></a>4.Android测试研究的分类</h5><p>关键内容：</p>
+<ol>
+<li>图6显示了与研究问题相关的四个维度（即测试目标，测试目标，测试水平和测试技术）的分类图的高级视图。</li>
+</ol>
+<p><img src="/2019/02/20/Paper-Reading-1/20.PNG" alt=""></p>
+<p>为了测试Android应用程序，GUI /事件和ICC /应用程序间通信（IAC）是反复出现的测试目标。 为简单起见，我们将所有其他目标（例如正常代码分析）重组为General。</p>
+<h5 id="5-Literature-Review"><a href="#5-Literature-Review" class="headerlink" title="5. Literature Review"></a>5. Literature Review</h5><p>关键内容：</p>
+<p>一、What Concerns do the Approaches Focus on?</p>
+<ol>
+<li>测试对象（Test Objectives）：见4中图6。</li>
+</ol>
+<p>表III描述了根据上述目标为我们的SLR选择的出版物。 通过我们的深入检查，最考虑的测试目标是错误/缺陷（Bug/Defect），占所选出版物的23.3％。</p>
+<p><img src="/2019/02/20/Paper-Reading-1/21.PNG" alt=""></p>
+<ol start="2">
+<li>测试目标（Test Targets）：由于Android应用程序是用Java编写的，因此关于Android应用程序测试的文献主要关注Android的特性，主要是关于如何使用复杂的事件机制来解决GUI测试以及组件间和应用程序间通信问题。</li>
+</ol>
+<blockquote>
+<p>The most frequently addressed testing target is GUI/Event, accounting for 45.6% of the selected publications;<br>there are only 12 publications targeted ICC/IAC;<br>A total of 44 publications are regrouped under the General category.</p>
+</blockquote>
+<p>二、Which Test Levels are Addressed?</p>
+<ol>
+<li>本SLR中审查的绝大多数方法都是针对给定的测试标准测试整个应用程序。</li>
+</ol>
+<p>三、How are the Test Approaches Built?</p>
+<ol>
+<li>测试方法（Test Methodologies）：表VI列举了我们在检查中观察到的所有测试方法。</li>
+</ol>
+<p><img src="/2019/02/20/Paper-Reading-1/22.PNG" alt=""></p>
+<p>总的来说，我们的审查表明，文献通常结合了几种测试方法来提高测试效率。</p>
+<ol start="2">
+<li><p>测试类型（Test Types）：白盒测试是最少使用的类型，远远落后于黑盒和灰盒测试。</p>
+</li>
+<li><p>测试环境（Test Environments）：主要使用真实设备。</p>
+</li>
+</ol>
+<p>经验：可以将仿真器+真实设备结合使用来测试Android应用程序。例如，可以首先使用模拟器启动大规模应用测试，以预选相关应用的子集<br>然后使用真实设备进行更准确的测试。</p>
+<ol start="4">
+<li>已有工具支撑（Tool Support）：在执行SLR时，我们观察到一些公开可用的工具被反复利用来实现或补充最先进的方法。 表VIII列举了这些工具，并提供了相关工作的示例参考。</li>
+</ol>
+<p><img src="/2019/02/20/Paper-Reading-1/23.PNG" alt=""></p>
+<ul>
+<li>EMMA是一个用于测量和报告Java代码覆盖率的开源工具包。由于Android应用程序是用Java编写的，因此研究人员经常使用EMMA计算其Android应用程序测试方法的代码覆盖率。</li>
+</ul>
+<p>四、 To What Extent are the Approaches Validated?</p>
+<ol>
+<li>在评估测试方法的有效性时，必须考虑几个方面。</li>
+</ol>
+<ul>
+<li>Coverage</li>
+<li>Ground truth</li>
+<li>The Dataset Size</li>
+</ul>
+<p>我们在此SLR中考虑对代码覆盖率和准确度进行的测量。我们还研究了使用基础事实来验证性能分数，即实验数据集的大小。</p>
+<ol start="2">
+<li>虽然文献作品总是提供评估部分来提供证据（通常通过比较），证明他们的方法是有效的，但是他们的再现性仍然受到缺乏确定的基本事实和基准这一事实的挑战。 然而，重复性对于确保该领域确实在基线性能基础上取得进展至关重要，而不是依赖于作者的主观观察和具有可变特征的数据集。</li>
+</ol>
+<h5 id="6-讨论"><a href="#6-讨论" class="headerlink" title="6.讨论"></a>6.讨论</h5><p>关键内容：</p>
+<p>一、 Open Issues and Future Challenges</p>
+<p>虽然我们选择的出版物都有自己的坚实贡献，但是一些作者提出了未决问题和未来的挑战，需要更多的研究关注这个领域。 我们设法收集了这些问题并总结如下。</p>
+<ol>
+<li>Satisfying Fastidious Preconditions——一个反复讨论的问题是生成可以适当满足诸如登录应用程序之类的前提条件的测试用例。当oracles生成事件来遍历Android应用程序的活动时，某些特定活动极难被触及。 一个公知的条件是连续七次点击相同的按钮以触发开发者模式。 另一个例子是突破登录页面，这需要用户帐户和密码的特定组合。 在测试Android应用程序的过程中，这两个先决条件显然不容易满足。</li>
+</ol>
+<ol start="2">
+<li>Modeling Complex Events (e.g., gestures or n-user<br>events)。</li>
+</ol>
+<ol start="3">
+<li><p>Bridging Incompatible Instruction Sets：为了提高Android应用程序的性能，Google提供了一个工具集，即Android Native Developer Kit，允许应用程序开发人员通过C / C ++实现时间密集型任务。 使用C / C ++实现的任务非常依赖于CPU指令集（例如，Intel或ARM），因此只能在正确的指令集中启动，例如，基于ARM体系结构实现的任务只能在基于ARM的基础上执行 设备）。 然而，由于目前大多数移动设备都采用ARM芯片组装，而大多数运行Android仿真器的PC都采用英特尔芯片组装，因此在基于Intel的PC上运行基于ARM的仿真器非常慢; 这种差距给基于仿真器的测试方法带来了问题。</p>
+</li>
+<li><p>Evaluating Testing Approaches Fairly：我们的SLR仍然表明，没有任何普遍获得的工具支持测试方法之间的公平比较。</p>
+</li>
+<li><p>Addressing Usability Defect：大多数研究都侧重于Android应用程序的功能缺陷。 可用性缺陷不像用户那样引起注意。 可用性缺陷，如响应能力差，是Android应用程序的主要缺点，并受到用户的大量抱怨。 由于用户手势的不兼容性和重复不精确识别而导致的屏幕上的错误视图组织也意味着糟糕的用户体验。</p>
+</li>
+</ol>
+<p>二、 New Research Directions</p>
+<p>根据最新技术的SLR总结并考虑到文献中报道的新挑战，有机会探索新的测试应用程序，以提高Android应用程序的质量或/和增加安全使用它们的信心。 我们现在列举三个示例方向，如下所示。</p>
+<ol>
+<li><p>Validation of App Updates：Android应用开发者会出于各种原因定期更新他们的应用，包括让他们对用户群具有吸引力。 不幸的是，最近的研究表明，Android应用程序的更新通常会带来更多的安全漏洞和功能缺陷。 在这种情况下，社区可以调查和调整回归技术，以识别容易出现缺陷或不安全的更新。 为了加速在更新中识别这些问题，可以考虑探索具有行为等效性的方法，例如，使用“记录和重放”测试用例生成技术。</p>
+</li>
+<li><p>Accounting for the Ecosystem Fragmentation：如前所述，Android生态系统的碎片化（在运行给定应用程序的操作系统版本中具有多种多样性，以及各种硬件规格）对于执行可能暴露所有问题的测试来说是一个严峻的挑战。用户可能会遇到他的特定设备运行时环境。仍有空间调查Android的测试优化和优先级，以涵盖大多数设备和操作系统版本。例如，在建模应用程序之上，研究人员可以考虑对框架（及其变量）进行建模，并在测试执行期间对其进行说明。</p>
+</li>
+</ol>
+<ol start="3">
+<li>Code Prioritization Versus Test Prioritization：最后，我们注意到Android应用程序在规模方面变得越来越大，包括不再需要的功能的过时代码，或者考虑到设备（及其操作系统版本）的多样性。 例如，在大型公司中，由于开发人员轮换，“死”代码/功能可能仍然隐藏在应用程序代码的明显位置，而开发团队不愿意将其删除。 因此，维护这些应用程序所付出的努力不断增加，因此验证这些应用程序的功能正确性所需的测试工作也会增加。 因此，为了缓解这个问题，我们认为测试此类应用程序显然需要优化必须优先测试的代码选择。 然后必须结合代码优化过程执行测试用例优先级排序，以专注于用户与应用的互动w.r.t. 。</li>
+</ol>
+<h5 id="9-结论"><a href="#9-结论" class="headerlink" title="9.结论"></a>9.结论</h5><p>我们在本文中报告了针对Android应用测试主题的SLR。我们的评论探索了103篇论文，这些论文发表在软件工程，编程语言和安全领域的主要会议，研讨会和期刊上。然后，我们提出了相关研究的分类，探讨了几个方面，包括目标（即，方法所涉及的功能或非功能性问题）以及技术（即，什么类型的测试方法 - 变异，类似于等等） 。）杠杆化。我们进一步探讨了文献中提出的评估，强调缺乏明确监测该领域进展情况的既定基准。最后，除了定量总结之外，我们还提供了有关未来挑战的讨论，并提出了Android测试研究的新研究方向，以进一步确保应用程序的质量，包括兼容性问题，漏洞诱导更新等。</p>
+<h3 id="六、”A-Taxonomy-and-Qualitative-Comparison-of-Program-Analysis-Techniques-for-Security-Assessment-of-Android-Apps”-2016-对-2009-2015-期间的Android安全研究综述。"><a href="#六、”A-Taxonomy-and-Qualitative-Comparison-of-Program-Analysis-Techniques-for-Security-Assessment-of-Android-Apps”-2016-对-2009-2015-期间的Android安全研究综述。" class="headerlink" title="六、”A Taxonomy and Qualitative Comparison of Program Analysis Techniques for Security Assessment of Android Apps”,2016,对(2009-2015)期间的Android安全研究综述。"></a>六、”A Taxonomy and Qualitative Comparison of Program Analysis Techniques for Security Assessment of Android Apps”,2016,对(2009-2015)期间的Android安全研究综述。</h3><p>未细看，其中值得重点关注的内容是研究结果和分析以及对于未来发展的预测，可作为参考和查阅资料，从中查找与自己感兴趣的方向相关的研究内容。</p>
+<h5 id="1-摘要-1"><a href="#1-摘要-1" class="headerlink" title="1.摘要"></a>1.摘要</h5><p>随着移动软件的迅速崛起，我们目睹了针对移动平台（尤其是Android）作为主导平台的安全威胁的数量和复杂性的惊人升级。 虽然现有研究在检测和缓解Android安全方面取得了重大进展，但仍存在差距和挑战。 本文提供了一个全面的分类法来对该领域的最新研究进行分类和表征。 我们仔细研究了系统的文献综述过程，分析了100多篇研究论文的结果，对该领域的研究进行了最全面，最精细的研究。 对研究文献的系统分析揭示了现有文献中的模式，趋势和差距，并强调了将成为未来研究工作重点的关键挑战和机遇。</p>
+<h5 id="2-研究结果与分析"><a href="#2-研究结果与分析" class="headerlink" title="2.研究结果与分析"></a>2.研究结果与分析</h5><p><img src="/2019/02/20/Paper-Reading-1/24.PNG" alt=""></p>
+<p><img src="/2019/02/20/Paper-Reading-1/25.PNG" alt=""></p>
+<p><img src="/2019/02/20/Paper-Reading-1/26.PNG" alt=""></p>
+<p><img src="/2019/02/20/Paper-Reading-1/29.PNG" alt=""></p>
+<h5 id="3-展望"><a href="#3-展望" class="headerlink" title="3.展望"></a>3.展望</h5><p>总而言之，未来的研究需要关注以下领域，以保持领先于当今不断增长的安全威胁。</p>
+<ol>
+<li><p>Pursue integrated and hybrid approaches that span not only static and dynamic analyses, but also other supplementary analysis techniques——追求集成和混合方法，不仅包括静态和动态分析，还包括其他补充分析技术；</p>
+</li>
+<li><p>Move beyond fuzzing for security test input generation——超越模糊测试以生成安全测试输入；</p>
+</li>
+<li><p>Continue the paradigm shift from basic single app analysis to overall system monitoring, and exploring compositional vulnerabilities——继续从基本的单一应用程序分析到整体系统监控的范式转换，并探索组合漏洞；</p>
+</li>
+<li><p>Construct techniques capable of analyzing ICC beyond Intents；</p>
+</li>
+<li><p>Consider dynamically loaded code that is not bundled with installed packages——考虑未与已安装的软件包捆绑在一起的动态加载代码；</p>
+</li>
+<li><p>Analyze code of different forms and from different languages——Recall from section 6.1.5 and Table 1 that only<br>2% and 10% of surveyed approaches consider obfuscated and native codes, respectively——分析不同形式和不同语言的代码；</p>
+</li>
+<li><p>Consider studying Android repudiation；</p>
+</li>
+<li><p>Promote collaboration in the research community。</p>
+</li>
+</ol>
+<h5 id="补充1"><a href="#补充1" class="headerlink" title="补充1"></a>补充1</h5><ol>
+<li><p>除了Apposcopy可以适应的混淆类型之外，更复杂的混淆还包括通过本机代码隐藏行为，反射和动态类加载。这些类型的混淆中的每一种都在Android安全分析技术中得到非常有限的支持。</p>
+</li>
+<li><p>在我们的调查中研究的静态分析技术中，没有一个能够直接对本机代码执行分析，本机代码是用Java以外的语言编写的，例如C或C ++。但是，一些方法[49]，[73]，[109]只能识别本机代码的使用，特别是如果它以异常方式使用。例如，如果RiskRanker [49]发现加密的本机代码，或者如果本机库存储在非标准化的位置，则会引发危险信号。</p>
+</li>
+<li><p>很少有方法考虑动态加载的代码，这在安装应用程序后会发生。一些静态方法，例如Poeplau等人开发的工具，能够识别加载可能是恶意的外部代码的尝试。然而，需要更先进的技术来区分动态加载代码和恶意代码的合法用法。例如，不考虑处理考虑Android组件生命周期的动态加载代码，其中组件可以从多个入口点执行。作为另一个示例，另外加密的动态加载代码对静态或混合分析提出了另一个挑战。</p>
+</li>
+<li><p>考虑Java反射的方法可以分为两类。一个类别采用保守的黑盒方法，只是将所有反射调用标记为可疑。这种方法的一个例子是AdRisk。研究的另一个重点是尝试使用更高级的分析来解决反思。例如，DroidSafe采用字符串和点分析来代替直接调用的反射调用。另一个例子，Pegasus通过在进行反射调用时注入动态检查来重写应用程序。</p>
+</li>
+</ol>
+<h5 id="补充2"><a href="#补充2" class="headerlink" title="补充2"></a>补充2</h5><p>一、与native相关的参考文献.</p>
+<blockquote>
+<p>S. Arzt, S. Rasthofer, C. Fritz, E. Bodden, A. Bartel, J. Klein,Y. Le Traon, D. Octeau, and P. McDaniel, “Flowdroid: Precise context, flow, field, object-sensitive and lifecycle-aware taint analysis for android apps,” in Proceedings of the 35th ACM SIGPLAN Conference on Programming Language Design and Implementation. Edinburgh, UK: ACM, 2014, p. 29.</p>
+</blockquote>
+<blockquote>
+<p>M. Grace, Y. Zhou, Q. Zhang, S. Zou, and X. Jiang,<br>“Riskranker: scalable and accurate zero-day android malware detection,” in Proceedings of the 10th international conference on Mobile systems, applications, and services. Washington, DC: ACM, 2012, pp. 281–294.</p>
+</blockquote>
+<blockquote>
+<p>S. Poeplau, Y. Fratantonio, A. Bianchi, C. Kruegel, and G. Vigna, “Execute this! analyzing unsafe and malicious dynamic code loading in android applications,” in Proceedings of the 20th Annual Network &amp; Distributed System Security Symposium, San Diego, California, 2014.</p>
+</blockquote>
+<blockquote>
+<p>A. Reina, A. Fattori, and L. Cavallaro, “A system call-centric analysis and stimulation technique to automatically reconstruct android malware behaviors,” in ACM European Workshop on Systems Security (EuroSec), Prague, Czech Republic, 2013.</p>
+</blockquote>
+<blockquote>
+<p>K. Tam, S. J. Khan, A. Fattori, and L. Cavallaro, “Cop-<br>perDroid: Automatic Reconstruction of Android Malware<br>Behaviors,” in Proceedings of the 22st Network and Distributed System Security Symposium, San Diego, CA, 2015.</p>
+</blockquote>
+<blockquote>
+<p>Y. Zhou, Z. Wang, W. Zhou, and X. Jiang, “Hey, you, get<br>off of my market: Detecting malicious apps in official and<br>alternative android markets.” in NDSS, San Diego, CA, 2012.</p>
+</blockquote>
+<p>二、与Android Fuzzing相关的参考文献</p>
+<blockquote>
+<p>W. Enck, P. Gilbert, B.-G. Chun, L. P. Cox, J. Jung, P. McDaniel,and A. N. Sheth, “TaintDroid: an information flow tracking system for real-time privacy monitoring on smartphones,” pp. 393–407, 2010.</p>
+</blockquote>
+<blockquote>
+<p>D. S. J. S. G. Greenwood and Z. L. L. Khan, “SMV-HUNTER:<br>Large scale, automated detection of SSL/TLS man-in-the-<br>middle vulnerabilities in android apps,” 2014.</p>
+</blockquote>
+<blockquote>
+<p>C. Marforio, H. Ritzdorf, A. Francillon, and S. Capkun,<br>“Analysis of the communication between colluding appli-<br>cations on modern smartphones,” in Proceedings of the 28th<br>Annual Computer Security Applications Conference, ser. ACSAC’12. Orlando, Florida: ACM, 2012, pp. 51–60.</p>
+</blockquote>
+<blockquote>
+<p>V. Rastogi, Y. Chen, and W. Enck, “AppsPlayground: Au-<br>tomatic security analysis of smartphone applications,” in<br>Proceedings of the 3rd ACM Conference on Data and Application Security and Privacy, ser. CODASPY ’13. San Antonio, TX: ACM, 2013, pp. 209–220.</p>
+</blockquote>
+<blockquote>
+<p>A. Reina, A. Fattori, and L. Cavallaro, “A system call-centric analysis and stimulation technique to automatically reconstruct android malware behaviors,” in ACM European Workshop on Systems Security (EuroSec), Prague, Czech Republic, 2013.</p>
+</blockquote>
+<blockquote>
+<p>S. Sakamoto, K. Okuda, R. Nakatsuka, and T. Yamauchi,<br>“DroidTrack: Tracking and visualizing information diffusion for preventing information leakage on android,” Journal of Internet Services and Information Security (JISIS), vol. 4, no. 2, pp. 55–69, 2014.</p>
+</blockquote>
+<blockquote>
+<p>K. Tam, S. J. Khan, A. Fattori, and L. Cavallaro, “Cop-<br>perDroid: Automatic Reconstruction of Android Malware<br>Behaviors,” in Proceedings of the 22st Network and Distributed System Security Symposium, San Diego, CA, 2015.</p>
+</blockquote>
+<blockquote>
+<p>W. Xu, F. Zhang, and S. Zhu, “Permlyzer: Analyzing permission usage in android applications,” in 2013 IEEE 24th International Symposium on Software Reliability Engineering (ISSRE),Nov. 2013, pp. 400–410.</p>
+</blockquote>
+<blockquote>
+<p>L. K. Yan and H. Yin, “DroidScope: Seamlessly reconstructing the OS and dalvik semantic views for dynamic android malware analysis,” in Proceedings of the 21st USENIX Conference on Security Symposium, ser. Security’12. Bellevue, WA: USENIX Association, 2012, pp. 29–29.</p>
+</blockquote>
+<blockquote>
+<p> Y. Zhang, M. Yang, B. Xu, Z. Yang, G. Gu, P. Ning, X. S. Wang, and B. Zang, “Vetting undesirable behaviors in android apps with permission use analysis,” in Proceedings of the 2013 ACM SIGSAC Conference on Computer and Communications Security, ser. CCS ’13. Berlin, Germany: ACM, 2013, pp. 611–622.</p>
+</blockquote>
+<blockquote>
+<p>C. Zheng, S. Zhu, S. Dai, G. Gu, X. Gong, X. Han, and W. Zou, “SmartDroid: An automatic system for revealing UI-based trigger conditions in android applications,” in Proceedings of the Second ACM Workshop on Security and Privacy in Smartphones and Mobile Devices, ser. SPSM ’12. New York, NY, USA: ACM, 2012, pp. 93–104.</p>
+</blockquote>
+<blockquote>
+<p>“Detecting passive content leaks and pollution in an-<br>droid applications.” in NDSS, San Diego, CA, 2013.</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/paper/" rel="tag"># paper</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/16/知识积累-python-1/" rel="next" title="知识积累-python-1">
+                <i class="fa fa-chevron-left"></i> 知识积累-python-1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/21/Eclipse使用技巧/" rel="prev" title="Eclipse使用技巧">
+                Eclipse使用技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、”ANALYSIS-OF-ANDROID-VULNERABILITIES-AND-MODERN-EXPLOITATION-TECHNIQUES”——ICTACT-JOURNAL-ON-COMMUNICATION-TECHNOLOGY-MARCH-2014-VOLUME-05-ISSUE-01"><span class="nav-number">1.</span> <span class="nav-text">一、”ANALYSIS OF ANDROID VULNERABILITIES AND MODERN EXPLOITATION TECHNIQUES”——ICTACT JOURNAL ON COMMUNICATION TECHNOLOGY, MARCH 2014, VOLUME: 05, ISSUE: 01</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-主要内容"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.主要内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Android漏洞"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.Android漏洞</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Android安全防护"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.Android安全防护</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-结论"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.结论</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Parnika-Bhat-and-Kamlesh-Dutta-2019-“A-Survey-on-Various-Threats-and-Current-State-of-Security-in-Android-Platform-”-ACM-Comput-Surv-52-1-Article-21-February-2019-35-pages"><span class="nav-number">2.</span> <span class="nav-text">二、Parnika Bhat and Kamlesh Dutta.2019. “A Survey on Various Threats and Current State of Security in Android Platform.” ACM Comput. Surv. 52, 1, Article 21 (February 2019), 35 pages.</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-摘要"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.摘要</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-介绍"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-对Android系统进行攻击"><span class="nav-number">2.0.3.</span> <span class="nav-text">3.对Android系统进行攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-4-Applications-based-attacks"><span class="nav-number">2.0.3.1.</span> <span class="nav-text">3.4 Applications-based attacks</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-导致Android恶意软件增加的因素"><span class="nav-number">2.0.4.</span> <span class="nav-text">4.导致Android恶意软件增加的因素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-用于保护Android系统免受各种攻击和恶意活动的防御工具和技术"><span class="nav-number">2.0.5.</span> <span class="nav-text">5.用于保护Android系统免受各种攻击和恶意活动的防御工具和技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-FUTURE-SCOPE-AND-DISCUSSION"><span class="nav-number">2.0.6.</span> <span class="nav-text">6.FUTURE SCOPE AND DISCUSSION</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-结论"><span class="nav-number">2.0.7.</span> <span class="nav-text">7.结论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、”Open-Source-Android-Vulnerability-DetectionTools-A-Survey”——2018年"><span class="nav-number">3.</span> <span class="nav-text">三、”Open Source Android Vulnerability DetectionTools: A Survey”——2018年</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#摘要"><span class="nav-number">3.0.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关键词"><span class="nav-number">3.0.2.</span> <span class="nav-text">关键词</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关键内容"><span class="nav-number">3.0.3.</span> <span class="nav-text">关键内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、”Profiling-Android-Vulnerabilities”-2016-IEEE-International-Conference-on-Software-Quality-Reliability-and-Security"><span class="nav-number">4.</span> <span class="nav-text">四、”Profiling Android Vulnerabilities”,2016 IEEE International Conference on Software Quality, Reliability and Security</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#摘要-1"><span class="nav-number">4.0.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关键词-1"><span class="nav-number">4.0.2.</span> <span class="nav-text">关键词</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-概述"><span class="nav-number">4.0.3.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-背景"><span class="nav-number">4.0.4.</span> <span class="nav-text">2.背景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-研究方法"><span class="nav-number">4.0.5.</span> <span class="nav-text">3.研究方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-实验结果"><span class="nav-number">4.0.6.</span> <span class="nav-text">4.实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#4-1-RQ1-Categorizing-the-Causes-of-Android-Vulnerabilities"><span class="nav-number">4.0.6.1.</span> <span class="nav-text">4.1  RQ1: Categorizing the Causes of Android Vulnerabilities</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-2-RQ2-Vulnerable-Components"><span class="nav-number">4.0.6.2.</span> <span class="nav-text">4.2 RQ2: Vulnerable Components</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-3-RQ3-Fix-Analysis"><span class="nav-number">4.0.6.3.</span> <span class="nav-text">4.3 RQ3: Fix Analysis</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-讨论"><span class="nav-number">4.0.7.</span> <span class="nav-text">5.讨论</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-相关工作"><span class="nav-number">4.0.8.</span> <span class="nav-text">6.相关工作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-结论-1"><span class="nav-number">4.0.9.</span> <span class="nav-text">7.结论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、”Automated-Testing-of-Android-Apps-A-Systematic-Literature-Review”，2018"><span class="nav-number">5.</span> <span class="nav-text">五、”Automated Testing of Android Apps: A Systematic Literature Review”，2018</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#摘要-2"><span class="nav-number">5.0.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关键词-2"><span class="nav-number">5.0.2.</span> <span class="nav-text">关键词</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-介绍"><span class="nav-number">5.0.3.</span> <span class="nav-text">1.介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-和3-和7-和8"><span class="nav-number">5.0.4.</span> <span class="nav-text">2.和3.和7.和8.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-Android测试研究的分类"><span class="nav-number">5.0.5.</span> <span class="nav-text">4.Android测试研究的分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-Literature-Review"><span class="nav-number">5.0.6.</span> <span class="nav-text">5. Literature Review</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-讨论"><span class="nav-number">5.0.7.</span> <span class="nav-text">6.讨论</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-结论"><span class="nav-number">5.0.8.</span> <span class="nav-text">9.结论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、”A-Taxonomy-and-Qualitative-Comparison-of-Program-Analysis-Techniques-for-Security-Assessment-of-Android-Apps”-2016-对-2009-2015-期间的Android安全研究综述。"><span class="nav-number">6.</span> <span class="nav-text">六、”A Taxonomy and Qualitative Comparison of Program Analysis Techniques for Security Assessment of Android Apps”,2016,对(2009-2015)期间的Android安全研究综述。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-摘要-1"><span class="nav-number">6.0.1.</span> <span class="nav-text">1.摘要</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-研究结果与分析"><span class="nav-number">6.0.2.</span> <span class="nav-text">2.研究结果与分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-展望"><span class="nav-number">6.0.3.</span> <span class="nav-text">3.展望</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#补充1"><span class="nav-number">6.0.4.</span> <span class="nav-text">补充1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#补充2"><span class="nav-number">6.0.5.</span> <span class="nav-text">补充2</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

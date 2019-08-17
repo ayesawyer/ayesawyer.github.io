@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Android,Fuzzing,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="关于Android原生代码中漏洞的利用和分析的一些基础实验和知识。">
+<meta name="keywords" content="Android,Fuzzing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android原生代码中漏洞的利用和分析">
+<meta property="og:url" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="关于Android原生代码中漏洞的利用和分析的一些基础实验和知识。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/14.png">
+<meta property="og:updated_time" content="2019-08-13T09:19:54.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android原生代码中漏洞的利用和分析">
+<meta name="twitter:description" content="关于Android原生代码中漏洞的利用和分析的一些基础实验和知识。">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/">
+
+
+
+
+
+  <title>Android原生代码中漏洞的利用和分析 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/03/Android原生代码中漏洞的利用和分析/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android原生代码中漏洞的利用和分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-03T16:15:20+08:00">
+                2019-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/漏洞挖掘-利用/" itemprop="url" rel="index">
+                    <span itemprop="name">漏洞挖掘/利用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/03/Android原生代码中漏洞的利用和分析/" class="leancloud_visitors" data-flag-title="Android原生代码中漏洞的利用和分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于Android原生代码中漏洞的利用和分析的一些基础实验和知识。</p>
+<a id="more"></a>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><h3 id="1-主要内容"><a href="#1-主要内容" class="headerlink" title="(1)主要内容"></a>(1)主要内容</h3><ul>
+<li>检查文件的权限</li>
+<li>交叉编译原生可执行程序</li>
+<li>竞争条件类漏洞的利用</li>
+<li>溢出漏洞的利用</li>
+<li>自动进行Android原生代码的fuzzing测试</li>
+</ul>
+<h3 id="2-Android原生代码"><a href="#2-Android原生代码" class="headerlink" title="(2)Android原生代码"></a>(2)Android原生代码</h3><ol>
+<li>原生代码(native)—即支持应用层组件的所有事物。</li>
+<li>这些原生代码包括：系统守护进程、专为指定系统架构编译的二进制可执行文件以及文件系统组件和设备级配置。</li>
+<li>为什么要研究原生代码中漏洞的利用技术呢?root技术的原理，一般都是通过滥用 Android设备里原生代码中的漏洞完成提取操作，使得我们能永久性地访问 Android设备上的root(或称超级用户)账户。</li>
+</ol>
+<h2 id="2-内容要点"><a href="#2-内容要点" class="headerlink" title="2.内容要点"></a>2.内容要点</h2><h3 id="1-检查文件权限"><a href="#1-检查文件权限" class="headerlink" title="(1)检查文件权限"></a>(1)检查文件权限</h3><h4 id="1-背景知识"><a href="#1-背景知识" class="headerlink" title="1.背景知识"></a>1.背景知识</h4><ol>
+<li><p>滥用操作系统在设置文件系统权限（或访问权限）上的差异和不足，是本地提权的最常见方式之一。定义Android原生系统的受攻击面时，明确的识别出文件系统中所有可能会成为攻击点的文件是一个良好的开端。</p>
+</li>
+<li><p>为了正确地认识厂商在设备的操作系统上增添的差异，接下来介绍一点“默认的”或标准的 Android文件系统在结构和访问权限设置方面的知识。</p>
+</li>
+<li><p>我们根据 Linux文件系统层次结构和 Jelly Bean( Android4.1的代号)中的 init.rc脚本，对默认的或标准的文件系统中，文件夹及其用途作的一个概述，如下图所示<em>（下图只是一个参考，不同的厂商为他们的设备专门编译的Android版本之间还会有不同）</em>。</p>
+</li>
+</ol>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/1.png" alt=""></p>
+<p><em>下面补充一些Linux或基于UNIX的操作系统中的文件权限相关知识。</em></p>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/2.png" alt=""></p>
+<h4 id="2-具体步骤"><a href="#2-具体步骤" class="headerlink" title="2.具体步骤"></a>2.具体步骤</h4><ol>
+<li>在Android手机上安装<code>find</code>这个二进制可执行文件或for Android版的<code>Busybox</code>。</li>
+<li>在ADB shell中执行以下命令，按照访问控制权限，搜索相关的文件。</li>
+</ol>
+<blockquote>
+<p><code>find [path-to-search] -perm 0444 -exec ls -al {} \;</code>（列出手机指定目录下“所有用户均可读”的文件）</p>
+</blockquote>
+<blockquote>
+<p><code>find [path-to-search] -perm 0444 -exec ls -al {} \; 2&gt; dev/null</code>（包括一个重定向至/dev/null的指令，被用来忽略由于权限不匹配而导致的错误输出）<em>（dev/null的作用就好比是一个输出“黑洞”，允许 Linux/UNIX用户用它来放置他们不感兴趣的输出。一个额外的好处是，它会返回一个值让你知道写操作是否成功。）</em></p>
+</blockquote>
+<blockquote>
+<p><code>find [path-to-search] -perm 0222 -exec ls -al {} \;</code>（列出手机指定目录下“所有用户均可写”的文件）</p>
+</blockquote>
+<blockquote>
+<p><code>find [path-to-search] -perm 0111 -exec ls -al {} \;</code>（列出手机指定目录下“所有用户均可执行”的文件）</p>
+</blockquote>
+<blockquote>
+<p><code>find [path-to-search] -perm a=r -exec ls -al {} \;</code>（列出手机指定目录下“除组成员外所有用户均可读”的文件）</p>
+</blockquote>
+<p><em>上面这条指令确保只有当权限完全匹配的文件才会被列出，也就是说，返回的文件的相应位肯定被设为1了。如果你要找规定的位被设为1，而其他的位设不设都没关系的文件—这可能是你最常做的事了—你可以在之前的例子里，在指定搜索权限的参数前面加上一个“-”符号作为前缀，如<code>find [path-to-search] -perm -444 -exec ls -al {} \;</code></em></p>
+<blockquote>
+<p><code>find [path-to-search] -user 0 -exec ls -al {} \;</code>（列出手机指定目录下“属于root用户”的文件）</p>
+</blockquote>
+<blockquote>
+<p><code>find [path-to-search] -user 1000 -exec ls -al {} \;</code>（列出手机指定目录下所有“系统用户”的文件）</p>
+</blockquote>
+<blockquote>
+<p><code>find [path-to-search] -group 0 -exec ls -al {} \;</code>（列出手机指定目录下“指定组ID”的文件）</p>
+</blockquote>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/3.png" alt=""></p>
+<ol start="3">
+<li>关于应用程序目录data/data。</li>
+</ol>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/4.png" alt=""></p>
+<h4 id="3-补充说明"><a href="#3-补充说明" class="headerlink" title="3.补充说明"></a>3.补充说明</h4><p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/5.png" alt=""></p>
+<h3 id="2-交叉编译原生可执行程序"><a href="#2-交叉编译原生可执行程序" class="headerlink" title="(2)交叉编译原生可执行程序"></a>(2)交叉编译原生可执行程序</h3><ol>
+<li>为你的代码准备一个目录。在建立这个目录之后，你还需要再创建一个名为JNI的子目录。这个子目录的名字必须是“JNI”，因为NDK的编译脚本将会专门寻找这个目录。</li>
+<li>创建一个 Android.mk文件。把它创建在JNI目录中。 Android.mk文件基本上就是个Make文件，其中记录了一些编译相关的属性。它的内容应该是这样的。</li>
+</ol>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/6.png" alt=""></p>
+<ol start="3">
+<li>同时在JNI目录下存放需要编译的.c文件（源代码）。</li>
+<li>在JNI目录下执行<code>ndk_build</code>命令（需要将其添加到环境变量中），即可编译。</li>
+</ol>
+<h3 id="3-竞争条件类漏洞的利用"><a href="#3-竞争条件类漏洞的利用" class="headerlink" title="(3)竞争条件类漏洞的利用"></a>(3)竞争条件类漏洞的利用</h3><ol>
+<li><p>在 Android平台上，竞争条件会引发不少问题和提权攻击，其中有许多能让恶意攻击者获得root权限。</p>
+</li>
+<li><p>从本质上讲，竞争条件问题是当进程运行在使用抢占式进程调度系统的多线程系统(允许多个进程同时运行的平台)中时，由于缺乏强制互斥条件(enforced mutual exclusion)而引发的。抢占式调度允许任务调度器强制中断一个正在运行中的线程或进程，也就是说，不用等到被中断进程准备好，就可以中断其运行。这就会产生竞争条件问题，因为开发人员无法不让进程调度器以这种任意的或不可预测测的方式中断正在运行中的应用程序。结果，那些依赖于访问诸如文件、环境变量或共享内存中的数据结构等潜在共享资源的进程，就要去“竟争”抢占和独占这些资源的访问权。攻击者通过抢先获得这些资源的访问权并改写资源内容的的方式，滥用这一情景，就能达到破坏进程的操作或恶意影响进程行为目的。</p>
+</li>
+<li><p>举个简单的例子：某个程序验证用户的方式是把所有已经认证的用户全部列在某个文件中。但这一操作方式不能适应抢占式任务调度，因为程序访问该文件之前，它可能已经被攻击者修改过了，把(未经认证的)他/她的名字加到了列表里，这样他/她就会被认为是认证用户了。</p>
+</li>
+</ol>
+<blockquote>
+<p><a href="https://paper.seebug.org/364/#0x0" target="_blank" rel="noopener">高通声卡驱动中的条件竞争漏洞分析（CVE-2017-7368）</a></p>
+</blockquote>
+<h3 id="4-自动进行Android原生代码的fuzzing测试"><a href="#4-自动进行Android原生代码的fuzzing测试" class="headerlink" title="(4)自动进行Android原生代码的fuzzing测试"></a>(4)自动进行Android原生代码的fuzzing测试</h3><p><em>接下来，我们将讨论如何把fuzzing测试工具<a href="https://gitlab.com/akihe/radamsa" target="_blank" rel="noopener">Radamsa</a>用到Android平台上，以及安装一些实用程序，以帮助编写一些专为Radamsa开发的，健壮的fuzzing测试脚本。</em></p>
+<h4 id="1-编译for-Android版的Radamsa"><a href="#1-编译for-Android版的Radamsa" class="headerlink" title="1.编译for Android版的Radamsa"></a>1.编译for Android版的Radamsa</h4><ol>
+<li><p>下载<a href="https://github.com/anestisb/radamsa-android" target="_blank" rel="noopener">radamsa</a></p>
+</li>
+<li><p>在jni目录下使用<code>ndk-build</code>命令，结果报错如下图。</p>
+</li>
+</ol>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/7.png" alt=""></p>
+<p>这是一个定义(即有一个<code>typedef</code>，它把 <code>in_addr_t</code>定义为<code>unsigned long</code>的别名)无法传递到之后的代码中的问题。<strong>解决如下图——</strong></p>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/8.png" alt=""></p>
+<p>解决之后就可以尝试<strong>将生成的可执行文件radamsa复制到手机的system/bin目录下</strong>了，具体步骤如下图。</p>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/9.png" alt=""></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/fkgjdkblxckvbxbgb/article/details/80370356" target="_blank" rel="noopener">android push文件到system/目录下</a><br><a href="https://blog.csdn.net/stone_2323/article/details/78092297" target="_blank" rel="noopener">无法通过adb将文件push到system的问题</a></p>
+</blockquote>
+<p>但是将radamsa复制到system/bin目录下后尝试运行时，<strong>报错如下图</strong>。</p>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/10.png" alt=""></p>
+<p><em>经过查询，最开始以为是编译时带有指定具体版本的<code>Application.mk</code>文件中指定的android版本(<code>android-21</code>)过高，于是尝试不带此文件进行<code>ndk-build</code>编译，结果仍然报错。</em></p>
+<p><strong>解决方式一</strong></p>
+<p><em>后来猜测是手机系统版本的问题，于是将手机从4.4.4的版本换成5.1.1的，结果在将生成的可执行文件radamsa复制到手机的system/bin目录下时碰到问题。Android5.0及以上在remount system目录时会失败。</em></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/andrewblog/article/details/51879844" target="_blank" rel="noopener">Android 6.0 adb remount后没有写权限，提示Read-only file system</a><br><a href="https://blog.csdn.net/wh_19910525/article/details/50263851" target="_blank" rel="noopener">在 Android 5.1.1 执行 remount system failed 解决方法</a><br><a href="https://blog.csdn.net/zi_zhe/article/details/71597609" target="_blank" rel="noopener">remount of /system failed: Read-only file system原因及解决</a><br><a href="https://android.stackexchange.com/questions/110927/how-to-mount-system-rewritable-or-read-only-rw-ro" target="_blank" rel="noopener">How to mount system rewritable or read-only? RW/RO</a><br><a href="https://stackoverflow.com/questions/6066030/read-only-file-system-on-android" target="_blank" rel="noopener">Read only file system on Android</a><br><a href="https://www.jianshu.com/p/5a520fd93ccc" target="_blank" rel="noopener">Android 模拟器启动时参数设置</a><br><a href="http://iyounix.com/2017/12/31/Android_Sys/[Android]%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%88%86%E5%8C%BA%E6%8C%82%E8%BD%BD%E6%B5%81%E7%A8%8B/" target="_blank" rel="noopener">Android 文件系统分区挂载流程</a></p>
+</blockquote>
+<p>上述这么多参考链接中的解答都没有解决我的问题。最终，是通过<strong>先将其push到data/local/tmp目录下，然后再在root的shell中将其复制到system/bin目录下</strong>解决问题的，如下图，然后上一个问题也解决了，果然是系统版本的问题。</p>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/11.png" alt=""></p>
+<p><strong>解决方式二</strong></p>
+<p>参考以下链接，将<code>Application.mk</code>文件中指定的android版本进行改变再编译即可。</p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/yuanxiaoping_21cn_com/p/6936843.html" target="_blank" rel="noopener">android cannot locate symbol ‘sigemptyset’问题解决</a></p>
+</blockquote>
+<h4 id="2-建立一个简单的fuzzing脚本，对dexdump做fuzzing测试"><a href="#2-建立一个简单的fuzzing脚本，对dexdump做fuzzing测试" class="headerlink" title="2.建立一个简单的fuzzing脚本，对dexdump做fuzzing测试"></a>2.建立一个简单的fuzzing脚本，对dexdump做fuzzing测试</h4><h5 id="1-测试目标"><a href="#1-测试目标" class="headerlink" title="(1)测试目标"></a>(1)测试目标</h5><p>安装<code>Busybox.apk</code>后，其中的一个用于剖析Android DEX并输出其中代码的工具<strong><code>dexdump</code>（位于目录<code>/system/xbin/dexdump</code>下）</strong>。</p>
+<h5 id="2-测试脚本及步骤"><a href="#2-测试脚本及步骤" class="headerlink" title="(2)测试脚本及步骤"></a>(2)测试脚本及步骤</h5><p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/12.png" alt=""></p>
+<h5 id="3-对测试脚本的说明"><a href="#3-对测试脚本的说明" class="headerlink" title="(3)对测试脚本的说明"></a>(3)对测试脚本的说明</h5><p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/13.png" alt=""></p>
+<p><img src="/2019/06/03/Android原生代码中漏洞的利用和分析/14.png" alt=""></p>
+<h2 id="3-扩展"><a href="#3-扩展" class="headerlink" title="3.扩展"></a>3.扩展</h2><p><strong>可用于对Android系统代码进行fuzz的工具简介。</strong></p>
+<h3 id="A-Android-kernel-fuzz"><a href="#A-Android-kernel-fuzz" class="headerlink" title="A.Android kernel fuzz"></a>A.Android kernel fuzz</h3><blockquote>
+<p><a href="http://www.gandalf.site/2019/02/syzkallerfuzz-android-kernel.html" target="_blank" rel="noopener">Syzkaller（一）fuzz Android kernel（安装编译Syzkaller、使用syzkaller fuzz Android kernel）</a><br><a href="https://github.com/google/syzkaller" target="_blank" rel="noopener">google/syzkaller</a></p>
+</blockquote>
+<p>Syzkaller是是一款无监督的覆盖引导Linux内核模糊器，由Google团队开发的开源工具，目前还在不断的维护之中。<br>Syzkaller支持Android平台，搭配使用KASAN 排错和 KCOV 检测编译的内核版本，可以更有效的检测运行时内存错误以及获取代码覆盖率信息。</p>
+<h3 id="B-fuzzy-fastboot"><a href="#B-fuzzy-fastboot" class="headerlink" title="B.fuzzy_fastboot"></a>B.fuzzy_fastboot</h3><blockquote>
+<p><a href="http://www.gandalf.site/2019/02/androidfuzzyfastboot.html" target="_blank" rel="noopener">Android（十一）fuzzy_fastboot（编译fuzzy_fastboot、使用fuzzy_fastboot、 fuzzy_fastboot原理、fuzz结果分析）</a><br><a href="https://github.com/aosp-mirror/platform_system_core/tree/master/fastboot/fuzzy_fastboot" target="_blank" rel="noopener">fuzzy_fastboot</a></p>
+</blockquote>
+<p>fuzzy_fastboot是AOSP官方支持的fastboot fuzzer工具，主要用于给三方手机厂商进行出厂时安全测试。<br>fuzzy_fastboot工具通用测试会尝试进行51项测试，内容如下，包括usb连接、fastboot相关参数获取、oem锁状态、flash等基础功能以及一些其他测试。</p>
+<pre><code>#usb连接测试
+USBFunctionality.USBConnect
+#获取配置参数
+Conformance.GetVar
+Conformance.GetVarVersionBootloader
+Conformance.GetVarVersionBaseband
+Conformance.GetVarSerialNo
+Conformance.GetVarSecure
+Conformance.GetVarOffModeCharge
+Conformance.GetVarVariant
+Conformance.GetVarRevision
+Conformance.GetVarBattVoltage
+Conformance.GetVarBattVoltageOk
+Conformance.GetVarDownloadSize
+Conformance.GetVarAll
+Conformance.UnlockAbility
+Conformance.PartitionInfo
+Conformance.Slots
+Conformance.SetActive
+Conformance.LockAndUnlockPrompt
+#擦除测试
+Conformance.SparseBlockSupport0
+Conformance.SparseBlockSupport1
+Conformance.SparseDownload0
+Conformance.SparseDownload1
+Conformance.SparseDownload2
+Conformance.SparseDownload3
+Conformance.SparseVersionCheck
+#oem解锁状态测试
+UnlockPermissions.Download
+UnlockPermissions.DownloadFlash
+#oem锁状态测试
+LockPermissions.DownloadFlash
+LockPermissions.Erase
+LockPermissions.SetActive
+LockPermissions.Boot
+#fuzz测试
+Fuzz.DownloadSize
+Fuzz.DownloadPartialBuf
+Fuzz.DownloadOverRun
+Fuzz.DownloadInvalid1
+Fuzz.DownloadInvalid2
+Fuzz.DownloadInvalid3
+Fuzz.DownloadInvalid4
+Fuzz.DownloadInvalid5
+Fuzz.DownloadInvalid6
+Fuzz.DownloadInvalid7
+Fuzz.DownloadInvalid8
+Fuzz.GetVarAllSpam
+Fuzz.BadCommandTooLarge
+Fuzz.CommandTooLarge
+Fuzz.CommandMissingArgs
+Fuzz.SparseZeroLength
+Fuzz.SparseTooManyChunks
+Fuzz.USBResetSpam
+Fuzz.USBResetCommandSpam
+Fuzz.USBResetAfterDownload
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Fuzzing/" rel="tag"># Fuzzing</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/01/反编译App的原生库/" rel="next" title="反编译App的原生库+使用GDB调试Android进程">
+                <i class="fa fa-chevron-left"></i> 反编译App的原生库+使用GDB调试Android进程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/10/教我兄弟学Android逆向05-课后作业（未完待续）/" rel="prev" title="教我兄弟学Android逆向05-课后作业（未完待续）">
+                教我兄弟学Android逆向05-课后作业（未完待续） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概述"><span class="nav-number">1.</span> <span class="nav-text">1.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-主要内容"><span class="nav-number">1.1.</span> <span class="nav-text">(1)主要内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Android原生代码"><span class="nav-number">1.2.</span> <span class="nav-text">(2)Android原生代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-内容要点"><span class="nav-number">2.</span> <span class="nav-text">2.内容要点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-检查文件权限"><span class="nav-number">2.1.</span> <span class="nav-text">(1)检查文件权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-背景知识"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.背景知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-具体步骤"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.具体步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-补充说明"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.补充说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-交叉编译原生可执行程序"><span class="nav-number">2.2.</span> <span class="nav-text">(2)交叉编译原生可执行程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-竞争条件类漏洞的利用"><span class="nav-number">2.3.</span> <span class="nav-text">(3)竞争条件类漏洞的利用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-自动进行Android原生代码的fuzzing测试"><span class="nav-number">2.4.</span> <span class="nav-text">(4)自动进行Android原生代码的fuzzing测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-编译for-Android版的Radamsa"><span class="nav-number">2.4.1.</span> <span class="nav-text">1.编译for Android版的Radamsa</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-建立一个简单的fuzzing脚本，对dexdump做fuzzing测试"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.建立一个简单的fuzzing脚本，对dexdump做fuzzing测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-测试目标"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">(1)测试目标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-测试脚本及步骤"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">(2)测试脚本及步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-对测试脚本的说明"><span class="nav-number">2.4.2.3.</span> <span class="nav-text">(3)对测试脚本的说明</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-扩展"><span class="nav-number">3.</span> <span class="nav-text">3.扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Android-kernel-fuzz"><span class="nav-number">3.1.</span> <span class="nav-text">A.Android kernel fuzz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-fuzzy-fastboot"><span class="nav-number">3.2.</span> <span class="nav-text">B.fuzzy_fastboot</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

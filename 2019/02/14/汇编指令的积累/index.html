@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="汇编,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="实践过程中的一些汇编指令及含义的积累。">
+<meta name="keywords" content="汇编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编指令的积累">
+<meta property="og:url" content="http://yoursite.com/2019/02/14/汇编指令的积累/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="实践过程中的一些汇编指令及含义的积累。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/14.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/15.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/16.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/19.png">
+<meta property="og:updated_time" content="2019-04-09T07:54:20.068Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="汇编指令的积累">
+<meta name="twitter:description" content="实践过程中的一些汇编指令及含义的积累。">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/14/汇编指令的积累/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/14/汇编指令的积累/">
+
+
+
+
+
+  <title>汇编指令的积累 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/汇编指令的积累/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">汇编指令的积累</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T10:18:49+08:00">
+                2019-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/14/汇编指令的积累/" class="leancloud_visitors" data-flag-title="汇编指令的积累">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>实践过程中的一些汇编指令及含义的积累。</p>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+<th>补充</th>
+<th>指令系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cbw</code>、<code>cwd</code>、<code>cdq</code>、<code>cwde</code>、<code>cdqe</code></td>
+<td>符号拓展指令</td>
+<td>见图1</td>
+</tr>
+<tr>
+<td><code>sidt</code></td>
+<td>存储全局/中断描述符表格寄存器</td>
+<td>将全局描述符表格寄存器 (GDTR) 或中断描述符表格寄存器 (IDTR) 中的内容存储到目标操作数。示例见图2.</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>JCC</code></td>
+<td>汇编跳转指令</td>
+<td>详细描述见下</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>STOS</code>、<code>STOSB</code>、<code>STOSW</code>、<code>STOSD</code></td>
+<td>字符串存储指令</td>
+<td>详细说明见图3(1)，示例见图3(2)所示。</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>REPNE/REPNZ</code></td>
+<td>重复前缀，当ECX!=0并且ZF==0时 重复执行后边的指令 每执行一次ECX的值减1</td>
+<td>REPNE和REPNZ是同一条指令的不同助记符，可配合其他指令，用于计算字符串长度、定位特定字符等。示例如图4</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>STOS</code></td>
+<td>将eax中的值拷贝到ES:EDI指向的地址</td>
+<td>…</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>neg</code></td>
+<td>求补指令，对操作数执行求补运算：用零减去操作数，然后结果返回操作数。也可以表达成：将操作数按位取反后加1。</td>
+<td>对标志的影响与用零作减法的SUB指令一样,可用于求一个数的相反数</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>not</code></td>
+<td>把操作数按位取反</td>
+<td>NEG比NOT指令多了一步“加一”操作</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>LEA</code></td>
+<td>目标地址传送指令</td>
+<td>将一个地址指针写入到指定的寄存器,区别MOV传送指令：MOV传送的是地址所指的内容，而LEA只是地址</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>SCASB</code></td>
+<td>详细描述见图5</td>
+<td>…</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>CMP</code></td>
+<td>详细描述见图6</td>
+<td>…</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>Test</code></td>
+<td>对两个参数(目标，源)执行AND逻辑操作,并根据结果设置标志寄存器(影响标志: C,O,P,Z,S(其中C与O两个标志会被设为0)),结果本身不会保存。<code>TEST AX,BX</code> 与 <code>AND AX,BX</code> 命令有相同效果</td>
+<td>Test可以用来测试一个位,例如寄存器:<code>test eax, 100b</code>; b后缀意为二进制 <code>jnz **</code>; 如果eax右数第三个位为1,jnz将会跳转; 另一个非常普遍的用法是用来测试寄存器是否为空,如<code>test ecx, ecx</code></td>
+<td>x86</td>
+</tr>
+<tr>
+<td><a href="https://blog.csdn.net/oBuYiSeng/article/details/50349139" target="_blank" rel="noopener"><code>cdq</code></a></td>
+<td>把 EAX 的第 31 bit 复制到 EDX 的每一个 bit 上,它实际的作用只是把EDX的所有位都设成EAX最高位的值。也就是说，当EAX &lt;80000000, EDX 为00000000；当EAX &gt;= 80000000， EDX 则为FFFFFFFF。</td>
+<td>大多出现在除法运算之前</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>div/idiv</code></td>
+<td>无符号/带符号除法指令</td>
+<td><a href="https://www.cnblogs.com/zhangdongsheng/archive/2012/02/03/2337583.html" target="_blank" rel="noopener">如图7</a></td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>sar</code>、<code>shr</code></td>
+<td>汇编语言中SAR和SHR指令都是右移指令，SAR是算数右移指令（shift arithmetic right），而SHR是逻辑右移指令（shift logical right）</td>
+<td>两者的区别在于SAR右移时保留操作数的符号，即用符号位来补足，而SHR右移时总是用0来补足;例如10000000算数右移一位是11000000，而逻辑右移一位是01000000</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>Movsx</code>、<code>Movsxd</code></td>
+<td>符号扩展指令</td>
+<td>符号扩展/传送指令有两大类：movsx系列和cbw系列，详细说明见图8</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>Movzx</code></td>
+<td>零扩展指令</td>
+<td>详细说明见图9</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><a href="https://www.felixcloutier.com/x86/cmovcc" target="_blank" rel="noopener"><code>CMOVcc</code></a></td>
+<td>有条件的移动指令</td>
+<td>该指令检查EFLAGS寄存器（CF，OF，PF，SF和ZF）中的一个或多个状态标志的状态，并在标志处于指定状态（或条件）时执行移动操作。条件代码（cc）与每个指令相关联以指示正在测试的条件。如果不满足条件，则不执行移动并继续执行CMOV cc指令之后的指令。详细描述如图10(1)(2)所示。</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>setne</code></td>
+<td>检查ZF标志位，并按照其值将后面的寄存器赋值为相反的值。</td>
+<td>如<code>cmp eax,06 setne al</code>,若eax等于6，ZF等于1，则赋值al=0，反之则赋值al=1。</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><a href="https://blog.csdn.net/abraham_li/article/details/49474721" target="_blank" rel="noopener"><code>sbb</code></a></td>
+<td>借位减法指令</td>
+<td>如<code>sbb eax，eax</code>,相当于eax=eax-eax-CF。详细说明见下图11.</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><a href="http://www.hgy413.com/hgydocs/IA32/instruct32_hh/vc180.htm" target="_blank" rel="noopener"><code>Movapd</code></a>]</td>
+<td>移动对齐的压缩双精度浮点值。</td>
+<td>从源操作数（第二个操作数）将包含两个压缩双精度浮点值的双四字移到目标操作数（第一个操作数）。此指令可用于将 128 位内存位置的内容加载到 XMM 寄存器、将 XMM 寄存器的内容存储到 128 位内存位置，或是在两个 XMM 寄存器之间移动数据。源操作数或目标操作数是内存操作数时，操作数必须对齐 16 字节边界，否则将生成一般保护性异常 (#GP)。</td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>setz</code></td>
+<td>把ZF标志的值传给指令后面跟着的一个字节型操作数，ZF=1时结果为1，ZF=0时结果为0</td>
+<td>可以引申为条件指令集<code>setCC</code></td>
+<td></td>
+<td>x86</td>
+</tr>
+<tr>
+<td><code>fsub</code></td>
+<td>从目标操作数减去源操作数，差值存储到目标位置。目标操作数总是 FPU 数据寄存器(ST[0]-ST[1])；源操作数可以是寄存器或内存位置。内存中的源操作数可以是单精度实数、双精度实数、字整数或短整数格式。</td>
+<td>无操作数版的指令从 ST(1) 寄存器的内容减去 ST(0) 寄存器的内容，结果存储到 ST(1)。单操作数版从 ST(0) 寄存器的内容减去内存位置的内容（实数或整数值），结果存储到 ST(0) 寄存器。双操作数版从 ST(i) 寄存器的内容减去 ST(0) 寄存器的内容，反之亦然。详细描述见图12</td>
+<td>x86</td>
+</tr>
+</tbody>
+</table>
+<p>图1——<br><img src="/2019/02/14/汇编指令的积累/1.png" alt=""></p>
+<p>图2——<br><img src="/2019/02/14/汇编指令的积累/2.png" alt=""></p>
+<p>JCC系列指令：</p>
+<ol>
+<li><p>测试标志位的JCC指令——<br><img src="/2019/02/14/汇编指令的积累/3.png" alt=""></p>
+</li>
+<li><p>使用无符号数比较的JCC指令——<br><img src="/2019/02/14/汇编指令的积累/4.png" alt=""></p>
+</li>
+<li><p>使用有符号数比较的JCC指令——<br><img src="/2019/02/14/汇编指令的积累/5.png" alt=""></p>
+</li>
+</ol>
+<p>图3——<br>（1）<br><img src="/2019/02/14/汇编指令的积累/6.png" alt=""></p>
+<p>（2）与REP前缀一起使用时，Store String指令对初始化内存块很有用。例如，以下代码将BUFFER的100字节内存块初始化为0：<br><img src="/2019/02/14/汇编指令的积累/7.png" alt=""></p>
+<p>图4——关于<code>repnz scasb</code>指令的解释</p>
+<p><img src="/2019/02/14/汇编指令的积累/8.png" alt=""></p>
+<blockquote>
+<p>当repne scasb指令执行结束后，存在两种结束的可能;<br>一种是找到了空格字符,此时 ZF = 0;<br>另外一种是字符串中没有空格，当比较完最后一个字符是，仍不相等，此时ZF = 1;<br>所以repne scasb指令后面要跟踪jne指令，判断是哪一种情况；<br>当找到空格后，由于scasb指令自动修改地址， edi指向空格字符的下一个字符位置，所以空格字符的偏移地址是edi的值减1。</p>
+</blockquote>
+<p>图5——</p>
+<p><img src="/2019/02/14/汇编指令的积累/9.png" alt=""></p>
+<p>图6——</p>
+<p><img src="/2019/02/14/汇编指令的积累/10.png" alt=""></p>
+<p><img src="/2019/02/14/汇编指令的积累/11.png" alt=""></p>
+<p>图7——</p>
+<p><img src="/2019/02/14/汇编指令的积累/12.png" alt=""></p>
+<p>图8——</p>
+<p><img src="/2019/02/14/汇编指令的积累/13.png" alt=""></p>
+<p>图9——</p>
+<p><img src="/2019/02/14/汇编指令的积累/1.jpg" alt=""></p>
+<p>图10——</p>
+<p>（1）<br><img src="/2019/02/14/汇编指令的积累/14.png" alt=""></p>
+<p>（2）<br><img src="/2019/02/14/汇编指令的积累/15.png" alt=""></p>
+<p>图11——</p>
+<p><img src="/2019/02/14/汇编指令的积累/16.png" alt=""></p>
+<p>图12——</p>
+<p><img src="/2019/02/14/汇编指令的积累/19.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/汇编/" rel="tag"># 汇编</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/24/用python实现简单的File-Fuzzing/" rel="next" title="用python实现简单的File Fuzzing">
+                <i class="fa fa-chevron-left"></i> 用python实现简单的File Fuzzing
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/14/c指令的积累/" rel="prev" title="c指令的积累">
+                c指令的积累 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

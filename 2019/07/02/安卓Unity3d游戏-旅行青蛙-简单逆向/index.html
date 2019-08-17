@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Android 逆向,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对安卓Unity3d游戏&amp;lt;旅行青蛙&amp;gt;的简单逆向分析。">
+<meta name="keywords" content="Android 逆向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓Unity3d游戏&lt;旅行青蛙&gt;简单逆向">
+<meta property="og:url" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对安卓Unity3d游戏&amp;lt;旅行青蛙&amp;gt;的简单逆向分析。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/11.png">
+<meta property="og:updated_time" content="2019-07-05T09:44:53.572Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓Unity3d游戏&lt;旅行青蛙&gt;简单逆向">
+<meta name="twitter:description" content="对安卓Unity3d游戏&amp;lt;旅行青蛙&amp;gt;的简单逆向分析。">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/">
+
+
+
+
+
+  <title>安卓Unity3d游戏<旅行青蛙>简单逆向 | Aye's house</旅行青蛙></title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">安卓Unity3d游戏<旅行青蛙>简单逆向</旅行青蛙></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-02T19:47:23+08:00">
+                2019-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/" class="leancloud_visitors" data-flag-title="安卓Unity3d游戏<旅行青蛙>简单逆向">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对安卓Unity3d游戏&lt;旅行青蛙&gt;的简单逆向分析。</p>
+<a id="more"></a>
+<h2 id="1-背景知识"><a href="#1-背景知识" class="headerlink" title="1.背景知识"></a>1.背景知识</h2><p><em>第一次接触这类android app的逆向分析，发现还是有相关的开发经验之后，逆向分析起来才能比较熟悉，易于上手。介于我只有普通类型的app的开发经历，并没有这类游戏app的开发经验，就需要先补一下相关的基础知识。</em></p>
+<h3 id="A-Unity-游戏引擎-E6-B8-B8-E6-88-8F"><a href="#A-Unity-游戏引擎-E6-B8-B8-E6-88-8F" class="headerlink" title="A.Unity (游戏引擎)/#%E6%B8%B8%E6%88%8F)"></a>A.<a href="https://zh.wikipedia.org/wiki/Unity_(%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E" target="_blank" rel="noopener">Unity (游戏引擎)</a>/#%E6%B8%B8%E6%88%8F)</h3><ul>
+<li>Unity 是一款由 Unity Technologies 研发的跨平台2D/3D 游戏引擎。</li>
+<li>可用于开发 Windows、MacOS 及 Linux 平台的单机游。戏,PlayStation、XBox、Wii、3DS 和 任天堂Switch 等游戏主机平台的视频游戏，或是 iOS、Android 等移动设备的游戏。</li>
+<li>Unity 所支持的游戏平台还延伸到了基于 WebGL 技术的 HTML5 网页平台，以及 tvOS、Oculus Rift、ARKit 等新一代多媒体平台。</li>
+<li>除可以用于研发电子游戏之外，Unity 还是被广泛用于建筑可视化、实时三维动画等类型互动内容的综合型创作工具。</li>
+</ul>
+<p><em>游戏引擎是指一些已编写好的可编辑电脑游戏系统或者一些交互式实时图像应用程序的核心组件。这些系统为游戏设计者提供各种编写游戏所需的各种工具，其目的在于让游戏设计者能容易和快速地做出游戏程序，而不用由零开始。大部分都支持多种操作系统平台，如Linux、Mac OS X、Windows。大多数游戏引擎包含以下系统：渲染引擎（即“渲染器”，含二维图像引擎和三维图像引擎）、物理引擎、碰撞检测系统、音效、脚本引擎、电脑动画、人工智能、网络引擎以及场景管理等。</em></p>
+<h3 id="B-Unity编译Android-apk"><a href="#B-Unity编译Android-apk" class="headerlink" title="B.Unity编译Android apk"></a>B.Unity编译Android apk</h3><blockquote>
+<p><a href="https://blog.csdn.net/zxy13826134783/article/details/80057067" target="_blank" rel="noopener">Unity 发布成android包的环境搭建步骤(详细，适合小白)</a><br><a href="https://www.cnblogs.com/qcloud1001/p/6650023.html" target="_blank" rel="noopener">Unity编译Android的原理解析和apk打包分析</a></p>
+</blockquote>
+<p><strong>如何区分普通APK和Unity编译生成的APK？</strong></p>
+<p>与普通APK相比，多了assert/bin目录，在这个目录之下，可以看到unity相关dll库，游戏主要功能大部分都是用C#语言在这些dll库中实现的。</p>
+<p><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/1.png" alt=""></p>
+<p>所以如果在分析apk时解压后看到如上图所示路径，则此apk很有可能是一个Unity游戏apk。</p>
+<h3 id="C-dll逆向工具dnSpy"><a href="#C-dll逆向工具dnSpy" class="headerlink" title="C.dll逆向工具dnSpy"></a>C.dll逆向工具<a href="https://github.com/0xd4d/dnSpy" target="_blank" rel="noopener"><code>dnSpy</code></a></h3><blockquote>
+<p><a href="https://blog.csdn.net/wpwalter/article/details/80457131" target="_blank" rel="noopener">神器如 dnSpy，无需源码也能修改 .NET 程序</a></p>
+</blockquote>
+<h2 id="2-逆向破解"><a href="#2-逆向破解" class="headerlink" title="2.逆向破解"></a>2.逆向破解</h2><p><strong>实现游戏主要功能的重点分析对象：Assembly-CSharp.dll。</strong>  <em>这个我觉得只有在各个dll文件中搜索关键字符串，最终定位到主要的功能dll。因为不像普通Apk一样，在manifest文件中可以找到入口Activity，所以我感觉是只有一个一个dll的查看和排除了（当然，如果能从dll文件的名字上看出点什么是最好的）。</em></p>
+<h3 id="A-三叶草无限"><a href="#A-三叶草无限" class="headerlink" title="A.三叶草无限"></a>A.三叶草无限</h3><p>找到关键方法（查询三叶草数量）如下图所示，并将其返回值改为固定值，这样每次查询的三叶草数量都为我们修改后的10000，从而达到无限购买的目的。</p>
+<p><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/3.png" alt=""><br><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/4.png" alt=""></p>
+<p><em>这里我是通过搜索关键字符串如<code>三叶草不足</code>分析定位到关键方法的，所以逆向分析一定要有目的和入手点，不然效率很低，而且也不知道到底要干啥。</em></p>
+<h3 id="B-无限抽奖"><a href="#B-无限抽奖" class="headerlink" title="B.无限抽奖"></a>B.无限抽奖</h3><p>与上述分析类似，找到关键函数并改变其返回值。</p>
+<p><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/5.png" alt=""><br><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/6.png" alt=""></p>
+<h3 id="C-补充说明"><a href="#C-补充说明" class="headerlink" title="C.补充说明"></a>C.补充说明</h3><p>在<code>dnSpy</code>中搜索字符串时，如果选择<code>以上所有</code>是搜索不出结果的，只有选择<code>数字/字符串</code>才能成功搜索到dll文件中的对应字符串位置。</p>
+<p><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/2.png" alt=""></p>
+<h3 id="D-apk重打包"><a href="#D-apk重打包" class="headerlink" title="D.apk重打包"></a>D.apk重打包</h3><p>与普通的apk重打包流程相同，<code>apktool b xxx</code>之后签名即可，此app并没有签名校验。</p>
+<p><em>很久没用过apktool重打包，居然忘记了重打包之后的apk的存放位置了（捂脸~），在被打包的xxx目录下的dist文件夹中。</em></p>
+<p><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/10.png" alt=""></p>
+<h3 id="E-遗留问题"><a href="#E-遗留问题" class="headerlink" title="E.遗留问题"></a>E.遗留问题</h3><p>在分析问题A时，找到了初始化定义三叶草数量的变量如下图所示，但是在修改其值的时候遇到了问题，并不知道修改哪个值才能成功修改该变量。</p>
+<p><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/7.png" alt=""><br><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/8.png" alt=""></p>
+<p><em>这里附上一张其他教程中修改变量值的图，为啥到我这里就不一样了233</em></p>
+<p><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/9.png" alt=""></p>
+<p><em>介于不是主攻方向，以后有时间可以研究研究unity相关知识，应该会对此问题有更多的了解。</em></p>
+<h2 id="3-思路分析"><a href="#3-思路分析" class="headerlink" title="3.思路分析"></a>3.思路分析</h2><p><strong>接下来对其中的部分功能实现机制进行简单分析。</strong></p>
+<h3 id="A-抽奖奖品的出现机制"><a href="#A-抽奖奖品的出现机制" class="headerlink" title="A.抽奖奖品的出现机制"></a>A.抽奖奖品的出现机制</h3><p><em>在游戏过程中，我们可以发现抽奖的时候可能会出现白玉、青玉、绿玉、红玉、黄玉，那么这些玉的出现机制是怎样的呢？是简单的随机数吗？</em></p>
+<p>我们在如下图所示代码中可以看到各种玉之间的数量占比（60+27+9+3+1=100）</p>
+<p><img src="/2019/07/02/安卓Unity3d游戏-旅行青蛙-简单逆向/11.png" alt=""></p>
+<p>具体的判断出什么球的思路如下：</p>
+<ul>
+<li>先从0-100中取一个随机数；</li>
+<li>返回结果的初始值为白玉；</li>
+<li>程序定义了一个枚举ENUM，枚举的value从0-4分别对应上图所示从white-gold的name；</li>
+<li>然后进行while循环<code>While i &lt; 5</code>;</li>
+<li>在while循环中根据i的值，取对应的name，再去上图中PrizeBalls中取name对应的具体数值（如white对应的60），如果该数值大于之前取的随机数，则返回结果为对应的name；如果不满足条件，则继续循环，取下一个name并将其具体数值和之前的数值相加，直到满足条件并获得对应的返回结果（此时返回结果取得是最后取到的name值）。</li>
+</ul>
+<p><strong>所以可以看到并不是简单的取随机数判断，整个思路设计还是比较巧妙的。</strong></p>
+<h3 id="B-更多分析"><a href="#B-更多分析" class="headerlink" title="B.更多分析"></a>B.更多分析</h3><p>关于小青蛙旅行的过程（包括目的地决定、明信片、耗时等等），主要在class <code>TravelSimulator</code>中，由于时间有限，没有分析完整个类，只分析了一部分代码，这里就不列出来了，以后有时间的话可以完整的分析一下整体的设计思路和判断机制。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在分析过程中可以明显看到，程序中较多的使用了枚举ENUM这一数据结构，可以简化很多对应的switch-case操作。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/caolijunmingyan/article/details/6732170" target="_blank" rel="noopener">.vb.net中三种转换【CType/DirectCast/TryCast】</a><br><a href="https://www.cnblogs.com/xiaofeixiang/p/3872142.html" target="_blank" rel="noopener">C#中的枚举(Enum)你知道多少呢？</a></p>
+</blockquote>
+<h2 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h2><blockquote>
+<p><a href="https://www.anquanke.com/post/id/96901#h2-11" target="_blank" rel="noopener">青蛙旅行 — Unity3d类安卓游戏逆向分析初探</a><br><a href="https://paper.seebug.org/519/" target="_blank" rel="noopener">Unity3d类安卓游戏逆向分析初探</a><br><a href="https://www.zhihu.com/question/68733553/answer/305463907" target="_blank" rel="noopener">玩《旅行青蛙（旅かえる）》有哪些体验</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android-逆向/" rel="tag"># Android 逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/25/剑指offer题目记录（一）/" rel="next" title="剑指offer题目记录（一）">
+                <i class="fa fa-chevron-left"></i> 剑指offer题目记录（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/03/漏洞分析——MEDIACODER-0-8-43-5852-M3U缓冲区溢出漏洞/" rel="prev" title="漏洞分析——MEDIACODER 0.8.43.5852 - .M3U缓冲区溢出漏洞">
+                漏洞分析——MEDIACODER 0.8.43.5852 - .M3U缓冲区溢出漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-背景知识"><span class="nav-number">1.</span> <span class="nav-text">1.背景知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Unity-游戏引擎-E6-B8-B8-E6-88-8F"><span class="nav-number">1.1.</span> <span class="nav-text">A.Unity (游戏引擎)/#%E6%B8%B8%E6%88%8F)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-Unity编译Android-apk"><span class="nav-number">1.2.</span> <span class="nav-text">B.Unity编译Android apk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-dll逆向工具dnSpy"><span class="nav-number">1.3.</span> <span class="nav-text">C.dll逆向工具dnSpy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-逆向破解"><span class="nav-number">2.</span> <span class="nav-text">2.逆向破解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-三叶草无限"><span class="nav-number">2.1.</span> <span class="nav-text">A.三叶草无限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-无限抽奖"><span class="nav-number">2.2.</span> <span class="nav-text">B.无限抽奖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-补充说明"><span class="nav-number">2.3.</span> <span class="nav-text">C.补充说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-apk重打包"><span class="nav-number">2.4.</span> <span class="nav-text">D.apk重打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-遗留问题"><span class="nav-number">2.5.</span> <span class="nav-text">E.遗留问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-思路分析"><span class="nav-number">3.</span> <span class="nav-text">3.思路分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-抽奖奖品的出现机制"><span class="nav-number">3.1.</span> <span class="nav-text">A.抽奖奖品的出现机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-更多分析"><span class="nav-number">3.2.</span> <span class="nav-text">B.更多分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-参考"><span class="nav-number">4.</span> <span class="nav-text">4.参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

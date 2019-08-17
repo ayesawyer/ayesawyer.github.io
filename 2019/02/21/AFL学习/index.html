@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Fuzzing,AFL,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对AFL的实现原理的学习笔记。">
+<meta name="keywords" content="Fuzzing,AFL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AFL学习">
+<meta property="og:url" content="http://yoursite.com/2019/02/21/AFL学习/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对AFL的实现原理的学习笔记。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/02/21/AFL学习/2.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/21/AFL学习/1.PNG">
+<meta property="og:updated_time" content="2019-06-05T13:05:44.138Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AFL学习">
+<meta name="twitter:description" content="对AFL的实现原理的学习笔记。">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/21/AFL学习/2.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/21/AFL学习/">
+
+
+
+
+
+  <title>AFL学习 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/AFL学习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AFL学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T11:33:24+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Fuzzing/" itemprop="url" rel="index">
+                    <span itemprop="name">Fuzzing</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/21/AFL学习/" class="leancloud_visitors" data-flag-title="AFL学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对AFL的实现原理的学习笔记。</p>
+<a id="more"></a>
+<h3 id="学习1"><a href="#学习1" class="headerlink" title="学习1"></a>学习1</h3><blockquote>
+<p><a href="https://www.freebuf.com/articles/system/191543.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/system/191543.html</a></p>
+</blockquote>
+<p>关键：AFL通过实现对已有编译器的扩展实现在程序编译时的插桩操作；</p>
+<h3 id="学习2"><a href="#学习2" class="headerlink" title="学习2"></a>学习2</h3><blockquote>
+<p><a href="https://stfpeak.github.io/2017/06/11/Finding-bugs-using-AFL/" target="_blank" rel="noopener">https://stfpeak.github.io/2017/06/11/Finding-bugs-using-AFL/</a><br><a href="https://stfpeak.github.io/2017/06/12/AFL-Cautions/" target="_blank" rel="noopener">https://stfpeak.github.io/2017/06/12/AFL-Cautions/</a></p>
+</blockquote>
+<p>关键：</p>
+<ol>
+<li><p>有大牛表示：“AFL Fuzzing without ASAN is just a waste of CPU”。</p>
+</li>
+<li><p>ASAN——Linux下内存检测工具；ASAN（Address-Sanitizier）早先是LLVM中的特性，后被加入GCC 4.8，在GCC 4.9后加入对ARM平台的支持。因此GCC 4.8以上版本使用ASAN时不需要安装第三方库，通过在编译时指定编译CFLAGS即可打开开关。</p>
+</li>
+</ol>
+<blockquote>
+<p>在开启ASAN后。afl插桩则会在目标代码的关键位置添加检查代码，例如：malloc(),free()等，一旦发现了内存访问错误，便可以SIGABRT中止程序。</p>
+</blockquote>
+<blockquote>
+<p>例如越界读等内存访问错误不一定会造成程序的崩溃，所以在没有开启ASAN的情况下，许多内存漏洞都无法被AFL给发现。所以在编译二进制代码的时候，强烈建议开启ASAN。</p>
+</blockquote>
+<blockquote>
+<p>ASAN开启后的fuzzing会消耗更多的内存，这是需要注意的因素，对于32位的程序，基本上800MB即可；但64为程序大概需要20TB,所以，使用ASAN的话，建议添加CFLAGS=-m32来限制编译目标为32位，否则，可能应为64位消耗内存过多而造成程序崩溃。</p>
+</blockquote>
+<blockquote>
+<p>在使用了ASAN之后，可以再alf-fuzz的时候通过选项-m来指定使用的内存上限。启用了ASAN的32位程序，一般设置-m 1024即可。</p>
+</blockquote>
+<ol start="3">
+<li>在无源码的情况下Fuzzing二进制文件，详细请参见afl/qemu_mode/README.qemu。</li>
+</ol>
+<p><img src="/2019/02/21/AFL学习/2.PNG" alt=""></p>
+<ol start="4">
+<li><p>QEMU使用基本块作为翻译单元;插桩（伪码如下）在此基础上实现，并使用一个与编译时hooks类似的模型</p>
+<p> if (block_address &gt; elf_text_start &amp;&amp; block_address &lt; elf_text_end) {<br> cur_location = (block_address &gt;&gt; 4) ^ (block_address &lt;&lt; 8);    //消减指令对齐的影响<br> shared_mem[cur_location ^ prev_location]++;<br> prev_location = cur_location &gt;&gt; 1;</p>
+</li>
+</ol>
+<ol start="5">
+<li>像QEMU、DynamoRIO和PIN这样的二进制翻译的启动是相当缓慢的;为了解决这个问题，QEMU模式利用了一个类似于编译时插装的fork服务器，在开始时暂停然后有效地生成已经初始化的进程的副本。</li>
+</ol>
+<h3 id="学习3"><a href="#学习3" class="headerlink" title="学习3"></a>学习3</h3><blockquote>
+<p><a href="https://blog.csdn.net/gengzhikui1992/article/details/50844857（原理解析）" target="_blank" rel="noopener">https://blog.csdn.net/gengzhikui1992/article/details/50844857（原理解析）</a></p>
+</blockquote>
+<p>关键：</p>
+<ol>
+<li><p>插桩、代码覆盖率的计算、新的程序执行路径的发现、Fuzzing策略、Crash的去重、the fork server；</p>
+</li>
+<li><p>黑盒二进制目标程序的上述功能的实现。</p>
+</li>
+</ol>
+<h3 id="学习4"><a href="#学习4" class="headerlink" title="学习4"></a>学习4</h3><blockquote>
+<p><a href="https://blog.csdn.net/qq_32464719/article/details/80592902——AFL技术实现分析（源码解析，详细、清晰）" target="_blank" rel="noopener">https://blog.csdn.net/qq_32464719/article/details/80592902——AFL技术实现分析（源码解析，详细、清晰）</a></p>
+</blockquote>
+<p>关键：</p>
+<ol>
+<li><p>AFL的代码插桩，就是在将源文件编译为汇编代码后，通过afl-as完成(afl-as.c)。</p>
+</li>
+<li><p>在处理到某个分支，需要插入桩代码时，afl-as会生成一个随机数，作为运行时保存在ecx中的值。而这个随机数，便是用于标识这个代码块的key；</p>
+</li>
+<li><p>在分支点注入的代码本质上相当于——， 这里显示的是执行的伪代码，我们回到_afl_maybe_log()中,可以看到执行代码；</p>
+<pre><code>cur_location = ; 
+shared_mem[cur_location ^ prev_location]++; 
+prev_location = cur_location &gt;&gt; 1; 
+</code></pre></li>
+</ol>
+<ol start="4">
+<li>在每个插桩处，afl-as会添加相应指令，将ecx的值设为0到MAP_SIZE之间的某个随机数，从而实现了伪代码中的<code>cur_location = &lt;COMPILE_TIME_RANDOM&gt;</code>; </li>
+</ol>
+<ol start="5">
+<li>因此，AFL为每个代码块生成一个随机数，作为其“位置”的记录；随后，对分支处的”源位置“和”目标位置“进行异或，并将异或的结果作为该分支的key，保存每个分支的执行次数。这个 cur_location的值随机产生来简化对于复杂程序的链接过程而且还要保持XOR输出的均匀分布。 </li>
+</ol>
+<p><img src="/2019/02/21/AFL学习/1.PNG" alt=""></p>
+<ol start="6">
+<li><p>AFL会用一片大小为64KB的共享内存来存储二进制程序的信息。在输出的map中的每一个Byte字节用来保存被插装程序中的 (branch_src, branch_dst)命中信息。 </p>
+</li>
+<li><p>因为保存执行次数的实际是一张哈希表所以会存在碰撞问题。我们选择MAP_SIZE=64K,这其中可以保存大约 2k 到 10k程序分支点。对于不是很复杂的程序程序的碰撞还是可以接受的;</p>
+</li>
+<li><p>这种形式的覆盖提供了比简单的块覆盖更深入地了解程序的执行路径。特别地，它将以下执行跟踪区分开来： 这有助于在底层代码中发现微妙的错误条件，因为安全漏洞通常与意外或不正确的状态转换相关联，而不仅仅是到达一个新的基本块。</p>
+</li>
+</ol>
+<pre><code>A -&gt; B -&gt; C -&gt; D -&gt; E (tuples: AB, BC, CD, DE) 
+A -&gt; B -&gt; D -&gt; C -&gt; E (tuples: AB, BD, DC, CE) 
+</code></pre><ol start="9">
+<li><p>3）中移位操作的原因在伪代码的最后一行显示在本节的方向性保护tuples,假设target中存在A-&gt;A和B-&gt;B这样两个跳转，如果不右移，那么这两个分支对应的异或后的key都是0，从而无法区分；另一个例子是A-&gt;B和B-&gt;A，如果不右移，这两个分支对应的异或后的key也是相同的。</p>
+</li>
+<li><p>下面所示的第二个跟踪将被认为是全新的，因为存在新的tuples（CA，AE）：</p>
+<pre><code>1: A -&gt; B -&gt; C -&gt; D -&gt; E 
+2: A -&gt; B -&gt; C -&gt; A -&gt; E
+</code></pre></li>
+</ol>
+<p>同时，因为#2的出现下面的路径将不会被认为是一条独特的路径，尽管有一个明显不同的总体执行路径：</p>
+<pre><code>3: A -&gt; B -&gt; C -&gt; A -&gt; B -&gt; C -&gt; A -&gt; B -&gt; C -&gt; D -&gt; E
+</code></pre><p>思考：这种策略虽然会提高执行效率，但也有可能会漏掉一些可能会产生新的路径覆盖的样本数据，考虑能否在判断代码覆盖率的过程中增加对于整个总体执行路径的考虑？</p>
+<ol start="11">
+<li><p>总的来讲，AFL维护了一个队列(queue)，每次从这个队列中取出一个文件，对其进行大量变异，并检查运行后是否会引起目标崩溃、发现新路径等结果。变异的主要类型如下： </p>
+<pre><code>bitflip，按位翻转，1变为0，0变为1 
+arithmetic，整数加/减算术运算 
+interest，把一些特殊内容（AFL预设的一些比较特殊的数，基本都是可能会造成溢出的数）替换到原文件中 
+dictionary，把自动生成或用户提供的token替换/插入到原文件中 
+havoc，中文意思是“大破坏”，此阶段会对原文件进行大量变异，具体见下文 
+splice，中文意思是“绞接”，此阶段会将两个文件拼接起来得到一个新的文件
+</code></pre></li>
+</ol>
+<p>其中，前四项bitflip, arithmetic, interest, dictionary是非dumb mode（-d）和主fuzzer（-M）会进行的操作，由于其变异方式没有随机性，所以也称为deterministic fuzzing；havoc和splice则存在随机性，是所有状况的fuzzer（是否dumb mode、主从fuzzer）都会执行的变异</p>
+<ol start="12">
+<li><p>关于effector map：具体地，在对每个byte进行翻转时，如果其造成执行路径与原始路径不一致，就将该byte在effector map中标记为1，即“有效”的，否则标记为0，即“无效”的。 这样做的逻辑是：如果一个byte完全翻转，都无法带来执行路径的变化，那么这个byte很有可能是属于”data”，而非”metadata”（例如size, flag等），对整个fuzzing的意义不大。所以，在随后的一些变异中，会参考effector map，跳过那些“无效”的byte，从而节省了执行资源。 由此，通过极小的开销（没有增加额外的执行次数），AFL又一次对文件格式进行了启发式的判断。</p>
+</li>
+<li><p>如果满足以下两个条件中的任何一个，afl-fuzz中实现的解决方案将认为崩溃是唯一的：</p>
+</li>
+<li><pre><code>crash trace中包含一个在以前的崩溃中没有看到的tuples; 
+crash trace中缺少一个在早期错误中总是存在的tuples。
+</code></pre></li>
+</ol>
+<h3 id="学习5"><a href="#学习5" class="headerlink" title="学习5"></a>学习5</h3><blockquote>
+<p><a href="http://rk700.github.io/2017/12/28/afl-internals/（源码解析，详细、清晰）" target="_blank" rel="noopener">http://rk700.github.io/2017/12/28/afl-internals/（源码解析，详细、清晰）</a></p>
+</blockquote>
+<p>关键：</p>
+<ol>
+<li><p>编译target完成后，就可以通过afl-fuzz开始fuzzing了。其大致思路是，对输入的seed文件不断地变化，并将这些mutated input喂给target执行，检查是否会造成崩溃。因此，fuzzing涉及到大量的fork和执行target的过程。</p>
+</li>
+<li><p>为了更高效地进行上述过程，AFL实现了一套fork server机制。其基本思路是：启动target进程后，target会运行一个fork server；fuzzer并不负责fork子进程，而是与这个fork server通信，并由fork server来完成fork及继续执行目标的操作。这样设计的最大好处，就是不需要调用execve()，从而节省了载入目标文件和库、解析符号地址等重复性工作。如果熟悉Android的话，可以将fork server类比为zygote。</p>
+</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><blockquote>
+<p><a href="https://blog.csdn.net/qq_32464719/article/details/80277603" target="_blank" rel="noopener">https://blog.csdn.net/qq_32464719/article/details/80277603</a><br><a href="https://zhuanlan.zhihu.com/p/51443698" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/51443698</a><br><a href="http://0x4c43.cn/2018/0722/use-afl-for-fuzz-testing/" target="_blank" rel="noopener">http://0x4c43.cn/2018/0722/use-afl-for-fuzz-testing/</a><br><a href="http://www.voidcn.com/article/p-avxtnarw-bpk.html" target="_blank" rel="noopener">http://www.voidcn.com/article/p-avxtnarw-bpk.html</a><br><a href="https://www.freebuf.com/articles/system/191536.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/system/191536.html</a><br><a href="https://github.com/mirrorer/afl/blob/master/qemu_mode/README.qemu" target="_blank" rel="noopener">https://github.com/mirrorer/afl/blob/master/qemu_mode/README.qemu</a><br><a href="https://github.com/mirrorer/afl/tree/master/docs" target="_blank" rel="noopener">https://github.com/mirrorer/afl/tree/master/docs</a><br><a href="https://bbs.pediy.com/thread-249912.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-249912.htm</a><br>……</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fuzzing/" rel="tag"># Fuzzing</a>
+          
+            <a href="/tags/AFL/" rel="tag"># AFL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/21/Eclipse使用技巧/" rel="next" title="Eclipse使用技巧">
+                <i class="fa fa-chevron-left"></i> Eclipse使用技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/22/Sulley-安装/" rel="prev" title="Sulley 安装">
+                Sulley 安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习1"><span class="nav-number">1.</span> <span class="nav-text">学习1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习2"><span class="nav-number">2.</span> <span class="nav-text">学习2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习3"><span class="nav-number">3.</span> <span class="nav-text">学习3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习4"><span class="nav-number">4.</span> <span class="nav-text">学习4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习5"><span class="nav-number">5.</span> <span class="nav-text">学习5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

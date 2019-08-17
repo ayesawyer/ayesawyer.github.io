@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Android,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="如题，这里主要列举的是Android开发相关的，但感觉安全也会需要用到。包括Android消息机制Handler、Android事件分发、Android内存泄漏。">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些面试容易问的知识点—Android+Java">
+<meta property="og:url" content="http://yoursite.com/2019/07/10/一些面试容易问的知识点—Android+Java/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="如题，这里主要列举的是Android开发相关的，但感觉安全也会需要用到。包括Android消息机制Handler、Android事件分发、Android内存泄漏。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/10/一些面试容易问的知识点—Android+Java/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/10/一些面试容易问的知识点—Android+Java/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/10/一些面试容易问的知识点—Android+Java/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/10/一些面试容易问的知识点—Android+Java/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/10/一些面试容易问的知识点—Android+Java/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/10/一些面试容易问的知识点—Android+Java/1.jpg">
+<meta property="og:updated_time" content="2019-07-26T07:52:10.598Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一些面试容易问的知识点—Android+Java">
+<meta name="twitter:description" content="如题，这里主要列举的是Android开发相关的，但感觉安全也会需要用到。包括Android消息机制Handler、Android事件分发、Android内存泄漏。">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/10/一些面试容易问的知识点—Android+Java/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/10/一些面试容易问的知识点—Android+Java/">
+
+
+
+
+
+  <title>一些面试容易问的知识点—Android+Java | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/一些面试容易问的知识点—Android+Java/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一些面试容易问的知识点—Android+Java</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-10T16:55:18+08:00">
+                2019-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/10/一些面试容易问的知识点—Android+Java/" class="leancloud_visitors" data-flag-title="一些面试容易问的知识点—Android+Java">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>如题，这里主要列举的是Android开发相关的，但感觉安全也会需要用到。包括Android消息机制Handler、Android事件分发、Android内存泄漏。</p>
+<a id="more"></a>
+<h2 id="1-Android消息机制Handler"><a href="#1-Android消息机制Handler" class="headerlink" title="1.Android消息机制Handler"></a>1.Android消息机制Handler</h2><p>Android的消息机制主要是Handler的运行机制，Handler的运行需要底层MessageQueue和looper的支撑。Handler机制被引入的目的就是为了实现线程间通信。Handler一共干了两件事——</p>
+<ul>
+<li>在子线程中发出massage；</li>
+<li>在主线程获取，处理message。</li>
+</ul>
+<h3 id="A-概述"><a href="#A-概述" class="headerlink" title="A.概述"></a>A.概述</h3><ul>
+<li>消息机制中主要用于多线程的通讯。</li>
+<li>在 Android 开发中最常见的使用场景是：在子线程做耗时操作，操作完成后需要在主线程更新 UI（子线程不能直接修改 UI）。</li>
+<li>这时就需要用到消息机制来完成子线程和主线程的通讯。</li>
+<li>Message 是消息机制中消息的载体。</li>
+</ul>
+<h3 id="B-实际应用"><a href="#B-实际应用" class="headerlink" title="B.实际应用"></a>B.实际应用</h3><ul>
+<li><strong>在项目中用过Handler.postDelayed()方法。</strong></li>
+<li>主要是新建一个线程Runnable，在线程中每隔一段时间进行某些判断和操作。</li>
+<li>handler在这里主要承担的是子线程中延时的作用。</li>
+<li>也就是将指定Runnable（包装成PostMessage）加入到MessageQueue中，然后Looper不断从MessageQueue（链表）中读取Message进行处理。</li>
+<li>在项目中是每隔30秒进行Runnable中的处理和操作。</li>
+</ul>
+<h3 id="C-关于Handler-postDelayed"><a href="#C-关于Handler-postDelayed" class="headerlink" title="C.关于Handler.postDelayed()"></a>C.关于Handler.postDelayed()</h3><p><strong>如何保证Handler.postDelayed()发布的消息能在相对精确的时间被传递给Looper进行处理而又不会阻塞队列？</strong></p>
+<p>举个例子说明——</p>
+<ol>
+<li>postDelay()一个10秒钟的Runnable A、消息进队，MessageQueue调用nativePollOnce()阻塞，Looper阻塞；</li>
+<li>紧接着post()一个Runnable B、消息进队，判断现在A时间还没到、正在阻塞，把B插入消息队列的头部（A的前面），然后调用nativeWake()方法唤醒线程；</li>
+<li>MessageQueue.next()方法被唤醒后，重新开始读取消息链表，第一个消息B无延时，直接返回给Looper；</li>
+<li>Looper处理完这个消息再次调用next()方法，MessageQueue继续读取消息链表，第二个消息A还没到时间，计算一下剩余时间（假如还剩9秒）继续调用nativePollOnce()阻塞；</li>
+<li>直到阻塞时间到或者下一次有Message进队；</li>
+</ol>
+<p>总结一下，就是<em>MessageQueue会根据post delay的时间排序放入到链表中，链表头的时间小，尾部时间最大。因此能保证时间Delay最长的不会block住时间短的。当每次post message的时候会进入到MessageQueue的next()方法，会根据其delay时间和链表头的比较，如果更短则，放入链表头，并且看时间是否有delay，如果有，则block，等待时间到来唤醒执行，否则将唤醒立即执行。</em></p>
+<p><strong>所以handler.postDelay并不是先等待一定的时间再放入到MessageQueue中，而是直接进入MessageQueue，以MessageQueue的时间顺序排列和唤醒的方式结合实现的。</strong></p>
+<p><em>使用后者的方式，集中式的统一管理了所有message，而如果像前者的话，有多少个delay message，则需要起多少个定时器。前者由于有了排序，而且保存的每个message的执行时间，因此只需一个定时器按顺序next即可。</em></p>
+<h3 id="D-消息机制的具体流程"><a href="#D-消息机制的具体流程" class="headerlink" title="D.消息机制的具体流程"></a>D.消息机制的具体流程</h3><h4 id="（1）准备阶段"><a href="#（1）准备阶段" class="headerlink" title="（1）准备阶段"></a>（1）准备阶段</h4><ul>
+<li>在子线程调用 Looper.prepare() 方法或 在主线程调用 。Lopper.prepareMainLooper() 方法创建当前线程的 Looper 对象（主线程中这一步由 Android 系统在应用启动时完成）。</li>
+<li>在创建 Looper 对象时会创建一个消息队列 MessageQueue。</li>
+<li>Looper 通过 loop() 方法获取到当前线程的 Looper 并启动循环，从 MessageQueue 不断提取 Message，若 MessageQueue 没有消息，处于阻塞状态。</li>
+</ul>
+<h4 id="（2）发送消息"><a href="#（2）发送消息" class="headerlink" title="（2）发送消息"></a>（2）发送消息</h4><ul>
+<li>使用当前线程创建的 Handler 在其它线程通过 sendMessage() 发送 Message 到 MessageQueue。</li>
+<li>MessageQueue 插入新 Message 并唤醒阻塞。</li>
+</ul>
+<h4 id="（3）获取消息"><a href="#（3）获取消息" class="headerlink" title="（3）获取消息"></a>（3）获取消息</h4><ul>
+<li>重新检查 MessageQueue 获取新插入的 Message。</li>
+<li>Looper 获取到 Message 后，通过 Message 的 target 即 Handler 调用 dispatchMessage(Message msg) 方法分发提取到的 Message，然后回收 Message 并继续循环获取下一个 Message。</li>
+<li>Handler 使用 handlerMessage(Message msg) 方法处理 Message。</li>
+</ul>
+<h4 id="（4）阻塞等待"><a href="#（4）阻塞等待" class="headerlink" title="（4）阻塞等待"></a>（4）阻塞等待</h4><ul>
+<li>MessageQueue 没有 Message 时，重新进入阻塞状态。</li>
+</ul>
+<h3 id="E-扩展——Thread、Looper和Handler"><a href="#E-扩展——Thread、Looper和Handler" class="headerlink" title="E.扩展——Thread、Looper和Handler"></a>E.扩展——Thread、Looper和Handler</h3><p>在Android中——</p>
+<ul>
+<li>接收消息的“消息队列” ——【MessageQueue】</li>
+<li>阻塞式地从消息队列中接收消息并进行处理的“线程” ——【Thread+Looper】</li>
+<li>可发送的“消息的格式” ——【Message】</li>
+<li>“消息发送函数”——【Handler的post和sendMessage】</li>
+</ul>
+<p>一个Looper类似一个消息泵。它本身是一个死循环，不断地从MessageQueue中提取Message或者Runnable。而Handler可以看做是一个Looper的暴露接口，向外部暴露一些事件，并暴露sendMessage()和post()函数。</p>
+<p>由于每一个线程内最多只可以有一个Looper，所以一定要在Looper.prepare()之前做好判定，否则会抛出java.lang.RuntimeException: Only one Looper may be created per thread。为了获取Looper的信息可以使用两个方法：</p>
+<ul>
+<li>Looper.myLooper()</li>
+<li>Looper.getMainLooper()</li>
+</ul>
+<p>Looper.myLooper()获取当前线程绑定的Looper，如果没有返回null。Looper.getMainLooper()返回主线程的Looper,这样就可以方便的与主线程通信。注意：在Thread的构造函数中调用Looper.myLooper只会得到主线程的Looper，因为此时新线程还未构造好。</p>
+<h3 id="F-主要参考链接"><a href="#F-主要参考链接" class="headerlink" title="F.主要参考链接"></a>F.主要参考链接</h3><blockquote>
+<p><a href="https://www.jianshu.com/p/3b8c2dbf1124" target="_blank" rel="noopener">Android 消息机制详解</a><br><a href="https://blog.csdn.net/qingtiantianqing/article/details/72783952" target="_blank" rel="noopener">你真的懂Handler.postDelayed()的原理吗?</a><br><a href="https://hit-alibaba.github.io/interview/Android/basic/Android-handler-thread-looper.html" target="_blank" rel="noopener">Android中的Thread, Looper和Handler机制(附带HandlerThread与AsyncTask)</a><br><a href="https://www.jianshu.com/p/a8054dfae47d" target="_blank" rel="noopener">Android-Handler消息处理机制</a></p>
+</blockquote>
+<h2 id="2-Android事件分发"><a href="#2-Android事件分发" class="headerlink" title="2.Android事件分发"></a>2.Android事件分发</h2><h3 id="A-概述-1"><a href="#A-概述-1" class="headerlink" title="A.概述"></a>A.概述</h3><ul>
+<li>将点击事件（MotionEvent）传递到某个具体的View &amp; 处理的整个过程；</li>
+<li>事件传递的顺序：Activity -&gt; ViewGroup -&gt; View;</li>
+<li>要想充分理解Android分发机制，本质上是要理解：Activity对点击事件的分发机制、ViewGroup对点击事件的分发机制、View对点击事件的分发机制。</li>
+</ul>
+<p><img src="/2019/07/10/一些面试容易问的知识点—Android+Java/1.png" alt=""></p>
+<p><img src="/2019/07/10/一些面试容易问的知识点—Android+Java/2.png" alt=""></p>
+<h3 id="B-主要参考链接"><a href="#B-主要参考链接" class="headerlink" title="B.主要参考链接"></a>B.主要参考链接</h3><blockquote>
+<p><a href="https://blog.csdn.net/carson_ho/article/details/54136311" target="_blank" rel="noopener">Android事件分发机制 详解攻略，您值得拥有</a></p>
+</blockquote>
+<h2 id="3-Android内存泄漏（重点）"><a href="#3-Android内存泄漏（重点）" class="headerlink" title="3.Android内存泄漏（重点）"></a>3.Android内存泄漏（重点）</h2><h3 id="A-概述-2"><a href="#A-概述-2" class="headerlink" title="A.概述"></a>A.概述</h3><p>产生原因：在 Android 中内存泄漏的原因其实和在 Java 中是一样的，即某个对象已经不需要再用了，但是它却没有被系统所回收，一直在内存中占用着空间，而导致它无法被回收的原因大多是由于它被一个生命周期更长的对象所引用。即<strong>生命周期较长的对象持有生命周期较短的对象的引用，导致生命周期较短的对象在使用完成后也无法被内存回收机制回收。</strong></p>
+<p><em>在了解Android内存泄漏之前，需要先理解Java的内存分配策略以及垃圾回收机制（也就是我们所说的GC）。</em></p>
+<h3 id="B-Java内存管理相关"><a href="#B-Java内存管理相关" class="headerlink" title="B.Java内存管理相关"></a>B.Java内存管理相关</h3><h4 id="（1）Java-内存分配策略"><a href="#（1）Java-内存分配策略" class="headerlink" title="（1）Java 内存分配策略"></a>（1）Java 内存分配策略</h4><p>Java 程序运行时的内存分配策略有三种,分别是静态分配,栈式分配,和堆式分配，对应的，三种存储策略使用的内存空间主要分别是<strong>静态存储区（也称方法区）</strong>、<strong>栈区</strong>和<strong>堆区</strong>。</p>
+<ul>
+<li><p>静态存储区（方法区）：主要存放静态数据、全局 static 数据和常量。这块内存在程序编译时就已经分配好，并且<strong>在程序整个运行期间都存在</strong>。</p>
+</li>
+<li><p>栈区 ：当方法被执行时，方法体内的局部变量（其中包括基础数据类型、对象的引用）都在栈上创建，并<strong>在方法执行结束时这些局部变量所持有的内存将会自动被释放</strong>。因为栈内存分配运算内置于处理器的指令集中，效率很高，但是分配的内存容量有限。</p>
+</li>
+<li><p>堆区 ： 又称动态内存分配，通常就是指在程序运行时直接 new 出来的内存，也就是<strong>对象的实例</strong>。<strong>这部分内存在不使用时将会由 Java 垃圾回收器来负责回收</strong>。</p>
+</li>
+</ul>
+<h4 id="（2）Java中堆与栈的区别"><a href="#（2）Java中堆与栈的区别" class="headerlink" title="（2）Java中堆与栈的区别"></a>（2）Java中堆与栈的区别</h4><ul>
+<li>在方法体内定义的（局部变量）一些基本类型的变量和对象的引用变量都是在方法的栈内存中分配的。</li>
+<li><p>当在一段方法块中定义一个变量时，Java 就会在栈中为该变量分配内存空间，当超过该变量的作用域后，该变量也就无效了，分配给它的内存空间也将被释放掉，该内存空间可以被重新使用。</p>
+</li>
+<li><p>堆内存用来存放所有由 new 创建的对象（包括该对象其中的所有成员变量）和数组。</p>
+</li>
+<li>在堆中分配的内存，将由 Java 垃圾回收器来自动管理。</li>
+<li>在堆中产生了一个数组或者对象后，还可以在栈中定义一个特殊的变量，这个变量的取值等于数组或者对象在堆内存中的首地址，这个特殊的变量就是我们上面说的引用变量。</li>
+<li>我们可以通过这个引用变量来访问堆中的对象或者数组。</li>
+</ul>
+<h4 id="（3）Java垃圾回收-GC"><a href="#（3）Java垃圾回收-GC" class="headerlink" title="（3）Java垃圾回收(GC)"></a>（3）Java垃圾回收(GC)</h4><h5 id="A-概述-3"><a href="#A-概述-3" class="headerlink" title="A.概述"></a>A.概述</h5><ul>
+<li>Java的内存管理就是对象的分配和释放问题。</li>
+<li>在 Java 中，程序员需要通过关键字 new 为每个对象申请内存空间 (基本类型除外)，所有的对象都在堆 (Heap)中分配空间。</li>
+<li>另外，对象的释放是由 GC 决定和执行的。</li>
+<li>在 Java 中，内存的分配是由程序完成的，而内存的释放是由 GC 完成的。</li>
+<li>GC 为了能够正确释放对象，必须监控每一个对象的运行状态，包括对象的申请、引用、被引用、赋值等。</li>
+<li>GC在简化程序员的工作的同时，加重了JVM的工作，这也是Java程序运行速度较慢的原因之一。</li>
+<li>Java使用有向图的方式进行内存管理，具体的描述见下图。</li>
+</ul>
+<p><img src="/2019/07/10/一些面试容易问的知识点—Android+Java/3.png" alt=""></p>
+<h5 id="B-java内存泄漏"><a href="#B-java内存泄漏" class="headerlink" title="B.java内存泄漏"></a>B.java内存泄漏</h5><p>在Java中，内存泄漏就是指存在一些满足如下条件的被分配的对象，这些对象不会被GC所回收，然而它却占用内存。</p>
+<ul>
+<li>这些对象是可达的，即在有向图中，存在通路可以与其相连；</li>
+<li>这些对象是无用的，即程序以后不会再使用这些对象；</li>
+</ul>
+<hr>
+<p>一、java内存泄漏的原因：长生命周期的对象持有短生命周期对象的引用就很可能发生内存泄漏，尽管短生命周期对象已经不再需要，但是因为长生命周期持有它的引用而导致不能被回收，这就是Java中内存泄漏的发生场景。主要有以下类：</p>
+<ul>
+<li>静态集合类引起内存泄漏</li>
+<li>当集合里面的对象属性被修改后，再调用remove()方法时不起作用(?)</li>
+<li>监听器</li>
+<li>各种连接</li>
+<li>内部类和外部模块的引用</li>
+<li>单例模式</li>
+</ul>
+<p>二、java的内存泄漏与c++内存泄漏的比较</p>
+<p><img src="/2019/07/10/一些面试容易问的知识点—Android+Java/4.png" alt=""></p>
+<hr>
+<h5 id="C-JVM调用GC的时间和策略"><a href="#C-JVM调用GC的时间和策略" class="headerlink" title="C.JVM调用GC的时间和策略"></a>C.JVM调用GC的时间和策略</h5><p><img src="/2019/07/10/一些面试容易问的知识点—Android+Java/5.png" alt=""></p>
+<h4 id="（4）Java-对象的几种引用类型"><a href="#（4）Java-对象的几种引用类型" class="headerlink" title="（4）Java 对象的几种引用类型"></a>（4）Java 对象的几种引用类型</h4><p><strong>Java对引用的分类有 Strong reference, SoftReference, WeakReference, PhatomReference 四种。</strong></p>
+<p><img src="/2019/07/10/一些面试容易问的知识点—Android+Java/1.jpg" alt=""></p>
+<h3 id="C-Android内存泄漏"><a href="#C-Android内存泄漏" class="headerlink" title="C.Android内存泄漏"></a>C.Android内存泄漏</h3><h4 id="（1）常见内存泄漏"><a href="#（1）常见内存泄漏" class="headerlink" title="（1）常见内存泄漏"></a>（1）常见内存泄漏</h4><ul>
+<li>集合类泄漏<em>（集合类如果仅仅有添加元素的方法，而没有相应的删除机制，导致内存被占用。如果这个集合类是全局性的变量 (比如类中的静态属性，全局性的 map 等即有静态引用或 final 一直指向它)，那么没有相应的删除机制，很可能导致集合所占用的内存只增不减。）</em></li>
+<li>单例造成的内存泄漏<em>（单例的静态特性使得其生命周期跟应用的生命周期一样长）</em>。</li>
+<li>匿名内部类/非静态内部类和异步线程</li>
+</ul>
+<p>android开发经常会继承实现Activity/Fragment/View，此时如果你使用了匿名类，并被异步线程持有了，那要小心了，如果没有任何措施这样一定会导致泄露。</p>
+<ul>
+<li>Handler 造成的内存泄漏</li>
+</ul>
+<p>Handler 的使用造成的内存泄漏问题应该说是最为常见了，很多时候我们为了避免 ANR 而不在主线程进行耗时操作，在处理网络任务或者封装一些请求回调等api都借助Handler来处理，但 Handler 不是万能的，对于 Handler 的使用代码编写一不规范即有可能造成内存泄漏。另外，我们知道 Handler、Message 和 MessageQueue 都是相互关联在一起的，万一 Handler 发送的 Message 尚未被处理，则该 Message 及发送它的 Handler 对象将被线程 MessageQueue 一直持有。</p>
+<p>由于 Handler 属于 TLS(Thread Local Storage) 变量, 生命周期和 Activity 是不一致的。因此这种实现方式一般很难保证跟 View 或者 Activity 的生命周期保持一致，故很容易导致无法正确释放。</p>
+<ul>
+<li><p>尽量避免使用 static 成员变量<em>（如果成员变量被声明为 static，那我们都知道其生命周期将与整个app进程生命周期一样。）</em></p>
+</li>
+<li><p>避免 override finalize()</p>
+</li>
+</ul>
+<p>1、finalize 方法被执行的时间不确定，不能依赖与它来释放紧缺的资源。时间不确定的原因是： 虚拟机调用GC的时间不确定 Finalize daemon线程被调度到的时间不确定</p>
+<p>2、finalize 方法只会被执行一次，即使对象被复活，如果已经执行过了 finalize 方法，再次被 GC 时也不会再执行了，原因是：</p>
+<p>含有 finalize 方法的 object 是在 new 的时候由虚拟机生成了一个 finalize reference 在来引用到该Object的，而在 finalize 方法执行的时候，该 object 所对应的 finalize Reference 会被释放掉，即使在这个时候把该 object 复活(即用强引用引用住该 object )，再第二次被 GC 的时候由于没有了 finalize reference 与之对应，所以 finalize 方法不会再执行。</p>
+<p>3、含有Finalize方法的object需要至少经过两轮GC才有可能被释放。</p>
+<ul>
+<li><p>资源未关闭造成的内存泄漏<em>（对于使用了BraodcastReceiver，ContentObserver，File，游标 Cursor，Stream，Bitmap等资源的使用，应该在Activity销毁时及时关闭或者注销，否则这些资源将不会被回收，造成内存泄漏。）</em></p>
+</li>
+<li><p>一些不良代码造成的内存压力</p>
+</li>
+</ul>
+<h4 id="（2）如何避免内存泄漏"><a href="#（2）如何避免内存泄漏" class="headerlink" title="（2）如何避免内存泄漏"></a>（2）如何避免内存泄漏</h4><ol>
+<li><p>对 Activity 等组件的引用应该控制在 Activity 的生命周期之内； 如果不能就考虑使用 getApplicationContext 或者 getApplication，以避免 Activity 被外部长生命周期的对象引用而泄露。</p>
+</li>
+<li><p>尽量不要在静态变量或者静态内部类中使用非静态外部成员变量（包括context )，即使要使用，也要考虑适时把外部成员变量置空；也可以在内部类中使用弱引用来引用外部类的变量。</p>
+</li>
+<li><p>对于生命周期比Activity长的内部类对象，并且内部类中使用了外部类的成员变量，可以这样做避免内存泄漏：</p>
+</li>
+</ol>
+<ul>
+<li>将内部类改为静态内部类</li>
+<li>静态内部类中使用弱引用来引用外部类的成员变量</li>
+</ul>
+<ol start="4">
+<li><p>Handler 的持有的引用对象最好使用弱引用，资源释放时也可以清空 Handler 里面的消息。比如在 Activity onStop 或者 onDestroy 的时候，取消掉该 Handler 对象的 Message和 Runnable.</p>
+</li>
+<li><p>在 Java 的实现过程中，也要考虑其对象释放，最好的方法是在不使用某对象时，显式地将此对象赋值为 null，比如使用完Bitmap 后先调用 recycle()，再赋为null,清空对图片等资源有直接引用或者间接引用的数组（使用 array.clear() ; array = null）等，最好遵循谁创建谁释放的原则。</p>
+</li>
+<li><p>正确关闭资源，对于使用了BraodcastReceiver，ContentObserver，File，游标 Cursor，Stream，Bitmap等资源的使用，应该在Activity销毁时及时关闭或者注销。</p>
+</li>
+<li><p>保持对对象生命周期的敏感，特别注意单例、静态对象、全局性集合等的生命周期。</p>
+</li>
+</ol>
+<h3 id="D-主要参考链接"><a href="#D-主要参考链接" class="headerlink" title="D.主要参考链接"></a>D.主要参考链接</h3><blockquote>
+<p><a href="https://www.jianshu.com/p/abee7c186bfa" target="_blank" rel="noopener">Android 中内存泄漏的原因和解决方案</a><br><a href="https://github.com/francistao/LearningNotes/blob/master/Part1/Android/Android%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%80%BB%E7%BB%93.md" target="_blank" rel="noopener">Android内存泄漏总结</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/09/操作系统基础/" rel="next" title="操作系统基础">
+                <i class="fa fa-chevron-left"></i> 操作系统基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/16/代码审计训练-cve-2017-13089/" rel="prev" title="代码审计训练-cve-2017-13089">
+                代码审计训练-cve-2017-13089 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Android消息机制Handler"><span class="nav-number">1.</span> <span class="nav-text">1.Android消息机制Handler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-概述"><span class="nav-number">1.1.</span> <span class="nav-text">A.概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-实际应用"><span class="nav-number">1.2.</span> <span class="nav-text">B.实际应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-关于Handler-postDelayed"><span class="nav-number">1.3.</span> <span class="nav-text">C.关于Handler.postDelayed()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-消息机制的具体流程"><span class="nav-number">1.4.</span> <span class="nav-text">D.消息机制的具体流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）准备阶段"><span class="nav-number">1.4.1.</span> <span class="nav-text">（1）准备阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）发送消息"><span class="nav-number">1.4.2.</span> <span class="nav-text">（2）发送消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）获取消息"><span class="nav-number">1.4.3.</span> <span class="nav-text">（3）获取消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（4）阻塞等待"><span class="nav-number">1.4.4.</span> <span class="nav-text">（4）阻塞等待</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-扩展——Thread、Looper和Handler"><span class="nav-number">1.5.</span> <span class="nav-text">E.扩展——Thread、Looper和Handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-主要参考链接"><span class="nav-number">1.6.</span> <span class="nav-text">F.主要参考链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Android事件分发"><span class="nav-number">2.</span> <span class="nav-text">2.Android事件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-概述-1"><span class="nav-number">2.1.</span> <span class="nav-text">A.概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-主要参考链接"><span class="nav-number">2.2.</span> <span class="nav-text">B.主要参考链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Android内存泄漏（重点）"><span class="nav-number">3.</span> <span class="nav-text">3.Android内存泄漏（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-概述-2"><span class="nav-number">3.1.</span> <span class="nav-text">A.概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-Java内存管理相关"><span class="nav-number">3.2.</span> <span class="nav-text">B.Java内存管理相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）Java-内存分配策略"><span class="nav-number">3.2.1.</span> <span class="nav-text">（1）Java 内存分配策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）Java中堆与栈的区别"><span class="nav-number">3.2.2.</span> <span class="nav-text">（2）Java中堆与栈的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）Java垃圾回收-GC"><span class="nav-number">3.2.3.</span> <span class="nav-text">（3）Java垃圾回收(GC)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-概述-3"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">A.概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#B-java内存泄漏"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">B.java内存泄漏</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-JVM调用GC的时间和策略"><span class="nav-number">3.2.3.3.</span> <span class="nav-text">C.JVM调用GC的时间和策略</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（4）Java-对象的几种引用类型"><span class="nav-number">3.2.4.</span> <span class="nav-text">（4）Java 对象的几种引用类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-Android内存泄漏"><span class="nav-number">3.3.</span> <span class="nav-text">C.Android内存泄漏</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）常见内存泄漏"><span class="nav-number">3.3.1.</span> <span class="nav-text">（1）常见内存泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）如何避免内存泄漏"><span class="nav-number">3.3.2.</span> <span class="nav-text">（2）如何避免内存泄漏</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-主要参考链接"><span class="nav-number">3.4.</span> <span class="nav-text">D.主要参考链接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

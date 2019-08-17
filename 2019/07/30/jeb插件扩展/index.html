@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="jeb,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="关于Android 安全工具jeb的基本使用和自定义插件扩展。">
+<meta name="keywords" content="jeb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jeb插件扩展">
+<meta property="og:url" content="http://yoursite.com/2019/07/30/jeb插件扩展/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="关于Android 安全工具jeb的基本使用和自定义插件扩展。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/jeb插件扩展/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/jeb插件扩展/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/jeb插件扩展/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/jeb插件扩展/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/jeb插件扩展/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/30/jeb插件扩展/6.png">
+<meta property="og:updated_time" content="2019-07-30T08:27:05.131Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jeb插件扩展">
+<meta name="twitter:description" content="关于Android 安全工具jeb的基本使用和自定义插件扩展。">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/30/jeb插件扩展/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/30/jeb插件扩展/">
+
+
+
+
+
+  <title>jeb插件扩展 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/jeb插件扩展/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">jeb插件扩展</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-30T10:05:51+08:00">
+                2019-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/30/jeb插件扩展/" class="leancloud_visitors" data-flag-title="jeb插件扩展">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于Android 安全工具jeb的基本使用和自定义插件扩展。</p>
+<a id="more"></a>
+<h2 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1.基本使用"></a>1.基本使用</h2><h3 id="A-针对对象"><a href="#A-针对对象" class="headerlink" title="A.针对对象"></a>A.针对对象</h3><ul>
+<li>jar文件（利用dx工具将jar文件转换为dex文件）</li>
+<li>dex文件</li>
+<li>apk文件</li>
+</ul>
+<h3 id="B-基本操作"><a href="#B-基本操作" class="headerlink" title="B.基本操作"></a>B.基本操作</h3><ul>
+<li>重命名(n)</li>
+<li>跟踪(Enter, 双击)</li>
+<li>返回(Esc)</li>
+<li>前进(Ctrl + Enter)</li>
+<li>帮助(H)</li>
+<li>条目信息(I)</li>
+<li>交叉引用(X)，源码交叉引用(Ctrl + X)</li>
+<li>注释(；或者 C)</li>
+<li>改变进制数(B)</li>
+<li>反编译(Tab)</li>
+</ul>
+<h3 id="C-参考"><a href="#C-参考" class="headerlink" title="C.参考"></a>C.参考</h3><blockquote>
+<p><a href="https://www.icode9.com/content-4-101536.html" target="_blank" rel="noopener">【移动安全基础篇】——04、JEB使用</a></p>
+</blockquote>
+<h2 id="2-jeb插件扩展（java-python）"><a href="#2-jeb插件扩展（java-python）" class="headerlink" title="2.jeb插件扩展（java/python）"></a>2.jeb插件扩展（java/python）</h2><p>除了一些简单的增加分析效率的扩展（如提取资源文件，打印指定方法的交叉引用等），比较重要的扩展应用就是<strong>实现字符串解密、混淆后的apk代码的部分还原</strong>等功能。</p>
+<h3 id="A-API手册"><a href="#A-API手册" class="headerlink" title="A.API手册"></a>A.<a href="https://www.pnfsoftware.com/jeb/apidoc/reference/packages.html" target="_blank" rel="noopener">API手册</a></h3><p>可在jeb的帮助中查看其可用API，如下图。</p>
+<p><img src="/2019/07/30/jeb插件扩展/1.png" alt=""></p>
+<p><img src="/2019/07/30/jeb插件扩展/2.png" alt=""></p>
+<hr>
+<p>关键API（位于<code>jeb.jar</code>中）：<code>jeb.api.ast</code>（Abstract Syntax Tree-抽象语法树），以如下图所示的函数<code>isZtz162</code>为例——</p>
+<p><img src="/2019/07/30/jeb插件扩展/4.png" alt=""></p>
+<p>其AST结构如图所示——</p>
+<p><img src="/2019/07/30/jeb插件扩展/5.png" alt=""></p>
+<p>可以通过如下代码来递归打印一个<code>Method</code>中的各个<code>Element</code>——</p>
+<pre><code>#!python
+class test(IScript):
+def run(self, j):
+    self.instance = j
+    sig = self.instance.getUI().getView(View.Type.JAVA).getCodePosition().getSignature()
+    currentMethod = self.instance.getDecompiledMethodTree(sig)
+    self.instance.print(&quot;scanning method: &quot; + currentMethod.getSignature())
+    body = currentMethod.getBody()
+    self.instance.print(repr(body))
+    for i in range(body.size()):
+        self.viewElement(body.get(i),1)
+def viewElement(self, element, depth):
+    self.instance.print(&quot;    &quot;*depth+repr(element))
+    for sub in element.getSubElements():
+        self.viewElement(sub, depth+1)
+</code></pre><blockquote>
+<p><a href="https://www.zybuluo.com/oro-oro/note/143651" target="_blank" rel="noopener">JebAPI 之 jeb.api.ast</a><br><a href="https://www.tuicool.com/articles/zm6Nz23" target="_blank" rel="noopener">Android应用分析进阶教程之一——初识jebapi</a></p>
+</blockquote>
+<h3 id="B-区分脚本和插件"><a href="#B-区分脚本和插件" class="headerlink" title="B.区分脚本和插件"></a>B.区分脚本和插件</h3><blockquote>
+<p>JEB客户端扩展（脚本）应该用Python编写；JEB后端扩展（插件）应该用Java 编写（某些类的后端插件可能用Python编写）。</p>
+</blockquote>
+<h4 id="（1）脚本-python"><a href="#（1）脚本-python" class="headerlink" title="（1）脚本(python)"></a>（1）脚本(python)</h4><ol>
+<li><p>jeb1支持java脚本和python脚本，jeb2目前只支持python脚本。</p>
+</li>
+<li><p>使用方法：在jeb安装目录的scripts目录下放置<a href="http://search.maven.org/remotecontent?filepath=org/python/jython-standalone/2.7.0/jython-standalone-2.7.0.jar" target="_blank" rel="noopener">jython-standalone-2.7.0.jar</a>和自定义python脚本，然后在用jeb分析apk的过程中，<code>File -&gt; Scripts -&gt; Run script</code>即可。</p>
+</li>
+</ol>
+<p><img src="/2019/07/30/jeb插件扩展/3.png" alt=""></p>
+<blockquote>
+<p><a href="https://bbs.pediy.com/thread-218302.htm" target="_blank" rel="noopener">JEB2插件，导出APK资源文件</a><br><a href="https://blog.csdn.net/weixin_33912246/article/details/87157913" target="_blank" rel="noopener">JEB脚本开发折腾小记</a><br><a href="https://blog.csdn.net/zhuanshenai/article/details/52289594" target="_blank" rel="noopener">jeb2 java 脚本插件</a></p>
+</blockquote>
+<h4 id="（2）插件-java"><a href="#（2）插件-java" class="headerlink" title="（2）插件(java)"></a>（2）插件(java)</h4><p>一、jeb插件支持用java和python语言编写。</p>
+<p>二、java插件编写环境配置：在eclipse中建立java工程，然后将javadoc路径指向<code>jeb/doc/apidoc.zip</code>，添加library <code>jeb.jar</code>即可。</p>
+<p><img src="/2019/07/30/jeb插件扩展/6.png" alt=""></p>
+<p>三、插件安装：将<a href="https://blog.csdn.net/tianmaxingkong_/article/details/45646009" target="_blank" rel="noopener">eclipse中的java项目导出为jar</a>，然后放到jeb安装目录的<code>coreplugins</code>目录下，jeb在启动时就会加载相应的插件。</p>
+<pre><code>#简单的java插件示例——SampleEnginesPlugin.java
+
+package com.pnf.plugintest;
+
+import java.util.List;
+import java.util.Map;
+
+import com.pnfsoftware.jeb.core.IEnginesContext;
+import com.pnfsoftware.jeb.core.IEnginesPlugin;
+import com.pnfsoftware.jeb.core.IOptionDefinition;
+import com.pnfsoftware.jeb.core.IPluginInformation;
+import com.pnfsoftware.jeb.core.PluginInformation;
+import com.pnfsoftware.jeb.core.Version;
+import com.pnfsoftware.jeb.util.logging.GlobalLog;
+import com.pnfsoftware.jeb.util.logging.ILogger;
+
+/**
+ * Sample plugin.
+ * 
+ * @author Nicolas Falliere
+ */
+public class SampleEnginesPlugin implements IEnginesPlugin {
+    private static final ILogger logger = GlobalLog.getLogger(SampleEnginesPlugin.class);
+
+    @Override
+    public IPluginInformation getPluginInformation() {
+        return new PluginInformation(&quot;Sample Engines Plugin&quot;, &quot;A sample JEB back-end plugin&quot;, &quot;PNF Software&quot;,
+                Version.create(1, 0, 1));
+    }
+
+    @Override
+    public void load(IEnginesContext context) {
+        logger.info(&quot;Sample plugin is loaded&quot;);
+    }
+
+    @Override
+    public List&lt;? extends IOptionDefinition&gt; getExecutionOptionDefinitions() {
+        return null;
+    }
+
+    @Override
+    public void execute(IEnginesContext context) {
+        execute(context, null);
+    }
+
+    @Override
+    public void execute(IEnginesContext engctx, Map&lt;String, String&gt; executionOptions) {
+        logger.info(&quot;Executing sample plugin&quot;);
+    }
+
+    @Override
+    public void dispose() {
+    }
+}
+</code></pre><h3 id="B-实例"><a href="#B-实例" class="headerlink" title="B.实例"></a>B.实例</h3><h4 id="（1）打印目标方法的交叉引用"><a href="#（1）打印目标方法的交叉引用" class="headerlink" title="（1）打印目标方法的交叉引用"></a>（1）打印目标方法的交叉引用</h4><pre><code>from jeb.api import IScript
+
+class MyPlugin(IScript):
+
+def run(self, jeb):
+
+    OpMethod = &quot;sendTextMessage&quot;
+
+    def foo(dex, i, num_hyphen):
+        l = dex.getMethodReferences(i)    //获取方法i的交叉引用l
+        for k in l:
+            print &apos;-&apos;*num_hyphen+dex.getMethod(k).getSignature(True)
+            if dex.getMethodReferences(k) != None:
+                foo(dex, k, num_hyphen+4)  //递归调用回溯上层函数调用，用&apos;-&apos;*num_hyphen表示调用关系
+
+    print &apos;&apos;
+    print &apos;&apos;
+    dex = jeb.getDex()
+    method_count = dex.getMethodCount()
+    print &quot;method_count:&quot;+str(method_count)            
+    for i in range(method_count):
+        if dex.getMethod(i).getSignature(True).find(OpMethod)&gt;=0:
+            print &apos;*&apos;+dex.getMethod(i).getName()
+            print dex.getMethod(i).getSignature(True)
+            foo(dex, i, 4)
+</code></pre><blockquote>
+<p><a href="https://www.cnblogs.com/axiong/p/6039842.html" target="_blank" rel="noopener">编写jeb插件打印目标方法的交叉引用</a></p>
+</blockquote>
+<h4 id="（2）处理混淆应用"><a href="#（2）处理混淆应用" class="headerlink" title="（2）处理混淆应用"></a>（2）处理混淆应用</h4><blockquote>
+<p><a href="https://xz.aliyun.com/t/46#toc-0" target="_blank" rel="noopener">编写自己的JEB2插件</a></p>
+</blockquote>
+<p>主要处理逻辑——</p>
+<ul>
+<li>对于类：递归寻找它的父类和实现的接口。如果父类和接口包含了有意义的名字：例如SDK类Activity、不能混淆的类名MainActivity，以此为基础进行重命名。</li>
+<li>对于Field：根据该Field的类型，重命名其名字。</li>
+<li>对于函数：根据该函数的参数类型，重命名其名字。</li>
+</ul>
+<p>思路<code>根据被混淆item的基类信息和类型信息/参数信息对其重命名</code>的主要逻辑实现如下——</p>
+<pre><code>for clz in codeunit.getClasses(): 
+    if isObfuscated(clz):
+        name = determineNameFromHierchy(clz) ---&gt;1
+        rename(clz, name)
+
+for field in codeUnit.getFields():
+    if isObfuscated(field):
+        name = determineNameByFieldType(field)
+        rename(field, name)
+
+for mtd in codeUnit.getMethods():
+    if isObfuscated(mtd):
+        name = determineNameByArgsType(field)
+        rename(field, name)
+</code></pre><p>例如, class IiIiIiIi是继承于class iIiIiIiI, 而iIiIiIiI又继承于Activity/实现了onClickListener, 那么我们就可以使用Activity/onClickListener作为基准重命名两个被混淆的类. 这里的关键在于一个递归获取基类的函数, 代码如下所示——</p>
+<pre><code>&apos;&apos;&apos;
+clzElement is ICodeClass retrieved from ICodeUnit.getClass()
+&apos;&apos;&apos;
+def tryDetermineGodeName(self, clzElement):
+    javaunit = self.decomp.decompile(clzElement.getAddress())
+    clzElement = javaunit.getClassElement()
+    #now clzElement is a IJavaClass
+
+    if not isFuckingName(clzElement.getName()):
+      #this is a non-obfuscated name, just return it
+      return clzElement.getName()
+    ssupers = clzElement.getImplementedInterfaces()
+    supers = []
+    supers.extend(ssupers)
+    # do not directly append on returned list!
+
+    superSig = clzElement.getSupertype().getSignature()
+    supers.append(clzElement.getSupertype())
+
+    for superItem in supers:
+      sig = superItem.getSignature()
+      if sig == &quot;Ljava/lang/Object;&quot;:
+        #extend from java/lang/Object gives us zero info
+        #so try next
+        continue
+      if not isFuckingName(sig):
+        #return first non-obfuscated name
+        return sig
+      resolvedType = self.targetUnit.getClass(sig)
+      if resolvedType:
+        #this is a concret class
+        guessedName = self.tryDetermineGoodName(resolvedType)
+        if guessedName:
+          return guessedName
+      else:
+        #this is a SDK class
+        return sig
+    #cannot determine name from its supers, return None
+    return None
+</code></pre><blockquote>
+<p><a href="https://blog.csdn.net/weixin_37556843/article/details/66476295" target="_blank" rel="noopener">JEB2 script 中调用 api 重命名所有派生类</a></p>
+</blockquote>
+<h4 id="（3）其他"><a href="#（3）其他" class="headerlink" title="（3）其他"></a>（3）其他</h4><blockquote>
+<p><a href="https://bbs.pediy.com/thread-219449.htm" target="_blank" rel="noopener">一个简单的jeb字符串解密脚本</a><br><a href="https://github.com/flankerhqd/jebPlugins" target="_blank" rel="noopener">各种Jeb插件，包括混淆恢复（适用于jeb1）</a><br><a href="https://github.com/pnfsoftware/jeb2-samplecode" target="_blank" rel="noopener">官方的python脚本和java插件的实例</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jeb/" rel="tag"># jeb</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/29/深入理解计算机系统-笔记1/" rel="next" title="<深入理解计算机系统>笔记1">
+                <i class="fa fa-chevron-left"></i> <深入理解计算机系统>笔记1
+              </深入理解计算机系统></a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/31/漏洞分析——USQLITE1-0-0远程代码执行漏洞/" rel="prev" title="漏洞分析——USQLITE1.0.0远程代码执行漏洞">
+                漏洞分析——USQLITE1.0.0远程代码执行漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本使用"><span class="nav-number">1.</span> <span class="nav-text">1.基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-针对对象"><span class="nav-number">1.1.</span> <span class="nav-text">A.针对对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-基本操作"><span class="nav-number">1.2.</span> <span class="nav-text">B.基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-参考"><span class="nav-number">1.3.</span> <span class="nav-text">C.参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-jeb插件扩展（java-python）"><span class="nav-number">2.</span> <span class="nav-text">2.jeb插件扩展（java/python）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-API手册"><span class="nav-number">2.1.</span> <span class="nav-text">A.API手册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-区分脚本和插件"><span class="nav-number">2.2.</span> <span class="nav-text">B.区分脚本和插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）脚本-python"><span class="nav-number">2.2.1.</span> <span class="nav-text">（1）脚本(python)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）插件-java"><span class="nav-number">2.2.2.</span> <span class="nav-text">（2）插件(java)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-实例"><span class="nav-number">2.3.</span> <span class="nav-text">B.实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）打印目标方法的交叉引用"><span class="nav-number">2.3.1.</span> <span class="nav-text">（1）打印目标方法的交叉引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）处理混淆应用"><span class="nav-number">2.3.2.</span> <span class="nav-text">（2）处理混淆应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）其他"><span class="nav-number">2.3.3.</span> <span class="nav-text">（3）其他</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Android,Linux,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对Android系统和Linux系统的基本安全机制进行总结。">
+<meta name="keywords" content="Android,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统安全机制——Android&#x2F;Linux">
+<meta property="og:url" content="http://yoursite.com/2019/08/16/系统安全机制——Android-Linux/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对Android系统和Linux系统的基本安全机制进行总结。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/08/16/系统安全机制——Android-Linux/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/16/系统安全机制——Android-Linux/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/16/系统安全机制——Android-Linux/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/16/系统安全机制——Android-Linux/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/16/系统安全机制——Android-Linux/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/16/系统安全机制——Android-Linux/6.png">
+<meta property="og:updated_time" content="2019-08-16T10:15:54.416Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="系统安全机制——Android&#x2F;Linux">
+<meta name="twitter:description" content="对Android系统和Linux系统的基本安全机制进行总结。">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/16/系统安全机制——Android-Linux/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/16/系统安全机制——Android-Linux/">
+
+
+
+
+
+  <title>系统安全机制——Android/Linux | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/系统安全机制——Android-Linux/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">系统安全机制——Android/Linux</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T09:47:43+08:00">
+                2019-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/16/系统安全机制——Android-Linux/" class="leancloud_visitors" data-flag-title="系统安全机制——Android/Linux">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对Android系统和Linux系统的基本安全机制进行总结。</p>
+<a id="more"></a>
+<h1 id="Android安全机制"><a href="#Android安全机制" class="headerlink" title="Android安全机制"></a>Android安全机制</h1><h2 id="1-Android系统架构"><a href="#1-Android系统架构" class="headerlink" title="1.Android系统架构"></a>1.Android系统架构</h2><p>下面是Google官方提供的Android系统经典分层架构图，从下往上依次分为<strong>Linux内核、HAL、系统Native库和Android运行时环境、Java框架层以及应用层</strong>这5层架构，其中每一层都包含大量的子模块或子系统。</p>
+<p><img src="/2019/08/16/系统安全机制——Android-Linux/1.png" alt=""></p>
+<blockquote>
+<p><a href="http://gityuan.com/android/" target="_blank" rel="noopener">Android系统架构开篇</a></p>
+</blockquote>
+<h2 id="2-Android安全机制"><a href="#2-Android安全机制" class="headerlink" title="2.Android安全机制"></a>2.Android安全机制</h2><h3 id="A-概述"><a href="#A-概述" class="headerlink" title="A.概述"></a>A.概述</h3><p>Android安全模型延用了 Linux的安全机制，并且从进程、内存管理、进程间通信、权限等方面进一步增强，具体而言，<strong>使应用程序受保护于“沙箱”机制，采用更为安全、高效的进程间通信机制 Binder，提供 ashmem机制辅助有效地管理不再使用的内存，要求应用程序配置访问权限并采用数字签名。</strong></p>
+<p>Android安全模型主要提供以下几种安全机制:</p>
+<ol>
+<li><strong>进程沙箱隔离机制。</strong> Android应用程序在安装时被赋予独特的用户标识(UID)，并永久保持；应用程序及其运行的 Dalvik虚拟机运行于独立的 Linux进程空间，UID不同的应用程序完全隔离。</li>
+<li><strong>应用程序签名机制。</strong>应用程序包(.apk文件)必须被开发者数宇签名；同一开发者可指定不同的应用程序共享UID，进而运行于同一进程空间，共享资源。</li>
+<li><strong>权限声明机制。</strong>应用程序需要显式声明权限、名称、权限组与保护级别。不同的级别要求应用程序行使此权限时的认证方式不同： normal级申请即可用； Dangerous级需在安装时由用户确认才可用； Signature与 Signatureorsystem则必须是系统用户才可用。</li>
+<li><strong>访问控制机制。</strong>传统的Linux访问控制机制确保系统文件与用户数据不受非法访问。</li>
+<li><strong>进程通信机制。</strong> Binder进程通信机制提供基于共享内存的高效进程通信； Binder基于 Client-Server模式，提供类似COM与 CORBA的轻量级远程进程调用(RPC)；通过接口描述语言(AIDL)定义接口与交换数据的类型，确保进程间通信的数据不会溢出越界，污染进程空间。</li>
+<li><strong>内存管理机制。</strong>基于标准 Linux的低内存管理机制(OOM)，设计实现了独特的低内存清理(LMK)机制，将进程按重要性分级、分组，当内存不足时，自动清理最低级别进程所占用的内存空间；同时，引入不同于传统Linux共享内存机制的Android共享内存机制 Ashmem，具备清理不再使用共享内存区域的能力。</li>
+</ol>
+<h3 id="B-Linux安全模型简介"><a href="#B-Linux安全模型简介" class="headerlink" title="B.Linux安全模型简介"></a>B.Linux安全模型简介</h3><p>Android系统以 Linux内核为基础，理解 Android的安全设计首先要厘清 Linux安全模型的主要概念与元素，包括<strong>用户与权限、进程与内存空间</strong>等。</p>
+<h4 id="（1）用户与权限"><a href="#（1）用户与权限" class="headerlink" title="（1）用户与权限"></a>（1）用户与权限</h4><p>Linux安全模型的基础是<strong>用户与用户组</strong>，Linux的用户由用户名与用户标识(UID)表示。用户可同时参与多个用户组，每个用户组由组标识(GID)表示。</p>
+<h4 id="（2）进程与内存空间"><a href="#（2）进程与内存空间" class="headerlink" title="（2）进程与内存空间"></a>（2）进程与内存空间</h4><p>Linux是一个多用户与多进程的操作系统，允许多个用户同时运行各自隔离的多个应用进程，并且通过用户及权限对用户资源进行隔离与保护。Linux的用户、进程、内核、设备之间的关系如图所示，可总结为——</p>
+<ol>
+<li>Linux内核允许多个用户同时存在并运行不同的进程。</li>
+<li>每个用户拥有多个同时运行的进程，多个进程分别属于不同的用户。</li>
+<li>所有进程(无论是否属于同一用户)各自运行于独立的内存空间。</li>
+<li>用户进程通过系统调用接口访问操作系统的服务。</li>
+<li>操作系统内核通过设备驱动访问硬件设备与资源，如数据存储与网络设备等。</li>
+</ol>
+<p><img src="/2019/08/16/系统安全机制——Android-Linux/2.png" alt=""></p>
+<h3 id="C-Android安全机制补充介绍"><a href="#C-Android安全机制补充介绍" class="headerlink" title="C.Android安全机制补充介绍"></a>C.Android安全机制补充介绍</h3><h4 id="进程沙箱"><a href="#进程沙箱" class="headerlink" title="进程沙箱"></a>进程沙箱</h4><p>每个APP在各自独立的Dalvik虚拟机中运行，拥有独立的地址空间和资源。运行于Dalvik虚拟机中的进程必须依托内核层Linux进程而存在，因此<strong>Android使用Dalvik虚拟机和Linux的文件访问控制来实现沙箱机制。</strong></p>
+<ol>
+<li><p>Windows与UNIX/Linux等传统操作系统以用户为中心，假设用户之间是不可信的，更多考虑如何隔离不同用户对资源(存储区域与用户文件、内存区域与用户进程、底层设备等)的访问（即<strong>访问控制</strong>）。</p>
+</li>
+<li><p>不同于访问控制，针对的是系统内文件（Linux系统中，设备资源也是文件）；沙箱隔离概念，是针对运行中的进程。</p>
+</li>
+<li><p>Android扩展了Linux内核安全模型的用户与权限机制，<strong>将多用户操作系统的用户隔离机制巧妙地移植为应用程序隔离</strong>。在Linux中，一个用户标识(UID)识别一个给定用户；在 Android上，一个UID则识别一个应用程序。</p>
+</li>
+<li><p>在安装应用程序时向其分配UID。应用程序在设备上存续期间内，其UID保持不变。<strong>权限用于允许或限制应用程序(而非用户)对设备资源的访问。</strong></p>
+</li>
+<li><p>在很多情况下，源自同一开发者或同一开发机构的应用程序，相互间存在信任关系，Android系统提供一种所谓<strong>共享UID( SharedUserlD)机制</strong>，使具备信任关系的应用程序可以运行于同一进程空间。通常，这种信任关系由应用程序的数字签名确定，并且需要应用程序在 manifest文件中使用相同的UID。</p>
+</li>
+<li><p><strong>进程沙箱为互不信任的应用程序之间提供了隔离机制， SharedUserID则为具备信任关系的应用程序提供了共享资源的机制。</strong></p>
+</li>
+</ol>
+<h4 id="应用权限"><a href="#应用权限" class="headerlink" title="应用权限"></a>应用权限</h4><blockquote>
+<p>权限机制是 Android安全机制的基础，决定允许还是限制应用程序访问受限的API和系统资源。<br>由于用户自行安装的应用程序也不具备可信性，在默认情况下， Android应用程序没有任何权限，不能访问保护的设备API与资源。<br>应用程序的权限需要明确定义，在安装时被用户确认，并且在运行时检查、执行、授予和撤销权限。<br>在定制权限下，文件和内容提供者也可以受到保护。</p>
+</blockquote>
+<p>Android根据不同的用户和组，分配不同权限，比如访问网络、访问GPS数据等，<strong>这些 Android权限在底层映射为 Linux的用户与组权限</strong>。</p>
+<h4 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h4><p>对于IPC(Inter-Process Communication, 进程间通信)，Linux现有管道、消息队列、共享内存、套接字、信号量、信号这些IPC机制，Android额外还有Binder IPC机制。</p>
+<p>对于Android上层架构，<strong>则最常用的通信方式是Binder、Socket、Handler</strong>，当然也有少量其他的IPC方式，比如杀进程Process.killProcess()采用的是signal方式。</p>
+<h5 id="A-Binder"><a href="#A-Binder" class="headerlink" title="A.Binder"></a>A.Binder</h5><p><strong>基于共享内存的Binder实现，提供轻量级的远程进程调用（RPC）。通过接口描述语言（AIDL）定义接口与交换数据的类型，确保进程间通信的数据不会溢出越界。</strong></p>
+<p>在系统安全设计方面，Android的Binder进程通信机制设计具备优于传统 Linux的重要优势。</p>
+<ul>
+<li>Android应用基于权限机制，定义进程通信的权限，相比传统 Linux IPC具有<strong>更细粒度的权限控制</strong>。</li>
+<li>Binder进程间通信机制<strong>具备类型安全的优势</strong>。开发者在编译应用程序时，使用Android接口描述语言(AIDL)定义交换数据的类型，确保进程间通信的数据不会溢出越界污染进程空间。</li>
+<li>Binder通过 <strong>Android的共享内存机制(Ashmem)</strong>实现高效率的进程通信，而不是采用传统的 Linux/UNIX共享内存( Shared Memory)，也具备特殊的安全含义。</li>
+</ul>
+<p><strong>AIDL的接口定义与参数描述是类型安全的。</strong></p>
+<blockquote>
+<p>Android应用程序使用Java语言编写。<strong>Java语言就具备所谓的“类型安全”特性，是一种强类型化的编程语言</strong>，它强制不同内容遵循规定的数据格式，进而防止错误或恶意应用。<br><strong>不完整的类型安全与边界检查机制极易受到内存污染或缓冲区溢出攻击，进而导致任意代码，甚至恶意代码的运行</strong>。<br>但是，在C/C++程序设计中，允许未经类型检查的强制类型转换，而且，除非编程者专门编程进行边界检查，否则C语言本身不要求边界检查。实践证明，这些C/C++语言的灵活性恰恰成为恶意代码攻击的目标。<br>Android系统原生库允许采用C/C++编程，存在一定的安全隐患，需要其他特殊技术加以防范。<br>传统 Linux的进程通信机制虽然有用户权限的限制，但缺少强制的类型安全。</p>
+</blockquote>
+<h5 id="B-Socket"><a href="#B-Socket" class="headerlink" title="B.Socket"></a>B.Socket</h5><p>Socket通信方式也是C/S架构，比Binder简单很多。在Android系统中采用Socket通信方式的主要有：</p>
+<ul>
+<li>zygote：用于孵化进程，system_server创建进程是通过socket向zygote进程发起请求；</li>
+<li>installd：用于安装App的守护进程;</li>
+<li>lmkd：lowmemorykiller的守护进程，Java层的LowMemoryKiller最终都是由lmkd来完成；</li>
+<li>adbd：用于服务adb；</li>
+<li>logcatd:用于服务logcat；</li>
+<li>vold：即volume Daemon，是存储类的守护进程，用于负责如USB、Sdcard等存储设备的事件处理。</li>
+</ul>
+<p><strong>Socket方式更多的用于Android framework层与native层之间的通信。</strong></p>
+<h5 id="C-Handler"><a href="#C-Handler" class="headerlink" title="C.Handler"></a>C.Handler</h5><p><strong>Binder/Socket用于进程间通信，而Handler消息机制用于同进程的线程间通信。</strong> Handler消息机制是由一组MessageQueue、Message、Looper、Handler共同组成的，为了方便且称之为Handler消息机制。</p>
+<h4 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h4><h5 id="A-Ashmem匿名共享内存"><a href="#A-Ashmem匿名共享内存" class="headerlink" title="A.Ashmem匿名共享内存"></a>A.Ashmem匿名共享内存</h5><p>android的匿名共享内存(Ashmem)机制基于 Linux内核的共享内存，但是 Ashmem与 cache shrinker关联起来，增加了内存回收算法的注册接口，因此 Linux内存管理系统将不再使用的内存区域加以回收。</p>
+<h5 id="B-LMK（LowMemoryKiller）机制"><a href="#B-LMK（LowMemoryKiller）机制" class="headerlink" title="B.LMK（LowMemoryKiller）机制"></a>B.LMK（LowMemoryKiller）机制</h5><p>Android内存管理机制基于Linux的OOM(out of memory killer)机制,实现了LMK(low memory killer)机制。将所有的进程按照重要性进行分级，系统会自动清理最低级别的进程所占用的内存空间。</p>
+<p>每个程序都有一个oom_adj值，值越小，优先级越高，被杀死的可能性越低。Android将程序的重要性分为几类。每一类的内存警戒值与oom_adj值如下图所示——</p>
+<p><img src="/2019/08/16/系统安全机制——Android-Linux/3.png" alt=""></p>
+<h3 id="D-Android安全机制变迁"><a href="#D-Android安全机制变迁" class="headerlink" title="D.Android安全机制变迁"></a>D.Android安全机制变迁</h3><p>在 Android系统中虽然大量的应用程序由类型安全的Java程序设计实现，但底层软件中仍大量使用C/C++代码，受到安全攻击的可能性时刻存在。</p>
+<p>Android系统的SDK、编译器及操作系统工具为防范<strong>内存溢出攻击</strong>提供了相应的辅助手段，利用现代移动处理器(CPU)的虚拟内存管理(MMU)的安全特性等对内存管理的安全性进行了增强。在 Android版本升级过程中，自1.5版本之后，引人了许多安全机制，如IBM的 ProPolice检测堆栈溢出， OpenBSD的 dlmalloc等。</p>
+<p>下图是对一些典型的安全机制的简介——</p>
+<p><img src="/2019/08/16/系统安全机制——Android-Linux/5.png" alt=""></p>
+<p>下图是<a href="http://www.gandalf.site/2019/03/android.html" target="_blank" rel="noopener">大佬整理的Android安全机制随版本更新变迁脑图</a>，主要为漏洞缓解和一些安全措施。</p>
+<p><img src="/2019/08/16/系统安全机制——Android-Linux/4.png" alt=""></p>
+<h3 id="E-参考"><a href="#E-参考" class="headerlink" title="E.参考"></a>E.参考</h3><blockquote>
+<p>《Android安全机制解析与应用实践》<br><a href="https://www.cnblogs.com/lao-liang/p/5089336.html" target="_blank" rel="noopener">理解Android安全机制</a><br><a href="https://www.jianshu.com/p/5346fa1aa713" target="_blank" rel="noopener">Android 安全机制</a><br><a href="http://sparkyuan.me/2016/04/05/Android%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/" target="_blank" rel="noopener">Android安全机制</a><br><a href="http://gityuan.com/android/" target="_blank" rel="noopener">Android系统架构开篇</a><br><a href="http://www.gandalf.site/2019/03/android.html" target="_blank" rel="noopener">Android（十二）安全机制变迁脑图</a><br><a href="https://www.4hou.com/system/19474.html" target="_blank" rel="noopener">Android Q：安全与隐私</a></p>
+</blockquote>
+<h1 id="Linux安全机制"><a href="#Linux安全机制" class="headerlink" title="Linux安全机制"></a>Linux安全机制</h1><p><em>由于时间有限，这里只是对整体的Linux安全进行了简单的概述，其中的各项安全机制及具体作用（要想理解透彻，离不开对源码的阅读），等到需要的时候再进行详细查阅和理解。</em></p>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><p>Linux系统安全包括Linux内核层的安全和用户层的安全。</p>
+<p>用户层的安全包括Linux下的各种认证系统，比如目前流行的PAM认证机制，Ukey指纹认证机制，远程网络认证机制，LDAP认证机制，3A认证机制等。用户层安全还包括网络安全，比如通过iptables定制防火墙，关闭服务器不必要开启的端口等。</p>
+<p>内核层的安全就包括了Linux操作系统的各种安全机制。现有的Linux安全框架叫做<strong>LSM(Linux security module)。基于这个框架，可以实现各种各样的Linux安全机制，其中最著名的就是SELinux</strong>。</p>
+<h2 id="2-Linux内核安全"><a href="#2-Linux内核安全" class="headerlink" title="2.Linux内核安全"></a>2.Linux内核安全</h2><ol>
+<li><p>在安全性方面，Linux内核只提供了经典的UNIX自主访问控制（root用户，用户ID，模式位安全机制），以及部分的支持了POSIX.1e标准草案中的capabilities安全机制。</p>
+</li>
+<li><p>有很多安全访问控制模型和框架已经被研究和开发出来，用以增强Linux系统的安全性，比较知名的 SELinux，DTE，以及 LIDS 等等。但是由于没有一个系统能够获得统治性的地位而进入Linux内核成为标准；并且这些系统都大多以各种不同的内核补丁的形式提供，使用这些系统需要有编译和定制内核的能力，对于没有内核开发经验的普通用户，获得并使用这些系统是有难度的。<strong>即Linux内核需要有一个通用的安全访问控制框架。</strong></p>
+</li>
+<li><p>LSM是Linux内核的一个轻量级通用访问控制框架。它使得各种不同的安全访问控制模型能够以Linux可加载内核模块的形式实现出来，用户可以根据其需求选择适合的安全模块加载到Linux内核中，从而大大提高了Linux安全访问控制机制的灵活性和易用性。目前已经有很多著名的增强访问控制系统移植到LSM上实现，包括POSIX.1e capabilities、SELinux、DTE，以及 LIDS 等等。<strong>即LSM只是一个框架，用户可根据实际需要动态加载各种具体的安全增强功能模块。</strong></p>
+</li>
+</ol>
+<ol start="4">
+<li><strong>LSM本身不提供任何具体的安全策略，而是提供了一个通用的基础体系给安全模块，由安全模块来实现具体的安全策略。</strong></li>
+</ol>
+<p>LSM对于普通用户的价值就在于：可以提供各种安全模块，由用户选择适合自己需要的加载到内核，满足特定的安全功能。LSM本身只提供增强访问控制策略的机制，而由各个安全模块实现具体特定的安全策略。下面简要介绍一些已经实现的安全模块——</p>
+<ul>
+<li><strong>SELinux。</strong>这是一个Flask灵活访问控制体系在Linux上的实现，并且提供了类型增强，基于角色的访问控制，以及可选的多级安全策略。SELinux原来是作为一个内核补丁实现的，现在已经使用LSM重新实现为一个安全模块。SELinux可以被用来限制进程为最小特权，保护进程和数据的完整性和机密性，并且支持应用安全需求。</li>
+<li><strong>DTE Linux。</strong>这是一个域和类型增强在Linux上的实现。就像SELinux一样，DTE Linux原来是作为一个内核补丁实现的，现在已经使用LSM重新实现为一个安全模块。当这个安全模块被加载到内核上时，类型被赋给对象，域被赋给进程。DTE策略限制域之间和从域到类型的访问。</li>
+<li><strong>Openwall 内核补丁的LSM移植。</strong>Openwall内核补丁提供了一系列的安全特性集合来保护系统免受例如缓冲区溢出和临时文件竞争这样的攻击。</li>
+<li><strong>POSIX.1e capabilities。</strong> Linux内核中已经存在有POSIX.1e capabilities逻辑，但是LSM把这个逻辑划分到了一个安全模块中。这样的修改使得不需要的用户可以从他们的内核中把这个功能略去；也使得capabilities逻辑的开发可以脱离内核开发获得更大的独立性。</li>
+<li><strong>LIDS。</strong>这是由国人谢华刚发起的项目。开始时作为一个入侵检测系统开发，后来逐渐演变为使用访问控制系统的形式来进行入侵预防，它通过描述一个给定的程序可以访问哪些文件来进行访问控制。同样的，LIDS原来是作为一个内核补丁实现的并附带了一些管理工具，现在已经使用LSM重新实现为一个安全模块。</li>
+</ul>
+<p>当然还有缺省的<strong>传统超级用户机制</strong>。这个安全模块是LSM默认的，实现了传统的UNIX超级用户特权机制。</p>
+<h2 id="3-Linux-Kernel-Defence-Map"><a href="#3-Linux-Kernel-Defence-Map" class="headerlink" title="3.Linux Kernel Defence Map"></a>3.<a href="https://github.com/a13xp0p0v/linux-kernel-defence-map" target="_blank" rel="noopener">Linux Kernel Defence Map</a></h2><blockquote>
+<p><a href="https://schd.ws/hosted_files/osseu18/27/KSPP_lessons.pdf" target="_blank" rel="noopener">Between the Millstones:Lessons of Self-Funded Participation in Kernel Self Protection Project</a></p>
+</blockquote>
+<p><img src="/2019/08/16/系统安全机制——Android-Linux/6.png" alt=""></p>
+<p><em>对于此图的学习和理解有待后续有时间和需要的时候进行。</em></p>
+<h2 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h2><blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/20696042" target="_blank" rel="noopener">Linux系统安全</a><br><a href="https://ixyzero.com/blog/archives/3359.html#comments" target="_blank" rel="noopener">LSM学习</a><br><a href="https://wiki.wh-redirect.deepin.cn/mediawiki/index.php?title=Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6---%E8%83%BD%E5%8A%9B%EF%BC%88capability" target="_blank" rel="noopener">Linux操作系统中的安全机制—能力（capability)</a>)</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/13/漏洞分析——AXESSH-4-2拒绝服务漏洞/" rel="next" title="漏洞分析——AXESSH 4.2拒绝服务漏洞">
+                <i class="fa fa-chevron-left"></i> 漏洞分析——AXESSH 4.2拒绝服务漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android安全机制"><span class="nav-number">1.</span> <span class="nav-text">Android安全机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Android系统架构"><span class="nav-number">1.1.</span> <span class="nav-text">1.Android系统架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Android安全机制"><span class="nav-number">1.2.</span> <span class="nav-text">2.Android安全机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">A.概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-Linux安全模型简介"><span class="nav-number">1.2.2.</span> <span class="nav-text">B.Linux安全模型简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）用户与权限"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">（1）用户与权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）进程与内存空间"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">（2）进程与内存空间</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-Android安全机制补充介绍"><span class="nav-number">1.2.3.</span> <span class="nav-text">C.Android安全机制补充介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程沙箱"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">进程沙箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用权限"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">应用权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程通信"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">进程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-Binder"><span class="nav-number">1.2.3.3.1.</span> <span class="nav-text">A.Binder</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#B-Socket"><span class="nav-number">1.2.3.3.2.</span> <span class="nav-text">B.Socket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-Handler"><span class="nav-number">1.2.3.3.3.</span> <span class="nav-text">C.Handler</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存管理"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-Ashmem匿名共享内存"><span class="nav-number">1.2.3.4.1.</span> <span class="nav-text">A.Ashmem匿名共享内存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#B-LMK（LowMemoryKiller）机制"><span class="nav-number">1.2.3.4.2.</span> <span class="nav-text">B.LMK（LowMemoryKiller）机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-Android安全机制变迁"><span class="nav-number">1.2.4.</span> <span class="nav-text">D.Android安全机制变迁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-参考"><span class="nav-number">1.2.5.</span> <span class="nav-text">E.参考</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux安全机制"><span class="nav-number">2.</span> <span class="nav-text">Linux安全机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概述"><span class="nav-number">2.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Linux内核安全"><span class="nav-number">2.2.</span> <span class="nav-text">2.Linux内核安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Linux-Kernel-Defence-Map"><span class="nav-number">2.3.</span> <span class="nav-text">3.Linux Kernel Defence Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-参考"><span class="nav-number">2.4.</span> <span class="nav-text">4.参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

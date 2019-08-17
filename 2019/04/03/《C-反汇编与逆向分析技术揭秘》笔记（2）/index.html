@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="教材学习,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于《C++反汇编与逆向分析技术揭秘》第五章~第n章的学习记录。">
+<meta name="keywords" content="教材学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《C++反汇编与逆向分析技术揭秘》笔记（2）">
+<meta property="og:url" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于《C++反汇编与逆向分析技术揭秘》第五章~第n章的学习记录。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/14.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/15.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/16.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/19.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/20.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/21.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/22.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/23.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/24.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/25.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/26.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/27.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/28.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/29.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/30.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/31.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/32.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/33.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/34.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/35.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/36.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/39.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/40.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/41.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/42.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/43.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/44.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/45.png">
+<meta property="og:updated_time" content="2019-05-20T08:42:25.427Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《C++反汇编与逆向分析技术揭秘》笔记（2）">
+<meta name="twitter:description" content="对于《C++反汇编与逆向分析技术揭秘》第五章~第n章的学习记录。">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/">
+
+
+
+
+
+  <title>《C++反汇编与逆向分析技术揭秘》笔记（2） | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《C++反汇编与逆向分析技术揭秘》笔记（2）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-03T16:45:33+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/" class="leancloud_visitors" data-flag-title="《C++反汇编与逆向分析技术揭秘》笔记（2）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于《C++反汇编与逆向分析技术揭秘》第五章~第n章的学习记录。</p>
+<a id="more"></a>
+<h2 id="第五章-流程控制语句的识别"><a href="#第五章-流程控制语句的识别" class="headerlink" title="第五章 流程控制语句的识别"></a>第五章 流程控制语句的识别</h2><h3 id="1-if-语句"><a href="#1-if-语句" class="headerlink" title="1 if 语句"></a>1 if 语句</h3><p>if 语句的转换规则 ：在转换成汇编代码后，由于当 if 比较结果为假时，需要跳过 if 语句块内的代码，因此使用了相反的条件跳转指令。</p>
+<p>出现上述情况的原因在于——因为按照 if 语句的规定，满足 if 判定的表达式才能执行 if 的语句块，而汇编语言的条件跳转却是满足某条件则跳转，绕过某些代码块，这一点与 C 语言是相反的。</p>
+<p>在反汇编时，表达式短路和 if 语句这两种分支结构的实现过程都是一样的，很难在源码中对它们进行区分。</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/1.png" alt=""></p>
+<h3 id="2-if…else…语句"><a href="#2-if…else…语句" class="headerlink" title="2 if…else…语句"></a>2 if…else…语句</h3><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/2.png" alt=""></p>
+<p>在很多情况下，会发现条件表达式的反汇编代码和 if…else…组合是一样的，这时，可以根据个人习惯还原出等价的高级代码。有时候会遇到复杂的条件表达式作为分支或者循环结构的判定条件的情况，这时即使直接阅读高级源码也会让人抓狂。<strong>在没有高级源码的情况下，分析者需要先定位语句块的边界，然后根据跳转目标和逻辑依赖慢慢反推出高级代码。</strong></p>
+<h3 id="3-用-if-构成的多分支流程"><a href="#3-用-if-构成的多分支流程" class="headerlink" title="3 用 if 构成的多分支流程"></a>3 用 if 构成的多分支流程</h3><p>多分支结构的 C++ 语法格式为 ：if…else if…else if…，可重复后缀为 else if。当最后为 else 时，便到了多分支结构的末尾处，不可再分支。</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/3.png" alt=""></p>
+<h3 id="4-switch-的真相"><a href="#4-switch-的真相" class="headerlink" title="4 switch 的真相"></a>4 switch 的真相</h3><p>switch 是比较常用的多分支结构，在效率上也高于 if…else if多分支结构。</p>
+<h4 id="if-else优化"><a href="#if-else优化" class="headerlink" title="if-else优化"></a>if-else优化</h4><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/4.png" alt=""></p>
+<h4 id="有序线性优化"><a href="#有序线性优化" class="headerlink" title="有序线性优化"></a>有序线性优化</h4><p>当遇到如下图所示的代码块时，可获取某一变量的信息并对其进行范围检查，如果超过 case 的最大值，则跳转条件成立 ，跳转目标指明了 switch 语句块的末尾或者是 default 块的首地址。条件跳转后紧跟 jmp 指令，并且是相对比例因子寻址方式，且基址为地址表的首地址，说明此处是线性关系的 switch 分支结构。对变量做运算，使对齐到 case 地址表 0 下标的代码不一定存在（当 case 的最小值为 0 时）。根据每条 case 地址在表中的下标位置，即可反推出线性关系的 switch 分支结构原型。</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/5.png" alt=""></p>
+<h3 id="5-难以构成跳转表的-switch"><a href="#5-难以构成跳转表的-switch" class="headerlink" title="5 难以构成跳转表的 switch"></a>5 难以构成跳转表的 switch</h3><h4 id="非线性索引表优化"><a href="#非线性索引表优化" class="headerlink" title="非线性索引表优化"></a>非线性索引表优化</h4><p><em>当 case 值比较稀疏，且没有明显的线性关系时，如将代码清单 5-11 中 case 7 改为 case 15，并且还采用有序线性的方式优化，则在 case 地址表中，下标 7~15 之间将保存 switch 结构的结尾地址，这样会浪费很多空间。</em></p>
+<p>对于非线性的 switch 结构，可以采用制作索引表的方法来进行优化。索引表优化，需要两张表：一张为 case 语句块地址表，另一张为 case 语句块索引表。这样的情况可以采用二次查表法来查找地址。</p>
+<blockquote>
+<p>地址表中的每一项保存一个 case 语句块的首地址，有几个 case 语句块就有几项。default语句块也在其中，如果没有则保存一个 switch 结束地址。这个结束地址在地址表中只会保存一份，不会像有序线性地址表那样，重复保存 switch 的结束地址。</p>
+</blockquote>
+<blockquote>
+<p>索引表中保存地址表的编号，它的大小等于最大 case 值和最小 case 值的差。当差值大于255 时，这种优化方案也会浪费空间，可通过树方式优化，这里就只讨论差值小于或等于 255的情况。表中的每一项为一个字节大小，保存的数据为 case 语句块地址表中的索引编号。</p>
+</blockquote>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/6.png" alt=""></p>
+<p>在数值间隔过多的情况下，与上节介绍的制作单一的 case 线性地址表相比，制作索引表的方式更加节省空间，但是由于在执行时需要通过索引表来查询地址表，会多出一次查询地址表的过程，因此效率会有所下降。</p>
+<p><em>注意：在 case 语句块中没有任何代码的情况下，索引表中也会出现相同标号。由于 case 中没有任何代码，当执行到它时，则会顺序向下，直到发现下一个 case 语句不为空为止。这时所有没有代码的 case 属于一段多个 case 值共用的代码。索引表中这些 case 的对应位置处所保存的都是这段共用代码在地址表中的下标值，因此出现了索引表中标号相同的情况。</em></p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/7.png" alt=""></p>
+<h3 id="6-降低判定树的高度"><a href="#6-降低判定树的高度" class="headerlink" title="6 降低判定树的高度"></a>6 降低判定树的高度</h3><h4 id="树的优化"><a href="#树的优化" class="headerlink" title="树的优化"></a>树的优化</h4><p><em>非线性索引表的优化，讨论了最大 case 值和最小 case 值之差在 255 以内的情况。当最大 case 值与最小 case 值之差大于 255，超出索引 1 字节的表达范围时，上述优化方案同样会造成空间的浪费。</em></p>
+<p>此时采用另一种优化方案 — 判定树：将每个 case 值作为一个节点，从这些节点中找到一个中间值作为根节点，以此形成一棵二叉平衡树，以每个节点为判定值，大于和小于关系分别对应左子树和右子树，这样可以提高效率。</p>
+<p><em>如果打开 O1 选项 — 体积优先，由于有序线性优化和索引表优化都需要消耗额外的空间，因此在体积优先的情况下，这两种优化方案是不被允许的。编译器尽量以二叉判定树的方式来降低程序占用的体积。</em></p>
+<blockquote>
+<p>为了降低树的高度，在树的优化过程中，检测树的左子树或右子树能否满足 if else优化、有序线性优化、非线性索引优化，利用这三种优化来降低树高度。选择哪种优化也是有顺序的，谁的效率最高，又满足其匹配条件，就可以被优先使用。以上三种优化都无法匹配，就会选择使用判定树。</p>
+</blockquote>
+<h3 id="7-do-while-for-的比较"><a href="#7-do-while-for-的比较" class="headerlink" title="7 do/while/for 的比较"></a>7 do/while/for 的比较</h3><p><strong>注意：向上跳转是循环结构的明显特征。</strong></p>
+<ul>
+<li>do 循环：先执行循环体，后比较判断。</li>
+<li>while 循环：先比较判断，后执行循环体。</li>
+<li>for 循环：先初始化，再比较判断，最后执行循环体。</li>
+</ul>
+<h4 id="（1）do-循环"><a href="#（1）do-循环" class="headerlink" title="（1）do 循环"></a><strong>（1）do 循环</strong></h4><p>C++ 中的 goto 语句也可以用来模拟 do 循环结构。</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/8.png" alt=""></p>
+<h4 id="（2）while-循环"><a href="#（2）while-循环" class="headerlink" title="（2）while 循环"></a><strong>（2）while 循环</strong></h4><p>while 循环结构中使用了两次跳转指令完成循环，由于多使用了一次跳转指令，因此while 循环要比 do 循环效率低一些。</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/9.png" alt=""></p>
+<h4 id="（3）for-循环"><a href="#（3）for-循环" class="headerlink" title="（3）for 循环"></a><strong>（3）for 循环</strong></h4><p>for 循环是三种循环结构中最复杂的一种。for 循环由赋初值、设置循环条件、设置循环步长这三条语句组成。由于 for 循环更符合人类的思维方式，在循环结构中被使用的频率也最高。</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/10.png" alt=""></p>
+<p>遇到以上代码块，即可判定它为一个 for 循环结构。这种结构是 for 循环独有的，在计数器变量被赋初值后，利用 jmp 跳过第一次步长计算。然后，可以通过三个跳转指令还原for 循环的各个组成部分 ：第一个 jmp 指令之前的代码为初始化部分 ；从第一个 jmp 指令到循环条件比较处（也就是上面代码中 FOR_CMP 标号的位置）之间的代码为步长计算部分 ；在条件跳转指令 jxx 之后寻找一个 jmp 指令，这 jmp 指令必须是向上跳转的，且其目标是到步长计算的位置，在 jxx 和这个 jmp（也就是上面代码中省略号所在的位置）之间的代码即为循环语句块。</p>
+<h3 id="8-编译器对循环结构的优化"><a href="#8-编译器对循环结构的优化" class="headerlink" title="8 编译器对循环结构的优化"></a>8 编译器对循环结构的优化</h3><p><strong>注意：在结构上，for循环和while循环都会被优化成do-while循环先执行后比较的结构。</strong></p>
+<h4 id="结构上的优化"><a href="#结构上的优化" class="headerlink" title="结构上的优化"></a>结构上的优化</h4><h5 id="do-while循环"><a href="#do-while循环" class="headerlink" title="do-while循环"></a>do-while循环</h5><p><em>对于3种循环结构，在结构上，由于do循环是先执行后比较，只使用一个条件跳转指令就完成了循环，因此已经无需在结构上进行优化处理。</em></p>
+<pre><code>int i = 0;
+00401248 mov dword ptr [ebp-4],0
+do
+{
+i++;
+0040124F mov eax,dword ptr [ebp-4]
+00401252 add eax,1
+00401255 mov dword ptr [ebp-4],eax
+printf(&quot;%d&quot;, i);
+; printf 讲解略
+} while(i &lt; 1000);
+; 此处的汇编代码在退出循环时才预测失败
+00401269 cmp dword ptr [ebp-4],3E8h
+00401270 jl main+1Fh (0040124f)
+</code></pre><h5 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h5><p><em>while 循环结构先比较再循环，使用了 2 个跳转指令，为了提升 while 循环结构的效率，可以将其转成效率较高的 do 循环结构。**</em>优化将while结构转换成了if单分支结构+do循环结构。<em>**在不能直接转换成 do 循环结构的情况下，使用 if 单分支结构，将 do 循环结构嵌套在 if语句块内，由 if 语句判定是否能执行循环体。 优化示例如下——</em></p>
+<pre><code>优化前的c++代码——
+int LoopWhile(int nCount){
+int nSum = 0;
+int nIndex = 0;
+// 先执行条件比较，再进入循环体
+while (nIndex &lt;= nCount){
+    nSum += nIndex;
+    nIndex++;
+}
+return nSum;
+}
+
+优化后的c++伪代码（汇编代码如下图所示）——
+int LoopWhile(int nCount){
+int nSum = 0;
+int nIndex = 0;
+if(nCount &gt;= 0){
+    do{
+        nSum += nIndex;
+        nIndex++;
+      }while(nIndex &lt;= nCount)
+}
+return nSum;
+}
+</code></pre><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/11.png" alt=""></p>
+<h5 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h5><p><strong>for循环结构也会优化成do循环结构。*</strong>使用 if 单分支结构进行第一次执行循环体的判断，再将转换后的 do 循环嵌套在 if 语句中，就形成了“先执行，后判断”的 do 循环结构。由于在O2 选项下，while 循环及 for 循环都可以使用 do 循环进行优化，所以在分析经过 O2 选项优化的反汇编代码时，很难转换回相同源码，只能尽量还原等价源码。*</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/12.png" alt=""></p>
+<h4 id="细节优化——代码外提"><a href="#细节优化——代码外提" class="headerlink" title="细节优化——代码外提"></a>细节优化——代码外提</h4><p><em>循环结构中经常有重复的操作，在对循环结构中语句块的执行结果没有任何影响的情况下，可选择相同代码外提，以减少循环语句块中的执行代码，提升循环执行效率。</em></p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/13.png" alt=""></p>
+<h4 id="细节优化——强度削弱"><a href="#细节优化——强度削弱" class="headerlink" title="细节优化——强度削弱"></a>细节优化——强度削弱</h4><p><em>用等价的低强度运算替换原来代码中的高强度运算，例如，用加法代替乘法。</em></p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/14.png" alt=""></p>
+<hr>
+<h2 id="第六章-函数的工作原理"><a href="#第六章-函数的工作原理" class="headerlink" title="第六章 函数的工作原理"></a>第六章 函数的工作原理</h2><h3 id="1-栈帧的形成与关闭"><a href="#1-栈帧的形成与关闭" class="headerlink" title="1 栈帧的形成与关闭"></a>1 栈帧的形成与关闭</h3><p><em>在VC++中，函数__chkesp是Debug编译选项组下独有的函数，用于检测栈平衡。在Debug版下，所有的函数退出时都会使用到这个函数。它的实现代码如下——</em></p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/15.png" alt=""></p>
+<p><em>在编译时使用了O2优化选项后，将不会存在栈平衡检查的代码，还可能没有保存环境、使用ebp保存当前栈底等一系列操作，代码将变得简洁而高效。</em></p>
+<h3 id="2-各种调用方式的考察"><a href="#2-各种调用方式的考察" class="headerlink" title="2 各种调用方式的考察"></a>2 各种调用方式的考察</h3><p>VC++环境下的调用约定有三种：_cdecl、_stdcall、_fastcall。这3种调用约定的解释如下：</p>
+<ul>
+<li>_cdecl：C\C++默认的调用方式，调用方平衡栈，不定参数的函数可以使用。</li>
+<li>_stdcall：被调方平衡栈，不定参数的函数无法使用。</li>
+<li>_fastcall：寄存器方式传参，被调方平衡栈，不定参数的函数无法使用。</li>
+</ul>
+<h4 id="补充1"><a href="#补充1" class="headerlink" title="补充1"></a>补充1</h4><p>当函数参数个数为0时，无需区分调用方式，使用_cdecl和_stdcall都一样。</p>
+<h4 id="补充2"><a href="#补充2" class="headerlink" title="补充2"></a>补充2</h4><p>C语言中经常使用的printf函数就是典型的_cdecl调用方式，由于printf的参数可以有多个，所以只能以_cdecl方式调用。那么，当printf函数被多次使用后，会在每次调用结束后进行栈平衡操作吗？在Debug版下，为了匹配源码会这样做。而经过O2选项的优化后，会采取<strong>复写传播优化</strong>，将每次参数平衡的操作进行归并，一次性平衡栈顶指针esp。</p>
+<pre><code>//C++源码说明：复写传播
+void main（）{
+printf（&quot;Hello&quot;）；//函数调用结束后，执行eps+4平衡参数
+printf（&quot;World&quot;）；//同上
+printf（&quot;C++&quot;）；//同上
+printf（&quot;\r\n&quot;）；//同上，经过优化后，会将4次平衡归并为1次
+}
+；Release版的反汇编代码信息
+push offset Format；&quot;Hello&quot;
+call_printf；调用结束后没有平衡栈
+push offset aWorld；&quot;World&quot;
+call_printf；调用结束后没有平衡栈
+push offset aC；&quot;C++&quot;
+call_printf；调用结束后没有平衡栈
+push offset asc_406030；&quot;\r\n&quot;
+call_printf
+add esp，10h；一次性对esp加16，正好平衡了之前的4个参数
+retn
+</code></pre><h4 id="补充3"><a href="#补充3" class="headerlink" title="补充3"></a>补充3</h4><p>在这三种调用方式中，_fastcall调用方式的效率最高，其他两种调用方式都是通过栈传递参数，唯独_fastcall可以利用寄存器传递参数。但由于寄存器数目很少，而参数相比可以很多，只能量力而行，故_fastcall调用方式<strong>只使用了ecx和edx，分别传递第一个参数和第二个参数，其余参数传递则转换成栈传参方式</strong>。示例如下——</p>
+<pre><code>//C++源码说明：_fastcall调用方式
+void__fastcall ShowFast（int nOne, int nTwo, int nThree, int nFour）{
+printf（&quot;%d%d%d%d\r\n&quot;，nOne, nTwo, nThree, nFour）；
+}
+void main（）{
+ShowFast（1，2，3，4）；
+｝
+//C++源码与对应汇编代码讲解
+//C++源码对比，函数调用
+ShowFast（1，2，3，4）；
+004012A8 push 4；使用栈方式传递参数
+004012AA push 3；使用栈方式传递参数
+004012AC mov edx，2；使用edx传递第二个参数2
+004012B1 mov ecx，1；使用ecx传递第一个参数1
+004012B6 call@ILT+15（ShowFast）（00401014）
+//C++源码对比，函数说明
+void_fastcall ShowFast（int nOne, int nTwo, int nThree, int nFour）{
+004010F0 push ebp
+004010F1 mov ebp, esp
+004010F3 sub esp，48h
+004010F6 push ebx
+004010F7 push esi
+004010F8 push edi
+；由于ecx即将被赋值作为循环计数器使用，在此将ecx原值保存
+004010F9 push ecx
+004010FA lea edi，[ebp-48h]
+004010FD mov ecx，12h
+00401102 mov eax，0CCCCCCCCh
+00401107 rep stos dword ptr[edi]
+00401109 pop ecx；还原ecx
+；使用临时变量保存edx（参数2）
+0040110A mov dword ptr[ebp-8]，edx
+；使用临时变量保存ecx（参数1）
+0040110D mov dword ptr[ebp-4]，ecx
+//C++源码对比，printf函数调用
+printf（&quot;%d%d%d%d\r\n&quot;，nOne, nTwo, nThree, nFour）；
+；使用ebp相对寻址取得参数4
+00401110 mov eax, dword ptr[ebp+0Ch]
+00401113 push eax；将eax压栈，作为参数
+；使用ebp相对寻址取得参数3
+00401114 mov ecx, dword ptr[ebp+8]
+00401117 push ecx；将ecx压栈，作为参数
+；在ebp-8中保存edx，即参数2
+00401118 mov edx, dword ptr[ebp-8]
+0040111B push edx；将edx压栈，作为参数
+；在ebp-4中保存ecx，即参数1
+0040111C mov eax, dword ptr[ebp-4]
+0040111F push eax；将eax压栈，作为参数
+00401120 push offset string&quot;%d%d%d%d\r\n&quot;（00422024）
+00401125 call printf（004012e0）；调用printf函数
+0040112A add esp，14h；平衡pirntf使用的5个参数
+}
+；Debug还原环境，栈检测部分略
+0040113D ret 8；此函数有4个参数，ret指令对其平衡
+</code></pre><h3 id="3-使用ebp或esp寻址"><a href="#3-使用ebp或esp寻址" class="headerlink" title="3 使用ebp或esp寻址"></a>3 使用ebp或esp寻址</h3><p><em>在内存中，局部变量是以连续排列的方式存储在栈空间内。局部变量有生命周期的，它的生命周期在**</em>进入函数体的时候开始，在函数执行结束的时候结束。**</p>
+<p><em>在大多数情况下，使用ebp寻址局部变量只能在非O2选项中产生，这样做是为了方便调试和检测栈平衡，使目标代码可读性更高。使用ebp保存函数作用域的栈地址，这样在函数退出前，用于esp的还原，以及栈平衡的检查。而在O2编译选项中，为了提升程序的效率，省去了这些检测工作，在用户编写的代码中，只要栈顶是稳定的，就可以不再使用ebp，利用esp直接访问局部变量，可以节省一个寄存器资源。</em></p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/16.png" alt=""></p>
+<h3 id="3-函数的参数"><a href="#3-函数的参数" class="headerlink" title="3 函数的参数"></a>3 函数的参数</h3><p>在C++代码中，其传参顺序为从右向左依次入栈，最先定义的参数最后入栈。ida采用负数标号法表示，可以更容易的区分参数和局部变量，正数表示参数，而负数则表示局部变量，0值表示返回地址。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="函数调用的一般工作流程"><a href="#函数调用的一般工作流程" class="headerlink" title="函数调用的一般工作流程"></a>函数调用的一般工作流程</h4><ol>
+<li>参数传递——通过栈或寄存器方式传递参数。</li>
+<li>函数调用，将返回地址压栈——使用call指令调用参数，并将返回地址压入栈中。</li>
+<li>保存栈底——使用栈空间保存调用方的栈底寄存器ebp。</li>
+<li>申请栈空间和保存寄存器环境——根据函数内局部变量的大小抬高栈顶让出对应的栈空间，并且将即将修改的寄存器保存在栈内。</li>
+<li>函数实现代码——函数实现过程的代码。</li>
+<li>还原环境——还原栈中保存的寄存器信息。</li>
+<li>平衡栈空间——平衡局部变量使用的栈空间。</li>
+<li>ret返回，结束函数调用——从栈顶取出第（2）步保存的返回地址，更新EIP。在非__cdecl调用方式下，平衡参数占用栈空间。</li>
+<li>调整esp，平衡栈顶——此处为__cdecl特有的方式，用于平衡参数占用的栈顶。</li>
+</ol>
+<h4 id="两种编译选项下的函数识别"><a href="#两种编译选项下的函数识别" class="headerlink" title="两种编译选项下的函数识别"></a>两种编译选项下的函数识别</h4><h5 id="Debug编译选项组下的函数识别"><a href="#Debug编译选项组下的函数识别" class="headerlink" title="Debug编译选项组下的函数识别"></a>Debug编译选项组下的函数识别</h5><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/19.png" alt=""></p>
+<h5 id="Release版函数识别"><a href="#Release版函数识别" class="headerlink" title="Release版函数识别"></a>Release版函数识别</h5><pre><code>push reg/mem/imm；根据调用函数查看参数使用，可确定是否为参数
+……
+call reg/mem/imm；调用函数
+add esp, xxxx；在Release版下调用__cdecl方式的函数，栈平衡可能会复写传播，请注意
+；函数实现内没有将局部变量初始化为0CCCCCCCCh
+；若在函数体内不存在内联汇编或异常处理等代码，则使用esp寻址
+</code></pre><hr>
+<h2 id="第七章-变量在内存中的位置和访问方式"><a href="#第七章-变量在内存中的位置和访问方式" class="headerlink" title="第七章 变量在内存中的位置和访问方式"></a>第七章 变量在内存中的位置和访问方式</h2><h3 id="1-全局变量和局部变量的区别"><a href="#1-全局变量和局部变量的区别" class="headerlink" title="1 全局变量和局部变量的区别"></a>1 全局变量和局部变量的区别</h3><p>在反汇编代码中如何区分全局变量和局部变量？</p>
+<p>全局变量在内存中的地址顺序是先定义的变量在低地址，后定义变量在高地址。有此特性即可根据反汇编代码中全局变量的所在地址，还原出其高级代码中被定义的先后顺序，更进一步接近源码。</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/20.png" alt=""></p>
+<h3 id="2-局部静态变量的工作方式"><a href="#2-局部静态变量的工作方式" class="headerlink" title="2 局部静态变量的工作方式"></a>2 局部静态变量的工作方式</h3><p>在分析过程中，如果遇到以下代码块，表示符合局部静态变量的基本特征，可判定为局部静态变量的初始化过程。在分析的过程中应注意对测试标志位的操作，其立即数只能为1、2、8这样的2的幂。</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/21.png" alt=""></p>
+<h3 id="3-堆变量"><a href="#3-堆变量" class="headerlink" title="3 堆变量"></a>3 堆变量</h3><p>确定变量空间属于堆空间只要找到两个关键点即可。</p>
+<ul>
+<li>空间申请：<code>malloc</code>与<code>new</code>等；</li>
+<li>空间释放：<code>free</code>与<code>delete</code>等。</li>
+</ul>
+<p>与malloc和new对应的有free和delete，只要确定free与delete所释放的地址和malloc与new所申请的堆空间地址一致，即可确定该堆空间的生命周期。在分析的过程中，关于堆空间的释放不能只看delete与free，还需要结合new和malloc确认所操作的是同一个堆空间。</p>
+<p>当某个堆空间被释放后，再次申请堆空间时会检查这个被释放的堆空间是否能满足用户要求。如果能满足，则再次申请的堆空间地址将会是刚释放过的堆空间地址，这就形成了回收空间的再次利用。</p>
+<hr>
+<h2 id="第八章-数组和指针的寻址"><a href="#第八章-数组和指针的寻址" class="headerlink" title="第八章 数组和指针的寻址"></a>第八章 数组和指针的寻址</h2><h3 id="1-数组在函数内"><a href="#1-数组在函数内" class="headerlink" title="1 数组在函数内"></a>1 数组在函数内</h3><p>对于函数内数组的识别，应判断数据在内存中是否连续并且类型是否一致，均符合即可将此段数据视为数组。在C++中，字符串本身就是数组，根据约定，该数组的最后一个数据统一使用0作为字符串结束符。</p>
+<h4 id="在ida中重定义数组"><a href="#在ida中重定义数组" class="headerlink" title="在ida中重定义数组"></a>在ida中重定义数组</h4><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/22.png" alt=""></p>
+<h3 id="2-数组作为参数"><a href="#2-数组作为参数" class="headerlink" title="2 数组作为参数"></a>2 数组作为参数</h3><ul>
+<li><p>数组中的数据元素连续存储，并且数组是同类型数据的集合。</p>
+</li>
+<li><p>当数组作为参数时，数组的下标值被省略了。这是因为，当数组作为函数形参时，函数参数中保存的是数组的首地址，是一个指针变量。</p>
+</li>
+<li>虽然参数是指针变量，但需要特别注意的是，实参数组名为常量值，而指针或形参数组为变量。使用sizeof（数组名）可以获取数组的总大小，而对指针或者形参中保存的数组名使用sizeof只能得到当前平台的指针长度，这里是32位的环境，所以指针的长度为4字节。因此，在编写代码的过程中应避免如下错误。</li>
+</ul>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/23.png" alt=""></p>
+<ul>
+<li>字符串处理函数在Debug版下非常容易识别，而在Release版下，它们会被作为内联函数编译处理，因此没有了函数调用指令call。但是，我们只需认真分析一次，总结出内联库函数的特点和识别要领即可。</li>
+</ul>
+<h3 id="3-数组作为返回值"><a href="#3-数组作为返回值" class="headerlink" title="3 数组作为返回值"></a>3 数组作为返回值</h3><p>当数组为局部变量数据时，便产生了稳定性问题。</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/24.png" alt=""></p>
+<p>全局数组与静态数组都属于变量，它们的特征与全局变量、静态变量相同，看上去就是连续定义的多个同类型变量。</p>
+<h3 id="4-下标寻址和指针寻址"><a href="#4-下标寻址和指针寻址" class="headerlink" title="4 下标寻址和指针寻址"></a>4 下标寻址和指针寻址</h3><h4 id="二者的对比"><a href="#二者的对比" class="headerlink" title="二者的对比"></a>二者的对比</h4><ol>
+<li>访问数组的方法有两种：通过下标访问（寻址）和通过指针访问（寻址）。</li>
+<li>指针寻址方式要经过2次寻址才能得到目标数据，而下标寻址方式只需要1次寻址就可以得到目标数据。因此，指针寻址比下标寻址多一次寻址操作，效率自然要低。</li>
+<li>虽然使用指针寻址方式需要经过2次间接访问，效率要比下标寻址方式低，但其灵活性更强，可修改指针中保存的地址数据，访问其他内存中的数据，而数组下标在没有越界使用的情况下只能访问数组内的数据。</li>
+</ol>
+<h4 id="下标寻址"><a href="#下标寻址" class="headerlink" title="下标寻址"></a>下标寻址</h4><p>假设首地址为aryAddr，数组元素的类型为type，元素个数为M，下标为n，要求数组中某下标元素的地址，其寻址公式如下——</p>
+<pre><code>type Ary[M]；
+＆Ary[n]==（type*）（（int）aryAddr+sizeof（type）*n）；
+</code></pre><p>容易理解的写法如下（注意这里是整型加法，不是地址加法）——</p>
+<p><strong>ary[n]的地址=ary的首地址+sizeof（type）*n</strong></p>
+<p>由于数组的首地址是数组中第一个元素的地址，因此下标值从0开始。首地址加偏移量0自然就得到了第一个数组元素的首地址。</p>
+<p>下标寻址方式中的下标值可以使用三种类型来表示：整型常量、整型变量、计算结果为整型的表达式。</p>
+<h5 id="下标值为整型常量的寻址"><a href="#下标值为整型常量的寻址" class="headerlink" title="下标值为整型常量的寻址"></a>下标值为整型常量的寻址</h5><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/25.png" alt=""></p>
+<h5 id="下标值为整型变量的寻址"><a href="#下标值为整型变量的寻址" class="headerlink" title="下标值为整型变量的寻址"></a>下标值为整型变量的寻址</h5><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/26.png" alt=""></p>
+<h5 id="下标值为整型表达式的寻址"><a href="#下标值为整型表达式的寻址" class="headerlink" title="下标值为整型表达式的寻址"></a>下标值为整型表达式的寻址</h5><p>当下标值为表达式时，会先计算出表达式的结果，然后将其结果作为下标值。如果表达式为常量计算，则编译过程中将会执行常量折叠，编译时提前计算出结果，其结果依然是常量，所以最后还是以常量作为下标，藉此寻址数组内元素。以表达式nArry[2*2]为例，编译过程中将计算2×2得到4，并将4作为整型常量下标值来寻址。其结果等价于nArry[4]。</p>
+<pre><code>；数组中各元素的地址同上
+printf（&quot;%d\r\n&quot;，nArry[argc*2]）；
+；变量argc的类型为整型，所在的地址为ebp+8
+mov eax, dword ptr[ebp+8]；取下标变量数据存入eax中
+shl eax，1；对eax执行左移1位运行等同于乘以2
+；用argc乘以2的结果作为下标值乘以数组的类型大小（4），
+；从而寻址到数组中元素的地址
+mov ecx, dword ptr[ebp+eax*4-14h]
+；printf函数分析略
+</code></pre><h4 id="数组下标寻址越界访问"><a href="#数组下标寻址越界访问" class="headerlink" title="数组下标寻址越界访问"></a>数组下标寻址越界访问</h4><p>在VC++6.0中，不会对数组的下标进行访问检查，使用数组时很容易导致越界访问的错误。当下标值小于0或大于数组下标最大值时，就会访问到数组邻近定义的数据，造成越界访问，进而导致程序崩溃，或者产生更为严重的其他隐患。</p>
+<h3 id="5-多维数组"><a href="#5-多维数组" class="headerlink" title="5 多维数组"></a>5 多维数组</h3><p><strong>关键：编译器将多维数组通过转化重新变为一维数组。</strong></p>
+<p><em>如二维整型数组：int nArray[2][2]，经过转换后可用一维数组表示为：int nArray[4]。它们在内存中的存储方式也相同。两者在内存中的排列相同，可见在内存中根本就没有多维数组。二维数组甚至多维数组的出现只是为了方便开发者计算偏移地址、寻址数组数据。</em></p>
+<h4 id="二维数组的寻址"><a href="#二维数组的寻址" class="headerlink" title="二维数组的寻址"></a>二维数组的寻址</h4><p>二维数组<code>a[二维下标值i][一维下标值j]</code>的寻址公式为——</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/27.png" alt=""></p>
+<h4 id="一维数组、二维数组初始化及寻址优化—Release版"><a href="#一维数组、二维数组初始化及寻址优化—Release版" class="headerlink" title="一维数组、二维数组初始化及寻址优化—Release版"></a>一维数组、二维数组初始化及寻址优化—Release版</h4><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/28.png" alt=""></p>
+<h3 id="6-存放指针类型数据的数组"><a href="#6-存放指针类型数据的数组" class="headerlink" title="6 存放指针类型数据的数组"></a>6 存放指针类型数据的数组</h3><h4 id="字符串指针数组与对应的二维指针数组"><a href="#字符串指针数组与对应的二维指针数组" class="headerlink" title="字符串指针数组与对应的二维指针数组"></a>字符串指针数组与对应的二维指针数组</h4><pre><code>//字符串指针数组
+char*pBuff[3]={       //字符串指针数组定义
+     &quot;Hello&quot;，        //初始化字符串指针数组第1项
+     &quot;World&quot;，        //初始化字符串指针数组第2项
+     &quot;！\r\n&quot;         //初始化字符串指针数组第3项
+ }；
+
+ //二维指针数组
+ char cArray[3][10]={{"Hello"}，{"World"}，{"！\r\n"}}；
+</code></pre><h5 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h5><p>同样存储着3个字符串，但指针数组中存储的是各字符串的首地址，而二维字符数组中存储着每个字符串中的字符数据。</p>
+<h5 id="区分"><a href="#区分" class="headerlink" title="区分"></a>区分</h5><ol>
+<li>分析它们的初始化过程——在二维字符数组初始化过程中，赋值的不是字符串地址，而是其中的字符数据，据此可以明显地区分它与字符指针数组。</li>
+</ol>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/29.png" alt=""></p>
+<ol start="2">
+<li>分析它们如何寻址数据——虽然二维字符数组和指针数组的寻址过程非常相似，但依然有一些不同。字符指针数组寻址后，得到的是数组成员内容，而二维字符数组寻址后得到的却是数组中某个一维数组的首地址。</li>
+</ol>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/30.png" alt=""></p>
+<h3 id="7-指向数组的指针变量"><a href="#7-指向数组的指针变量" class="headerlink" title="7 指向数组的指针变量"></a>7 指向数组的指针变量</h3><p><em>对指向二维数组的数组指针执行取内容操作后，得到的还是一个地址值，再次执行取内容操作才能寻址到二维字符数组中的单个字符数据。看上去与二级指针相似，实际上并不一样。二级指针的类型为指针类型，其偏移长度在32位下固定为4字节，而数组指针的类型为数组，其偏移长度随数组而定，两者的偏移计算不同，不可混为一谈。</em></p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/31.png" alt=""></p>
+<p><strong>虽然指针与数组间的关系千变万化，错综复杂，但只要掌握了它们的寻址过程，就可通过偏移量获得其类型以及它们之间的关系。</strong></p>
+<h3 id="8-函数指针"><a href="#8-函数指针" class="headerlink" title="8 函数指针"></a>8 函数指针</h3><p>用于保存函数首地址的指针变量被称为函数指针。函数指针的定义很简单，和函数的定义非常相似，由四部分组成——</p>
+<pre><code>返回值类型（[调用约定，可选]*函数指针变量名称）（参数信息）
+</code></pre><hr>
+<h2 id="第九章-结构体和类"><a href="#第九章-结构体和类" class="headerlink" title="第九章 结构体和类"></a>第九章 结构体和类</h2><p><em>该章中重要的基础知识较多，不清楚的地方可翻阅教材详细查看。</em></p>
+<p><em>在C++中，结构体和类都具有构造函数、析构函数和成员函数，两者只有一个区别：结构体的访问控制默认为public，而类的默认访问控制是private。对于C++中的结构体而言，public、private、protected的访问控制都是在编译期进行检查，当越权访问时，编译过程中会检查出此类错误并给予提示。编译成功后，程序在执行的过程中不会在访问控制方面做任何检查和限制。因此，在反汇编中，C++中的结构体与类没有分别，两者的原理相同，只是类型名称不同。</em></p>
+<h3 id="1-对象的内存布局"><a href="#1-对象的内存布局" class="headerlink" title="1 对象的内存布局"></a>1 对象的内存布局</h3><h4 id="类与对象（举例）"><a href="#类与对象（举例）" class="headerlink" title="类与对象（举例）"></a>类与对象（举例）</h4><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/32.png" alt=""></p>
+<h4 id="类与对象的关系—C-源码"><a href="#类与对象的关系—C-源码" class="headerlink" title="类与对象的关系—C++源码"></a>类与对象的关系—C++源码</h4><pre><code>class CNumber{     //CNumber为抽象类名称，如同&quot;人&quot;这个名称
+public：
+CNumber（）{
+   m_nOne=1；
+   m_nTwo=2；
+}
+int GetNumberOne（）{     //类成员函数，如人类的行为，吃、喝、睡等
+    return m_nOne；
+}
+int GetNumberTwo（）{
+   return m_nTwo；
+}
+private：
+     int m_nOne；         //类数据成员，如人类的耳、鼻等外部器官
+     int m_nTwo；
+}；
+void main（）{
+      CNumber Number；
+}
+</code></pre><ol>
+<li>其中定义了自定义类型CNumber类，以及该类的实例对象Number。</li>
+<li>对象的大小只包含数据成员，类成员函数属于执行代码，不属于类对象的数据。</li>
+<li>凡是属于CNumber类型的变量，在内存中都会占据8字节的空间。这8字节由类中的两个数据成员组成，它们都是int类型，各自的数据长度为4字节。从内存布局上看，类与数组非常相似，都是由多个数据元素构成，但类的能力要远远大于数组。类成员的数据类型定义非常广，除本身的对象外，任何已知数据类型都可以在类中定义。</li>
+</ol>
+<h4 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h4><ol>
+<li>对齐值的计算流程换个说法是：将设定的对齐值与结构体中最大的基本类型数据成员的长度进行比较，取两者之间的较小者。</li>
+<li>由于存在内存对齐，数据的布局变化多端，因此在分析结构体和类的数据成员布局时，不能单纯地参考各数据成员的类型长度，按顺序进行排列，而应该按上述方法仔细观察和分析。另外，各编译器厂商的实现也有所不同，应详细阅读相关文档。</li>
+<li>对象的内存布局并不简单。在类中定义了虚函数和类为派生类等情况下，对象的内存布局中将含有虚函数表和父类数据成员等数据信息，这将使长度计算更为复杂。</li>
+</ol>
+<h3 id="2-this指针"><a href="#2-this指针" class="headerlink" title="2 this指针"></a>2 this指针</h3><p><em>根据字面含义，this指针应属于指针类型，在32位环境下占4字节大小，保存的数据为地址信息。“this”可翻译为“这个”，因此经过字面的分析可认为this指针中保存了所属对象的首地址。</em></p>
+<h4 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h5><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/33.png" alt=""></p>
+<h5 id="正确答案"><a href="#正确答案" class="headerlink" title="正确答案"></a>正确答案</h5><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/34.png" alt=""></p>
+<h5 id="我的解答"><a href="#我的解答" class="headerlink" title="我的解答"></a>我的解答</h5><ol>
+<li>我最开始虽然知道<code>＆（（struct A*）NULL）-＞m_float=0+4=4</code>，但由于不理解参数为<code>%p</code>的<code>printf</code>，认为其会去访问<code>00000004</code>的地址，故认为程序会崩溃。</li>
+<li>但后来编程验证了一下，发现虽然格式化字符参数为<code>%p</code>，但是依然能打印int型常量4，只是在编译的时候<code>VS</code>给了警告。</li>
+<li>所以程序是不会崩溃的。</li>
+</ol>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/35.png" alt=""></p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/36.png" alt=""></p>
+<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><blockquote>
+<p><a href="https://blog.csdn.net/creat2012/article/details/44224217" target="_blank" rel="noopener">c语言中 %p的含义</a></p>
+</blockquote>
+<h4 id="thiscall调用方式"><a href="#thiscall调用方式" class="headerlink" title="thiscall调用方式"></a>thiscall调用方式</h4><ol>
+<li><p>在使用默认的调用约定时，在调用成员函数的过程中，编译器做了一个“小动作”：利用寄存器ecx保存了对象的首地址，并以寄存器传参的方式传递到成员函数中，这便是this指针的由来。由此可见，所有成员函数都有一个隐藏参数，即自身类型的指针，这便是this指针，将这样的默认调用约定称为thiscall。</p>
+</li>
+<li><p>在VC++的环境下，识别this指针的关键点是在函数的调用过程中使用了ecx作为第一个参数，并且在ecx中保存的数据为对象的首地址，但并非所有的this指针的传递都是如此。</p>
+</li>
+<li><p>使用<strong>cdecl和</strong>stdcall声明的成员函数，this指针并不像thiscall那样容易识别。使用栈方式传递参数，并且第一个参数为对象首地址的函数很多，很难区分。</p>
+</li>
+</ol>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/39.png" alt=""></p>
+<h3 id="3-静态数据成员"><a href="#3-静态数据成员" class="headerlink" title="3 静态数据成员"></a>3 静态数据成员</h3><ol>
+<li><p><em>当类中定义了静态数据成员时，由于静态数据成员和静态变量原理相同（是一个含有作用域的特殊全局变量），因此该静态数据成员的初值会被写入编译链接后的执行文件中。当程序被加载时，操作系统将执行文件中的数据读到对应的内存单元里，静态数据成员便已经存在，而这时类并没有实例对象。所以静态数据成员和对象之间的生命周期不同，并且静态数据成员也不属于某一对象，与对象之间是一对多的关系。静态数据成员仅仅和类相关，和对象无关，多个对象可以共同拥有同一个静态数据成员。总结一下就是，**</em>类中的普通数据成员对于同类对象而言是独立存在的，而静态数据成员则是所有同类对象的共用数据。静态数据成员和对象是一对多的关系。**</p>
+</li>
+<li><p>因为静态数据成员的特性，所以在计算类和对象的长度时，静态数据成员属于特殊的独立个体，不被计算在其中。</p>
+</li>
+</ol>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/40.png" alt=""></p>
+<ol start="3">
+<li>静态数据成员在反汇编代码中很难被识别，因为其展示形态与全局变量相同，很难被还原成对应的高级代码。</li>
+</ol>
+<h3 id="4-对象作为函数参数"><a href="#4-对象作为函数参数" class="headerlink" title="4 对象作为函数参数"></a>4 对象作为函数参数</h3><ol>
+<li><p>对象作为函数的参数时，其传参过程与数组不同：数组变量的名称代表数组的首地址，而对象的变量名称却不能代表对象的首地址。传参时不会像数组那样以首地址作为参数传递，而是先将对象中的所有数据进行备份（复制），将复制的数据作为形参传递到调用函数中使用。</p>
+</li>
+<li><p>类对象中的数据成员的传参顺序为：<strong>最先定义的数据成员最后压栈，最后定义的数据成员最先压栈</strong>。</p>
+</li>
+</ol>
+<h4 id="对象作为参数的资源释放错误"><a href="#对象作为参数的资源释放错误" class="headerlink" title="对象作为参数的资源释放错误"></a>对象作为参数的资源释放错误</h4><p>有两种解决方案可以修正这个错误：<strong>深拷贝数据</strong>和<strong>设置引用计数</strong>，这两种解决方案都需要拷贝构造函数的配合。</p>
+<ol>
+<li><p>深拷贝数据：在复制对象时，编译器会调用一次该类的拷贝构造函数，给编码者一次机会。深拷贝利用这次机会将原对象的数据成员所保存的资源信息也制作一份副本。这样，当销毁复制对象时，销毁的资源是复制对象在拷贝构造函数中制作的副本，而非原对象中保存的资源信息。</p>
+</li>
+<li><p>设置引用计数：在进入拷贝构造函数时，记录类对象被复制引用的次数。当对象被销毁时，检查这个引用计数中保存的引用复制次数是否为0。如果是，则释放掉申请的资源，否则引用计数减1。</p>
+</li>
+</ol>
+<p><strong>当参数为对象的指针类型时，则不存在这种资源释放的错误隐患。</strong>在使用类对象作为参数时，如无特殊需求，应尽量使用指针或引用。这样做不但可以避免资源释放的错误隐患，还可以在函数调用过程中避免复制操作，提升程序运行的效率。</p>
+<h3 id="5-对象作为返回值"><a href="#5-对象作为返回值" class="headerlink" title="5 对象作为返回值"></a>5 对象作为返回值</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p><strong>对象作为返回值与对象作为参数的处理方式非常类似。</strong></p>
+<blockquote>
+<p>对象作为参数时，进入函数前预先将对象使用的栈空间保留出来，并将实参对象中的数据复制到栈空间中。该栈空间作为函数参数，用于函数内部使用。</p>
+</blockquote>
+<blockquote>
+<p>同理，对象作为返回值时，进入函数后将申请返回对象使用的栈空间，在退出函数时，将返回对象中的数据复制到临时的栈空间中，以这个临时栈空间的首地址作为返回值。</p>
+</blockquote>
+<h4 id="复制对象的资源释放错误"><a href="#复制对象的资源释放错误" class="headerlink" title="复制对象的资源释放错误"></a>复制对象的资源释放错误</h4><p><em>虽然使用临时对象进行了数据复制，但是同样存在出错的风险。这与对象作为参数时遇到的情况一样，由于使用了临时对象进行数据复制，当临时对象被销毁时，会执行析构函数。如果析构函数中有对资源释放的处理，就有可能造成同一个资源多次释放的错误发生。</em></p>
+<p><em>这个错误与对象作为函数参数时的错误在原理上是一样的，也是临时对象被析构造成的，因此两者的解决方案也相同。对于复制对象的资源释放错误，我们会在第10章中给出详细的解决方案，并分析错误的处理过程。</em></p>
+<ol>
+<li>当对象作为函数的参数时，可以传递指针。</li>
+<li>当对象作为返回值时，如果对象在函数内部被定义为局部变量，则不可返回此对象的首地址或引用，以避免返回已经被释放的局部变量，如以下代码所示。</li>
+</ol>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/41.png" alt=""></p>
+<ol start="3">
+<li>要解决此类错误，只能避免返回函数内局部变量的地址，但可以返回堆地址，还可以使用返回对象的办法来代替。由此可见，使用返回值为类对象的情况具有特殊的意义。</li>
+</ol>
+<h3 id="6-本章小结"><a href="#6-本章小结" class="headerlink" title="6 本章小结"></a>6 本章小结</h3><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/42.png" alt=""></p>
+<hr>
+<h2 id="第十章-关于构造函数和析构函数"><a href="#第十章-关于构造函数和析构函数" class="headerlink" title="第十章 关于构造函数和析构函数"></a>第十章 关于构造函数和析构函数</h2><ol>
+<li>构造函数与析构函数是类的重要组成部分。</li>
+<li><strong>构造函数常用来完成对象生成时的数据初始化工作，而析构函数则常用于在对象销毁时释放对象中所申请的资源</strong>。</li>
+<li>当对象生成时，编译器会自动产生调用其类构造函数的代码，在编码过程中可以为类中的数据成员赋予恰当的初始值。当对象销毁时，编译器同样也会产生调用其类析构函数的代码。</li>
+<li>构造函数与析构函数都是类中特殊的成员函数，构造函数支持函数重载，而析构函数只能是一个无参函数。它们不可定义返回值，调用构造函数后，返回值为对象首地址，也就是<strong>this指针</strong>。</li>
+<li>在某些情况下，编译器会提供默认的构造函数和析构函数，但并不是任何情况下编译器都会提供。</li>
+</ol>
+<h3 id="1-构造函数的出现时机"><a href="#1-构造函数的出现时机" class="headerlink" title="1 构造函数的出现时机"></a>1 构造函数的出现时机</h3><p>根据生命周期将对象进行分类，然后分析各类对象的构造函数和析构函数的调用时机——</p>
+<ul>
+<li>局部对象（当对象产生时，便有可能引发构造函数的调用。）</li>
+<li>堆对象</li>
+<li>参数对象</li>
+<li>返回对象</li>
+<li>全局对象</li>
+<li>静态对象</li>
+</ul>
+<h4 id="局部对象"><a href="#局部对象" class="headerlink" title="局部对象"></a>局部对象</h4><p>结合C++的语法，我们可以总结识别局部对象的构造函数的必要条件（请注意，这并不是充分条件）——</p>
+<ol>
+<li>该成员函数是这个对象在作用域内调用的第一个成员函数，根据this指针即可以区分每个对象。</li>
+<li>这个函数返回this指针。</li>
+</ol>
+<h4 id="堆对象"><a href="#堆对象" class="headerlink" title="堆对象"></a>堆对象</h4><p>堆对象的识别重点在于识别堆空间的申请与使用。在C++的语法中，堆空间的申请需要使用<strong>malloc函数</strong>、<strong>new运算符</strong>或者其他同类功能的函数。</p>
+<p>C中的malloc函数和C++中的new运算的区别很大，很重要的两点是malloc不负责触发构造函数，它也不是运算符，无法进行运算符重载。</p>
+<p>在使用new申请对象堆空间时，许多初学者很容易将有参构造函数与对象数组搞混，在申请对象数组时很容易写错，申请对象数组却写成了调用有参构造函数。以int类型的堆空间申请为例，如下所示：</p>
+<pre><code>//圆括号是调用有参构造函数，最后只申请了一个int类型的堆变量并赋初值10
+int*pInt=new int（10）；
+//方括号才是申请了10个int元素的堆数组
+int*pInt=new int[10]；
+</code></pre><h4 id="参数对象"><a href="#参数对象" class="headerlink" title="参数对象"></a>参数对象</h4><p>参数对象属于局部对象中的一种特殊情况。当对象作为函数参数时，调用一个特殊的构造函数—<strong>拷贝构造函数</strong>。该构造函数只有一个参数，类型为对象的引用。当对象为参数时，会触发此类对象的拷贝构造函数。</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/43.png" alt=""></p>
+<h4 id="返回对象"><a href="#返回对象" class="headerlink" title="返回对象"></a>返回对象</h4><blockquote>
+<p>返回对象与参数对象相似，都是局部对象中的一种特殊情况。<br>由于函数返回时需要对返回对象进行拷贝，因此同样会使用到拷贝构造函数。<br>但是，两者使用拷贝构造函数的时机不同，<strong>当对象为参数时，在进入函数前使用拷贝构造函数，而返回对象则在函数返回时使用拷贝构造函数</strong>。</p>
+</blockquote>
+<p>虽然编译器会对返回值为对象类型的函数进行调整，修改其参数与返回值，但是它留下了一个与返回指针类型不同的象征，那就是<strong>在函数中使用拷贝构造函数</strong>。返回值和参数为对象指针类型的函数，不会使用以参数为目标的拷贝构造函数，而是直接使用指针保存对象首地址，如以下代码所示。</p>
+<pre><code>//函数的返回类型与参数类型都是对象的指针类型
+CMyString *GetMyString（CMyString *pMyString）{
+CMyString MyString；           //定义局部对象
+MyString.SetString（&quot;World&quot;）；
+pMyString= ＆MyString；
+
+00401589    lea eax，[ebp-10h]                ;直接保存对象首地址
+0040158C    mov dword ptr[ebp+8]，eax
+    return  ＆MyString；
+0040158F    lea ecx，[ebp-10h]
+00401592    mov dword ptr[ebp-14h]，ecx
+00401595    mov dword ptr[ebp-4]，0FFFFFFFFh
+0040159C    lea ecx，[ebp-10h]                ；将局部对象作为返回值
+0040159F    call@ILT+35（CMyString：～CMyString）（00401028）
+004015A4    mov eax, dword ptr[ebp-14h]
+}
+</code></pre><p><em>如以上代码所示，在使用指针作为参数和返回值时，函数内没有对拷贝构造函数的调用。以此为依据，便可以分辨参数或返回值是对象还是对象的指针。如果在函数内为参数指针申请了堆对象，那么此时就会存在new运算和构造函数的调用，因此就更容易分辨参数或返回值。</em></p>
+<h4 id="全局对象与静态对象"><a href="#全局对象与静态对象" class="headerlink" title="全局对象与静态对象"></a>全局对象与静态对象</h4><p>程序中所有全局对象将会在同一地点调用构造函数以初始化数据。</p>
+<h5 id="思考题-1"><a href="#思考题-1" class="headerlink" title="思考题"></a>思考题</h5><p>对于全局对象和静态对象，能不能取消代理函数而直接在main函数前调用其构造函数呢？</p>
+<p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/44.png" alt=""></p>
+<h5 id="如何寻找全局对象的构造函数？"><a href="#如何寻找全局对象的构造函数？" class="headerlink" title="如何寻找全局对象的构造函数？"></a>如何寻找全局对象的构造函数？</h5><p><img src="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/45.png" alt=""></p>
+<h3 id="2-每个对象都有默认的构造函数吗？"><a href="#2-每个对象都有默认的构造函数吗？" class="headerlink" title="2 每个对象都有默认的构造函数吗？"></a>2 每个对象都有默认的构造函数吗？</h3><p>在何种情况下编译器会提供默认的构造函数呢？有以下两种情况——</p>
+<ul>
+<li>本类、本类中定义的成员对象或者父类中有虚函数存在。</li>
+<li>父类或本类中定义的成员对象带有构造函数。</li>
+</ul>
+<p>在没有定义构造函数的情况下，当类中没有虚函数存在，父类和成员对象也没有定义构造函数时，提供默认的构造函数已没有任何意义，只会降低程序的执行效率，因此VC++6.0没有对这种情况下的类提供默认的构造函数。</p>
+<h3 id="3-析构函数的出现时机"><a href="#3-析构函数的出现时机" class="headerlink" title="3 析构函数的出现时机"></a>3 析构函数的出现时机</h3><p>并非有构造函数就一定会有对应的析构函数，析构函数的触发时机也需要视情况而定，主要分如下几种情况。</p>
+<ul>
+<li><strong>局部对象</strong>：作用域结束前调用析构函数。</li>
+<li><strong>堆对象</strong>：释放堆空间前调用析构函数。</li>
+<li><strong>参数对象</strong>：退出函数前，调用参数对象的析构函数。</li>
+<li><strong>返回对象</strong>：如无对象引用定义，退出函数后，调用返回对象的析构函数，否则与对象引用的作用域一致。</li>
+<li><strong>全局对象</strong>：main函数退出后调用析构函数。</li>
+<li><strong>静态对象</strong>：main函数退出后调用析构函数。</li>
+</ul>
+<p>析构函数与构造函数略有不同，析构函数不支持函数重载，并且只有一个参数，即this指针，而且编译器隐藏了这个参数的传递过程，对于开发者而言，它是<strong>一个隐藏了this指针的无参函数</strong>。</p>
+<h4 id="堆对象-1"><a href="#堆对象-1" class="headerlink" title="堆对象"></a>堆对象</h4><p>delete的使用便是找到堆对象调用析构函数的关键点。</p>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><p>在分析析构函数时，可以构造函数作为参照，但并非出现了构造函数就一定会产生析构函数。在没有编写析构函数的类中，编译器会根据情况决定是否提供默认的析构函数。<strong>默认的构造函数和析构函数与虚函数的知识点紧密相关</strong>，具体分析见第11章。</p>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h3><h4 id="构造函数的必要条件"><a href="#构造函数的必要条件" class="headerlink" title="构造函数的必要条件"></a>构造函数的必要条件</h4><ul>
+<li>这个函数的调用，是这个对象在作用域内的第一次成员函数调用，看this指针即可以区分对象，是哪个对象的this指针就是哪个对象的成员函数；</li>
+<li>使用thiscall调用方式，使用ecx传递this指针；</li>
+<li>返回值为this指针。</li>
+</ul>
+<h4 id="析构函数的必要条件"><a href="#析构函数的必要条件" class="headerlink" title="析构函数的必要条件"></a>析构函数的必要条件</h4><ul>
+<li>这个函数的调用，是这个对象在作用域内的最后一次成员函数调用，看this指针即可以区分对象，是哪个对象的this指针就是哪个对象的成员函数；</li>
+<li>使用thiscall调用方式，使用ecx传递this指针；</li>
+<li>没有返回值。</li>
+</ul>
+<h4 id="识别构造函数和析构函数的充分条件"><a href="#识别构造函数和析构函数的充分条件" class="headerlink" title="识别构造函数和析构函数的充分条件"></a>识别构造函数和析构函数的充分条件</h4><p>识别构造函数和析构函数的充分条件是<strong>有虚表指针初始化的操作和写入虚表指针的操作</strong>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/教材学习/" rel="tag"># 教材学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/02/课后练习第二章/" rel="next" title="课后练习第二章">
+                <i class="fa fa-chevron-left"></i> 课后练习第二章
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/03/汇编与对应C-伪码（2）/" rel="prev" title="汇编与对应C++伪码（2）">
+                汇编与对应C++伪码（2） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章-流程控制语句的识别"><span class="nav-number">1.</span> <span class="nav-text">第五章 流程控制语句的识别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-if-语句"><span class="nav-number">1.1.</span> <span class="nav-text">1 if 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-if…else…语句"><span class="nav-number">1.2.</span> <span class="nav-text">2 if…else…语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-用-if-构成的多分支流程"><span class="nav-number">1.3.</span> <span class="nav-text">3 用 if 构成的多分支流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-switch-的真相"><span class="nav-number">1.4.</span> <span class="nav-text">4 switch 的真相</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if-else优化"><span class="nav-number">1.4.1.</span> <span class="nav-text">if-else优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有序线性优化"><span class="nav-number">1.4.2.</span> <span class="nav-text">有序线性优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-难以构成跳转表的-switch"><span class="nav-number">1.5.</span> <span class="nav-text">5 难以构成跳转表的 switch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非线性索引表优化"><span class="nav-number">1.5.1.</span> <span class="nav-text">非线性索引表优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-降低判定树的高度"><span class="nav-number">1.6.</span> <span class="nav-text">6 降低判定树的高度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#树的优化"><span class="nav-number">1.6.1.</span> <span class="nav-text">树的优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-do-while-for-的比较"><span class="nav-number">1.7.</span> <span class="nav-text">7 do/while/for 的比较</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）do-循环"><span class="nav-number">1.7.1.</span> <span class="nav-text">（1）do 循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）while-循环"><span class="nav-number">1.7.2.</span> <span class="nav-text">（2）while 循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）for-循环"><span class="nav-number">1.7.3.</span> <span class="nav-text">（3）for 循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-编译器对循环结构的优化"><span class="nav-number">1.8.</span> <span class="nav-text">8 编译器对循环结构的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#结构上的优化"><span class="nav-number">1.8.1.</span> <span class="nav-text">结构上的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#do-while循环"><span class="nav-number">1.8.1.1.</span> <span class="nav-text">do-while循环</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#while循环"><span class="nav-number">1.8.1.2.</span> <span class="nav-text">while循环</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#for循环"><span class="nav-number">1.8.1.3.</span> <span class="nav-text">for循环</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#细节优化——代码外提"><span class="nav-number">1.8.2.</span> <span class="nav-text">细节优化——代码外提</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#细节优化——强度削弱"><span class="nav-number">1.8.3.</span> <span class="nav-text">细节优化——强度削弱</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-函数的工作原理"><span class="nav-number">2.</span> <span class="nav-text">第六章 函数的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-栈帧的形成与关闭"><span class="nav-number">2.1.</span> <span class="nav-text">1 栈帧的形成与关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-各种调用方式的考察"><span class="nav-number">2.2.</span> <span class="nav-text">2 各种调用方式的考察</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充1"><span class="nav-number">2.2.1.</span> <span class="nav-text">补充1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补充2"><span class="nav-number">2.2.2.</span> <span class="nav-text">补充2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补充3"><span class="nav-number">2.2.3.</span> <span class="nav-text">补充3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用ebp或esp寻址"><span class="nav-number">2.3.</span> <span class="nav-text">3 使用ebp或esp寻址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-函数的参数"><span class="nav-number">2.4.</span> <span class="nav-text">3 函数的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.5.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数调用的一般工作流程"><span class="nav-number">2.5.1.</span> <span class="nav-text">函数调用的一般工作流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两种编译选项下的函数识别"><span class="nav-number">2.5.2.</span> <span class="nav-text">两种编译选项下的函数识别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Debug编译选项组下的函数识别"><span class="nav-number">2.5.2.1.</span> <span class="nav-text">Debug编译选项组下的函数识别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Release版函数识别"><span class="nav-number">2.5.2.2.</span> <span class="nav-text">Release版函数识别</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七章-变量在内存中的位置和访问方式"><span class="nav-number">3.</span> <span class="nav-text">第七章 变量在内存中的位置和访问方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-全局变量和局部变量的区别"><span class="nav-number">3.1.</span> <span class="nav-text">1 全局变量和局部变量的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-局部静态变量的工作方式"><span class="nav-number">3.2.</span> <span class="nav-text">2 局部静态变量的工作方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-堆变量"><span class="nav-number">3.3.</span> <span class="nav-text">3 堆变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八章-数组和指针的寻址"><span class="nav-number">4.</span> <span class="nav-text">第八章 数组和指针的寻址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数组在函数内"><span class="nav-number">4.1.</span> <span class="nav-text">1 数组在函数内</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在ida中重定义数组"><span class="nav-number">4.1.1.</span> <span class="nav-text">在ida中重定义数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数组作为参数"><span class="nav-number">4.2.</span> <span class="nav-text">2 数组作为参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-数组作为返回值"><span class="nav-number">4.3.</span> <span class="nav-text">3 数组作为返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-下标寻址和指针寻址"><span class="nav-number">4.4.</span> <span class="nav-text">4 下标寻址和指针寻址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二者的对比"><span class="nav-number">4.4.1.</span> <span class="nav-text">二者的对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下标寻址"><span class="nav-number">4.4.2.</span> <span class="nav-text">下标寻址</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下标值为整型常量的寻址"><span class="nav-number">4.4.2.1.</span> <span class="nav-text">下标值为整型常量的寻址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#下标值为整型变量的寻址"><span class="nav-number">4.4.2.2.</span> <span class="nav-text">下标值为整型变量的寻址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#下标值为整型表达式的寻址"><span class="nav-number">4.4.2.3.</span> <span class="nav-text">下标值为整型表达式的寻址</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组下标寻址越界访问"><span class="nav-number">4.4.3.</span> <span class="nav-text">数组下标寻址越界访问</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-多维数组"><span class="nav-number">4.5.</span> <span class="nav-text">5 多维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二维数组的寻址"><span class="nav-number">4.5.1.</span> <span class="nav-text">二维数组的寻址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一维数组、二维数组初始化及寻址优化—Release版"><span class="nav-number">4.5.2.</span> <span class="nav-text">一维数组、二维数组初始化及寻址优化—Release版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-存放指针类型数据的数组"><span class="nav-number">4.6.</span> <span class="nav-text">6 存放指针类型数据的数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串指针数组与对应的二维指针数组"><span class="nav-number">4.6.1.</span> <span class="nav-text">字符串指针数组与对应的二维指针数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#区别"><span class="nav-number">4.6.1.1.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#区分"><span class="nav-number">4.6.1.2.</span> <span class="nav-text">区分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-指向数组的指针变量"><span class="nav-number">4.7.</span> <span class="nav-text">7 指向数组的指针变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-函数指针"><span class="nav-number">4.8.</span> <span class="nav-text">8 函数指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第九章-结构体和类"><span class="nav-number">5.</span> <span class="nav-text">第九章 结构体和类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-对象的内存布局"><span class="nav-number">5.1.</span> <span class="nav-text">1 对象的内存布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类与对象（举例）"><span class="nav-number">5.1.1.</span> <span class="nav-text">类与对象（举例）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类与对象的关系—C-源码"><span class="nav-number">5.1.2.</span> <span class="nav-text">类与对象的关系—C++源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存对齐"><span class="nav-number">5.1.3.</span> <span class="nav-text">内存对齐</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-this指针"><span class="nav-number">5.2.</span> <span class="nav-text">2 this指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思考题"><span class="nav-number">5.2.1.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正确答案"><span class="nav-number">5.2.1.2.</span> <span class="nav-text">正确答案</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#我的解答"><span class="nav-number">5.2.1.3.</span> <span class="nav-text">我的解答</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考资料"><span class="nav-number">5.2.1.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thiscall调用方式"><span class="nav-number">5.2.2.</span> <span class="nav-text">thiscall调用方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-静态数据成员"><span class="nav-number">5.3.</span> <span class="nav-text">3 静态数据成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-对象作为函数参数"><span class="nav-number">5.4.</span> <span class="nav-text">4 对象作为函数参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象作为参数的资源释放错误"><span class="nav-number">5.4.1.</span> <span class="nav-text">对象作为参数的资源释放错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-对象作为返回值"><span class="nav-number">5.5.</span> <span class="nav-text">5 对象作为返回值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概念"><span class="nav-number">5.5.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制对象的资源释放错误"><span class="nav-number">5.5.2.</span> <span class="nav-text">复制对象的资源释放错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-本章小结"><span class="nav-number">5.6.</span> <span class="nav-text">6 本章小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-关于构造函数和析构函数"><span class="nav-number">6.</span> <span class="nav-text">第十章 关于构造函数和析构函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-构造函数的出现时机"><span class="nav-number">6.1.</span> <span class="nav-text">1 构造函数的出现时机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局部对象"><span class="nav-number">6.1.1.</span> <span class="nav-text">局部对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆对象"><span class="nav-number">6.1.2.</span> <span class="nav-text">堆对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数对象"><span class="nav-number">6.1.3.</span> <span class="nav-text">参数对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回对象"><span class="nav-number">6.1.4.</span> <span class="nav-text">返回对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局对象与静态对象"><span class="nav-number">6.1.5.</span> <span class="nav-text">全局对象与静态对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思考题-1"><span class="nav-number">6.1.5.1.</span> <span class="nav-text">思考题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#如何寻找全局对象的构造函数？"><span class="nav-number">6.1.5.2.</span> <span class="nav-text">如何寻找全局对象的构造函数？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-每个对象都有默认的构造函数吗？"><span class="nav-number">6.2.</span> <span class="nav-text">2 每个对象都有默认的构造函数吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-析构函数的出现时机"><span class="nav-number">6.3.</span> <span class="nav-text">3 析构函数的出现时机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆对象-1"><span class="nav-number">6.3.1.</span> <span class="nav-text">堆对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结-1"><span class="nav-number">6.3.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-总结"><span class="nav-number">6.4.</span> <span class="nav-text">4 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数的必要条件"><span class="nav-number">6.4.1.</span> <span class="nav-text">构造函数的必要条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#析构函数的必要条件"><span class="nav-number">6.4.2.</span> <span class="nav-text">析构函数的必要条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#识别构造函数和析构函数的充分条件"><span class="nav-number">6.4.3.</span> <span class="nav-text">识别构造函数和析构函数的充分条件</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="教材学习,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于《C++反汇编与逆向分析技术揭秘》第一章~第四章的学习记录。">
+<meta name="keywords" content="教材学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《C++反汇编与逆向分析技术揭秘》笔记（1）">
+<meta property="og:url" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于《C++反汇编与逆向分析技术揭秘》第一章~第四章的学习记录。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/14.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/15.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/16.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/17.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/18.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/19.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/20.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/21.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/22.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/23.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/24.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/25.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/26.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/29.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/27.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/28.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/30.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/31.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/32.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/33.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/34.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/35.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/36.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/37.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/38.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/39.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/40.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/41.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/42.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/43.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/44.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/45.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/46.png">
+<meta property="og:updated_time" content="2019-03-27T07:59:12.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《C++反汇编与逆向分析技术揭秘》笔记（1）">
+<meta name="twitter:description" content="对于《C++反汇编与逆向分析技术揭秘》第一章~第四章的学习记录。">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/">
+
+
+
+
+
+  <title>《C++反汇编与逆向分析技术揭秘》笔记（1） | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《C++反汇编与逆向分析技术揭秘》笔记（1）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-21T14:50:48+08:00">
+                2019-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/" class="leancloud_visitors" data-flag-title="《C++反汇编与逆向分析技术揭秘》笔记（1）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于《C++反汇编与逆向分析技术揭秘》第一章~第四章的学习记录。</p>
+<a id="more"></a>
+<h3 id="第一章-熟悉工作环境和相关工具"><a href="#第一章-熟悉工作环境和相关工具" class="headerlink" title="第一章 熟悉工作环境和相关工具"></a>第一章 熟悉工作环境和相关工具</h3><h5 id="1-调试工具Microsoft-Visual-C-6-0和OllyDBG"><a href="#1-调试工具Microsoft-Visual-C-6-0和OllyDBG" class="headerlink" title="1 调试工具Microsoft Visual C++ 6.0和OllyDBG"></a>1 调试工具Microsoft Visual C++ 6.0和OllyDBG</h5><p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/1.png" alt=""></p>
+<ol>
+<li>OllyDBG的基本快捷键</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/2.png" alt=""></p>
+<h5 id="2-反汇编静态分析工具IDA"><a href="#2-反汇编静态分析工具IDA" class="headerlink" title="2 反汇编静态分析工具IDA"></a>2 反汇编静态分析工具IDA</h5><ol>
+<li>IDA的常用快捷键</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/3.png" alt=""></p>
+<ol start="2">
+<li>IDA的各视图窗口说明</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/4.png" alt=""></p>
+<ol start="3">
+<li>IDA函数名称识别</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/5.png" alt=""></p>
+<p>（1）SIG文件的制作步骤；</p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/6.png" alt=""></p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/8.png" alt=""></p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/7.png" alt=""></p>
+<p>（2）将生成后的SIG文件放置在IDA的安装目录SIG文件夹下，使用快捷键<code>Shift+F5</code>添加SIG文件到分析工程中。</p>
+<p>（3）SIG文件制作批处理文件</p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/9.png" alt=""></p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/10.png" alt=""></p>
+<h5 id="3-反汇编引擎的工作原理"><a href="#3-反汇编引擎的工作原理" class="headerlink" title="3 反汇编引擎的工作原理"></a>3 反汇编引擎的工作原理</h5><p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/11.png" alt=""></p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/12.png" alt=""></p>
+<h3 id="第二章-基本数据类型的表现形式"><a href="#第二章-基本数据类型的表现形式" class="headerlink" title="第二章 基本数据类型的表现形式"></a>第二章 基本数据类型的表现形式</h3><h5 id="1-整数类型"><a href="#1-整数类型" class="headerlink" title="1 整数类型"></a>1 整数类型</h5><p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/13.png" alt=""></p>
+<ol>
+<li>无符号整数</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/14.png" alt=""></p>
+<ol start="2">
+<li>有符号整数</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/15.png" alt=""></p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/16.png" alt=""></p>
+<h5 id="2-浮点数类型"><a href="#2-浮点数类型" class="headerlink" title="2 浮点数类型"></a>2 浮点数类型</h5><ol>
+<li>浮点数的编码方式（float、double、IEEE编码）</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/17.png" alt=""></p>
+<ol start="2">
+<li>基本的浮点数指令</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/18.png" alt=""></p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/19.png" alt=""></p>
+<h5 id="3-字符和字符串"><a href="#3-字符和字符串" class="headerlink" title="3 字符和字符串"></a>3 字符和字符串</h5><p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/20.png" alt=""></p>
+<ol>
+<li>字符的编码（ASCII和Unicode）</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/21.png" alt=""></p>
+<ol start="2">
+<li>字符串的存储方式</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/22.png" alt=""></p>
+<h5 id="4-布尔类型"><a href="#4-布尔类型" class="headerlink" title="4 布尔类型"></a>4 布尔类型</h5><p>C++中定义0为假，非0为真。</p>
+<h5 id="5-地址、指针和引用"><a href="#5-地址、指针和引用" class="headerlink" title="5 地址、指针和引用"></a>5 地址、指针和引用</h5><ol>
+<li>指针</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/23.png" alt=""></p>
+<p>由于指针保存的数据都是地址，所以无论什么类型的指针占据的内存空间大小都是一样的（32位-4字节；64位-8字节）。</p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/24.png" alt=""></p>
+<ol start="2">
+<li>指针和地址的区别</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/25.png" alt=""><br><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/26.png" alt=""></p>
+<ol start="3">
+<li>各类型指针的工作方式</li>
+</ol>
+<ul>
+<li>指针的取内容操作分为两个步骤：先取出指针中保存的地址信息，然后针对这个地址进行取内容，也就是一个间接寻址的过程，这也是识别指针的重要依据；</li>
+<li>在C++中，所有指针类型只支持加法和减法。指针是用于保存数据地址、解释地址而存在的。因此，只有加法与减法才有意义，其他运算对于指针而言没有任何意义。</li>
+<li>指针加法用于地址偏移，但指针的加法并不像数学中的加法那样简单。指针加1后，指针内保存的地址值并不一定会加1，具体的值取决于指针类型，如指针类型为int，地址值将会加4。这个4是根据类型大小所得到的值。</li>
+<li>C++为什么要用这种烦琐的地址偏移方法呢?当指针中保存的地址为数组首地址时，为了能够利用指针加1后访问到数组内下一成员，所以加的是类型长度，而非数字1。</li>
+<li>指针可以做减法操作，但乘法与除法对于指针寻址而言是没有意义的。</li>
+<li>两指针做减法操作是在计算的两个地址之间的元素个数，结果为有符号整数，进行减法操作的两指针必须是同类指针相减。可用于两指针中的地址比较，也可用于其他场合，比如求数组元素个数。其计算公式如下——</li>
+</ul>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/29.png" alt=""></p>
+<ul>
+<li>另外，两指针相加也是没有意义的。</li>
+</ul>
+<ol start="4">
+<li>引用</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/27.png" alt=""><br><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/28.png" alt=""></p>
+<h5 id="6-常量"><a href="#6-常量" class="headerlink" title="6 常量"></a>6 常量</h5><p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/30.png" alt=""></p>
+<ol>
+<li>常量的定义</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/31.png" alt=""></p>
+<ol start="2">
+<li>#define和const的区别</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/32.png" alt=""></p>
+<h5 id="7-总结"><a href="#7-总结" class="headerlink" title="7 总结"></a>7 总结</h5><p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/33.png" alt=""><br><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/34.png" alt=""></p>
+<h3 id="第三章-认识启动函数，找到用户入口"><a href="#第三章-认识启动函数，找到用户入口" class="headerlink" title="第三章 认识启动函数，找到用户入口"></a>第三章 认识启动函数，找到用户入口</h3><h5 id="1-main函数的识别"><a href="#1-main函数的识别" class="headerlink" title="1 main函数的识别"></a>1 main函数的识别</h5><p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/35.png" alt=""></p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/36.png" alt=""></p>
+<h5 id="2-总结"><a href="#2-总结" class="headerlink" title="2 总结"></a>2 总结</h5><p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/37.png" alt=""></p>
+<h3 id="第四章-观察各种表达式的求值过程"><a href="#第四章-观察各种表达式的求值过程" class="headerlink" title="第四章 观察各种表达式的求值过程"></a>第四章 观察各种表达式的求值过程</h3><h5 id="1-算术运算和赋值"><a href="#1-算术运算和赋值" class="headerlink" title="1 算术运算和赋值"></a>1 算术运算和赋值</h5><ul>
+<li>算术运算是指加法、减法、乘法、除法这四种数学运算，也称为四则运算；</li>
+<li>赋值运算类似于数学中的“等于”，是将一个内存空间中的数据传递到另一个内存空间中。由于内存没有处理器那样的控制能力，各个内存单元之间是无法直接传递数据的，必须通过处理器访问并中转，以实现两个内存单元间的数据传输。</li>
+<li>在VC++6.0中，算术运算与其他传递计算结果的代码组合后才能被视为一条有效的语句，如赋值运算或函数的参数传递。单独的算术运算虽然可以编译通过，但是并不会生成代码。因为只进行计算而没有传递结果的运算不会对程序结果有任何影响，此时编译器将其视为无效语句，与空语句等价，不会有任何编译处理。</li>
+</ul>
+<ol>
+<li>各种算术运算的工作形式</li>
+</ol>
+<p>（1）加法</p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/38.png" alt=""></p>
+<p>在编译过程中，编译器常常会采用“常量传播”和“常量折叠”这样的方案对代码中的变量与常量进行优化。</p>
+<ul>
+<li>常量传播：将编译期间可计算出结果的变量转换成常量，这样就减少了变量的使用；</li>
+<li>常量折叠：当计算公式中出现多个常量进行计算的情况时，且编译器可以在编译期间计算出结果时，这样源码中所有的常量计算都将被计算结果代替。</li>
+</ul>
+<p>如下示例——</p>
+<pre><code>void main(){
+    int nvar=1+5-3*6;
+    printf(&quot;nvar = %d \r\n&quot;, nvar);
+}
+</code></pre><p>优化之后就会变成——</p>
+<pre><code>void main(){
+    printf(&quot;nvar = %d \r\n&quot;, -12);
+}
+</code></pre><p>使用常量的好处是可以生成立即数寻址的目标代码，常量作为立即数成为指令的一部分，从而减少了内存的访问次数。</p>
+<p>（2）减法</p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/39.png" alt=""></p>
+<p>在实际分析中，根据加法操作数的情况，当加数为负数时，执行的并非是加法而是减法操作。</p>
+<p>（3）乘法</p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/40.png" alt=""></p>
+<p>（4）除法</p>
+<ul>
+<li>除法计算约定</li>
+</ul>
+<p>除法运算对应的汇编指令分有符号idiv和无符号div两种。除法指令的执行周期较长，效率也较低，所以编译器想尽办法用其他运算指令代替除法指令。C++中的除法和数学中的除法不同。在C++中，除法运算不保留余数，有专门求取余数的运算(运算符为%)，也称之为取模运算。对于整数除法，C++的规则是仅仅保留整数部分，小数部分完全舍弃。</p>
+<p>对于除法而言，计算机面临着如何处理小数部分的问题。在数学意义上,7/2=3.5，而对于计算机而言，整数除法的结果必须为整数。对于3.5这样的数值，计算机取整数部分的方式有如下几种：向下取整（<code>向下取整的除法，当除数为2的幂时，可以直接用带符号右移指令(sar)来完成</code>）、向上取整、向零取整。</p>
+<p>在c语言和其他多数高级语言中，对整数除法规定为向零取整，也即是放弃小数部分（“截断除法”）。</p>
+<ul>
+<li>VC++6.0对整数除法的优化和论证</li>
+</ul>
+<p>如果除数是变量，则只能使用除法指令。如果除数为常量，就有了优化的余地。根据除数值的相关特性，编译器有对应的处理方式。详细的代码示例及优化策略见博客<a href="https://ayesawyer.github.io/2019/03/21/%E6%B1%87%E7%BC%96%E4%B8%8E%E5%AF%B9%E5%BA%94C-%E4%BC%AA%E7%A0%81/" target="_blank" rel="noopener">《汇编与对应C++伪码》</a>中对应章节部分的内容。</p>
+<p>（5）取模</p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/41.png" alt=""></p>
+<ol start="2">
+<li>算术结果的溢出</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/42.png" alt=""></p>
+<h5 id="2-关系运算和逻辑运算"><a href="#2-关系运算和逻辑运算" class="headerlink" title="2 关系运算和逻辑运算"></a>2 关系运算和逻辑运算</h5><ol>
+<li>条件跳转指令表</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/43.png" alt=""></p>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/44.png" alt=""></p>
+<ol start="2">
+<li>条件表达式</li>
+</ol>
+<p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/45.png" alt=""></p>
+<h5 id="3-位运算"><a href="#3-位运算" class="headerlink" title="3 位运算"></a>3 位运算</h5><p><img src="/2019/03/21/《C-反汇编与逆向分析技术揭秘》笔记（1）/46.png" alt=""></p>
+<p>对于左移运算而言，无符号数和有符号数的移位操作是一样的，都不需要考虑到符号位。但右移运算则有变化，有符号数对应的指令为sar，可以保留符号位；无符号数不需要符号位，所以直接使用shr将最高位补0。<strong>故我们可以通过shr和sar指令判断操作数是否有符号。</strong></p>
+<h5 id="4-编译器的优化技巧"><a href="#4-编译器的优化技巧" class="headerlink" title="4 编译器的优化技巧"></a>4 编译器的优化技巧</h5><p>代码优化，是指为了达到某一种优化目的对程序代码进行变换。这样的变换有一个原则：变换前和变换后等价(不改变程序的运行结果)。就优化目的而论，代码优化一般有四个方向：</p>
+<ul>
+<li>执行速度优化；</li>
+<li>内存存储空间优化；</li>
+<li>磁盘存储空间优化；</li>
+<li>编译时间优化(别诧异，大型软件编译一次需要好几个小时是常事)；</li>
+</ul>
+<p>如今，计算机的存储空间都不小，因此常见的优化都是以执行速度的优化为主，这里也仅以速度优化为主展开讨论。编译器的工作过程中可以分为几个阶段：<strong>预处理→词法分析→语法分析→语义分析→中间代码生成→目标代码生成</strong>。其中，优化的机会一般存在于<strong>中间代码生成和目标代码生成</strong>这两个阶段。尤其是在中间代码生成阶段所做的优化，这类优化不具备设备相关性，在不同的硬件环境中都能通用，因此编译器设计者广泛采用这类办法。</p>
+<p>常见的与设备无关（中间代码生成阶段）的优化方案有以下几种——</p>
+<ul>
+<li>常量折叠；</li>
+<li>常量传播；</li>
+<li>减少变量；</li>
+<li>公共表达式；</li>
+<li>复写传播；</li>
+<li>减去不可达分支（减支优化）；</li>
+<li>顺序语句代替分支；</li>
+<li>强度削弱；</li>
+<li>数学变换；</li>
+<li>代码外提；</li>
+</ul>
+<p>目标代码生成阶段（与设备有关）的优化方案有以下几种——</p>
+<ul>
+<li>流水线优化；</li>
+<li>分支优化；</li>
+<li>高速缓存优化；</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/教材学习/" rel="tag"># 教材学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/逆向练习4/" rel="next" title="逆向练习4">
+                <i class="fa fa-chevron-left"></i> 逆向练习4
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/21/汇编与对应C-伪码（1）/" rel="prev" title="汇编与对应C++伪码（1）">
+                汇编与对应C++伪码（1） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一章-熟悉工作环境和相关工具"><span class="nav-number">1.</span> <span class="nav-text">第一章 熟悉工作环境和相关工具</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-调试工具Microsoft-Visual-C-6-0和OllyDBG"><span class="nav-number">1.0.1.</span> <span class="nav-text">1 调试工具Microsoft Visual C++ 6.0和OllyDBG</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-反汇编静态分析工具IDA"><span class="nav-number">1.0.2.</span> <span class="nav-text">2 反汇编静态分析工具IDA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-反汇编引擎的工作原理"><span class="nav-number">1.0.3.</span> <span class="nav-text">3 反汇编引擎的工作原理</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#第二章-基本数据类型的表现形式"><span class="nav-number">2.</span> <span class="nav-text">第二章 基本数据类型的表现形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-整数类型"><span class="nav-number">2.0.1.</span> <span class="nav-text">1 整数类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-浮点数类型"><span class="nav-number">2.0.2.</span> <span class="nav-text">2 浮点数类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-字符和字符串"><span class="nav-number">2.0.3.</span> <span class="nav-text">3 字符和字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-布尔类型"><span class="nav-number">2.0.4.</span> <span class="nav-text">4 布尔类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-地址、指针和引用"><span class="nav-number">2.0.5.</span> <span class="nav-text">5 地址、指针和引用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-常量"><span class="nav-number">2.0.6.</span> <span class="nav-text">6 常量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-总结"><span class="nav-number">2.0.7.</span> <span class="nav-text">7 总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三章-认识启动函数，找到用户入口"><span class="nav-number">3.</span> <span class="nav-text">第三章 认识启动函数，找到用户入口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-main函数的识别"><span class="nav-number">3.0.1.</span> <span class="nav-text">1 main函数的识别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-总结"><span class="nav-number">3.0.2.</span> <span class="nav-text">2 总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四章-观察各种表达式的求值过程"><span class="nav-number">4.</span> <span class="nav-text">第四章 观察各种表达式的求值过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-算术运算和赋值"><span class="nav-number">4.0.1.</span> <span class="nav-text">1 算术运算和赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-关系运算和逻辑运算"><span class="nav-number">4.0.2.</span> <span class="nav-text">2 关系运算和逻辑运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-位运算"><span class="nav-number">4.0.3.</span> <span class="nav-text">3 位运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-编译器的优化技巧"><span class="nav-number">4.0.4.</span> <span class="nav-text">4 编译器的优化技巧</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

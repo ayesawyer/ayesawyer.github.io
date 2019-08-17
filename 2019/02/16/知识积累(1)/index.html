@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="pwn,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="关于做题(pwn)过程中的一些细节知识/经验的积累。">
+<meta name="keywords" content="pwn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="知识积累(1)">
+<meta property="og:url" content="http://yoursite.com/2019/02/16/知识积累(1)/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="关于做题(pwn)过程中的一些细节知识/经验的积累。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/21.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/31.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/1.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/18.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/19.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/26.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/27.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/28.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/20.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/2.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/16.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/17.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/22.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/23.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/24.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/14.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/15.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/25.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/29.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/30.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/32.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/33.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/34.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/16/知识积累(1)/35.png">
+<meta property="og:updated_time" content="2019-02-22T03:03:09.002Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="知识积累(1)">
+<meta name="twitter:description" content="关于做题(pwn)过程中的一些细节知识/经验的积累。">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/16/知识积累(1)/8.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/16/知识积累(1)/">
+
+
+
+
+
+  <title>知识积累(1) | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/知识积累(1)/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">知识积累(1)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T10:18:21+08:00">
+                2019-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/pwn/" itemprop="url" rel="index">
+                    <span itemprop="name">pwn</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/16/知识积累(1)/" class="leancloud_visitors" data-flag-title="知识积累(1)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于做题(pwn)过程中的一些细节知识/经验的积累。</p>
+<a id="more"></a>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><h3 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h3><ul>
+<li><p><code>print &amp;id</code>——查看变量id在内存中的地址；</p>
+</li>
+<li><p><code>gdb-peda$ pattern_create 50</code>——创建长度为50的随机字符串；</p>
+</li>
+<li><p><code>pattern_offset</code>——查看指定值在输入字符串中的偏移，定位溢出点，需要与<code>pattern_creat</code>一起使用，如下图；</p>
+</li>
+</ul>
+<p><img src="/2019/02/16/知识积累(1)/8.png" alt=""></p>
+<p><img src="/2019/02/16/知识积累(1)/9.png" alt=""></p>
+<blockquote>
+<p>如下图，发现在44字节之后，我们可以完全覆盖EIP寄存器。</p>
+</blockquote>
+<p><img src="/2019/02/16/知识积累(1)/21.png" alt=""></p>
+<ul>
+<li><p><code>delete 断点号</code>——删除程序中的断点；</p>
+</li>
+<li><p><a href="https://blog.csdn.net/yangzhongxuan/article/details/6911689" target="_blank" rel="noopener"><code>bt</code></a>——显示所有的函数调用栈帧的信息，每个帧一行；</p>
+</li>
+<li><p><code>disas /r xxx</code>——查看xxx函数中对应的汇编指令及其机器码；</p>
+</li>
+<li><p>gdb调试过程中修改指定内存/变量的值,如下图;</p>
+</li>
+</ul>
+<p><img src="/2019/02/16/知识积累(1)/31.png" alt=""></p>
+<p>-<code>hex 0xXXXXXXXX</code>——查看堆栈信息，回车可以查看后面栈的内容；</p>
+<p><img src="/2019/02/16/知识积累(1)/1.PNG" alt=""></p>
+<h3 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h3><ul>
+<li>ROP链生成器；</li>
+</ul>
+<p><img src="/2019/02/16/知识积累(1)/18.png" alt=""></p>
+<p><img src="/2019/02/16/知识积累(1)/19.png" alt=""></p>
+<ul>
+<li><p><code>asm()</code>——将汇编指令转换成真正的shellcode(机器码)；</p>
+</li>
+<li><p><code>fmtstr_payload(autofmt.offset, {printf_got: system_add})</code>——用来生成格式化字符串漏洞写内存的payload；</p>
+</li>
+</ul>
+<blockquote>
+<p>第一个参数为offset偏移（通过爆破试出来,如图）;</p>
+</blockquote>
+<p><img src="/2019/02/16/知识积累(1)/26.png" alt=""></p>
+<blockquote>
+<p>我们可以看到，%p泄漏出了printf栈里面的东西，并且可以发现AAAA也就是“0x41414141”在第十个位置，也就是说格式化字符串在栈的第十个位置，于是我们就可以构造：【泄漏地址】+%10$s，来把password给泄漏出来；</p>
+</blockquote>
+<blockquote>
+<p>第二个参数是一个字典，意义是往key的地址，写入value的值，比如往0x804a010地址写入数据0xaaaaaaaa。<br>利用此函数构造的payload示例如下图；</p>
+</blockquote>
+<p><img src="/2019/02/16/知识积累(1)/27.png" alt=""></p>
+<blockquote>
+<p>不借助此函数的对应脚本示例如下图；</p>
+</blockquote>
+<p><img src="/2019/02/16/知识积累(1)/28.png" alt=""></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>在linux下用vi编辑ELF文件；</li>
+</ul>
+<p><img src="/2019/02/16/知识积累(1)/20.png" alt=""></p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ol>
+<li>关于<a href="https://www.ibm.com/developerworks/cn/linux/sdk/assemble/inline/index.html" target="_blank" rel="noopener">内联汇编</a>——内联arm汇编如图所示；</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/2.PNG" alt=""></p>
+<ol start="2">
+<li>libc.so.6文件的作用——在一些题目中，经常可以看到除了提供ELF文件之外还提供了一个libc.so.6文件，其作用如下图：</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/3.png" alt=""></p>
+<ol start="3">
+<li><a href="http://spd.dropsec.xyz/2016/08/09/Linux%E7%B3%BB%E7%BB%9F%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8FELF/" target="_blank" rel="noopener">Linux ELF文件</a>：三种文件类型——可重定位的目标文件（Relocatable，或者Object File）、可执行文件（Executable）、共享库（Shared Object，或者Shared Library）。</li>
+</ol>
+<ol start="4">
+<li>stripped和not stripped</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/7.png" alt=""></p>
+<ol start="5">
+<li>关于one_gadget：解释如下图；一个潜在的gadget需要满足以下条件：A.能够访问到”/bin/sh”字符串；B.调用了exec*系列的函数。</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/10.png" alt=""></p>
+<ol start="6">
+<li>关于stack smash：指的是程序存在栈溢出漏洞，但同时存在对栈溢出的检测保护机制__stack_chk_fail（其源码如下图）</li>
+</ol>
+<blockquote>
+<p>由图可知，我们只需要能够覆盖argv这个参数为我们想要的字符串的地址系统在检测到栈溢出时就会打印出我们想要的内容;<br>这种利用方式主要是利用了canary的报错信息。</p>
+</blockquote>
+<p><img src="/2019/02/16/知识积累(1)/16.png" alt=""></p>
+<ol start="7">
+<li>linux中的mprotect()函数。</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/17.png" alt=""></p>
+<ol start="8">
+<li>关于ELF的安全防护机制。</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/22.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>RELRO</td>
+<td>RELRO会有Partial RELRO和FULL RELRO，如果开启FULL RELRO，意味着我们无法修改got表</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Stack</td>
+<td>如果栈中开启Canary found，那么就不能用直接用溢出的方法覆盖栈中返回地址，而且要通过改写指针与局部变量、leak canary、overwrite canary的方法来绕过</td>
+</tr>
+<tr>
+<td>3</td>
+<td>NX</td>
+<td>如果这个保护开启就是意味着栈中数据没有执行权限，以前的经常用的call esp或者jmp esp的方法就不能使用，但是可以利用rop这种方法绕过</td>
+</tr>
+<tr>
+<td>4</td>
+<td>PIE</td>
+<td>如果程序开启这个地址随机化选项就意味着程序每次运行的时候地址都会变化，而如果没有开PIE的话那么No PIE (0x400000)，括号内的数据就是程序的基地址</td>
+</tr>
+<tr>
+<td>5</td>
+<td>FORTIFY</td>
+<td>FORTIFY_SOURCE机制对格式化字符串有两个限制(1)包含%n的格式化字符串不能位于程序内存中的可写地址。(2)当使用位置参数时，必须使用范围内的所有参数。所以如果要使用%7$x，你必须同时使用1,2,3,4,5和6</td>
+</tr>
+</tbody>
+</table>
+<ol start="9">
+<li>汇编语言堆栈平衡。</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/23.png" alt=""></p>
+<ol start="10">
+<li>关于plt和got表：以<code>puts</code>函数为例,通过<code>puts_plt</code>可以直接调用<code>puts</code>函数；<code>puts_got</code>里面存的是程序实际运行过程中<code>puts</code>函数的动态libc地址。</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/24.png" alt=""></p>
+<h3 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h3><ul>
+<li>Ook语言</li>
+</ul>
+<p><img src="/2019/02/16/知识积累(1)/11.png" alt=""></p>
+<ul>
+<li>Brainfuck语言</li>
+</ul>
+<p><img src="/2019/02/16/知识积累(1)/12.png" alt=""></p>
+<ul>
+<li>莫斯密码</li>
+</ul>
+<p><img src="/2019/02/16/知识积累(1)/13.png" alt=""></p>
+<ul>
+<li>.?!</li>
+</ul>
+<p><img src="/2019/02/16/知识积累(1)/14.png" alt=""></p>
+<ul>
+<li>base64编码</li>
+</ul>
+<p><img src="/2019/02/16/知识积累(1)/15.png" alt=""></p>
+<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><p>关键内容如下——</p>
+<ol>
+<li>对于登陆验证型题目——</li>
+</ol>
+<blockquote>
+<p>在输入比较好控制改变的情况下，可以考虑想办法让输入满足验证条件（一般很少这样处理）;<br>大部分情况下，都是考虑直接绕过验证，跳到验证正确之后的处理流程进行处理。</p>
+</blockquote>
+<ol start="2">
+<li>对于给了源代码的题目，要学会从中找到有问题的代码（包括如格式化字符串漏洞等漏洞、以及代码处理逻辑上的一些问题-如下面2个图）：</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/5.png" alt=""></p>
+<p><img src="/2019/02/16/知识积累(1)/6.png" alt=""></p>
+<ol start="3">
+<li>对于没什么思路的题目，通用思路如下图——</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/4.png" alt=""></p>
+<ol start="4">
+<li>一般来说，即使ELF可执行文件是开启了ASLR保护机制的，其got表中函数的地址的最后三位是不会变化的，这也给暴力破解提供了可能性。</li>
+</ol>
+<ol start="5">
+<li>对于没有给libc文件的题目，可以通过泄露得到的libc函数地址的最后三位，判定远程libc版本并获取system函数和binsh字符串的偏移（<a href="https://libc.blukat.me/?q=puts%3A140&amp;l=libc6-i386_2.23-0ubuntu10_amd64" target="_blank" rel="noopener">libc database search</a>、libc-database、LibSearcher）。</li>
+</ol>
+<ol start="6">
+<li>利用qemu动态调试arm架构的elf文件。</li>
+</ol>
+<blockquote>
+<p><a href="http://m4x.fun/post/how-2-pwn-an-arm-binary/（需要翻墙访问）" target="_blank" rel="noopener">http://m4x.fun/post/how-2-pwn-an-arm-binary/（需要翻墙访问）</a></p>
+</blockquote>
+<ol start="7">
+<li>调试EXP：下述流程一般是针对堆漏洞的，栈的话下断点看比较方便</li>
+</ol>
+<blockquote>
+<p>在exp中的 <code>p = process()</code> 之后 就用 <code>gdb.attach(p,&#39;continue&#39;)</code>;<br>然后在想断下来的地方加个 <code>pause()</code>;<br>执行exp，程序会停在<code>pause</code>的地方；<br>在弹出的gdb窗口上 <code>ctrl+c</code> 停下来，查看内存进行调试即可；<br>这种方法不用管断点下在哪里，比较方便。</p>
+</blockquote>
+<ol start="8">
+<li>对开启了PIE保护机制的程序的动态调试方法——主要是如何将断点下在ida中对应的指令处。</li>
+</ol>
+<blockquote>
+<p>pwngdb可以直接 b reabse，可以bcall；<br>在<code>gdb attach</code>调试程序运行的时候<code>ctrl+c</code>断下来，用<code>bt</code>找到main函数地址，替换后面三位；<br>在本地调试开启了PIE的程序，可以直接在本机上使用命令<code>sudo sh-c&quot;echo 0 &gt; /proc/sys/kernel/randomize_va_space&quot;</code>把aslr关了，由于PIE依赖aslr，此时程序的PIE保护机制也会失效；<br>在gdb中利用<code>b offset</code>通过ida中看到的偏移地址的最后三位下断点。</p>
+</blockquote>
+<ol start="9">
+<li><p>binary patch：对二进制文件内容的改变，比如改变关键跳转语句；简单的patch流程为——</p>
+<blockquote>
+<p>在十六进制编辑器中打开对应的ELF文件;<br>此时文件的内容是所含汇编程序的机器码;<br>在gdb中用（disas /r xxx）命令可以看到xxx函数中对应的汇编指令及其机器码;<br>然后定位到关键待修改语句，在十六进制编辑器中对应位置处修改即可。</p>
+</blockquote>
+</li>
+<li><p>若可执行文件的主函数十分简单，但是程序里却有十分多的函数，说明可执行文件是静态链接编译的。</p>
+</li>
+</ol>
+<ol start="11">
+<li>对于基本ROP的绕过；</li>
+</ol>
+<blockquote>
+<p>直接利用<code>ROPgadget</code>等工具生成ropchain，需要足够的溢出空间；<br>对于动态链接的ELF，利用其so文件中的<code>system</code>和<code>&quot;bin/sh&quot;</code>;<br>对于静态链接的ELF，若程序中没有<code>system</code>函数，则可利用程序中可能存在的 <code>int 0x80</code>（中断信号）或者 <code>execve(&quot;/bin/sh\x00&quot;,0,0)</code>函数；<br>一种将<code>&quot;bin/sh\x00&quot;</code>写入内存的思路（程序开启了栈上不可执行保护，对于此类函数参数一般考虑将其写入<code>.bss</code>段）:利用特殊的<code>gadget</code> 例如是 <code>mov dword ptr [ecx],eax</code> ， 将字符串压入eax中，要写入的地址压入ecx中，然后通过这个<code>gadget</code>就可以将字符串写入想写入的内存了。</p>
+</blockquote>
+<ol start="12">
+<li>构造假栈帧——通过溢出，去执行一次read函数，把我们要接下来执行的rop链写到bss的某个地址里去（可以根据用readelf 命令去查一下bss的哪个地方有执行的权力），接着构造假的ebp，让ebp跳转到bss的某个地址中，从而让计算机把那个地址当成栈帧，达到构造假栈帧的目的。<code>参考题目：lab6</code></li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/25.png" alt=""></p>
+<ol start="13">
+<li>栈迁移——在写入空间不够的时候，通过leave_ret这类收尾的代码来把ebp和esp改到某个地址固定的位置，通过控制ret的地址和ebp指针向我们指定的位置写值，通常是一段不完整的rop代码，通过不断迁移把rop代码一段一段的写完，最后通过leave_ret到rop代码上面4字节（x86）来实现rop的调用。</li>
+</ol>
+<ol start="14">
+<li>在64位的程序中，申请的chunk大小需要比实际的内容长度多0x10,这16个字节用于存chunk的头信息（pre_size和size（各8个字节）)。</li>
+</ol>
+<ol start="15">
+<li>如图这种exp里面最后一行<code>cn.sendline(‘$0’)</code>的作用是什么呢，为啥这里面只是把<code>system</code>函数的got表地址的替换实现了，并没有给参数<code>“bin/sh”</code>最后就能getshell呢？</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/29.png" alt=""></p>
+<blockquote>
+<p>作用相当于提供了<code>system</code>执行所需要的<code>“bin/sh”</code>参数;<br>但这个<code>$0</code>与当前上下文环境有关，并不是每次都会是<code>bin/sh</code>;<br><code>$0</code>——Shell本身的文件名；<br>参考:linux shell中特殊字符的意义$0 $1 $$ $# $@;<br>示例如下图；</p>
+</blockquote>
+<p><img src="/2019/02/16/知识积累(1)/30.png" alt=""></p>
+<ol start="16">
+<li>如下图所示，在IDA中静态分析可判断出第0x45-0x48个字节可以覆盖到函数的返回地址；</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/32.png" alt=""></p>
+<p>但是实际测试发现往后偏移了8位，分析汇编代码发现是由于进行了内存对齐的操作，esp经过了与操作之后就比之前小了8，就往后移了8位，如下图所示——</p>
+<p><img src="/2019/02/16/知识积累(1)/33.png" alt=""></p>
+<ol start="17">
+<li>如下图所示，程序中限定了覆盖的return地址前两位不能为<code>FF</code>，但是我们填充的shellcode所在的地址前两位就是<code>FF</code>，如何处理？</li>
+</ol>
+<p><img src="/2019/02/16/知识积累(1)/34.png" alt=""></p>
+<p>通过包含空函数nop和ret指令的ROP指令如下图，然后再return回来执行下一句return到shellcode。</p>
+<p><img src="/2019/02/16/知识积累(1)/35.png" alt=""></p>
+<h2 id="报错及对应解决"><a href="#报错及对应解决" class="headerlink" title="报错及对应解决"></a>报错及对应解决</h2><ol>
+<li><code>gdb attach 进程号</code> 动态调试连接进程失败，报错：ptrace：不允许的操作。</li>
+</ol>
+<blockquote>
+<p><a href="https://blog.csdn.net/makenothing/article/details/9531247" target="_blank" rel="noopener">https://blog.csdn.net/makenothing/article/details/9531247</a></p>
+</blockquote>
+<ol start="2">
+<li>使用ROPgadget时报错——ImportError: ERROR: fail to load the dynamic library。</li>
+</ol>
+<blockquote>
+<p><a href="https://www.jianshu.com/p/b120b07d1710" target="_blank" rel="noopener">https://www.jianshu.com/p/b120b07d1710</a><br><a href="https://www.cnblogs.com/p4nda/p/7224340.html" target="_blank" rel="noopener">https://www.cnblogs.com/p4nda/p/7224340.html</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pwn/" rel="tag"># pwn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/14/c指令的积累/" rel="next" title="c指令的积累">
+                <i class="fa fa-chevron-left"></i> c指令的积累
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/16/知识积累(1)-reverse/" rel="prev" title="知识积累(1)-reverse">
+                知识积累(1)-reverse <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#工具"><span class="nav-number">1.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb"><span class="nav-number">1.1.</span> <span class="nav-text">gdb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwntools"><span class="nav-number">1.2.</span> <span class="nav-text">pwntools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">1.3.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">2.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#密码"><span class="nav-number">2.1.</span> <span class="nav-text">密码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经验"><span class="nav-number">3.</span> <span class="nav-text">经验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报错及对应解决"><span class="nav-number">4.</span> <span class="nav-text">报错及对应解决</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

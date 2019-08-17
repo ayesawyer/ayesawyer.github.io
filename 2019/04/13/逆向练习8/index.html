@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="汇编,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="每日逆向的理解和积累。">
+<meta name="keywords" content="汇编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逆向练习8">
+<meta property="og:url" content="http://yoursite.com/2019/04/13/逆向练习8/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="每日逆向的理解和积累。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/14.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/15.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/16.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/20.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/17.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/18.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/19.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/21.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/22.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/27.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/28.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/23.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/24.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/25.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/26.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/30.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/29.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/31.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/32.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/33.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/34.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/35.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/36.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/37.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/38.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/40.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/39.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/41.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/42.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/43.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/44.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/45.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/逆向练习8/46.png">
+<meta property="og:updated_time" content="2019-04-18T10:04:02.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="逆向练习8">
+<meta name="twitter:description" content="每日逆向的理解和积累。">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/13/逆向练习8/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/13/逆向练习8/">
+
+
+
+
+
+  <title>逆向练习8 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/13/逆向练习8/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">逆向练习8</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-13T10:55:58+08:00">
+                2019-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/13/逆向练习8/" class="leancloud_visitors" data-flag-title="逆向练习8">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>每日逆向的理解和积累。</p>
+<a id="more"></a>
+<h1 id="汇编阅读练习"><a href="#汇编阅读练习" class="headerlink" title="汇编阅读练习"></a>汇编阅读练习</h1><h2 id="练习1"><a href="#练习1" class="headerlink" title="练习1"></a>练习1</h2><h3 id="汇编代码及解释——"><a href="#汇编代码及解释——" class="headerlink" title="汇编代码及解释——"></a>汇编代码及解释——</h3><ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/1.png" alt=""><br><img src="/2019/04/13/逆向练习8/2.png" alt=""><br><img src="/2019/04/13/逆向练习8/3.png" alt=""><br><img src="/2019/04/13/逆向练习8/4.png" alt=""></p>
+<hr>
+<p><strong>注意：分析过程中值得注意的几个问题——</strong></p>
+<blockquote>
+<p>(1)如图中红框框起来的部分所示，注意对于除法和求余运算的汇编表示。</p>
+</blockquote>
+<blockquote>
+<p>(2)如图中标注的部分所示，注意对于源码中数组<code>l[4]</code>相关的操作在汇编层面的对应表示。</p>
+</blockquote>
+<hr>
+<p>参考资料——</p>
+<blockquote>
+<p><a href="http://c.biancheng.net/cpp/html/147.html" target="_blank" rel="noopener">C语言time()函数：获取当前时间(以秒数表示)</a>;<br><a href="https://blog.csdn.net/candyliuxj/article/details/4396666" target="_blank" rel="noopener">C++中随机函数rand()和srand()的用法</a>;</p>
+</blockquote>
+<h3 id="对应c语言源码——"><a href="#对应c语言源码——" class="headerlink" title="对应c语言源码——"></a>对应c语言源码——</h3><p>问题描述——C语言人机猜数问题：由计算机随机产生一个四位整数，请人猜这四位整数是多少。人输入一个四位数后，计算机首先判断其中有几位猜对了，并且对的数字中有几位位置也正确，将结果显示出来，给人以提示，请人再猜，直到人猜出计算机随机产生的四位数是多少为止。</p>
+<hr>
+<p><em>例如：计算机产生一个四位整数“1234”请人猜，可能的提示如下。人猜的整数计算机判断有几个数字正确，有几个位置正确：</em></p>
+<ul>
+<li>1122 2A1B</li>
+<li>3344 2A1B</li>
+<li>3312 3A0B</li>
+<li>4123 4A0B</li>
+<li>1243 4A2B</li>
+<li>1234 4A4B</li>
+</ul>
+<hr>
+<p>问题分析如下——</p>
+<p><img src="/2019/04/13/逆向练习8/5.png" alt=""></p>
+<p>具体编程实现如下——</p>
+<p><img src="/2019/04/13/逆向练习8/6.png" alt=""></p>
+<h2 id="练习2"><a href="#练习2" class="headerlink" title="练习2"></a>练习2</h2><p><em>吐槽：实在忍不住，还是要吐槽一下。今天开始尝试分析release版的应用程序，之前分析的都是debug版的应用程序。结果一上来就碰上C++和浮点数操作这两大难点结合起来的程序。分析着分析着，心态就爆炸了哈哈哈。言归正传，我觉得c++的release版简直不要太坑，可能也是我对于c++的基础不了解，以为懂c就懂c++（太天真了嘤嘤嘤）。所以后面还是先从release版的c程序入手，至于c++程序的分析，等我学完《c++反汇编》再说。当然，万一是这个程序的问题，下一个程序就没问题了呢？虽然不太可能，我还是打算明天再挣扎一下试试。另外，我觉得有必要搞一个浮点数相关的汇编指令的查询器之类的，不然每次找都很麻烦。</em></p>
+<h3 id="汇编代码及解释——-1"><a href="#汇编代码及解释——-1" class="headerlink" title="汇编代码及解释——"></a>汇编代码及解释——</h3><hr>
+<h4 id="C-的release版本"><a href="#C-的release版本" class="headerlink" title="C++的release版本"></a><strong>C++的release版本</strong></h4><ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/7.png" alt=""><br><img src="/2019/04/13/逆向练习8/8.png" alt=""><br><img src="/2019/04/13/逆向练习8/10.png" alt=""><br><img src="/2019/04/13/逆向练习8/9.png" alt=""></p>
+<hr>
+<h4 id="C的release版本"><a href="#C的release版本" class="headerlink" title="C的release版本"></a><strong>C的release版本</strong></h4><ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/11.png" alt=""><br><img src="/2019/04/13/逆向练习8/12.png" alt=""></p>
+<p><strong>注意：这里先比较一下c和c++下的汇编——我们可以看到，同样的功能，c++的代码量要大将近一半，而且如图中备注所示，c++的汇编有很大一部分代码是跟程序要实现的具体功能是无关的，增加了分析的难度。</strong></p>
+<hr>
+<h4 id="C的debug版本"><a href="#C的debug版本" class="headerlink" title="C的debug版本"></a><strong>C的debug版本</strong></h4><ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/13.png" alt=""></p>
+<ul>
+<li>prime函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/14.png" alt=""></p>
+<ul>
+<li>pow函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/15.png" alt=""></p>
+<ul>
+<li>pow函数（ida F5得到的c伪码）</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/16.png" alt=""></p>
+<p>注意：这里比较一下c的release版和debug版——我们可以对比发现，c语言release版程序比起debug程序，比较大的优化体现在——</p>
+<p><strong>(1)debug版中是通过函数调用的方式调用pow函数和prime函数的，而在release版中则直接将这两个函数的汇编实现集成在了main函数中，省略了函数调用的步骤。</strong></p>
+<p><strong>(2)release版中没有了debug版中对于函数<code>j___RTC_CheckEsp</code>的调用</strong></p>
+<hr>
+<p><em>补充1：我也比较了c++的debug版和release版程序，二者之间的不同和c语言情况下类似，但是还是不太清楚c++的release版程序中的最后那部分与程序功能无关的代码是个什么情况。另外，在分析时可以适当参考ida的F5伪代码，这样可以提高分析速度。</em></p>
+<hr>
+<p>补充2——关于VS2010的内置库函数<code>__ftol2_sse</code>，用于实现浮点数到整数的转换，<code>_ftol2_sse</code> 函数底层是调用 <code>cvtsi2sd</code> 函数的。</p>
+<p><img src="/2019/04/13/逆向练习8/20.png" alt=""></p>
+<blockquote>
+<p>参考链接——<br><a href="https://www.cnblogs.com/luo-peng/p/5945084.html" target="_blank" rel="noopener">汇编学习：float与double速度问题</a><br><a href="https://blog.csdn.net/housisong/article/details/1616026" target="_blank" rel="noopener">代码优化－之－优化浮点数取整</a></p>
+</blockquote>
+<h3 id="对应源码——"><a href="#对应源码——" class="headerlink" title="对应源码——"></a>对应源码——</h3><p>问题描述——C语言求梅森素数：梅森数（Mersenne Prime）指的是形如2n-1的正整数，其中指数n是素数，即为Mn。如果一个梅森数是素数，则称其为梅森素数。例如22-1=3、23-1=7都是梅森素数。当n=2，3，5，7时，Mn 都是素数，但n=11时，Mn=M11=211-1=2047=23X89，显然不是梅森素数。试求出指数n&lt;20的所有梅森素数。</p>
+<p><img src="/2019/04/13/逆向练习8/17.png" alt=""></p>
+<p>具体编程实现如下——</p>
+<hr>
+<p>c语言版——</p>
+<p><img src="/2019/04/13/逆向练习8/18.png" alt=""></p>
+<hr>
+<p>c++版——</p>
+<p><img src="/2019/04/13/逆向练习8/19.png" alt=""></p>
+<h3 id="参考资料——"><a href="#参考资料——" class="headerlink" title="参考资料——"></a>参考资料——</h3><p>1.关于浮点数相关汇编指令</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/runninghui/article/details/9094123" target="_blank" rel="noopener">汇编浮点数运算指令大全</a><br><a href="https://blog.csdn.net/Cassie_zkq/article/details/80384600" target="_blank" rel="noopener">汇编中NEG和NOT的区别</a></p>
+</blockquote>
+<p>2.其他</p>
+<blockquote>
+<p><a href="https://www.pediy.com/kssd/pediy09/pediy09-194.htm" target="_blank" rel="noopener">and esp, 0FFFFFFF8h有什么作用？</a><br><a href="https://zhidao.baidu.com/question/433750710.html" target="_blank" rel="noopener">关于C++中的用于清除错误状态的函数clear()</a></p>
+</blockquote>
+<h2 id="练习3"><a href="#练习3" class="headerlink" title="练习3"></a>练习3</h2><h3 id="汇编代码及解释——-2"><a href="#汇编代码及解释——-2" class="headerlink" title="汇编代码及解释——"></a>汇编代码及解释——</h3><hr>
+<h4 id="C的release版本-1"><a href="#C的release版本-1" class="headerlink" title="C的release版本"></a><strong>C的release版本</strong></h4><ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/21.png" alt=""><br><img src="/2019/04/13/逆向练习8/22.png" alt=""></p>
+<ul>
+<li>input函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/27.png" alt=""></p>
+<ul>
+<li>input函数（ida F5得到的c伪码）</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/28.png" alt=""></p>
+<hr>
+<h4 id="C的debug版本-1"><a href="#C的debug版本-1" class="headerlink" title="C的debug版本"></a><strong>C的debug版本</strong></h4><ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/23.png" alt=""></p>
+<ul>
+<li>copu函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/24.png" alt=""></p>
+<ul>
+<li>input函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/25.png" alt=""></p>
+<ul>
+<li>input函数（ida F5得到的c伪码）</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/26.png" alt=""></p>
+<p>注意：这里比较一下c的release版和debug版——我们可以对比发现，c语言release版程序比起debug程序，比较大的优化体现在——</p>
+<p><strong>(1)debug版中很多变量都是通过<code>[ebp+xxh]</code>的形式进行访问和操作的，而在release版中除了需要用户输入赋值的变量，其余变量都是通过寄存器的方式进行存储和访问的。</strong></p>
+<p><strong>(2)对于如<code>printf</code>等库函数的调用，debug版中是通过2个jmp跳转实现调用，而在release版中则直接将库函数的地址保存在寄存器中，然后通过call 寄存器实现函数调用。</strong></p>
+<p><strong>(3)release版中没有了debug版中对于如<code>j___RTC_CheckEsp</code>等实现各种保护机制的函数的调用</strong></p>
+<p><strong>(4)debug版中是通过函数调用的方式调用<code>copu</code>函数和<code>input</code>函数的，而在release版中则将没有涉及到用户输入的子函数<code>copu</code>的汇编实现集成在了main函数中，省略了函数调用的步骤。</strong></p>
+<p><strong>(5)在release版中对于重复的汇编代码实现进行了结构优化和精简。</strong></p>
+<p><strong>(6)在release版中对于调用函数的参数传递，并不都是通过<code>push</code>操作传递的，虽然这是一个32位的exe，但是在release版中还是存在通过寄存器传递调用函数参数的情况。</strong></p>
+<h3 id="对应源码——-1"><a href="#对应源码——-1" class="headerlink" title="对应源码——"></a>对应源码——</h3><p>问题描述——C语言“抢30”游戏：由两个人玩“抢30”游戏，游戏规则是：第一个人先说“1”或“2”，第二个人要接着往下说一个或两个数，然后又轮到第一个人，再接着往下说一个或两个数。这样两人反复轮流，每次每个人说一个或两个数都可以，但是不可以连说三个数，谁先抢到30，谁得胜。</p>
+<p><img src="/2019/04/13/逆向练习8/30.png" alt=""></p>
+<p>具体编程实现如下——</p>
+<p><img src="/2019/04/13/逆向练习8/29.png" alt=""></p>
+<h3 id="参考资料——-1"><a href="#参考资料——-1" class="headerlink" title="参考资料——"></a>参考资料——</h3><blockquote>
+<p><a href="https://www.cnblogs.com/xiaolongxia/articles/2643718.html" target="_blank" rel="noopener">一段求数字%2模代码的反汇编</a></p>
+</blockquote>
+<h2 id="练习4"><a href="#练习4" class="headerlink" title="练习4"></a>练习4</h2><h3 id="汇编代码及解释——-3"><a href="#汇编代码及解释——-3" class="headerlink" title="汇编代码及解释——"></a>汇编代码及解释——</h3><hr>
+<h4 id="C的release版本-2"><a href="#C的release版本-2" class="headerlink" title="C的release版本"></a><strong>C的release版本</strong></h4><ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/31.png" alt=""><br><img src="/2019/04/13/逆向练习8/32.png" alt=""><br><img src="/2019/04/13/逆向练习8/33.png" alt=""></p>
+<ul>
+<li>main函数（ida F5得到的部分c伪码）</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/34.png" alt=""></p>
+<hr>
+<h4 id="C的debug版本-2"><a href="#C的debug版本-2" class="headerlink" title="C的debug版本"></a><strong>C的debug版本</strong></h4><ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/35.png" alt=""></p>
+<p>注意：这里比较一下c的release版和debug版——我们可以对比发现，c语言release版程序比起debug程序，除了练习3中归纳的优化之外，本程序中特有的优化体现在——</p>
+<p><strong>(1)最明显的区别就是release版中比起debug版在结构上的精简和优化。</strong></p>
+<p><strong>(2)对于变量的优化，这里补充一下，对于一般的int型变量，release版中都是通过寄存器来访问和操作的，但是对于数组类的变量，release版中也是通过<code>[寄存器+偏移]</code>的形式进行访问和操作的。</strong></p>
+<p><strong>(3)release版中将debug版中的乘法操作如<code>imul</code>替换成了加法操作。</strong></p>
+<p><strong>(4)此程序的release版中保存了程序起始和结尾处的cookie安全检查机制，优化省略掉了其他安全校验。</strong></p>
+<hr>
+<p>补充1——关于.pdb文件</p>
+<p><em>我们知道，release版的应用程序，比起debug版的应用程序，最大的区别就在于其优化省略了很多调试信息。而用VS编译生成的release版的应用程序，VS将其调试信息保存在与exe文件同名的.pdb文件中，并在exe中指明了生成时对应.pdb文件的具体路径。所以在ida中加载此类exe时，会弹出如下图所示的提示框。</em></p>
+<p><img src="/2019/04/13/逆向练习8/36.png" alt=""></p>
+<p><img src="/2019/04/13/逆向练习8/37.png" alt=""></p>
+<p>在分析exe时加载对应.pdb文件和不加载的主要区别在于——对于一些数据结构具体信息的标识，比如本程序中，加载了.pdb文件就只会标识出数组的起始地址信息，而未加载的话，ida就会无法识别出具体的数组这一结构，而是将数组的所有元素都列出来，分析起来就会比较麻烦，如下图对比所示。</p>
+<p><img src="/2019/04/13/逆向练习8/38.png" alt=""></p>
+<h3 id="对应源码——-2"><a href="#对应源码——-2" class="headerlink" title="对应源码——"></a>对应源码——</h3><p>问题描述——C语言旅客国籍问题：在一个旅馆中住着6个不同国籍的人，他们分别来自美国、德国、英国、法国、俄罗斯和意大利这几个国家。他们的名字分别叫A、B、C、D、E和F，要说明的是名字的顺序与前面提到的国籍不一定是相互对应的。现在已知：</p>
+<ul>
+<li>A和美国人是医生。</li>
+<li>E和俄罗斯人是教师。</li>
+<li>C和德国人是技师。</li>
+<li>B和F曾经当过兵，而德国人从未参过军。</li>
+<li>法国人比A年龄大，意大利人比C年龄大。</li>
+<li>B同美国人下周要去西安旅行，而C同法国人下周要去杭州度假。</li>
+</ul>
+<p>现要求根据上述已知条件，编程求出A、B、C、D、E和F各是哪国人。</p>
+<p><img src="/2019/04/13/逆向练习8/40.png" alt=""></p>
+<p>具体编程实现如下——</p>
+<p><img src="/2019/04/13/逆向练习8/39.png" alt=""></p>
+<h3 id="参考资料——-2"><a href="#参考资料——-2" class="headerlink" title="参考资料——"></a>参考资料——</h3><blockquote>
+<p><a href="http://bbs.itheima.com/thread-53637-1-1.html" target="_blank" rel="noopener">for循环加大括号{}和不加有什么区别</a><br><a href="https://bbs.csdn.net/topics/392203941" target="_blank" rel="noopener">for循环不加括号作用域到哪？</a><br><a href="https://bbs.csdn.net/topics/350206420" target="_blank" rel="noopener">test 和 jg 配合起来用时，什么情况跳转？</a></p>
+</blockquote>
+<h2 id="练习5"><a href="#练习5" class="headerlink" title="练习5"></a>练习5</h2><h3 id="汇编代码及解释——-4"><a href="#汇编代码及解释——-4" class="headerlink" title="汇编代码及解释——"></a>汇编代码及解释——</h3><hr>
+<h4 id="C的release版本-3"><a href="#C的release版本-3" class="headerlink" title="C的release版本"></a><strong>C的release版本</strong></h4><p><strong>注意release版程序中如何辨识结构体的成员变量以及结构体数组。</strong></p>
+<ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/41.png" alt=""></p>
+<ul>
+<li>CaculateTax函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/42.png" alt=""></p>
+<hr>
+<h4 id="C的debug版本-3"><a href="#C的debug版本-3" class="headerlink" title="C的debug版本"></a><strong>C的debug版本</strong></h4><ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/43.png" alt=""></p>
+<ul>
+<li>CaculateTax函数</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/44.png" alt=""></p>
+<p>注意：这里比较一下c的release版和debug版——我们可以对比发现，c语言release版程序比起debug程序，除了练习3和4中归纳的优化之外，本程序中特有的优化体现在——</p>
+<p><strong>release版中对于结构体数组中各个结构体的成员变量的访问比起debug版的精简和优化（详见图上标注）。</strong></p>
+<hr>
+<h3 id="对应源码——-3"><a href="#对应源码——-3" class="headerlink" title="对应源码——"></a>对应源码——</h3><p>问题描述——C语言个人所得税问题：编写一个计算个人所得税的程序，要求输入收入金额后，能够输出应缴的个人所得税。 个人所得税征收办法如下：</p>
+<ul>
+<li>起征点为3500元；</li>
+<li>不超过1500元的部分，征收3%；</li>
+<li>超过1500〜4500元的部分，征收10%；</li>
+<li>超过4500〜9000元的部分，征收20%；</li>
+<li>超过9000〜35000元的部分，征收25%；</li>
+<li>超过35000〜55000元的部分，征收30%；</li>
+<li>超过55000〜80000元的部分，征收35%；</li>
+<li>超过80000元以上的，征收45%。</li>
+</ul>
+<p><img src="/2019/04/13/逆向练习8/45.png" alt=""></p>
+<p>具体编程实现如下——</p>
+<p><img src="/2019/04/13/逆向练习8/46.png" alt=""></p>
+<h3 id="参考资料——-3"><a href="#参考资料——-3" class="headerlink" title="参考资料——"></a>参考资料——</h3><blockquote>
+<p><a href="https://blog.csdn.net/lyl0625/article/details/7350045" target="_blank" rel="noopener">在C语言中，double、long、unsigned、int、char类型数据所占字节数</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/汇编/" rel="tag"># 汇编</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/12/Exploit编写系列教程1-学习笔记/" rel="next" title="Exploit编写系列教程1-学习笔记">
+                <i class="fa fa-chevron-left"></i> Exploit编写系列教程1-学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/15/代码审计训练-序/" rel="prev" title="代码审计训练-序">
+                代码审计训练-序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编阅读练习"><span class="nav-number">1.</span> <span class="nav-text">汇编阅读练习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#练习1"><span class="nav-number">1.1.</span> <span class="nav-text">练习1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编代码及解释——"><span class="nav-number">1.1.1.</span> <span class="nav-text">汇编代码及解释——</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对应c语言源码——"><span class="nav-number">1.1.2.</span> <span class="nav-text">对应c语言源码——</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习2"><span class="nav-number">1.2.</span> <span class="nav-text">练习2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编代码及解释——-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">汇编代码及解释——</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-的release版本"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">C++的release版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C的release版本"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">C的release版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C的debug版本"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">C的debug版本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对应源码——"><span class="nav-number">1.2.2.</span> <span class="nav-text">对应源码——</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料——"><span class="nav-number">1.2.3.</span> <span class="nav-text">参考资料——</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习3"><span class="nav-number">1.3.</span> <span class="nav-text">练习3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编代码及解释——-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">汇编代码及解释——</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C的release版本-1"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">C的release版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C的debug版本-1"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">C的debug版本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对应源码——-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">对应源码——</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料——-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">参考资料——</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习4"><span class="nav-number">1.4.</span> <span class="nav-text">练习4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编代码及解释——-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">汇编代码及解释——</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C的release版本-2"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">C的release版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C的debug版本-2"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">C的debug版本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对应源码——-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">对应源码——</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料——-2"><span class="nav-number">1.4.3.</span> <span class="nav-text">参考资料——</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习5"><span class="nav-number">1.5.</span> <span class="nav-text">练习5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编代码及解释——-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">汇编代码及解释——</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C的release版本-3"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">C的release版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C的debug版本-3"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">C的debug版本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对应源码——-3"><span class="nav-number">1.5.2.</span> <span class="nav-text">对应源码——</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料——-3"><span class="nav-number">1.5.3.</span> <span class="nav-text">参考资料——</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

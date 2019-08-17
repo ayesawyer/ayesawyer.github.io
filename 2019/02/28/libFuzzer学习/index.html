@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Fuzzing,libFuzzer,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对llvm中的Fuzz工具libFuzzer的实现原理的学习笔记。">
+<meta name="keywords" content="Fuzzing,libFuzzer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="libFuzzer学习">
+<meta property="og:url" content="http://yoursite.com/2019/02/28/libFuzzer学习/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对llvm中的Fuzz工具libFuzzer的实现原理的学习笔记。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-13T07:58:37.664Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="libFuzzer学习">
+<meta name="twitter:description" content="对llvm中的Fuzz工具libFuzzer的实现原理的学习笔记。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/28/libFuzzer学习/">
+
+
+
+
+
+  <title>libFuzzer学习 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/28/libFuzzer学习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">libFuzzer学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-28T10:26:11+08:00">
+                2019-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Fuzzing/" itemprop="url" rel="index">
+                    <span itemprop="name">Fuzzing</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/28/libFuzzer学习/" class="leancloud_visitors" data-flag-title="libFuzzer学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对llvm中的Fuzz工具libFuzzer的实现原理的学习笔记。</p>
+<a id="more"></a>
+<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><blockquote>
+<p><a href="https://www.secpulse.com/archives/71898.html" target="_blank" rel="noopener">https://www.secpulse.com/archives/71898.html</a><br><a href="https://stfpeak.github.io/2017/05/24/Finding-bugs-using-libFuzzer/" target="_blank" rel="noopener">https://stfpeak.github.io/2017/05/24/Finding-bugs-using-libFuzzer/</a><br><a href="http://pwn4.fun/2017/07/15/libFuzzer%E8%8F%9C%E9%B8%9F%E5%85%A5%E9%97%A8/" target="_blank" rel="noopener">http://pwn4.fun/2017/07/15/libFuzzer%E8%8F%9C%E9%B8%9F%E5%85%A5%E9%97%A8/</a></p>
+</blockquote>
+<p>关键：</p>
+<ol>
+<li>libFuzzer简介：libFuzzer 是一个in-process，coverage-guided，evolutionary 的 fuzz 引擎，是 LLVM 项目的一部分。libFuzzer 和要被测试的库链接在一起，通过一个模糊测试入口点（目标函数），把测试用例喂给要被测试的库。fuzzer会跟踪哪些代码区域已经测试过，然后在输入数据的语料库上进行变异，来使代码覆盖率最大化。代码覆盖率的信息由 LLVM 的SanitizerCoverage 插桩提供。</li>
+</ol>
+<ol start="2">
+<li><p>关于LLVM的参考资料——</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/snsn1984/article/details/78788031" target="_blank" rel="noopener">https://blog.csdn.net/snsn1984/article/details/78788031</a><br><a href="https://juejin.im/entry/5874d80761ff4b006d546b2f" target="_blank" rel="noopener">https://juejin.im/entry/5874d80761ff4b006d546b2f</a></p>
+</blockquote>
+</li>
+<li><p>关于llvm的SanitizerCoverage——</p>
+<blockquote>
+<p><a href="https://clang.llvm.org/docs/SanitizerCoverage.html" target="_blank" rel="noopener">https://clang.llvm.org/docs/SanitizerCoverage.html</a></p>
+</blockquote>
+</li>
+</ol>
+<ol start="4">
+<li><p>fuzz 的种类（根据测试用例生成方式来分）——</p>
+<blockquote>
+<p>Generation Based ：通过对目标协议或文件格式建模的方法，从零开始产生测试用例，没有先前的状态;<br>Mutation Based ：基于一些规则，从已有的数据样本或存在的状态变异而来;<br>Evolutionary ：包含了上述两种，同时会根据代码覆盖率的回馈进行变异。</p>
+</blockquote>
+</li>
+<li><p><a href="https://gitlab.com/akihe/radamsa" target="_blank" rel="noopener">radamsa</a>——一个测试用例生成器，基于变异的生成方式，根据给定的样本文件，生成各种测试用例，可以很好的集成在各个模糊测试框架中。并没有很详细的对其实现原理的解析，不太明白的地方在于：是如何根据给定的样本文件生成符合格式要求的同种测试用例的？——如有需要则阅读源码了解。</p>
+</li>
+<li><p>感觉libfuzzer 已经把 一个 fuzzer 的核心（样本生成引擎和异常检测系统） 给做好了， 我们需要做的是根据目标程序的逻辑，把 libfuzzer 生成的数据，交给目标程序处理。</p>
+</li>
+<li><p>有需要的话可以实践练习一下libfuzzer-workshop/tree/master/lessons(目前只练习了lessons04)。</p>
+</li>
+</ol>
+<ol start="8">
+<li>简单的理解libFuzzer——如果我们要 fuzz 一个程序，找到一个入口函数，然后利用</li>
+</ol>
+<pre><code>extern &quot;C&quot; int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
+.......
+.......
+}
+</code></pre><p>接口，我们可以拿到 libfuzzer 生成的 测试数据(<code>const uint8_t *data</code>)以及测试数据的长度(<code>size_t size</code>)，我们的任务就是把这些生成的测试数据传入到目标程序中, 让程序来处理测试数据， 同时要尽可能的触发更多的代码逻辑。对于测试目标中除data和size之外的参数，我们在fuzz脚本中自行构造，然后将构造的参数和libfuzzer 生成的测试数据一起传给测试目标程序。</p>
+<ul>
+<li>示例Fuzzer1（libfuzzer-workshop-master/lessons/04/second_fuzzer）</li>
+</ul>
+<pre><code>#include &quot;vulnerable_functions.h&quot;
+extern &quot;C&quot; int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
+   bool verify_hash_flags[] = { false, true };
+   for (auto flag : verify_hash_flags)
+     VulnerableFunction2(data, size, flag);
+   return 0;
+ }
+</code></pre><ul>
+<li>示例Fuzzer2（<a href="https://github.com/Dor1s/libfuzzer-workshop/tree/master/lessons/05——CVE-2014-0160-openssl漏洞）" target="_blank" rel="noopener">https://github.com/Dor1s/libfuzzer-workshop/tree/master/lessons/05——CVE-2014-0160-openssl漏洞）</a></li>
+</ul>
+<pre><code>#include &lt;openssl/ssl.h&gt;
+#include &lt;openssl/err.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stddef.h&gt;
+
+#ifndef CERT_PATH
+# define CERT_PATH
+#endif
+
+SSL_CTX *Init() {
+  SSL_library_init();
+  SSL_load_error_strings();
+  ERR_load_BIO_strings();
+  OpenSSL_add_all_algorithms();
+  SSL_CTX *sctx;
+  assert (sctx = SSL_CTX_new(TLSv1_method()));
+  /* These two file were created with this command:
+      openssl req -x509 -newkey rsa:512 -keyout server.key \
+     -out server.pem -days 9999 -nodes -subj /CN=a/
+  */
+  assert(SSL_CTX_use_certificate_file(sctx, CERT_PATH &quot;server.pem&quot;,
+                                  SSL_FILETYPE_PEM));
+  assert(SSL_CTX_use_PrivateKey_file(sctx, CERT_PATH &quot;server.key&quot;,
+                                 SSL_FILETYPE_PEM));
+  return sctx;
+}
+
+extern &quot;C&quot; int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
+  static SSL_CTX *sctx = Init();
+  SSL *server = SSL_new(sctx);
+  BIO *sinbio = BIO_new(BIO_s_mem());
+  BIO *soutbio = BIO_new(BIO_s_mem());
+  SSL_set_bio(server, sinbio, soutbio);
+  SSL_set_accept_state(server);
+  BIO_write(sinbio, data, size);
+  SSL_do_handshake(server);
+  SSL_free(server);
+  return 0;
+}
+</code></pre><p>感觉用 libfuzzer 的话，我们需要做的工作就是根据目标程序的逻辑，把 libfuzzer 生成的 测试数据 传递 给 目标程序去处理， 然后在编译时采取合适的 Sanitizer 用于检测运行时出现的内存错误。比如上面就是模拟了 SSL 握手的逻辑，然后把 libfuzzer 生成的 测试数据作为握手包传递给 openssl 。</p>
+<h3 id="报错及解决"><a href="#报错及解决" class="headerlink" title="报错及解决"></a>报错及解决</h3><p>报错信息如下：clang: error: no such file or directory:clang++</p>
+<p>通用类似的报错信息：clang: error: no such file or directory:xxx</p>
+<p>产生原因：大概是在编程的时候工程目录结构改变（即文件的路径等信息和之前不同）了，编译器还按照之前的方式进行文件之间的链接，于是无法找到相应的文件结构，所以报错。</p>
+<p><a href="https://blog.csdn.net/some_do/article/details/8776475" target="_blank" rel="noopener">解决办法</a>——</p>
+<blockquote>
+<p>关闭工程，将工程下的.xcodeproj后缀的文件改成后缀为.zip;<br>打开.zip文件;<br>找到project.pbxproj这个文件，用文本编译器打开;<br>找到报错的文件，修改为正确的路径，如果根本不存在这个文件，就直接删除就好了;<br>保存后，将.zip恢复为.xcodeproj打开运行即可。</p>
+</blockquote>
+<p>实际原因：在写命令的时候没注意，把路径搞错了，导致命令运行失败报错。</p>
+<h3 id="Android平台上使用libFuzzer"><a href="#Android平台上使用libFuzzer" class="headerlink" title="Android平台上使用libFuzzer"></a>Android平台上使用libFuzzer</h3><blockquote>
+<p><a href="http://www.gandalf.site/2018/11/libfuzzer-on-androidfuzz.html" target="_blank" rel="noopener">Android（八）libFuzzer</a></p>
+</blockquote>
+<p>Android默认支持libFuzzer，但需要编译插桩版本（即AddressSanitizer版Android）才能使用，而插桩版本需要以完整userdebug编译版本为起点继续编译，故需要编译两次。官方说明参考链接如下——</p>
+<blockquote>
+<p><a href="https://source.android.google.cn/devices/tech/debug/libfuzzer" target="_blank" rel="noopener">通过 libFuzzer 进行模糊测试</a><br><a href="https://source.android.google.cn/devices/tech/debug/asan.html#sanitize_target" target="_blank" rel="noopener">AddressSanitizer</a></p>
+</blockquote>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><blockquote>
+<p><a href="https://github.com/Dor1s/libfuzzer-workshop" target="_blank" rel="noopener">https://github.com/Dor1s/libfuzzer-workshop</a><br><a href="http://llvm.org/docs/LibFuzzer.html#dictionaries" target="_blank" rel="noopener">http://llvm.org/docs/LibFuzzer.html#dictionaries</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fuzzing/" rel="tag"># Fuzzing</a>
+          
+            <a href="/tags/libFuzzer/" rel="tag"># libFuzzer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/27/课后练习第一章/" rel="next" title="课后练习第一章">
+                <i class="fa fa-chevron-left"></i> 课后练习第一章
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/01/逆向练习1/" rel="prev" title="逆向练习1">
+                逆向练习1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习"><span class="nav-number">1.</span> <span class="nav-text">学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报错及解决"><span class="nav-number">2.</span> <span class="nav-text">报错及解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android平台上使用libFuzzer"><span class="nav-number">3.</span> <span class="nav-text">Android平台上使用libFuzzer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

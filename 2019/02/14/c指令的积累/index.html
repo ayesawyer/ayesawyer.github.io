@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="C语言,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="实践过程中的一些ｃ函数／指令及含义的积累。">
+<meta name="keywords" content="C语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c指令的积累">
+<meta property="og:url" content="http://yoursite.com/2019/02/14/c指令的积累/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="实践过程中的一些ｃ函数／指令及含义的积累。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/0.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/4.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/6.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/14/c指令的积累/7.png">
+<meta property="og:updated_time" content="2019-04-16T01:46:41.942Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c指令的积累">
+<meta name="twitter:description" content="实践过程中的一些ｃ函数／指令及含义的积累。">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/14/c指令的积累/0.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/14/c指令的积累/">
+
+
+
+
+
+  <title>c指令的积累 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/c指令的积累/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">c指令的积累</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T10:19:04+08:00">
+                2019-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/14/c指令的积累/" class="leancloud_visitors" data-flag-title="c指令的积累">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>实践过程中的一些ｃ函数／指令及含义的积累。</p>
+<a id="more"></a>
+<h3 id="函数积累"><a href="#函数积累" class="headerlink" title="函数积累"></a>函数积累</h3><table>
+<thead>
+<tr>
+<th>函数/指令</th>
+<th>含义</th>
+<th>补充说明</th>
+<th>对应函数头文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int main(intargc,char<em>argv[],char</em>envp[])；</td>
+<td>对于其参数说明见图1</td>
+<td>envp：存放系统的环境变量，保存用户环境中的变量字符串，以NULL结束，envp一旦传入，它就只是单纯的字符串数组而已，不会随着程序动态设置发生改变。可以使用putenv函数实时修改环境变量，也能使用getenv实时查看环境变量，但是envp本身不会发生改变</td>
+<td>#include &lt;stdio.h&gt;</td>
+</tr>
+<tr>
+<td>scanf(“格式控制字符串”, 地址表列);</td>
+<td>其中，格式控制字符串的作用与printf函数相同，但不能显示非格式字符串，也就是不能显示提示字符串。地址表列中给出各变量的地址。地址是由地址运算符“&amp;”后跟变量名组成的</td>
+<td>&amp;a、&amp;b分别表示变量a和变量b的地址</td>
+<td>#include &lt;stdio.h&gt;</td>
+</tr>
+<tr>
+<td>char <em>strstr( char </em>str, char * substr );</td>
+<td>用来检索子串在字符串中首次出现的位置，str为要检索的字符串，substr为要检索的子串</td>
+<td>返回字符串str中第一次出现子串substr的地址；如果没有检索到子串，则返回NULL</td>
+<td>#include &lt;string.h&gt;</td>
+</tr>
+<tr>
+<td>void <em>memcpy(void </em>dest, const void *src, size_t n);</td>
+<td>memcpy() 会复制 src 所指的内存内容的前 num 个字节到 dest 所指的内存地址上</td>
+<td>如图2</td>
+<td>#include &lt;string.h&gt;</td>
+</tr>
+<tr>
+<td>char <em>gets(char </em>string)</td>
+<td>gets()函数从流中读取字符串，直到出现换行符或读到文件尾为止，最后加上NULL作为字符串结束; 所读取的字符串暂存在给定的参数string中，若成功则返回string的指针，否则返回NULL</td>
+<td>由于gets()不检查字符串string的大小，必须遇到换行符或文件结尾才会结束输入，因此容易造成缓存溢出的安全性问题，导致程序崩溃，可以使用fgets()代替</td>
+<td>#include &lt;stdio.h&gt;</td>
+</tr>
+<tr>
+<td>ssize_t read(int fd, void * buf, size_t count);</td>
+<td>read()会把参数fd 所指的文件传送count 个字节到buf 指针所指的内存中</td>
+<td>若参数count 为0, 则read()不会有作用并返回0. 返回值为实际读取到的字节数, 如果返回0, 表示已到达文件尾或是无可读取的数据,此外文件读写位置会随读取到的字节移动，更多说明见图3</td>
+<td>#include &lt;unistd.h&gt;</td>
+</tr>
+<tr>
+<td>char <em>strcpy(char </em>dest, const char *src);</td>
+<td>strcpy()会将参数src 字符串拷贝至参数dest 所指的地址，然后返回参数dest 的字符串起始地址</td>
+<td>由于该函数没有检查数据长度，如果参数 dest 所指的内存空间不够大，可能会造成缓冲溢出，在编写程序时请特别留意，或者用strncpy()来取代</td>
+<td>#include &lt;string.h&gt;</td>
+</tr>
+<tr>
+<td>void free (void* ptr)；</td>
+<td>ptr 为将要释放的内存空间的地址，<code>free()</code>可以释放由 <code>malloc()</code>、<code>calloc()</code>、<code>realloc()</code> 分配的内存空间，<code>free()</code> 只能释放动态分配的内存空间，如果 ptr 所指向的内存空间不是由上面的三个函数所分配的，或者已被释放，那么调用 <code>free()</code> 会有无法预知的情况发生，如果 ptr 为 <code>NULL</code>，那么 <code>free()</code> 不会有任何作用</td>
+<td><code>free()</code> 不会改变 ptr 变量本身的值，调用 <code>free()</code> 后它仍然会指向相同的内存空间，但是此时该内存已无效，不能被使用。所以建议将 ptr 的值设置为 <code>NULL</code></td>
+<td>#include &lt;stdlib.h&gt;</td>
+</tr>
+<tr>
+<td>int strcmp(const char <em>s1, const char </em>s2);</td>
+<td>见图4</td>
+<td>见图4</td>
+<td>#include &lt;string.h&gt;</td>
+</tr>
+<tr>
+<td>long int strtol (const char* str, char** endptr, int base);</td>
+<td>将字符串转换为长整型数(long)</td>
+<td>见图5</td>
+<td>#include &lt;stdlib.h&gt;</td>
+</tr>
+<tr>
+<td>int strncmp ( const char <em> str1, const char </em> str2, size_t n );</td>
+<td>用来比较两个字符串的前n个字符，区分大小写，str1, str2 为需要比较的两个字符串，n为要比较的字符的数目</td>
+<td>见图6</td>
+<td>#include &lt;string.h&gt;</td>
+</tr>
+<tr>
+<td>int atoi (const char * str);</td>
+<td>将字符串转换成整数(int)</td>
+<td>见图7</td>
+<td>#include &lt;stdlib.h&gt;</td>
+</tr>
+<tr>
+<td>char <em>strset( char</em> s, char c);</td>
+<td>将字符串中的所有字符都设置为一个指定字符，s为要设置的字符串，c为指定字符；返回设置后的字符串指针，即 s</td>
+<td>strset() 不会生成新字符串，而是修改原有字符串，因此它只能操作字符数组，不能操作字符串指针指向的字符串，因为字符串指针指向字符串常量，常量不能被修改。如果你希望指定要设置的字符的个数，可以使用strnset()。</td>
+<td>#include&lt;string.h&gt;</td>
+</tr>
+<tr>
+<td>void <em> memset( void </em> ptr, int value, size_t num );</td>
+<td>用来将指定内存的前n个字节设置为特定的值, 返回指向 ptr 的指针。ptr 为要操作的内存的指针。value 为要设置的值。你既可以向 value 传递 int 类型的值，也可以传递 char 类型的值，int 和 char 可以根据 ASCII 码相互转换。num 为 ptr 的前 num 个字节，size_t 就是unsigned int。</td>
+<td>memset() 可以将一段内存空间全部设置为特定的值，所以经常用来初始化字符数组；参数 value 虽声明为 int，但必须是 unsigned char，所以范围在0 到255 之间。</td>
+<td>#include &lt;string.h&gt;</td>
+</tr>
+<tr>
+<td>clock_t clock(void);</td>
+<td>返回处理器调用某个进程或函数所花费的时间，clock_t其实就是long，即长整形。该函数返回值是硬件滴答数，要换算成秒或者毫秒，需要除以CLK_TCK或者CLOCKS_PER_SEC。比如，在VC++6.0下，这两个量的值都是1000，这表示硬件滴答1000下是1秒，因此要计算一个进程的时间，用clock()除以1000即可。</td>
+<td>C语言中求程序执行的时间可以使用clock()函数，函数返回从“开启这个程序进程”到“程序中调用clock()函数”时之间的CPU时钟计时单元（clock tick）数。</td>
+<td>#include &lt;time.h&gt;</td>
+</tr>
+<tr>
+<td>FILE <em> fopen(const char </em> path, const char * mode);</td>
+<td>用来以指定的方式打开文件，path为包含了路径的文件名，mode为文件打开方式。文件顺利打开后，指向该流的文件指针就会被返回。若果文件打开失败则返回NULL。更多说明详见图8.</td>
+<td>文件操作完成后，需要将文件关闭，一定要注意，否则会造成文件所占用内存泄露和在下次访问文件时出现问题。文件关闭后，需要将文件指针指向空，这样做会防止出现游离指针，而对整个工程造成不必要的麻烦，如fp = NULL。</td>
+<td>#include &lt;stdio.h&gt;</td>
+</tr>
+<tr>
+<td>char <em> fgets(char </em> string, int size, FILE * stream);</td>
+<td>用于从文件流中读取一行或指定个数的字符。</td>
+<td>更多说明见图9。</td>
+<td>include&lt;stdio.h&gt;</td>
+</tr>
+<tr>
+<td>char <em>strcat(char </em>dest, const char *src);</td>
+<td>用来连接字符串，dest 为目的字符串指针，src 为源字符串指针，返回dest 字符串起始地址。</td>
+<td>strcat() 会将参数 src 字符串复制到参数 dest 所指的字符串尾部；dest 最后的结束字符 NULL 会被覆盖掉，并在连接后的字符串的尾部再增加一个 NULL。 dest 与 src 所指的内存空间不能重叠，且 dest 要有足够的空间来容纳要复制的字符串。</td>
+<td>#include &lt;string.h&gt;</td>
+</tr>
+<tr>
+<td>int isalpha(int c);</td>
+<td>用来判断一个字符是否是英文字母，相当于 isupper(c)/islower(c)。</td>
+<td>c 为需要被检测的字符，若参数c 为英文字母（a ~ z  A ~ Z），则返回非 0 值，否则返回 0</td>
+<td>#include &lt;ctype.h&gt;</td>
+</tr>
+<tr>
+<td>int getche(void);</td>
+<td>该函数没有参数,从控制台读取字符，并在控制台显示读取的字符ASCII码值。</td>
+<td></td>
+<td>#include&lt;stdio.h&gt;  #include&lt;conio.h&gt;</td>
+</tr>
+<tr>
+<td>double pow(double x, double y);</td>
+<td>用来计算以x 为底的 y 次方值，然后将结果返回。</td>
+<td>见图10</td>
+<td>#include &lt;math.h&gt;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><h4 id="图1——"><a href="#图1——" class="headerlink" title="图1——"></a>图1——</h4><p><img src="/2019/02/14/c指令的积累/0.png" alt=""></p>
+<h4 id="图2——"><a href="#图2——" class="headerlink" title="图2——"></a>图2——</h4><p><img src="/2019/02/14/c指令的积累/1.png" alt=""></p>
+<h4 id="图3——"><a href="#图3——" class="headerlink" title="图3——"></a>图3——</h4><p><img src="/2019/02/14/c指令的积累/2.png" alt=""></p>
+<h4 id="图4——"><a href="#图4——" class="headerlink" title="图4——"></a>图4——</h4><p><img src="/2019/02/14/c指令的积累/3.png" alt=""></p>
+<h4 id="图5——"><a href="#图5——" class="headerlink" title="图5——"></a>图5——</h4><p><img src="/2019/02/14/c指令的积累/4.PNG" alt=""></p>
+<blockquote>
+<p>strtol(), strtoll(), strtoul(), strtoull()函数参数如下图；</p>
+</blockquote>
+<p><img src="/2019/02/14/c指令的积累/5.png" alt=""></p>
+<blockquote>
+<p>第一个参数 nptr是要转化的字符串;<br>第三个参数base说明nptr的进制，base 的取值范围为 0，2-36；<br><a href="http://zengwu3915.blog.163.com/blog/static/27834897201262562912597/" target="_blank" rel="noopener">http://zengwu3915.blog.163.com/blog/static/27834897201262562912597/</a></p>
+</blockquote>
+<h4 id="图6——"><a href="#图6——" class="headerlink" title="图6——"></a>图6——</h4><p><img src="/2019/02/14/c指令的积累/6.PNG" alt=""></p>
+<h4 id="图7——"><a href="#图7——" class="headerlink" title="图7——"></a>图7——</h4><p><img src="/2019/02/14/c指令的积累/9.png" alt=""></p>
+<h4 id="图8——"><a href="#图8——" class="headerlink" title="图8——"></a>图8——</h4><p><img src="/2019/02/14/c指令的积累/10.png" alt=""></p>
+<h4 id="图9——"><a href="#图9——" class="headerlink" title="图9——"></a>图9——</h4><p><img src="/2019/02/14/c指令的积累/11.png" alt=""></p>
+<h4 id="图10——"><a href="#图10——" class="headerlink" title="图10——"></a>图10——</h4><p><img src="/2019/02/14/c指令的积累/12.png" alt=""></p>
+<h4 id="int-ip-和-int-ip-的区别；"><a href="#int-ip-和-int-ip-的区别；" class="headerlink" title="(int )ip 和 int ( ip)的区别；"></a>(int <em>)ip 和 int (</em> ip)的区别；</h4><p><img src="/2019/02/14/c指令的积累/8.png" alt=""></p>
+<p><img src="/2019/02/14/c指令的积累/7.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C语言/" rel="tag"># C语言</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/14/汇编指令的积累/" rel="next" title="汇编指令的积累">
+                <i class="fa fa-chevron-left"></i> 汇编指令的积累
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/16/知识积累(1)/" rel="prev" title="知识积累(1)">
+                知识积累(1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数积累"><span class="nav-number">1.</span> <span class="nav-text">函数积累</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">2.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#图1——"><span class="nav-number">2.1.</span> <span class="nav-text">图1——</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图2——"><span class="nav-number">2.2.</span> <span class="nav-text">图2——</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图3——"><span class="nav-number">2.3.</span> <span class="nav-text">图3——</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图4——"><span class="nav-number">2.4.</span> <span class="nav-text">图4——</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图5——"><span class="nav-number">2.5.</span> <span class="nav-text">图5——</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图6——"><span class="nav-number">2.6.</span> <span class="nav-text">图6——</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图7——"><span class="nav-number">2.7.</span> <span class="nav-text">图7——</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图8——"><span class="nav-number">2.8.</span> <span class="nav-text">图8——</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图9——"><span class="nav-number">2.9.</span> <span class="nav-text">图9——</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图10——"><span class="nav-number">2.10.</span> <span class="nav-text">图10——</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#int-ip-和-int-ip-的区别；"><span class="nav-number">2.11.</span> <span class="nav-text">(int )ip 和 int ( ip)的区别；</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

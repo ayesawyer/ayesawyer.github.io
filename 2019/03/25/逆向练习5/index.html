@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="汇编,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="每日逆向的理解和积累。">
+<meta name="keywords" content="汇编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逆向练习5">
+<meta property="og:url" content="http://yoursite.com/2019/03/25/逆向练习5/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="每日逆向的理解和积累。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/14.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/15.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/16.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/17.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/18.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/19.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/20.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/21.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/24.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/22.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/23.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/25.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/26.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/27.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/28.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/29.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/逆向练习5/30.png">
+<meta property="og:updated_time" content="2019-04-01T02:20:29.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="逆向练习5">
+<meta name="twitter:description" content="每日逆向的理解和积累。">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/25/逆向练习5/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/25/逆向练习5/">
+
+
+
+
+
+  <title>逆向练习5 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/逆向练习5/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">逆向练习5</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-25T16:28:24+08:00">
+                2019-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/25/逆向练习5/" class="leancloud_visitors" data-flag-title="逆向练习5">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>每日逆向的理解和积累。</p>
+<a id="more"></a>
+<h3 id="汇编阅读练习"><a href="#汇编阅读练习" class="headerlink" title="汇编阅读练习"></a>汇编阅读练习</h3><h5 id="练习1-1"><a href="#练习1-1" class="headerlink" title="练习1-1"></a>练习1-1</h5><p>1.汇编代码及解释如下：</p>
+<ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/1.png" alt="">  </p>
+<p>2.对应c语言源码如下：</p>
+<p><img src="/2019/03/25/逆向练习5/2.png" alt=""></p>
+<p>3.该程序并未开启canary保护机制。补充：C语言源码中的<code>a=077</code>的意思是将a初始化为八进制的77。</p>
+<h5 id="练习1-2"><a href="#练习1-2" class="headerlink" title="练习1-2"></a>练习1-2</h5><p>1.汇编代码及解释如下：</p>
+<ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/3.png" alt="">  </p>
+<ul>
+<li>print_arr函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/4.png" alt=""> </p>
+<ul>
+<li>move函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/5.png" alt=""></p>
+<p>2.对应c语言源码如下：</p>
+<p><img src="/2019/03/25/逆向练习5/6.png" alt=""></p>
+<p>3.该程序开启了canary保护机制。</p>
+<p>4.补充1：本程序的分析难点在于move函数中通过指针变量实现数组元素循环右移的操作，重点区分指针变量和具体的取值操作；</p>
+<pre><code>mov     rax, [rbp+var_8]   //这里地址rbp+var_8处存放的是一个地址，所以变量[rbp+var_8]是一个指针变量。这句操作是将变量[rbp+var_8]的值（即其中存放的地址）赋值给rax
+mov     eax, [rax-4]       //rax中存放的是地址值，故[rax-4]指的是取出rax-4这个地址处存放的具体值，于是此时eax中存放的就不再是地址而是一个具体的值
+mov     [rbp+var_14], eax  //所以此时变量[rbp+var_14]中存放的就是一个具体的值，其就不是一个指针变量，只是一个普通的int型变量
+</code></pre><p>5.补充2：在print_arr函数中主要是对于以下几句汇编代码的理解。</p>
+<pre><code>（1）lea     rdx, ds:0[rax*4]   //此句代码等同于lea rdx, [rax*4+0]，都是混合运算；
+                               //此时rax中存的是一个具体的变量值；
+                               //执行之后rdx=（rax中的值*4+0）；
+
+（2）mov     edi, 10         
+    call    _putchar
+</code></pre><ul>
+<li>putchar(10)中的10是换行符的ASCII码，putchar(10)输出一个换行符，作用与putchar(‘\n’) 相同;</li>
+<li>CS：段寄存器，CS是代码段;</li>
+<li>DS：段寄存器，DS是数据段;</li>
+<li>16位CPU中，段寄存器有4个，分别是CS(代码段)、DS(数据段)、SS(堆栈段)、ES(附加段);</li>
+<li>32位寄存器中，段寄存器从4个扩展到6个，分别是CS、DS、SS、ES、FS和GS。</li>
+<li>FS和GS段寄存器也属于附加的段寄存器。</li>
+</ul>
+<p>参考资料：</p>
+<blockquote>
+<p><a href="https://codeday.me/bug/20171223/111586.html" target="_blank" rel="noopener">https://codeday.me/bug/20171223/111586.html</a><br><a href="http://www.xumenger.com/windows-assembly-20161208/" target="_blank" rel="noopener">http://www.xumenger.com/windows-assembly-20161208/</a><br><a href="https://www.jianshu.com/p/061d971424c6" target="_blank" rel="noopener">https://www.jianshu.com/p/061d971424c6</a><br><a href="https://zhidao.baidu.com/question/282296134.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/282296134.html</a></p>
+</blockquote>
+<h5 id="练习2"><a href="#练习2" class="headerlink" title="练习2"></a>练习2</h5><p>1.汇编代码及解释如下：</p>
+<ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/7.png" alt=""><br><img src="/2019/03/25/逆向练习5/8.png" alt=""><br><img src="/2019/03/25/逆向练习5/9.png" alt=""> </p>
+<p>2.对应c语言源码如下：</p>
+<p><img src="/2019/03/25/逆向练习5/10.png" alt=""></p>
+<p>3.该程序开启了canary保护机制。补充知识：对于源码中的冒泡排序算法的理解。</p>
+<pre><code>for(i=strlen(str)-1;i&gt;1;i--)      //外层循环是从字符串的最后一个字符开始向前循环的
+    for(j=0;j&lt;i;j++)              //内层循环是从前开始，控制条件：j&lt;i
+        if(str[j]&gt;str[j+1])       //如果前一个&gt;后一个则交换顺序
+                                  //这样一轮内层循环之后能保证最后一个元素一定是循环包含的元素中最大的元素
+        {
+            tem=str[j];
+            str[j]=str[j+1];
+            str[j+1]=tem;
+        }
+</code></pre><p>还可以改变循环条件，另一种形式的代码如下：</p>
+<p><img src="/2019/03/25/逆向练习5/11.png" alt=""></p>
+<p>之所以本题没有采取第二种形式，目测是因为第二种内层循环的计数变量初始值是一个变量（字符串的长度），第一种是常量0，所以第一种比较节省内存空间。</p>
+<h5 id="练习3-1"><a href="#练习3-1" class="headerlink" title="练习3-1"></a>练习3-1</h5><p>1.汇编代码及解释如下：</p>
+<ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/12.png" alt=""> </p>
+<ul>
+<li>strconnect函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/13.png" alt=""> </p>
+<p>2.对应c语言源码如下：</p>
+<p><img src="/2019/03/25/逆向练习5/14.png" alt=""></p>
+<p>3.该程序开启了canary保护机制。唯一不能在分析过程中准确确定的是两个字符数组的长度，在汇编层面来看给变量分配的内存空间大小是24或者32，均大于源码中的20。</p>
+<h5 id="练习3-2"><a href="#练习3-2" class="headerlink" title="练习3-2"></a>练习3-2</h5><p>1.汇编代码及解释如下：</p>
+<ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/15.png" alt="">  </p>
+<p>2.对应c语言源码如下：</p>
+<p><img src="/2019/03/25/逆向练习5/16.png" alt=""></p>
+<p>3.该程序并未开启canary保护机制。</p>
+<h5 id="练习4"><a href="#练习4" class="headerlink" title="练习4"></a>练习4</h5><p>1.汇编代码及解释如下：</p>
+<ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/17.png" alt="">  </p>
+<ul>
+<li>create_list函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/18.png" alt=""> </p>
+<ul>
+<li>selection_sort函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/19.png" alt=""><br><img src="/2019/03/25/逆向练习5/20.png" alt=""> </p>
+<ul>
+<li>delete_node函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/21.png" alt=""> </p>
+<ul>
+<li>concatenate函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/24.png" alt=""> </p>
+<p>2.对应c语言源码如下：</p>
+<p><img src="/2019/03/25/逆向练习5/22.png" alt=""><br><img src="/2019/03/25/逆向练习5/23.png" alt=""></p>
+<p>3.该程序开启了canary保护机制。</p>
+<p><strong>4.在分析该程序的过程中，存在以下错误</strong>——</p>
+<p>（1）main函数——</p>
+<pre><code>(1)
+mov     [rbp+var_20], 3
+mov     [rbp+var_1C], 0Ch
+mov     [rbp+var_18], 8
+mov     [rbp+var_14], 9
+mov     [rbp+var_10], 0Bh  //这一串连续的mov操作并不一定是结构体初始化赋值（结构体中一般都会包含不同类型的成员变量）；
+                           //这5个变量类型相同，又占用一片连续的内存空间，所以是int型数组的可能性更大。
+(2)
+call    create_list     ; 
+mov     [rbp+var_28], rax ;   //由于对create_list函数分析有误，导致对返回值的判断出错；
+</code></pre><p>（2）create_list函数——</p>
+<pre><code>(1)
+mov     edi, 10h           //size
+call    _malloc            //注意到每次malloc的地址都是10h，共16个字节，而分析时误以为其中只存放着8个字节的指针变量；
+                           //由于5次循环中每次循环时都会申请10h大小的空间，其实应该想到这10h大小的空间可能是用来存放一个包含有指针成员变量的结构体变量的。
+mov     [rbp+var_10], rax  //malloc申请的大小为16个字节的内存空间首地址；
+mov     rax, [rbp+var_28]
+mov     edx, [rax]
+mov     rax, [rbp+var_10]
+mov     [rax], edx         //这里其实是将main函数传进来的int型数组的第一个值存入malloc申请的内存空间中；
+
+
+
+(2)
+ mov     edi, 10h          //size
+ call    _malloc
+ mov     [rbp+var_8], rax  //[rbp+var_8]是一个指针变量，指向malloc申请的内存空间（16字节）
+ mov     rax, [rbp+var_8]
+ mov     qword ptr [rax+8], 0  //这里将malloc申请的内存空间的后8个字节初始化为0，故可猜测该结构体的第二个成员变量占16个字节的后8个字节
+ mov     eax, [rbp+var_1C]
+ cdqe
+ lea     rdx, ds:0[rax*4]
+ mov     rax, [rbp+var_28]
+ add     rax, rdx
+ mov     edx, [rax]
+ mov     rax, [rbp+var_8]
+ mov     [rax], edx          //依次取出main函数传进来的整形数组中的第i个值，存入每次循环申请的第i个16个字节大小的空间中；
+                             //i=2~5；
+                             //也就是说，到这里为止，[rbp+var_8]这个结构体变量的前8个字节是一个int型的成员变量，后8个字节初始化为0。
+ mov     rax, [rbp+var_18]
+ mov     rdx, [rbp+var_8]
+ mov     [rax+8], rdx    ;    //这里就给前一个结构体中的第二个成员变量（也即后8个字节）赋值为指向本结构体的第一个int型成员变量的指针变量。
+
+
+(3)
+ mov     rax, [rbp+var_10]    //此函数返回的是一块连续的内存空间的首地址，该内存空间中依次存放着5个结构体变量；
+ leave
+
+(4)经过分析，最终应该归纳出结构体的基本结构如下,这5个结构体应该组成了一个单向链表的结构——
+struct list
+{
+    int data;
+    struct list *next;      //这个指针变量指向下一个结构体的首地址
+};
+</code></pre><p>（3）selection_sort函数——</p>
+<pre><code>//由对应图中红框框起来的汇编代码可以看出[rbp+var_14]应该是个整型变量；
+//在错误的分析中，结构体的第一个元素分析的是指针，所以这里就会出现前后矛盾的情况；
+//以后在碰到这样的情况时，应该意识到可能是对于结构体变量的分析出问题了，考虑重新分析变量结构。
+mov     rax, [rbp+var_28]
+mov     [rbp+var_10], rax
+mov     rax, [rbp+var_10]
+mov     eax, [rax]
+mov     [rbp+var_14], eax ;     //[rbp+var_14]应该是结构体的第一个元素
+</code></pre><p><strong>5.总结</strong>——本题的难点在于对于链表这种数据结构的熟悉，以及对于结构体变量结构的识别，同时注意区分一段连续内存的赋值操作是数组、字符串还是结构体变量。</p>
+<h5 id="练习5-1"><a href="#练习5-1" class="headerlink" title="练习5-1"></a>练习5-1</h5><p>1.汇编代码及解释如下：</p>
+<ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/25.png" alt="">  </p>
+<p>2.对应c语言源码如下：</p>
+<p><img src="/2019/03/25/逆向练习5/26.png" alt=""></p>
+<p>3.该程序并未开启canary保护机制。</p>
+<h5 id="练习5-2"><a href="#练习5-2" class="headerlink" title="练习5-2"></a>练习5-2</h5><p>1.汇编代码及解释如下：</p>
+<ul>
+<li>main函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/27.png" alt="">  </p>
+<ul>
+<li>evenumber函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/28.png" alt=""> </p>
+<ul>
+<li>oddnumber函数</li>
+</ul>
+<p><img src="/2019/03/25/逆向练习5/29.png" alt=""></p>
+<p>2.对应c语言源码如下：</p>
+<p><img src="/2019/03/25/逆向练习5/30.png" alt=""></p>
+<p>3.该程序开启了canary保护机制。补充：双精度浮点数其实就是double型，对于浮点数的操作分析与整型操作数相似，区别在于进行操作的主要寄存器不同，为xmm0系列寄存器。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/汇编/" rel="tag"># 汇编</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/21/汇编与对应C-伪码（1）/" rel="next" title="汇编与对应C++伪码（1）">
+                <i class="fa fa-chevron-left"></i> 汇编与对应C++伪码（1）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/27/一个简单的Crackme的分析/" rel="prev" title="一个简单的Crackme.exe的分析">
+                一个简单的Crackme.exe的分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编阅读练习"><span class="nav-number">1.</span> <span class="nav-text">汇编阅读练习</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#练习1-1"><span class="nav-number">1.0.1.</span> <span class="nav-text">练习1-1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#练习1-2"><span class="nav-number">1.0.2.</span> <span class="nav-text">练习1-2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#练习2"><span class="nav-number">1.0.3.</span> <span class="nav-text">练习2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#练习3-1"><span class="nav-number">1.0.4.</span> <span class="nav-text">练习3-1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#练习3-2"><span class="nav-number">1.0.5.</span> <span class="nav-text">练习3-2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#练习4"><span class="nav-number">1.0.6.</span> <span class="nav-text">练习4</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#练习5-1"><span class="nav-number">1.0.7.</span> <span class="nav-text">练习5-1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#练习5-2"><span class="nav-number">1.0.8.</span> <span class="nav-text">练习5-2</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

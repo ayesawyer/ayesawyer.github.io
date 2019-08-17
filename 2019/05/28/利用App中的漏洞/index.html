@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Android,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="利用工具分析Android App，以发现漏洞和开发漏洞利用代码。">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用App中的漏洞">
+<meta property="og:url" content="http://yoursite.com/2019/05/28/利用App中的漏洞/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="利用工具分析Android App，以发现漏洞和开发漏洞利用代码。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/14.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/16.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/15.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/17.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/18.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/19.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/20.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/21.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/22.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/23.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/24.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/25.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/26.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/27.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/28.png">
+<meta property="og:updated_time" content="2019-05-31T02:19:34.472Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用App中的漏洞">
+<meta name="twitter:description" content="利用工具分析Android App，以发现漏洞和开发漏洞利用代码。">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/28/利用App中的漏洞/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/28/利用App中的漏洞/">
+
+
+
+
+
+  <title>利用App中的漏洞 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/利用App中的漏洞/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">利用App中的漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T09:25:30+08:00">
+                2019-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/漏洞挖掘-利用/" itemprop="url" rel="index">
+                    <span itemprop="name">漏洞挖掘/利用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/05/28/利用App中的漏洞/" class="leancloud_visitors" data-flag-title="利用App中的漏洞">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>利用工具分析Android App，以发现漏洞和开发漏洞利用代码。</p>
+<a id="more"></a>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><h3 id="1-主要内容"><a href="#1-主要内容" class="headerlink" title="(1)主要内容"></a>(1)主要内容</h3><ul>
+<li>收集logcat泄露的信息</li>
+<li>检查网络流量</li>
+<li>通过activity manager被动嗅探intent</li>
+<li>攻击service</li>
+<li>攻击broadcast receiver</li>
+<li>枚举有漏洞的content provider</li>
+<li>从有漏洞的content provider中提取数据</li>
+<li>向content provider中插入数据</li>
+<li>枚举有SQL注入漏洞的content provider</li>
+<li>利用可调试的App</li>
+<li>对App做中间人攻击</li>
+</ul>
+<h3 id="2-App中存在的攻击面-安全目标"><a href="#2-App中存在的攻击面-安全目标" class="headerlink" title="(2)App中存在的攻击面/安全目标"></a>(2)App中存在的攻击面/安全目标</h3><ul>
+<li>保护用户数据（如口令、认证令牌、联系人、通信记录、敏感服务器的IP地址或域名等）</li>
+<li>App间的保护（隔离和权限分离）</li>
+<li>保护敏感信息的通信（组件间通信<em>(可以通过intent和intent filter来完成)</em>、App间通信、与其他设备进行通信）</li>
+</ul>
+<h2 id="2-内容要点"><a href="#2-内容要点" class="headerlink" title="2.内容要点"></a>2.内容要点</h2><h3 id="1-收集logcat泄露的信息"><a href="#1-收集logcat泄露的信息" class="headerlink" title="(1)收集logcat泄露的信息"></a>(1)收集logcat泄露的信息</h3><ol>
+<li><strong><code>adb logcat</code></strong></li>
+<li><strong><code>adb logcat [options] [filter]</code></strong></li>
+</ol>
+<p><img src="/2019/05/28/利用App中的漏洞/1.png" alt=""></p>
+<ol start="3">
+<li><strong><code>adb logcat &gt; output.txt</code></strong>，把日志的输出转存到一个文件中去。</li>
+<li><strong><code>adb logcat | [其他程序]</code></strong>，利用“管道”把日志信息输入到另一个程序中去。<em>（如<strong><code>adb logcat | grep [pattern]</code></strong>）</em></li>
+<li>例如，下述例子可以帮助过滤给出日志文件中与Web相关的信息，<strong><code>adb logcat | grep [Cc]ookie</code></strong>、<strong><code>adb logcat | grep &quot;http[s]&quot;</code></strong>、<strong><code>adb logcat | grep &quot;ftp[s]&quot;</code></strong></li>
+</ol>
+<h3 id="2-使用Monkey框架对App进行测试"><a href="#2-使用Monkey框架对App进行测试" class="headerlink" title="(2)使用Monkey框架对App进行测试"></a>(2)使用Monkey框架对App进行测试</h3><p><strong><code>adb shell monkey -p [package] -v [event count]</code></strong>，其中[package]是你想要把事件发送给它的package或app的名称，而[event count]是你想要发送的随机事件的数量。</p>
+<h3 id="3-检查网络流量"><a href="#3-检查网络流量" class="headerlink" title="(3)检查网络流量"></a>(3)检查网络流量</h3><h4 id="主要工具"><a href="#主要工具" class="headerlink" title="主要工具"></a>主要工具</h4><ul>
+<li>Wireshark</li>
+<li>Netcat</li>
+<li>TCPdump for Android</li>
+</ul>
+<h4 id="主要步骤"><a href="#主要步骤" class="headerlink" title="主要步骤"></a>主要步骤</h4><p><img src="/2019/05/28/利用App中的漏洞/2.png" alt=""><br><img src="/2019/05/28/利用App中的漏洞/3.png" alt=""></p>
+<p>在首次进行上述步骤，配置完所有操作环境后，后面再想监听网络流量就只需要进行<strong>第三步</strong>和<strong>第六步</strong>了，也即是依次执行下面2条命令。</p>
+<pre><code>./data/tcpdump/tcpdump -w - | nc -l -p 31337
+
+adb forward tcp:12345 tcp:31337 &amp;&amp; nc 127.0.0.1 12345 | wireshark -k -S -i -
+</code></pre><h5 id="对于上述主要步骤中的命令参数的补充说明"><a href="#对于上述主要步骤中的命令参数的补充说明" class="headerlink" title="对于上述主要步骤中的命令参数的补充说明"></a>对于上述主要步骤中的命令参数的补充说明</h5><ol>
+<li>关于<strong>adb push tcpdump /data/tcpdump/.</strong></li>
+</ol>
+<p><img src="/2019/05/28/利用App中的漏洞/4.png" alt=""></p>
+<ol start="2">
+<li>关于<strong>./data/tcpdump/tcpdump -w - | nc -l -p 31337</strong></li>
+</ol>
+<p><img src="/2019/05/28/利用App中的漏洞/5.png" alt=""></p>
+<ol start="3">
+<li>关于<strong>wireshark -k -S -i -</strong></li>
+</ol>
+<p><img src="/2019/05/28/利用App中的漏洞/6.png" alt=""></p>
+<h3 id="4-通过activity-manager被动嗅探intent"><a href="#4-通过activity-manager被动嗅探intent" class="headerlink" title="(4)通过activity manager被动嗅探intent"></a>(4)通过activity manager被动嗅探intent</h3><h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>需要给drozer的手机端代理添加<strong><code>android.permission.GET_TASKS</code></strong>权限，有以下两种方式。</p>
+<ol>
+<li>因为agent.apk并没有加壳和混淆，所以可以直接利用AndroidKiller工具对其Manifest文件进行修改，然后重新编译apk。</li>
+<li>将其<a href="https://github.com/mwrlabs/drozer-agent" target="_blank" rel="noopener">源码</a>导入Android Studio，然后修改编译生成apk。</li>
+</ol>
+<p><em>在将源码导入Android Studio中时，从导入到成功编译过程中遇到了很多问题，折腾了将近一天。所以说环境问题真的太让人无语了。。。。。。</em></p>
+<p><strong>接下来是在这个过程中遇到的各种问题的记录。</strong></p>
+<p><em>关于报错<code>Expected caller to ensure valid ABI: MIPS</code>——最新版本的ndk去除了MIPS的编译工具，升级到最新的gradle版本可以解决。</em></p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/yongy1030/p/10812326.html" target="_blank" rel="noopener">NDK android Error:Expected caller to ensure valid ABI: MIPS</a><br><a href="https://blog.csdn.net/Sonic_sTorm/article/details/80476713" target="_blank" rel="noopener">ndk r17版本不再支持mips</a><br><a href="https://github.com/kevin-nazgul/olog/issues/1" target="_blank" rel="noopener">Expected caller to ensure valid ABI: MIPS</a></p>
+</blockquote>
+<p><em>关于报错<code>No toolchains found in the NDK toolchains folder for ABI with prefix: mips64el-linux-android</code>——详细解决见下面的链接。</em></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_24118527/article/details/82867864" target="_blank" rel="noopener">完美解决 No toolchains found in the NDK toolchains folder for ABI with prefix: mips64el-linux-android</a></p>
+</blockquote>
+<p><em>关于报错<code>No such property: javaCompilerTask for class: com.android.build.gradle.internal.variant.TestVariantData</code>——在gradle.build文件中将protobuf-gradle-plugin的版本增加到至少0.8.6。</em></p>
+<blockquote>
+<p><a href="https://github.com/grpc/grpc-java/issues/5211" target="_blank" rel="noopener">No such property: javaCompilerTask for class: com.android.build.gradle.internal.variant.TestVariantData.</a></p>
+</blockquote>
+<p><em>关于报错<code>Unable to find method &#39;org.gradle.api.tasks.compile.CompileOptions.setBootClasspath(Ljava/lang/String;)V&#39;</code>——将android Gradle插件升级到3.4.0版本和Gradle 5.1.1。</em></p>
+<blockquote>
+<p><a href="https://github.com/libgdx/libgdx/issues/5617" target="_blank" rel="noopener">Unable to find method ‘org.gradle.api.tasks.compile.CompileOptions.setBootClasspath(Ljava/lang/String;)V’.</a></p>
+</blockquote>
+<p><em>关于报错<code>Could not find com.android.tools.build:gradle:5.1.1</code>——应该在build.gradle文件中指定版本为3.4.0，在gradle-wrapper.properties文件中设置版本为5.1.1。</em></p>
+<blockquote>
+<p><a href="http://services.gradle.org/distributions/" target="_blank" rel="noopener">gradle下载</a><br><a href="https://www.jianshu.com/p/16dde31679d3" target="_blank" rel="noopener">Android Studio中的Gradle版本和更新</a><br><a href="https://stackoverflow.com/questions/56016265/could-not-find-com-android-tools-buildgradle5-1-1" target="_blank" rel="noopener">Could not find com.android.tools.build:gradle:5.1.1</a></p>
+</blockquote>
+<p><em>关于报错<code>Configuration with name &#39;prodDebugAndroidTestCompile&#39; not found</code>——将protobuf0.8.0升级到0.8.2。</em></p>
+<blockquote>
+<p><a href="https://github.com/GoogleCloudPlatform/android-docs-samples/issues/64" target="_blank" rel="noopener">Configuration with name ‘prodDebugAndroidTestCompile’ not found</a></p>
+</blockquote>
+<p><em>关于报错<code>Issue when compiling: minSdk version should not be declared in the android manifest</code>——在AndroidManifest文件中删除申明的minSDK项。</em></p>
+<blockquote>
+<p><a href="https://github.com/google/pixelvisualcorecamera/issues/1" target="_blank" rel="noopener">Issue when compiling: minSdk version should not be declared in the android manifest</a></p>
+</blockquote>
+<p><em>关于报错<code>ERROR: CreateProcess error=2, 系统找不到指定的文件。</code>——通过在网上查找资料，先后尝试卸载NDK、在Android Studio中添加git.exe路径，最终添加git路径解决了该问题。</em></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/gao_chun/article/details/49817229" target="_blank" rel="noopener">全面介绍Android Studio中Git 的使用（一）</a><br><a href="https://blog.csdn.net/li5476607/article/details/81078926" target="_blank" rel="noopener">android studio运行程序时CreateProcess error=2, 系统找不到指定的文件</a><br><a href="https://github.com/Tencent/tinker/issues/11" target="_blank" rel="noopener">请教 导入Sample Error:(19, 0) CreateProcess error=2, 系统找不到指定的文件。</a></p>
+</blockquote>
+<p><em>关于报错<code>ERROR: Directory xxx specified for property xxx does not exist</code>——折腾了很久，最后发现是没有在电脑上安装<a href="https://github.com/protocolbuffers/protobuf/releases?after=v3.0.1-javalite" target="_blank" rel="noopener">protobuf</a>的原因。然后去看了drozer开源项目的readme，发现环境的确是需要安装protobuf的，下次要仔细阅读安装说明才行。</em></p>
+<blockquote>
+<p><a href="https://github.com/google/protobuf-gradle-plugin/issues/253" target="_blank" rel="noopener">Gradle 5.0 Depreciated API features</a></p>
+</blockquote>
+<p><em>关于报错<code>Could not find com.android.tools.build:gradle:3.1.4</code>——在项目的 build.gradle 文件中，添加 google() 依赖项。</em></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/marshou/article/details/82751960" target="_blank" rel="noopener">Could not find com.android.tools.build:gradle:3.1.4</a></p>
+</blockquote>
+<p><em>关于报错<code>Cannot run program &quot;protoc&quot;: CreateProcess error=2, 系统找不到指定的文件。</code>——一是因为我当时并没有在电脑上安装<a href="https://github.com/protocolbuffers/protobuf/releases?after=v3.0.1-javalite" target="_blank" rel="noopener">protobuf</a>，二是因为我安装的protobuf的版本不符合项目需求，但去查阅官方安装说明文档，2.6.1及以上的版本都是满足的，而我安装的是3.3.0的，按理说不会存在版本不合适的问题呀，具体原因参见下一个问题。</em></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/weixin_34122810/article/details/85990285" target="_blank" rel="noopener">在windows上安装protobuf</a><br><a href="https://github.com/googleapis/google-api-java-client/issues/954" target="_blank" rel="noopener">Maven: Cannot run program “protoc”</a></p>
+</blockquote>
+<p><em>关于报错<code>错误: 程序包com.google.protobuf.GeneratedMessageV3不存在</code>——这是因为不仅需要在电脑上安装protobuf，还需要在Android项目的lib文件夹中添加对应版本的jar文件（如<code>protobuf-java-3.3.0.jar</code>）,而我后来在电脑上安装的是3.3.0版本的protobuf，从github上下载下来的drozer-agent项目中自带的是2.6.1版本的jar，所以会报错。只需要将其中的jar文件替换成对应的版本，然后在build.gradle文件中修改对应的依赖项的版本信息即可。补充：在最开始没搞清楚具体原因时，为了解决这个问题，我还尝试在Android Studio中安装Protobuf Support插件，但这个好像只是一个用于支持.proto格式的文件操作的，所以对于解决问题并没有什么帮助。</em></p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/liugh/p/7505533.html" target="_blank" rel="noopener">Intellij IDEA中使用Protobuf的正确姿势</a><br><a href="https://www.jianshu.com/p/b44f4d76d622" target="_blank" rel="noopener">Android Studio 三种添加插件的方式</a><br><a href="https://www.jianshu.com/p/e5539858997f" target="_blank" rel="noopener">Protocol Buffer V3.3.0 在Andoroid中的使用介绍</a><br><a href="https://maven.ityuan.com/maven2/com/google/protobuf/protobuf-java/3.3.0" target="_blank" rel="noopener">protobuf-java-3.3.0.jar下载、源码下载</a></p>
+</blockquote>
+<p><em>关于错误<code>gradle could not expand zip</code>——这是因为在解决上一个错误的过程中，最后忽略了还要修改build.gradle文件中对应的依赖项的版本信息，导致即使在项目中将2.6.1版本的jar替换成3.3.0的jar，项目在编译时还是尝试去寻找2.6.1版本的jar文件，改变其版本信息即可。</em></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/hai1059876295/article/details/53188091" target="_blank" rel="noopener">Could not expand ZIP错误</a></p>
+</blockquote>
+<h4 id="实现一个intent嗅探模块"><a href="#实现一个intent嗅探模块" class="headerlink" title="实现一个intent嗅探模块"></a>实现一个intent嗅探模块</h4><h5 id="模块代码"><a href="#模块代码" class="headerlink" title="模块代码"></a>模块代码</h5><p><img src="/2019/05/28/利用App中的漏洞/7.png" alt=""></p>
+<h5 id="代码说明"><a href="#代码说明" class="headerlink" title="代码说明"></a>代码说明</h5><p><img src="/2019/05/28/利用App中的漏洞/13.png" alt=""></p>
+<h5 id="各种问题"><a href="#各种问题" class="headerlink" title="各种问题"></a>各种问题</h5><p><strong>在将上述自定义模块安装到drozer中去的时候又碰到了问题。</strong></p>
+<p><em>首先是在利用<code>module install [路径]文件名</code>安装模块时，并没有任何报错信息，直接输出<code>Successfully installed 0 modules, 0 already installed.</code>，后来利用python运行对应python代码，发现是python代码存在语法错误，于是改正代码中的语法错误。</em></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/zcf1784266476/article/details/71335939" target="_blank" rel="noopener">python错误之SyntaxError: invalid syntax</a><br><a href="https://github.com/mwrlabs/drozer/issues/326" target="_blank" rel="noopener">wiki doesn’t demonstrate how to call your module</a></p>
+</blockquote>
+<p><em>关于报错<code>Failed to get module for</code>，具体报错如下图，提示找不到待安装的模块，这个一是因为我最开始利用<code>module repository create [路径]</code>创建目录时，并没有创建成功；二是因为待安装的文件不能放在创建的目标目录下，而是应该放在另外的目录中。</em></p>
+<p><img src="/2019/05/28/利用App中的漏洞/9.png" alt=""></p>
+<blockquote>
+<p><a href="https://github.com/mwrlabs/drozer/issues" target="_blank" rel="noopener">drozer/issues</a></p>
+</blockquote>
+<p><em>安装成功之后报错如下图所示。——关于这个错误，我尝试重新换一个自定义模块进行安装运行，结果就没有出现这个错误了，但出现了下面的错误。</em></p>
+<p><img src="/2019/05/28/利用App中的漏洞/8.png" alt=""></p>
+<blockquote>
+<p><a href="https://juejin.im/post/5aa1191c6fb9a028d936be30" target="_blank" rel="noopener">drozer模块的编写及模块动态加载问题研究</a></p>
+</blockquote>
+<p><em>关于如下图所示的报错，是因为在安装jdk的时候，当时系统默认的路径中包含了空格，所以会报错，想解决的话可以重装jdk（注意空格问题）。</em></p>
+<p><img src="/2019/05/28/利用App中的漏洞/10.png" alt=""></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/yalecaltech/article/details/79339648" target="_blank" rel="noopener">安装drozer的坑</a></p>
+</blockquote>
+<p><em>针对上面那个报错的脚本，在虚拟机上重新安装到drozer中，成功运行，但是最上面那个<code>Skipping source file at ex.sniffer.intents. Unable to load Python module.</code>的报错还是没有解决，猜测是因为脚本的编写有问题，估计是导入的库缺失导致的报错。</em></p>
+<blockquote>
+<p><a href="https://github.com/mwrlabs/drozer/issues/116" target="_blank" rel="noopener">unable to load python module</a></p>
+</blockquote>
+<p><strong>在解决上述问题后，还剩以下2个问题没有解决。</strong></p>
+<p><em>在网上学习其他人的教程时，发现他们提到的有些模块我的电脑上安装的drozer并没有包含，后来发现这些属于第三方开发者开源的插件，在<a href="https://github.com/mwrlabs/drozer-modules" target="_blank" rel="noopener">这里</a>可以找到，将其下载下来安装到本机drozer中即可。另外在<a href="https://github.com/mwrlabs/drozer/tree/develop/src/drozer/modules" target="_blank" rel="noopener">这里</a>可以找到几个官方自带的插件。</em></p>
+<p><em>另外，不清楚怎么卸载安装的自定义模块，后来发现直接在repository目录中删除模块对应的python文件即可。</em></p>
+<p><strong>本以为完事大吉，结果在虚拟机santoku中安装drozer模块时又遇到以下问题。</strong></p>
+<p><em>在成功安装完模块后，运行所有drozer命令都会报如下图所示的错误。——本来以为已经绕过这个错误了，结果看来不解决是不行了。网上并没有相关的解答，唯一能查到的<a href="https://github.com/mwrlabs/drozer/issues/116" target="_blank" rel="noopener">解答</a>感觉又不符合我的情况。捣鼓了很久终于发现原因：只要自定义模块名字的第一部分和drozer自带的模块的命名相同（这里注意两个自定义模块相同则并不会产生这样的错误），就会出现这样的报错，我将要安装的模块的名字由<code>scanner.misc.weburls</code>改为<code>exp.misc.weburls</code>，终于安装成功了，简直开心哈哈哈。</em></p>
+<p><img src="/2019/05/28/利用App中的漏洞/11.png" alt=""></p>
+<p><img src="/2019/05/28/利用App中的漏洞/12.png" alt=""></p>
+<h3 id="5-攻击service"><a href="#5-攻击service" class="headerlink" title="(5)攻击service"></a>(5)攻击service</h3><p><strong>主要内容：列出APP中导出的services，通过drozer框架编写一些定制的intent去触发这些services。</strong></p>
+<h4 id="主要步骤-1"><a href="#主要步骤-1" class="headerlink" title="主要步骤"></a>主要步骤</h4><ol>
+<li>寻找手机上各个app中导出的services：<strong>run app.service.info –permission null</strong>。</li>
+<li>在1中得到的结果中选定目标services，反编译对应apk，在其AndroidManifest.xml文件中获取目标service的<code>intent filter</code>等信息，构造命令启动service，具体命令如下图。</li>
+</ol>
+<p><img src="/2019/05/28/利用App中的漏洞/14.png" alt=""></p>
+<p><em>注：某些 service可能扮演的是原生库接口的角色—它会把从 intent中接收到的数据转换成类似基于堆或栈的变量的C/C++数据结构。在审计这类 service的安全性时，你一定要尝试识别出由于 intent中的数据，而导致的任何潜在的**</em>内存溢出漏洞。**</p>
+<h3 id="6-攻击broadcast-receiver"><a href="#6-攻击broadcast-receiver" class="headerlink" title="(6)攻击broadcast receiver"></a>(6)攻击broadcast receiver</h3><p>在发掘 broadcast receiver中的漏洞时，最大的问题是确定输入是否可信，以及破坏性有多强。要做到这一点，你必须要去<strong>阅读源码，或是想办法有效地搞清你的目标app中，相关 broadcast receiver中的 intent filter的定义</strong>。如果你成功地搞定了它，接下来就该去分析 broadcast receiver会对哪类数据进行操作，以及它是如何进行操作的。</p>
+<p><img src="/2019/05/28/利用App中的漏洞/16.png" alt=""></p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>对于GoatDroid项目中存在的如下图所示的漏洞进行利用。</p>
+<p><img src="/2019/05/28/利用App中的漏洞/15.png" alt=""></p>
+<h3 id="7-关于content-provider（1-4是递进的关系）"><a href="#7-关于content-provider（1-4是递进的关系）" class="headerlink" title="(7)关于content provider（1-4是递进的关系）"></a>(7)关于content provider<em>（1-4是递进的关系）</em></h3><h4 id="1-枚举有漏洞的content-provider"><a href="#1-枚举有漏洞的content-provider" class="headerlink" title="1.枚举有漏洞的content provider"></a>1.枚举有漏洞的content provider</h4><p><img src="/2019/05/28/利用App中的漏洞/17.png" alt=""></p>
+<p>如下图运行结果所示。</p>
+<p><img src="/2019/05/28/利用App中的漏洞/18.png" alt=""></p>
+<h4 id="2-从有漏洞的content-provider中提取数据"><a href="#2-从有漏洞的content-provider中提取数据" class="headerlink" title="2.从有漏洞的content provider中提取数据"></a>2.从有漏洞的content provider中提取数据</h4><p>在上一步中获取到一些目标uri后，可通过下述命令进行测试。</p>
+<ol>
+<li><strong>run app.provider.query [URI]</strong>——尝试提取URI中的数据；</li>
+</ol>
+<p><img src="/2019/05/28/利用App中的漏洞/19.png" alt=""></p>
+<p><img src="/2019/05/28/利用App中的漏洞/20.png" alt=""></p>
+<h4 id="3-向content-provider插入数据"><a href="#3-向content-provider插入数据" class="headerlink" title="3.向content provider插入数据"></a>3.向content provider插入数据</h4><ol>
+<li>在向content provider插入数据前，我们需要用以下命令获取数据的结构及各列的名称等信息：<strong>run app.provider.columns [URI]</strong>。</li>
+<li>用以下格式的命令将数据插进content provider。</li>
+</ol>
+<p><img src="/2019/05/28/利用App中的漏洞/21.png" alt=""></p>
+<h5 id="实例-drozer自带测试app-Sieve"><a href="#实例-drozer自带测试app-Sieve" class="headerlink" title="实例(drozer自带测试app-Sieve)"></a>实例(drozer自带测试app-Sieve)</h5><p><img src="/2019/05/28/利用App中的漏洞/22.png" alt=""></p>
+<h4 id="4-枚举有SQL注入漏洞的content-provider"><a href="#4-枚举有SQL注入漏洞的content-provider" class="headerlink" title="4.枚举有SQL注入漏洞的content provider"></a>4.枚举有SQL注入漏洞的content provider</h4><p><strong>利用drozer对下述两类SQL注入漏洞进行测试。</strong></p>
+<h5 id="1-SQL语句中的查询子句是可注入的"><a href="#1-SQL语句中的查询子句是可注入的" class="headerlink" title="(1)SQL语句中的查询子句是可注入的"></a>(1)SQL语句中的查询子句是可注入的</h5><p><img src="/2019/05/28/利用App中的漏洞/23.png" alt=""></p>
+<p>如果存在该漏洞，那么在执行完该命令后，被查询的整张表都会被返回并打印出来。</p>
+<h5 id="2-投影操作子句是可注入的"><a href="#2-投影操作子句是可注入的" class="headerlink" title="(2)投影操作子句是可注入的"></a>(2)投影操作子句是可注入的</h5><p><img src="/2019/05/28/利用App中的漏洞/24.png" alt=""></p>
+<h3 id="8-利用可调试的app（Java调试器）"><a href="#8-利用可调试的app（Java调试器）" class="headerlink" title="(8)利用可调试的app（Java调试器）"></a>(8)利用可调试的app（Java调试器）</h3><ol>
+<li><p>列出Android设备上所有被设为可调试的package，以及它们被赋予的权限：<strong>run app.package.debuggable</strong>。</p>
+</li>
+<li><p>在找到目标后，利用下述命令去运行：<strong>run app.activity.start –component [package] [package.MainActivity]</strong>。</p>
+</li>
+</ol>
+<p><img src="/2019/05/28/利用App中的漏洞/25.png" alt=""></p>
+<p><img src="/2019/05/28/利用App中的漏洞/26.png" alt=""></p>
+<h3 id="9-对app做中间人攻击"><a href="#9-对app做中间人攻击" class="headerlink" title="(9)对app做中间人攻击"></a>(9)对app做中间人攻击</h3><h4 id="1-在linux下查看ip和网关"><a href="#1-在linux下查看ip和网关" class="headerlink" title="1.在linux下查看ip和网关"></a>1.<a href="https://blog.csdn.net/qq_20480611/article/details/46822937" target="_blank" rel="noopener">在linux下查看ip和网关</a></h4><p><img src="/2019/05/28/利用App中的漏洞/27.png" alt=""></p>
+<p><em>如果有一台和设备连接在同一个路由器的Android手机，也可以直接<a href="https://jingyan.baidu.com/article/f7ff0bfc6fe0432e26bb139f.html" target="_blank" rel="noopener">在Android手机上查看网关信息</a>。</em></p>
+<h4 id="2-利用Ettercap对Android手机进行中间人攻击"><a href="#2-利用Ettercap对Android手机进行中间人攻击" class="headerlink" title="2.利用Ettercap对Android手机进行中间人攻击"></a>2.利用Ettercap对Android手机进行中间人攻击</h4><p><img src="/2019/05/28/利用App中的漏洞/28.png" alt=""></p>
+<h2 id="3-参考资料"><a href="#3-参考资料" class="headerlink" title="3.参考资料"></a>3.参考资料</h2><h3 id="1-drozer学习"><a href="#1-drozer学习" class="headerlink" title="(1)drozer学习"></a>(1)drozer学习</h3><blockquote>
+<p><a href="http://www.voidcn.com/article/p-rhtgazev-bgr.html" target="_blank" rel="noopener">drozer安装中的一些问题</a><br><a href="https://www.anquanke.com/post/id/85067" target="_blank" rel="noopener">打造您自己的Drozer模块，测试Android应用安全</a><br><a href="http://bobao.360.cn/learning/detail/158.html" target="_blank" rel="noopener">安卓Hacking Part 13:使用Drozer进行安全测试</a><br><a href="http://www.droidsec.cn/tag/drozer/" target="_blank" rel="noopener">droidsec</a><br><a href="https://www.0xaa55.com/thread-1855-1-1.html" target="_blank" rel="noopener">drozer入门讲解</a></p>
+</blockquote>
+<h3 id="2-检查网络流量"><a href="#2-检查网络流量" class="headerlink" title="(2)检查网络流量"></a>(2)检查网络流量</h3><blockquote>
+<p><a href="https://blog.csdn.net/qq_37585545/article/details/82250984" target="_blank" rel="noopener">windows环境下netcat的安装及使用</a><br><a href="https://play.google.com/store/apps/details?id=stericson.busybox&amp;hl=en_US" target="_blank" rel="noopener">BusyBox</a><br><a href="https://blog.csdn.net/commshare/article/details/27526517" target="_blank" rel="noopener">android编译netcat</a><br><a href="https://blog.csdn.net/lincyang/article/details/45971655" target="_blank" rel="noopener">Android问题集锦之四十：Android NDK: Could not find application project directory</a><br><a href="https://www.zhihu.com/question/31459186" target="_blank" rel="noopener">Win10 设置了环境变量，但是没有用啊，怎么回事？</a><br><a href="https://blog.csdn.net/AinUser/article/details/70887970" target="_blank" rel="noopener">系统cmd命令提示符出现“不是内部或外部命令，也不是可运行的程序或批处理文件”</a></p>
+</blockquote>
+<h3 id="3-通过activity-manager被动嗅探intent"><a href="#3-通过activity-manager被动嗅探intent" class="headerlink" title="(3)通过activity manager被动嗅探intent"></a>(3)通过activity manager被动嗅探intent</h3><blockquote>
+<p><a href="https://blog.csdn.net/hacker_crazy/article/details/78365406" target="_blank" rel="noopener">ActivityManager 和 内部类 RecentTaskInfo的学习</a><br><a href="https://blog.csdn.net/phoebe_2012/article/details/44805423" target="_blank" rel="noopener">Android漏洞挖掘工具收集与整理</a><br><a href="https://www.colabug.com/5899435.html" target="_blank" rel="noopener">理解 Context.getSystemService 原理</a></p>
+</blockquote>
+<h3 id="4-攻击service"><a href="#4-攻击service" class="headerlink" title="(4)攻击service"></a>(4)攻击service</h3><blockquote>
+<p><a href="https://github.com/nvisium-jack-mannino/OWASP-GoatDroid-Project" target="_blank" rel="noopener">一个包含各种安全问题的APP示例——OWASP的GoatDroid项目</a></p>
+</blockquote>
+<h3 id="5-关于content-provider"><a href="#5-关于content-provider" class="headerlink" title="(5)关于content provider"></a>(5)关于content provider</h3><blockquote>
+<p><a href="https://blog.csdn.net/shift_wwx/article/details/24350781" target="_blank" rel="noopener">Android基础总结八：ContentProvider</a><br><a href="https://blog.csdn.net/shift_wwx/article/details/82108549" target="_blank" rel="noopener">Provider 权限详解</a></p>
+</blockquote>
+<h3 id="6-对app做中间人攻击"><a href="#6-对app做中间人攻击" class="headerlink" title="(6)对app做中间人攻击"></a>(6)对app做中间人攻击</h3><blockquote>
+<p><a href="https://klionsec.github.io/2017/10/25/ettercap/" target="_blank" rel="noopener">宝刀未老之 ettercap 基础使用 (一)</a><br><a href="https://blog.csdn.net/xyt8023y/article/details/73731121" target="_blank" rel="noopener">使用Ettercap filter进行流量监听和数据篡改</a><br><a href="http://www.arkteam.net/?p=2909" target="_blank" rel="noopener">Ettercap：“中间人攻击”神器</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/26/解析APK中dex的具体格式/" rel="next" title="解析APK中dex的具体格式">
+                <i class="fa fa-chevron-left"></i> 解析APK中dex的具体格式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/31/保护APP/" rel="prev" title="保护APP">
+                保护APP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概述"><span class="nav-number">1.</span> <span class="nav-text">1.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-主要内容"><span class="nav-number">1.1.</span> <span class="nav-text">(1)主要内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-App中存在的攻击面-安全目标"><span class="nav-number">1.2.</span> <span class="nav-text">(2)App中存在的攻击面/安全目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-内容要点"><span class="nav-number">2.</span> <span class="nav-text">2.内容要点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-收集logcat泄露的信息"><span class="nav-number">2.1.</span> <span class="nav-text">(1)收集logcat泄露的信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用Monkey框架对App进行测试"><span class="nav-number">2.2.</span> <span class="nav-text">(2)使用Monkey框架对App进行测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-检查网络流量"><span class="nav-number">2.3.</span> <span class="nav-text">(3)检查网络流量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要工具"><span class="nav-number">2.3.1.</span> <span class="nav-text">主要工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主要步骤"><span class="nav-number">2.3.2.</span> <span class="nav-text">主要步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#对于上述主要步骤中的命令参数的补充说明"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">对于上述主要步骤中的命令参数的补充说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-通过activity-manager被动嗅探intent"><span class="nav-number">2.4.</span> <span class="nav-text">(4)通过activity manager被动嗅探intent</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备"><span class="nav-number">2.4.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现一个intent嗅探模块"><span class="nav-number">2.4.2.</span> <span class="nav-text">实现一个intent嗅探模块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#模块代码"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">模块代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码说明"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">代码说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#各种问题"><span class="nav-number">2.4.2.3.</span> <span class="nav-text">各种问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-攻击service"><span class="nav-number">2.5.</span> <span class="nav-text">(5)攻击service</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要步骤-1"><span class="nav-number">2.5.1.</span> <span class="nav-text">主要步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-攻击broadcast-receiver"><span class="nav-number">2.6.</span> <span class="nav-text">(6)攻击broadcast receiver</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例"><span class="nav-number">2.6.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-关于content-provider（1-4是递进的关系）"><span class="nav-number">2.7.</span> <span class="nav-text">(7)关于content provider（1-4是递进的关系）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-枚举有漏洞的content-provider"><span class="nav-number">2.7.1.</span> <span class="nav-text">1.枚举有漏洞的content provider</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-从有漏洞的content-provider中提取数据"><span class="nav-number">2.7.2.</span> <span class="nav-text">2.从有漏洞的content provider中提取数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-向content-provider插入数据"><span class="nav-number">2.7.3.</span> <span class="nav-text">3.向content provider插入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例-drozer自带测试app-Sieve"><span class="nav-number">2.7.3.1.</span> <span class="nav-text">实例(drozer自带测试app-Sieve)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-枚举有SQL注入漏洞的content-provider"><span class="nav-number">2.7.4.</span> <span class="nav-text">4.枚举有SQL注入漏洞的content provider</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-SQL语句中的查询子句是可注入的"><span class="nav-number">2.7.4.1.</span> <span class="nav-text">(1)SQL语句中的查询子句是可注入的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-投影操作子句是可注入的"><span class="nav-number">2.7.4.2.</span> <span class="nav-text">(2)投影操作子句是可注入的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-利用可调试的app（Java调试器）"><span class="nav-number">2.8.</span> <span class="nav-text">(8)利用可调试的app（Java调试器）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-对app做中间人攻击"><span class="nav-number">2.9.</span> <span class="nav-text">(9)对app做中间人攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-在linux下查看ip和网关"><span class="nav-number">2.9.1.</span> <span class="nav-text">1.在linux下查看ip和网关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-利用Ettercap对Android手机进行中间人攻击"><span class="nav-number">2.9.2.</span> <span class="nav-text">2.利用Ettercap对Android手机进行中间人攻击</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-参考资料"><span class="nav-number">3.</span> <span class="nav-text">3.参考资料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-drozer学习"><span class="nav-number">3.1.</span> <span class="nav-text">(1)drozer学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-检查网络流量"><span class="nav-number">3.2.</span> <span class="nav-text">(2)检查网络流量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-通过activity-manager被动嗅探intent"><span class="nav-number">3.3.</span> <span class="nav-text">(3)通过activity manager被动嗅探intent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-攻击service"><span class="nav-number">3.4.</span> <span class="nav-text">(4)攻击service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-关于content-provider"><span class="nav-number">3.5.</span> <span class="nav-text">(5)关于content provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-对app做中间人攻击"><span class="nav-number">3.6.</span> <span class="nav-text">(6)对app做中间人攻击</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="算法,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于常用算法中的递归、分治、动态规划、贪心算法、回溯法、深度优先搜索、广度优先搜索算法的学习笔记。">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用算法之递归、分治、动态规划等">
+<meta property="og:url" content="http://yoursite.com/2019/05/06/常用算法之递归、分治、动态规划等/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于常用算法中的递归、分治、动态规划、贪心算法、回溯法、深度优先搜索、广度优先搜索算法的学习笔记。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/常用算法之递归、分治、动态规划等/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/常用算法之递归、分治、动态规划等/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/常用算法之递归、分治、动态规划等/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/常用算法之递归、分治、动态规划等/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/常用算法之递归、分治、动态规划等/5.png">
+<meta property="og:updated_time" content="2019-05-10T01:50:19.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用算法之递归、分治、动态规划等">
+<meta name="twitter:description" content="对于常用算法中的递归、分治、动态规划、贪心算法、回溯法、深度优先搜索、广度优先搜索算法的学习笔记。">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/06/常用算法之递归、分治、动态规划等/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/06/常用算法之递归、分治、动态规划等/">
+
+
+
+
+
+  <title>常用算法之递归、分治、动态规划等 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/常用算法之递归、分治、动态规划等/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">常用算法之递归、分治、动态规划等</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-06T14:54:08+08:00">
+                2019-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/05/06/常用算法之递归、分治、动态规划等/" class="leancloud_visitors" data-flag-title="常用算法之递归、分治、动态规划等">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于常用算法中的递归、分治、动态规划、贪心算法、回溯法、深度优先搜索、广度优先搜索算法的学习笔记。</p>
+<a id="more"></a>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>递归算法是一种直接或者间接调用自身函数或者方法的算法。</p>
+<p>通俗来说，递归算法的实质是把问题分解成规模缩小的同类问题的子问题，然后递归调用方法来表示问题的解。它有如下特点：</p>
+<ol>
+<li>一个问题的解可以分解为几个子问题的解。</li>
+<li>这个问题与分解之后的子问题，除了数据规模不同，求解思路完全一样。</li>
+<li>存在递归终止条件，即必须有一个明确的递归结束条件，称之为递归出口。</li>
+</ol>
+<h3 id="经典示例"><a href="#经典示例" class="headerlink" title="经典示例"></a>经典示例</h3><ul>
+<li>数组求和</li>
+<li>汉诺塔（Hanoi Tower）问题</li>
+<li>爬台阶问题</li>
+</ul>
+<h3 id="如何写递归代码"><a href="#如何写递归代码" class="headerlink" title="如何写递归代码"></a>如何写递归代码</h3><ol>
+<li>找到如何将大问题分解为小问题的规律。</li>
+<li>通过规律写出递推公式。</li>
+<li>通过递归公式的临界点推敲出终止条件。</li>
+<li>将递推公式和终止条件翻译成代码。</li>
+</ol>
+<h2 id="分治算法"><a href="#分治算法" class="headerlink" title="分治算法"></a>分治算法</h2><h3 id="基本概念-1"><a href="#基本概念-1" class="headerlink" title="基本概念"></a>基本概念</h3><p>对于一个规模为n的问题，若该问题可以容易地解决（比如说规模n较小）则直接解决，否则将其分解为k个规模较小的子问题，这些子问题互相独立且与原问题形式相同，<strong>递归</strong>地解这些子问题，然后将各子问题的解合并得到原问题的解。这种算法设计策略叫做分治法。</p>
+<p>因为在求解大问题时，需要递归的求小问题，因此<strong>一般用递归的方法实现</strong>，即自顶向下。</p>
+<h3 id="适用情况"><a href="#适用情况" class="headerlink" title="适用情况"></a>适用情况</h3><p><img src="/2019/05/06/常用算法之递归、分治、动态规划等/1.png" alt=""></p>
+<h3 id="经典示例-1"><a href="#经典示例-1" class="headerlink" title="经典示例"></a>经典示例</h3><ul>
+<li>二分搜索</li>
+<li>大整数乘法</li>
+<li>Strassen矩阵乘法</li>
+<li>棋盘覆盖</li>
+<li>合并排序</li>
+<li>快速排序</li>
+<li>线性时间选择</li>
+<li>最接近点对问题</li>
+<li>循环赛日程表</li>
+</ul>
+<h3 id="如何设计程序"><a href="#如何设计程序" class="headerlink" title="如何设计程序"></a>如何设计程序</h3><p><strong>实际上就是类似于数学归纳法，找到解决本问题的求解方程公式，然后根据方程公式设计递归程序。</strong></p>
+<ol>
+<li>一定是先找到最小问题规模时的求解方法;</li>
+<li>然后考虑随着问题规模增大时的求解方法;</li>
+<li>找到求解的递归函数式后（各种规模或因子），设计递归程序即可。</li>
+</ol>
+<h3 id="递归与分治"><a href="#递归与分治" class="headerlink" title="递归与分治"></a>递归与分治</h3><ul>
+<li>分治策略用于解决原问题与子问题结构相似的问题，对于各子问题相互独立的情况，一般用递归实现。</li>
+<li>递归是实现手段，分治策略是解决问题的思想。</li>
+</ul>
+<h2 id="动态规划算法"><a href="#动态规划算法" class="headerlink" title="动态规划算法"></a>动态规划算法</h2><h3 id="基本概念-2"><a href="#基本概念-2" class="headerlink" title="基本概念"></a>基本概念</h3><ol>
+<li>动态规划其实和分治策略是类似的，也是将一个原问题分解为若干个规模较小的子问题，递归的求解这些子问题，然后合并子问题的解得到原问题的解。</li>
+<li>区别在于这些子问题会有重叠，一个子问题在求解后，可能会再次求解，于是我们想到将这些子问题的解<strong>存储</strong>起来，当下次再次求解这个子问题时，直接拿过来就是。</li>
+<li>动态规划所解决的问题是分治策略所解决问题的一个子集，只是这个子集更适合用动态规划来解决从而得到更小的运行时间。</li>
+<li><strong>用动态规划能解决的问题分治策略肯定能解决，只是运行时间较长</strong>。因此，分治策略一般用来解决<strong>子问题相互对立</strong>的问题，称为标准分治，而动态规划用来解决<strong>子问题重叠</strong>的问题。</li>
+</ol>
+<h3 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h3><ol>
+<li>动态规划一般由两种方法来实现，一种为自顶向下的备忘录方式，用递归实现，一种为自底向上的方式，用迭代实现。</li>
+<li>在自顶向下的动态规划中，我们存储已知的值；在自底向上的动态规划中，我们预先计算这些值。</li>
+</ol>
+<h3 id="适用条件"><a href="#适用条件" class="headerlink" title="适用条件"></a>适用条件</h3><p><img src="/2019/05/06/常用算法之递归、分治、动态规划等/2.png" alt=""></p>
+<h3 id="求解的基本步骤"><a href="#求解的基本步骤" class="headerlink" title="求解的基本步骤"></a>求解的基本步骤</h3><p><img src="/2019/05/06/常用算法之递归、分治、动态规划等/3.png" alt=""></p>
+<h3 id="递归、分治与动态规划"><a href="#递归、分治与动态规划" class="headerlink" title="递归、分治与动态规划"></a>递归、分治与动态规划</h3><ul>
+<li>动态规划用于解决子问题有重复求解的情况，既可以用递归实现，也可以用迭代实现；</li>
+<li>递归是实现手段，分治策略是解决问题的思想，动态规划很多时候会使用记录子问题运算结果的递归实现。</li>
+</ul>
+<h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a><a href="https://zh.wikipedia.org/wiki/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">贪心算法</a></h2><h3 id="基本概念-3"><a href="#基本概念-3" class="headerlink" title="基本概念"></a>基本概念</h3><p>贪心算法（greedy algorithm），又称贪婪算法，是一种在每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是最好或最优的算法。比如在旅行推销员问题中，如果旅行员每次都选择最近的城市，那这就是一种贪心算法。</p>
+<p>贪心算法在有<strong>最优子结构</strong>的问题中尤为有效。最优子结构的意思是局部最优解能决定全局最优解。简单地说，问题能够分解成子问题来解决，子问题的最优解能递推到最终问题的最优解。</p>
+<p>贪心法可以解决一些最优化问题，如：求图中的最小生成树、求哈夫曼编码……对于其他问题，贪心法一般不能得到我们所要求的答案。<strong>一旦一个问题可以通过贪心法来解决，那么贪心法一般是解决这个问题的最好办法</strong>。由于贪心法的高效性以及其所求得的答案比较接近最优结果，贪心法也可以用作辅助算法或者直接解决一些要求结果不特别精确的问题。</p>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><ul>
+<li>建立数学模型来描述问题。</li>
+<li>把求解的问题分成若干个子问题。</li>
+<li>对每一子问题求解，得到子问题的局部最优解。</li>
+<li>把子问题的解局部最优解合成原来解问题的一个解。</li>
+</ul>
+<h3 id="适用情形"><a href="#适用情形" class="headerlink" title="适用情形"></a>适用情形</h3><p>贪心策略适用的前提是：局部最优策略能导致产生全局最优解。</p>
+<h3 id="实现框架"><a href="#实现框架" class="headerlink" title="实现框架"></a>实现框架</h3><pre><code>从问题的某一初始解出发；
+while （能朝给定总目标前进一步）
+{ 
+      利用可行的决策，求出可行解的一个解元素；
+}
+由所有解元素组合成问题的一个可行解；
+</code></pre><h3 id="贪心算法与动态规划"><a href="#贪心算法与动态规划" class="headerlink" title="贪心算法与动态规划"></a>贪心算法与动态规划</h3><p>贪心算法与动态规划的不同在于它对每个子问题的解决方案都做出选择，不能回退。动态规划则会保存以前的运算结果，并根据以前的结果对当前进行选择，有回退功能。</p>
+<h2 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h2><h3 id="基本概念-4"><a href="#基本概念-4" class="headerlink" title="基本概念"></a>基本概念</h3><p>类似于枚举，通过尝试遍历问题各个可能解的通路，当发现此路不通时，回溯到上一步继续尝试别的通路。</p>
+<p>在包含问题的所有解的解空间树中，按照深度优先搜索的策略，从根结点出发深度探索解空间树。当探索到某一结点时，要先判断该结点是否包含问题的解，如果包含，就从该结点出发继续探索下去，如果该结点不包含问题的解，则逐层向其祖先结点回溯。（其实回溯法就是对隐式图的深度优先搜索算法）。</p>
+<h3 id="基本实现-1"><a href="#基本实现-1" class="headerlink" title="基本实现"></a>基本实现</h3><ul>
+<li>针对所给问题，确定问题的解空间：首先应明确定义问题的解空间，问题的解空间应至少包含问题的一个（最优）解。</li>
+<li>确定结点的扩展搜索规则</li>
+<li>以深度优先方式搜索解空间，并在搜索过程中用剪枝函数避免无效搜索。</li>
+</ul>
+<h3 id="算法框架"><a href="#算法框架" class="headerlink" title="算法框架"></a>算法框架</h3><ol>
+<li>非递归回溯框架</li>
+<li>递归的算法框架</li>
+</ol>
+<h3 id="回溯与深度优先搜索"><a href="#回溯与深度优先搜索" class="headerlink" title="回溯与深度优先搜索"></a>回溯与深度优先搜索</h3><ul>
+<li>回溯法是对解空间的深度优先搜索，在一般情况下使用递归函数来实现回溯法比较简单。</li>
+<li>回溯是深度优先搜索的一种特例，它在一次搜索过程中需要设置一些本次搜索过程的局部状态，并在本次搜索结束之后清除状态。而普通的深度优先搜索并不需要使用这些局部状态，虽然还是有可能设置一些全局状态。</li>
+</ul>
+<h2 id="深度优先搜索DFS-Depth-First-Search"><a href="#深度优先搜索DFS-Depth-First-Search" class="headerlink" title="深度优先搜索DFS(Depth-First-Search)"></a>深度优先搜索DFS(Depth-First-Search)</h2><h3 id="基本概念-5"><a href="#基本概念-5" class="headerlink" title="基本概念"></a>基本概念</h3><p>深度优先搜索是图论中的经典算法，利用深度优先搜索算法可以产生目标图的相应拓扑排序表，利用拓扑排序表可以方便的解决很多相关的图论问题，如最大路径问题等等。一般用<strong>堆数据结构</strong>来辅助实现DFS算法。</p>
+<p>深度优先搜索（缩写DFS）有点类似广度优先搜索，也是对一个连通图进行遍历的算法。它的思想是<strong>从一个顶点V0开始，沿着一条路一直走到底，如果发现不能到达目标解，那就返回到上一个节点，然后从另一条路开始走到底</strong>，这种尽量往深处走的概念即是深度优先的概念。</p>
+<h3 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h3><p><strong>深度优先遍历图算法步骤如下——</strong></p>
+<ul>
+<li>访问顶点v；</li>
+<li>依次从v的未被访问的邻接点出发，对图进行深度优先遍历；直至图中和v有路径相通的顶点都被访问；</li>
+<li>若此时图中尚有顶点未被访问，则从一个未被访问的顶点出发，重新进行深度优先遍历，直到图中所有顶点均被访问过为止。</li>
+</ul>
+<h2 id="广度优先搜索BFS-Breadth-First-Search"><a href="#广度优先搜索BFS-Breadth-First-Search" class="headerlink" title="广度优先搜索BFS(Breadth-First-Search)"></a>广度优先搜索BFS(Breadth-First-Search)</h2><h3 id="基本概念-6"><a href="#基本概念-6" class="headerlink" title="基本概念"></a>基本概念</h3><p>从根节点开始，沿着树(图)的宽度遍历树(图)的节点。如果所有节点均被访问，则算法中止。BFS同样属于盲目搜索。一般用<strong>队列数据结构</strong>来辅助实现BFS算法。</p>
+<h3 id="算法步骤-1"><a href="#算法步骤-1" class="headerlink" title="算法步骤"></a>算法步骤</h3><ul>
+<li>首先将根节点放入队列中。</li>
+<li>从队列中取出第一个节点，并检验它是否为目标。如果找到目标，则结束搜寻并回传结果。否则将它所有尚未检验过的直接子节点加入队列中。</li>
+<li>若队列为空，表示整张图都检查过了——亦即图中没有欲搜寻的目标。结束搜寻并回传“找不到目标”。</li>
+<li>重复步骤2。</li>
+</ul>
+<h2 id="DFS与BFS"><a href="#DFS与BFS" class="headerlink" title="DFS与BFS"></a>DFS与BFS</h2><h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><h4 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h4><p>在树的层次较深&amp;子节点数较多的情况下，消耗内存十分严重。广度优先搜索适用于节点的子节点数量不多，并且树的层次不会太深的情况。</p>
+<h4 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h4><p>难以寻找最优解，仅仅只能寻找有解。其优点就是内存消耗小，克服了刚刚说的广度优先搜索的缺点。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>如下图，其深度优先遍历顺序为 1-&gt;2-&gt;4-&gt;8-&gt;5-&gt;3-&gt;6-&gt;7;其广度优先算法的遍历顺序为：1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6-&gt;7-&gt;8.</p>
+<p><img src="/2019/05/06/常用算法之递归、分治、动态规划等/4.png" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>策略是面向问题的，算法是面向实现的。</strong></p>
+<h3 id="算法策略间的关系"><a href="#算法策略间的关系" class="headerlink" title="算法策略间的关系"></a>算法策略间的关系</h3><p><img src="/2019/05/06/常用算法之递归、分治、动态规划等/5.png" alt=""></p>
+<h3 id="算法策略侧重的问题类型"><a href="#算法策略侧重的问题类型" class="headerlink" title="算法策略侧重的问题类型"></a>算法策略侧重的问题类型</h3><p> 一般常遇到的问题分为四类：</p>
+<ul>
+<li>判定性问题：可用<strong>递推法、递归法</strong></li>
+<li>计算问题：可用<strong>递推法、递归法</strong></li>
+<li>最优化问题：<strong>贪心算法、分治法、动态规划法、枚举法</strong></li>
+<li>构造性问题：<strong>贪心算法、分治法、广度优先搜索、深度优先搜索</strong></li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><h3 id="关于递归、分治以及动态规划"><a href="#关于递归、分治以及动态规划" class="headerlink" title="关于递归、分治以及动态规划"></a>关于递归、分治以及动态规划</h3><blockquote>
+<p><a href="https://blog.csdn.net/DeepIT/article/details/6530282" target="_blank" rel="noopener">递归和动态规划</a><br><a href="https://blog.csdn.net/tyhj_sf/article/details/53969072" target="_blank" rel="noopener">递归、分治策略、动态规划以及贪心算法之间的关系</a><br><a href="https://juejin.im/post/5c2308abf265da615304ce41#heading-11" target="_blank" rel="noopener">看动画轻松理解「递归」与「动态规划」</a><br><a href="https://www.cnblogs.com/steven_oyj/archive/2010/05/22/1741370.html" target="_blank" rel="noopener">五大常用算法之一：分治算法</a><br><a href="https://www.cnblogs.com/steven_oyj/archive/2010/05/22/1741374.html" target="_blank" rel="noopener">五大常用算法之二：动态规划算法</a></p>
+</blockquote>
+<h3 id="贪心算法-1"><a href="#贪心算法-1" class="headerlink" title="贪心算法"></a>贪心算法</h3><blockquote>
+<p><a href="https://blog.csdn.net/effective_coder/article/details/8736718" target="_blank" rel="noopener">贪心算法详解</a><br><a href="https://www.cnblogs.com/steven_oyj/archive/2010/05/22/1741375.html" target="_blank" rel="noopener">五大常用算法之三：贪心算法</a></p>
+</blockquote>
+<h3 id="回溯算法-1"><a href="#回溯算法-1" class="headerlink" title="回溯算法"></a>回溯算法</h3><blockquote>
+<p><a href="https://www.cnblogs.com/steven_oyj/archive/2010/05/22/1741376.html" target="_blank" rel="noopener">五大常用算法之四：回溯法</a></p>
+</blockquote>
+<h3 id="深度优先搜索和广度优先搜索"><a href="#深度优先搜索和广度优先搜索" class="headerlink" title="深度优先搜索和广度优先搜索"></a>深度优先搜索和广度优先搜索</h3><blockquote>
+<p><a href="https://blog.csdn.net/raphealguo/article/details/7560918" target="_blank" rel="noopener">【算法入门】深度优先搜索(DFS)</a><br><a href="https://www.jianshu.com/p/b086986969e6" target="_blank" rel="noopener">DFS（深度优先搜索）和BFS(广度优先搜索)</a></p>
+</blockquote>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><blockquote>
+<p><a href="https://www.cnblogs.com/steven_oyj/archive/2010/05/22/1741378.html" target="_blank" rel="noopener">五大常用算法之五：分支限界法</a><br><a href="https://www.cnblogs.com/steven_oyj/archive/2010/05/22/1741482.html" target="_blank" rel="noopener">算法策略的总结</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/05/教我兄弟学Android逆向01-课后作业/" rel="next" title="教我兄弟学Android逆向01-课后作业">
+                <i class="fa fa-chevron-left"></i> 教我兄弟学Android逆向01-课后作业
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/09/使用命令与Android设备交互/" rel="prev" title="使用命令与Android设备交互">
+                使用命令与Android设备交互 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#递归"><span class="nav-number">1.</span> <span class="nav-text">递归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典示例"><span class="nav-number">1.2.</span> <span class="nav-text">经典示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何写递归代码"><span class="nav-number">1.3.</span> <span class="nav-text">如何写递归代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分治算法"><span class="nav-number">2.</span> <span class="nav-text">分治算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念-1"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用情况"><span class="nav-number">2.2.</span> <span class="nav-text">适用情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典示例-1"><span class="nav-number">2.3.</span> <span class="nav-text">经典示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设计程序"><span class="nav-number">2.4.</span> <span class="nav-text">如何设计程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归与分治"><span class="nav-number">2.5.</span> <span class="nav-text">递归与分治</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划算法"><span class="nav-number">3.</span> <span class="nav-text">动态规划算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念-2"><span class="nav-number">3.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本实现"><span class="nav-number">3.2.</span> <span class="nav-text">基本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用条件"><span class="nav-number">3.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求解的基本步骤"><span class="nav-number">3.4.</span> <span class="nav-text">求解的基本步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归、分治与动态规划"><span class="nav-number">3.5.</span> <span class="nav-text">递归、分治与动态规划</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心算法"><span class="nav-number">4.</span> <span class="nav-text">贪心算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念-3"><span class="nav-number">4.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本思路"><span class="nav-number">4.2.</span> <span class="nav-text">基本思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用情形"><span class="nav-number">4.3.</span> <span class="nav-text">适用情形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现框架"><span class="nav-number">4.4.</span> <span class="nav-text">实现框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心算法与动态规划"><span class="nav-number">4.5.</span> <span class="nav-text">贪心算法与动态规划</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回溯算法"><span class="nav-number">5.</span> <span class="nav-text">回溯算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念-4"><span class="nav-number">5.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本实现-1"><span class="nav-number">5.2.</span> <span class="nav-text">基本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法框架"><span class="nav-number">5.3.</span> <span class="nav-text">算法框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯与深度优先搜索"><span class="nav-number">5.4.</span> <span class="nav-text">回溯与深度优先搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深度优先搜索DFS-Depth-First-Search"><span class="nav-number">6.</span> <span class="nav-text">深度优先搜索DFS(Depth-First-Search)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念-5"><span class="nav-number">6.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法步骤"><span class="nav-number">6.2.</span> <span class="nav-text">算法步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广度优先搜索BFS-Breadth-First-Search"><span class="nav-number">7.</span> <span class="nav-text">广度优先搜索BFS(Breadth-First-Search)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念-6"><span class="nav-number">7.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法步骤-1"><span class="nav-number">7.2.</span> <span class="nav-text">算法步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS与BFS"><span class="nav-number">8.</span> <span class="nav-text">DFS与BFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对比"><span class="nav-number">8.1.</span> <span class="nav-text">对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#广度优先搜索"><span class="nav-number">8.1.1.</span> <span class="nav-text">广度优先搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深度优先搜索"><span class="nav-number">8.1.2.</span> <span class="nav-text">深度优先搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">8.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法策略间的关系"><span class="nav-number">9.1.</span> <span class="nav-text">算法策略间的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法策略侧重的问题类型"><span class="nav-number">9.2.</span> <span class="nav-text">算法策略侧重的问题类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">10.</span> <span class="nav-text">参考资料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于递归、分治以及动态规划"><span class="nav-number">10.1.</span> <span class="nav-text">关于递归、分治以及动态规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心算法-1"><span class="nav-number">10.2.</span> <span class="nav-text">贪心算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯算法-1"><span class="nav-number">10.3.</span> <span class="nav-text">回溯算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度优先搜索和广度优先搜索"><span class="nav-number">10.4.</span> <span class="nav-text">深度优先搜索和广度优先搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">10.5.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

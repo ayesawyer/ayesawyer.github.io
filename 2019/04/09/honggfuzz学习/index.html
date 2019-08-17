@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Fuzzing,honggfuzz,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对honggfuzz的实现原理的学习笔记。">
+<meta name="keywords" content="Fuzzing,honggfuzz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="honggfuzz学习">
+<meta property="og:url" content="http://yoursite.com/2019/04/09/honggfuzz学习/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对honggfuzz的实现原理的学习笔记。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-05T13:08:23.777Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="honggfuzz学习">
+<meta name="twitter:description" content="对honggfuzz的实现原理的学习笔记。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/09/honggfuzz学习/">
+
+
+
+
+
+  <title>honggfuzz学习 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/honggfuzz学习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">honggfuzz学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T11:39:00+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Fuzzing/" itemprop="url" rel="index">
+                    <span itemprop="name">Fuzzing</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/09/honggfuzz学习/" class="leancloud_visitors" data-flag-title="honggfuzz学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对<a href="https://github.com/google/honggfuzz" target="_blank" rel="noopener">honggfuzz</a>的实现原理的学习笔记。</p>
+<a id="more"></a>
+<p><strong>honggfuzz - 一个易于使用的fuzzer,支持基于代码覆盖的feedback-driven fuzzing。同时支持GNU/Linux，FreeBSD，Windows, Mac OSX和Android等系统。</strong></p>
+<h3 id="学习1"><a href="#学习1" class="headerlink" title="学习1"></a>学习1</h3><blockquote>
+<p>(1)<a href="https://www.jianshu.com/p/a75a5492ccf4" target="_blank" rel="noopener">honggfuzz</a></p>
+</blockquote>
+<blockquote>
+<p>(2)<a href="https://www.secpulse.com/archives/71975.html" target="_blank" rel="noopener">模糊实战之honggfuzz</a></p>
+</blockquote>
+<p>关键：</p>
+<ol>
+<li><p>honggfuzz 也是 google 开发的一款 fuzz . 其设计思路 和 libfuzzer 和 afl 类似 ，感觉就是 libfuzzer + afl 的 增强版。</p>
+</li>
+<li><p>对于fuzz过程中的常用命令的解释——</p>
+</li>
+</ol>
+<p>(1)honggfuzz -f input_dir -W out -z -s – /usr/bin/djpeg <strong>_ FILE _</strong></p>
+<blockquote>
+<p>-f : 指定初始样本集目录</p>
+</blockquote>
+<blockquote>
+<p>-W : 指定输出目录</p>
+</blockquote>
+<blockquote>
+<p>-z : 使用编译时的指令插桩信息来 为 样本变异做回馈， 默认选项</p>
+</blockquote>
+<blockquote>
+<p>-s : 表示目标程序从 stdin 获取输入，即样本数据通过 stdin 喂给程序</p>
+</blockquote>
+<blockquote>
+<p><strong>_ FILE _</strong> : 类似于 afl 的 @@ , 表示程序通过文件获取输入，fuzz 过程会被替换为相应的样本文件名</p>
+</blockquote>
+<p>(2)honggfuzz -f input_dir -P – /usr/bin/djpeg_persistent_mode</p>
+<blockquote>
+<p>-P : 表示使用 persistent 模式</p>
+</blockquote>
+<p>(3)<a href="https://github.com/google/honggfuzz/blob/master/docs/USAGE.md" target="_blank" rel="noopener">更多使用说明</a></p>
+<ol start="3">
+<li>具体的实战，利用该框架对应用程序进行模糊测试。</li>
+</ol>
+<h3 id="学习2"><a href="#学习2" class="headerlink" title="学习2"></a>学习2</h3><blockquote>
+<p><a href="https://bbs.pediy.com/thread-247954.htm" target="_blank" rel="noopener">honggfuzz漏洞挖掘技术深究系列</a></p>
+</blockquote>
+<p>关键：</p>
+<ol>
+<li>反馈驱动（Feedback-Driven）——通过监控样本触发的代码覆盖率，进而改进输入样本以提高代码覆盖率，增加发现漏洞的概率。与libfuzzer和honggfuzz类似，该工具也是基于代码覆盖率的Fuzzer。</li>
+</ol>
+<p>关于代码覆盖率——</p>
+<p>(1)代码覆盖率的计量单位</p>
+<blockquote>
+<p><strong>函数</strong>(较粗糙)</p>
+</blockquote>
+<blockquote>
+<p><strong>基本块</strong> (较普遍，以指令跳转为作划分界限)</p>
+</blockquote>
+<blockquote>
+<p><strong>边界</strong>(涵盖了基本块部分，唯一的差别是edge多记录了一些执行边界的信息)</p>
+</blockquote>
+<p>(2)统计代码覆盖率</p>
+<blockquote>
+<p>有源码：直接使用SanitizerCoverage即可，在编译选项中添加相应的覆盖率统计方式，比如基本块统计方式可以添加：<code>CFLAG=“-fsanitize=address -fsanitize-coverage=bb”</code></p>
+</blockquote>
+<blockquote>
+<p>无源码：使用Pin、DynamoRIO等二进制插桩工具去hook统计，或者pediy改指令的方式去监控也是可以的</p>
+</blockquote>
+<ol start="2">
+<li><p>Persistent Fuzzing——即fuzzing API。</p>
+</li>
+<li><p>Fuzz策略——honggfuzz中fuzz策略的实现主要集中在mangle.c中，在循环的fuzzloop函数中，会根据用户的选择的fuzz方式来调用动态fuzz或者静态fuzz的方法，但最后都是调用mangle_mangleContent来变异文件数据。<em>（把这些函数过一遍就是honggfuzz中所有的文件变异规则(如下表)了，如果想实现自己的fuzzer，这些规则来扣出来用Python实现一遍，顺便把afl的规则也扣过来就更完美了。）</em></p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>源码中的函数</th>
+<th>具体的变异操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mangle_Resize</td>
+<td>用空格填充随机位置</td>
+</tr>
+<tr>
+<td>mangle_Byte</td>
+<td>向随机位置写随机的uint8类型的数据</td>
+</tr>
+<tr>
+<td>mangle_Bit</td>
+<td>取随机位置的数值做位翻转</td>
+</tr>
+<tr>
+<td>mangle_Bytes</td>
+<td>在随机位置覆盖写2~4字节数据</td>
+</tr>
+<tr>
+<td>mangle_Magic</td>
+<td>取各种边界值进行覆写，这些边界值部分跟AFL还不一样</td>
+</tr>
+<tr>
+<td>mangle_IncByte</td>
+<td>取随机位置的数据加1</td>
+</tr>
+<tr>
+<td>mangle_DecByte</td>
+<td>取随机位置的数据减1</td>
+</tr>
+<tr>
+<td>mangle_NegByte</td>
+<td>取随机位置的数据取反</td>
+</tr>
+<tr>
+<td>mangle_AddSub</td>
+<td>取随机位置的1、2、4或8字节的数据长度作加减操作，操作数取 rand(0~8192)-4096</td>
+</tr>
+<tr>
+<td>mangle_Dictionary</td>
+<td>变异目录名，也是随机取文件夹名称进行变异，如果有多个目录，那被变异的目录数也是随机的</td>
+</tr>
+<tr>
+<td>mangle_DictionaryInsert</td>
+<td>在目录的随机位置中插入随机数据</td>
+</tr>
+<tr>
+<td>mangle_MemMove</td>
+<td>取随机位置的数据拷贝随机长度的数据，里面就是调用memmove函数实现的</td>
+</tr>
+<tr>
+<td>mangle_MemSet</td>
+<td>取随机位置、随机大小，用UINT8_MAX数值填充</td>
+</tr>
+<tr>
+<td>mangle_Random</td>
+<td>取随机位置、随机大小的缓冲区，用随机数填充</td>
+</tr>
+<tr>
+<td>mangle_CloneByte</td>
+<td>取两处随机位置的作数据交换</td>
+</tr>
+<tr>
+<td>mangle_Expand</td>
+<td>文件末尾扩展随机长度的空间，用空格填充，然后在随机位置，取前面的随机长度作数据拷贝</td>
+</tr>
+<tr>
+<td>mangle_Shrink</td>
+<td>删除随机长度的文件内容</td>
+</tr>
+<tr>
+<td>mangle_InsertRnd</td>
+<td>在文件的随机位置插入随机长度的数据</td>
+</tr>
+<tr>
+<td>mangle_ASCIIVal</td>
+<td>在随机位置覆盖32字节的随机数</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意1：在Fuzzing过程中，很多变异规则是共用的，可以参考一些主源的开源软件，比如afl\peach\honggfuzz\libfuzzer，提取规则作整合，然后写个自己的fuzzing框架，在后面作针对的fuzzer时，可以直接套用。</strong></p>
+<p><strong>注意2：从上面的fuzz策略可以总结出常规的变异规则——</strong></p>
+<blockquote>
+<p>随机数据替换</p>
+</blockquote>
+<blockquote>
+<p>数据值增减</p>
+</blockquote>
+<blockquote>
+<p>已知边界值替换</p>
+</blockquote>
+<blockquote>
+<p>插入随机数据</p>
+</blockquote>
+<blockquote>
+<p>删减文件内容</p>
+</blockquote>
+<blockquote>
+<p>目录变异</p>
+</blockquote>
+<blockquote>
+<p>数据拷贝覆盖</p>
+</blockquote>
+<blockquote>
+<p>……</p>
+</blockquote>
+<ol start="4">
+<li>Intel Processor Trace</li>
+</ol>
+<p>对于闭源程序的反馈驱动Fuzzing，通常有3种方式——</p>
+<blockquote>
+<p>二进制插桩：使用Pin或DynamoRIO动态插桩监控代码覆盖率，比如winafl</p>
+</blockquote>
+<blockquote>
+<p>虚拟化技术：使用Qemu或Boch等虚拟化技术实现应用层和内核层的代码覆盖率监控，比如afl</p>
+</blockquote>
+<blockquote>
+<p>硬件级技术：使用Intel Processor Trace（PT）技术，比如honggfuzz</p>
+</blockquote>
+<h3 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h3><p>作为一款通用型Fuzzer，honggfuzz是支持Android平台的，可以研究一下怎样在Android平台上使用该Fuzzer，以及能否使用该框架对Android应用程序进行模糊测试。</p>
+<p><em>参考资料：<a href="https://github.com/google/honggfuzz/blob/master/docs/Android.md" target="_blank" rel="noopener">官方说明文档</a></em></p>
+<h3 id="其余的开源Fuzzer列表"><a href="#其余的开源Fuzzer列表" class="headerlink" title="其余的开源Fuzzer列表"></a>其余的开源Fuzzer列表</h3><blockquote>
+<p>(1)<a href="https://www.zhihu.com/question/28303982/answer/476479553" target="_blank" rel="noopener">有哪些好的fuzzing工具推荐?</a></p>
+</blockquote>
+<blockquote>
+<p>(2)<a href="https://www.peerlyst.com/posts/resource-open-source-fuzzers-list" target="_blank" rel="noopener">Open Source Fuzzers list (and other fuzzing tools)</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Fuzzing/" rel="tag"># Fuzzing</a>
+          
+            <a href="/tags/honggfuzz/" rel="tag"># honggfuzz</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/05/逆向练习7/" rel="next" title="逆向练习7">
+                <i class="fa fa-chevron-left"></i> 逆向练习7
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/10/捉虫日记-笔记/" rel="prev" title="<捉虫日记>笔记">
+                <捉虫日记>笔记 <i class="fa fa-chevron-right"></i>
+              </捉虫日记></a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习1"><span class="nav-number">1.</span> <span class="nav-text">学习1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习2"><span class="nav-number">2.</span> <span class="nav-text">学习2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充说明"><span class="nav-number">3.</span> <span class="nav-text">补充说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其余的开源Fuzzer列表"><span class="nav-number">4.</span> <span class="nav-text">其余的开源Fuzzer列表</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

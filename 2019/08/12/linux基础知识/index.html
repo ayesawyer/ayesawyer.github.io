@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于Linux操作系统相关基础知识进行复习和整理。">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux基础知识">
+<meta property="og:url" content="http://yoursite.com/2019/08/12/linux基础知识/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于Linux操作系统相关基础知识进行复习和整理。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/linux基础知识/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/linux基础知识/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/linux基础知识/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/linux基础知识/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/linux基础知识/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/linux基础知识/6.png">
+<meta property="og:updated_time" content="2019-08-15T12:51:06.896Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux基础知识">
+<meta name="twitter:description" content="对于Linux操作系统相关基础知识进行复习和整理。">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/12/linux基础知识/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/12/linux基础知识/">
+
+
+
+
+
+  <title>linux基础知识 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/linux基础知识/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux基础知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-12T21:17:34+08:00">
+                2019-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/12/linux基础知识/" class="leancloud_visitors" data-flag-title="linux基础知识">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于Linux操作系统相关基础知识进行复习和整理。</p>
+<a id="more"></a>
+<p><strong>主要参考自：<a href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Linux.md" target="_blank" rel="noopener">CyC2018/CS-Notes</a></strong></p>
+<h2 id="1-常用操作及概念"><a href="#1-常用操作及概念" class="headerlink" title="1.常用操作及概念"></a>1.常用操作及概念</h2><h3 id="A-快捷键"><a href="#A-快捷键" class="headerlink" title="A.快捷键"></a>A.快捷键</h3><ol>
+<li><p><strong>Tab</strong>：命令和文件名补全；</p>
+</li>
+<li><p><strong>Ctrl+C</strong>：linux下面默认的中断键（Interrupt Key），当键入Ctrl-C时，系统会发送一个中断信号给正在运行的程序和shell。具体的响应结果会根据程序的不同而不同。一些程序在收到这个信号后，会立即结束并推出程序，一些程序可能会忽略这个中断信号，还有一些程序在接受到这个信号后，会采取一些其他的动作（Action）。当shell接受到这个中断信号的时候，它会返回到提示界面，并等待下一个命令。</p>
+</li>
+</ol>
+<ol start="3">
+<li><strong>Ctrl+D</strong>：Linux下面标准输入输出的EOF，发送一个exit信号，相当于在在终端中输入exit后回车。在使用标准输入输出的设备中，遇到该符号，会认为读到了文件的末尾，因此结束输入或输出。</li>
+</ol>
+<ol start="4">
+<li><p><strong>Ctrl+Z</strong>：linux下面默认的挂起键（Suspend Key），当键入Ctrl-Z时，系统会将正在运行的程序挂起，然后放到后台，同时给出用户相关的job信息。此时，程序并没有真正的停止，用户可以通过使用fg、bg命令将job恢复到暂停前的上下文环境，并继续执行。</p>
+</li>
+<li><p>在linux终端输入<code>stty -a</code>命令可以查看系统默认设置的所有快捷键，如下图。</p>
+</li>
+</ol>
+<p><img src="/2019/08/12/linux基础知识/1.png" alt=""></p>
+<blockquote>
+<p><a href="https://www.jianshu.com/p/a4ce7c79f54a" target="_blank" rel="noopener">Linux下Ctrl-Z、Ctrl-C、Ctrl-D的异同点</a></p>
+</blockquote>
+<h3 id="B-帮助指令"><a href="#B-帮助指令" class="headerlink" title="B.帮助指令"></a>B.帮助指令</h3><blockquote>
+<p><strong>help</strong>：指令的基本用法与选项介绍。</p>
+</blockquote>
+<blockquote>
+<p><strong>man</strong>： manual 的缩写，将指令的具体信息显示出来。例如，执行 <code>man date</code> 时，结果如下图所示。</p>
+</blockquote>
+<p><img src="/2019/08/12/linux基础知识/2.png" alt=""></p>
+<p>上图中有 <code>DATE(1)</code> 出现，其中的数字代表指令的类型，常用的数字及其类型如下：</p>
+<table>
+<thead>
+<tr>
+<th>代号</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>用户在 shell 环境中可以操作的指令或者可执行文件</td>
+</tr>
+<tr>
+<td>5</td>
+<td>配置文件</td>
+</tr>
+<tr>
+<td>8</td>
+<td>系统管理员可以使用的管理指令</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>info</strong>：info 与 man 类似，但是 info 将文档分成一个个页面，每个页面可以进行跳转。</p>
+</blockquote>
+<blockquote>
+<p><strong>doc</strong>：/usr/share/doc 存放着所有已安装软件的说明文件，包括程序的说明文件，默认配置文件等。</p>
+</blockquote>
+<h3 id="C-关机"><a href="#C-关机" class="headerlink" title="C.关机"></a>C.关机</h3><blockquote>
+<p><strong>who</strong>：在关机前需要先使用 who 命令查看有没有其它用户在线。<br><strong>sync</strong>：为了加快对磁盘文件的读写速度，位于内存中的文件数据不会立即同步到磁盘上，因此关机之前需要先进行 sync 同步操作。<br><strong>shutdown</strong>：关机命令(<em>只有root用户可以执行</em>)，使用<code>shutdown --help</code>查看其可选参数如下图所示。</p>
+</blockquote>
+<p><img src="/2019/08/12/linux基础知识/3.png" alt=""></p>
+<h3 id="D-环境变量"><a href="#D-环境变量" class="headerlink" title="D.环境变量"></a>D.环境变量</h3><ol>
+<li><strong>env</strong>：使用env命令显示所有的环境变量</li>
+<li><strong>PATH</strong>：常用环境变量之一，用户可以在环境变量 PATH 中声明可执行文件的路径，路径之间用 <code>:</code> 分隔，如下——。</li>
+</ol>
+<p><code>/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/dmtsai/.local/bin:/home/dmtsai/bin</code></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/zqixiao_09/article/details/50340153" target="_blank" rel="noopener">Linux环境变量的设置和查看</a></p>
+</blockquote>
+<h3 id="E-Root"><a href="#E-Root" class="headerlink" title="E.Root"></a>E.Root</h3><h4 id="获取root权限"><a href="#获取root权限" class="headerlink" title="获取root权限"></a>获取root权限</h4><ol>
+<li><strong>sudo+命令</strong>：sudo 允许一般用户使用 root 可执行的命令，不过只有在 /etc/sudoers 配置文件中添加的用户才能使用该指令。</li>
+<li><strong>su</strong>：输入su，然后输入root密码即可从当前用户切换到root用户。</li>
+</ol>
+<h4 id="修改ubuntu默认root密码"><a href="#修改ubuntu默认root密码" class="headerlink" title="修改ubuntu默认root密码"></a>修改ubuntu默认root密码</h4><p>Ubuntu的默认root密码是随机的，即每次开机都有一个新的root密码。 我们可以在终端输入命令<strong><code>sudo passwd</code></strong>，然后输入当前用户的密码，终端会提示我们输入新的UNIX密码并确认，此时的密码就是root新密码。</p>
+<h3 id="F-Linux平台上的软件包管理"><a href="#F-Linux平台上的软件包管理" class="headerlink" title="F.Linux平台上的软件包管理"></a>F.Linux平台上的软件包管理</h3><p>软件包管理工具的作用是提供在操作系统中安装，升级，卸载需要的软件的方法，并提供对系统中所有软件状态信息的查询。</p>
+<p>在 GNU/Linux( 以下简称 Linux) 操作系统中，RPM 和 DPKG 为最常见的两类软件包管理工具，他们分别应用于<strong>基于 RPM 软件包</strong>（通常表现为以 .rpm 扩展名结尾的文件）的 Linux 发行版本和 <strong>DEB 软件包</strong>（通常表现为以 .deb 扩展名结尾的文件）的 Linux 发行版本。</p>
+<ul>
+<li>RPM 全称为 Redhat Package Manager，最早由 Red Hat 公司制定实施，随后被 GNU 开源操作系统接受并成为许多 Linux 系统的既定软件标准。</li>
+<li>与 RPM 竞争的是基于 Debian 操作系统的 DEB 软件包管理工具 DPKG，全称为 Debian Package，功能方面与 RPM 相似。</li>
+</ul>
+<p>更友好的包管理工具包括——<strong>YUM</strong>（基于 RPM 包管理工具，能够从指定的源空间（服务器，本地目录等）自动下载目标 RPM 包并且安装，可以自动处理依赖性关系并进行下载、安装，无须繁琐地手动下载、安装每一个需要的依赖包。此外，YUM 的另一个功能是进行系统中所有软件的升级。）、<strong>APT</strong>（Advanced Packaging Tools 。与 YUM 对应，它最早被设计成 DPKG 的前端软件，现在通过 apt-rpm 也支持 rpm 管理。APT 的主要包管理工具为 APT-GET，通过此工具可满足和上述 YUM 相似的功能要求。）</p>
+<pre><code>安装 RPM 包
+# rpm -ivh package.rpm
+
+安装 DEB 包命令
+$ sudo dpkg -i package.deb
+
+YUM安装指定软件 
+# yum -y install package-name
+
+apt-get安装指定软件（较常用）
+$ sudo apt-get install package-name
+更新源索引
+$ sudo apt-get update
+将系统中所有软件升级到最新版本
+$ sudo apt-get upgrade
+将操作系统连同所有软件升级到最新版本
+$ sudo apt-get dist-upgrade
+卸载指定软件
+$ sudo apt-get remove package-name
+</code></pre><blockquote>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-rpmdpkg/index.html" target="_blank" rel="noopener">Linux 平台上的软件包管理</a></p>
+</blockquote>
+<h3 id="G-发行版"><a href="#G-发行版" class="headerlink" title="G.发行版"></a>G.发行版</h3><table>
+<thead>
+<tr>
+<th>基于的包管理工具</th>
+<th>商业发行版</th>
+<th>社区发行版</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RPM</td>
+<td>Red Hat</td>
+<td>Fedora / CentOS</td>
+</tr>
+<tr>
+<td>DPKG</td>
+<td>Ubuntu</td>
+<td>Debian</td>
+</tr>
+</tbody>
+</table>
+<h3 id="H-VIM"><a href="#H-VIM" class="headerlink" title="H.VIM"></a>H.VIM</h3><blockquote>
+<p>一般指令模式（Command mode）：VIM 的默认模式，可以用于移动游标查看内容；<br>编辑模式（Insert mode）：按下 “i” 等按键之后进入，可以对文本进行编辑；<br>指令列模式（Bottom-line mode）：按下 “:” 按键之后进入，用于保存退出等操作。</p>
+</blockquote>
+<p><img src="/2019/08/12/linux基础知识/4.png" alt=""></p>
+<p>在指令列模式下，有以下命令用于离开或者保存文件。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:w</td>
+<td style="text-align:center">写入磁盘</td>
+</tr>
+<tr>
+<td style="text-align:center">:w!</td>
+<td style="text-align:center">当文件为只读时，强制写入磁盘。到底能不能写入，与用户对该文件的权限有关</td>
+</tr>
+<tr>
+<td style="text-align:center">:q</td>
+<td style="text-align:center">离开</td>
+</tr>
+<tr>
+<td style="text-align:center">:q!</td>
+<td style="text-align:center">强制离开不保存</td>
+</tr>
+<tr>
+<td style="text-align:center">:wq</td>
+<td style="text-align:center">写入磁盘后离开</td>
+</tr>
+<tr>
+<td style="text-align:center">:wq!</td>
+<td style="text-align:center">强制写入磁盘后离开</td>
+</tr>
+</tbody>
+</table>
+<h3 id="I-GNU"><a href="#I-GNU" class="headerlink" title="I.GNU"></a>I.GNU</h3><p>GNU 计划，译为革奴计划，它的目标是创建一套完全自由的操作系统，称为 GNU，其内容软件完全以 GPL 方式发布。其中 GPL 全称为 GNU 通用公共许可协议（GNU General Public License），包含了以下内容：</p>
+<ul>
+<li>以任何目的运行此程序的自由；</li>
+<li>再复制的自由；</li>
+<li>改进此程序，并公开发布改进的自由。</li>
+</ul>
+<h2 id="2-磁盘"><a href="#2-磁盘" class="headerlink" title="2.磁盘"></a>2.磁盘</h2><h3 id="A-磁盘接口"><a href="#A-磁盘接口" class="headerlink" title="A.磁盘接口"></a>A.磁盘接口</h3><blockquote>
+<p><strong>IDE</strong>：IDE（ATA）全称 Advanced Technology Attachment，接口速度最大为 133MB/s，因为并口线的抗干扰性太差，且排线占用空间较大，不利电脑内部散热，已逐渐被 SATA 所取代。</p>
+</blockquote>
+<blockquote>
+<p><strong>SATA</strong>：SATA 全称 Serial ATA，也就是使用串口的 ATA 接口，抗干扰性强，且对数据线的长度要求比 ATA 低很多，支持热插拔等功能。SATA-II 的接口速度为 300MiB/s，而 SATA-III 标准可达到 600MiB/s 的传输速度。SATA 的数据线也比 ATA 的细得多，有利于机箱内的空气流通，整理线材也比较方便。</p>
+</blockquote>
+<blockquote>
+<p><strong>SCSI</strong>：SCSI 全称是 Small Computer System Interface（小型机系统接口），SCSI 硬盘广为工作站以及个人电脑以及服务器所使用，因此会使用较为先进的技术，如碟片转速 15000rpm 的高转速，且传输时 CPU 占用率较低，但是单价也比相同容量的 ATA 及 SATA 硬盘更加昂贵。</p>
+</blockquote>
+<blockquote>
+<p><strong>SAS</strong>：SAS（Serial Attached SCSI）是新一代的 SCSI 技术，和 SATA 硬盘相同，都是采取序列式技术以获得更高的传输速度，可达到 6Gb/s。此外也通过缩小连接线改善系统内部空间等。</p>
+</blockquote>
+<h3 id="B-磁盘的文件名"><a href="#B-磁盘的文件名" class="headerlink" title="B.磁盘的文件名"></a>B.磁盘的文件名</h3><p>Linux 中每个硬件都被当做一个文件，包括磁盘。磁盘以磁盘接口类型进行命名，常见磁盘的文件名如下：</p>
+<ul>
+<li>IDE 磁盘：/dev/hd[a-d]</li>
+<li>SATA/SCSI/SAS 磁盘：/dev/sd[a-p]</li>
+</ul>
+<p>其中文件名后面的序号的确定与系统检测到磁盘的顺序有关，而与磁盘所插入的插槽位置无关。</p>
+<h2 id="3-文件系统"><a href="#3-文件系统" class="headerlink" title="3.文件系统"></a>3.文件系统</h2><h3 id="A-概述"><a href="#A-概述" class="headerlink" title="A.概述"></a>A.概述</h3><p>文件系统是用户和硬盘数据打交道的接口，用户通过文件系统可以对文件内容进行各种操作。目前最常见的两种文件系统分别是： FAT和Ext。</p>
+<blockquote>
+<p><a href="http://xingyaohuang.com/2017/11/16/fat/" target="_blank" rel="noopener">文件系统学习 – FAT和Ext</a></p>
+</blockquote>
+<h4 id="（1）FAT系统"><a href="#（1）FAT系统" class="headerlink" title="（1）FAT系统"></a>（1）FAT系统</h4><p>FAT文件系统曾经被广泛运用于DOS系统和早期的Windows系统，即使到了现在，部分U盘等存储设备使用的依然是FAT的文件系统格式。这种文件系统是最经典的一种文件系统。</p>
+<p><strong>FAT的基本思想是: 由于文件是由一个一个block构成类似链表格式而组成的。</strong>我们可以为之创建一个表专门表示block的分配信息。</p>
+<p>FAT的作用是告诉我们在硬盘系统中怎么样将block数据块合成为一个文件，但是并没有告诉我们文件到底是从哪一个block开始的。所以我们还需要一个文件目录表(File Directory table)。</p>
+<h4 id="（2）EXT系统"><a href="#（2）EXT系统" class="headerlink" title="（2）EXT系统"></a>（2）EXT系统</h4><p>另外一种流行的文件系统是Ext(Extended Format)。EXT系统被广泛运用于Linux上，它有Ext2, Ext3, Ext4等版本，不过他们的基本思想比较类似。在EXT文件系统中，每一个文件都有一个对应的inode数据结构对其进行描述，其最主要的几个组成部分如下：</p>
+<ul>
+<li>inode：一个文件占用一个 inode，记录文件的属性，同时记录此文件的内容所在的 block 编号；</li>
+<li>block：记录文件的内容，文件太大时，会占用多个 block<em>（在 Ext2 文件系统中所支持的 block 大小有 1K，2K 及 4K 三种，不同的大小限制了单个文件和文件系统的最大大小）</em>（一个 block 只能被一个文件所使用，未使用的部分直接浪费了。因此如果需要存储大量的小文件，那么最好选用比较小的 block）。</li>
+</ul>
+<p>除此之外还包括：</p>
+<ul>
+<li>superblock：记录文件系统的整体信息，包括 inode 和 block 的总量、使用量、剩余量，以及文件系统的格式与相关信息等；</li>
+<li>block bitmap：记录 block 是否被使用的位图。</li>
+</ul>
+<p><img src="/2019/08/12/linux基础知识/5.png" alt=""></p>
+<h5 id="关于inode"><a href="#关于inode" class="headerlink" title="关于inode"></a>关于inode</h5><p>inode 具体包含以下信息：</p>
+<ul>
+<li>权限 (read/write/excute)；</li>
+<li>拥有者与群组 (owner/group)；</li>
+<li>容量；</li>
+<li>建立或状态改变的时间 (ctime)；</li>
+<li>最近读取时间 (atime)；</li>
+<li>最近修改时间 (mtime)；</li>
+<li>定义文件特性的旗标 (flag)，如 SetUID…；</li>
+<li>该文件真正内容的指向 (pointer)。</li>
+</ul>
+<p>inode 具有以下特点：</p>
+<ul>
+<li>每个 inode 大小均固定为 128 bytes (新的 ext4 与 xfs 可设定到 256 bytes)；</li>
+<li>每个文件都仅会占用一个 inode。</li>
+</ul>
+<p>inode 中记录了文件内容所在的 block 编号，但是每个 block 非常小，一个大文件随便都需要几十万的 block。而一个 inode 大小有限，无法直接引用这么多 block 编号。因此引入了间接、双间接、三间接引用。间接引用让 inode 记录的引用 block 块记录引用信息。</p>
+<h3 id="B-分区与文件系统"><a href="#B-分区与文件系统" class="headerlink" title="B.分区与文件系统"></a>B.分区与文件系统</h3><p>对磁盘分区进行格式化是为了在分区上建立文件系统。一个分区通常只能格式化为一个文件系统，但是磁盘阵列等技术可以将一个分区格式化为多个文件系统。</p>
+<h3 id="C-文件读取"><a href="#C-文件读取" class="headerlink" title="C.文件读取"></a>C.文件读取</h3><blockquote>
+<p>对于 Ext2 文件系统，当要读取一个文件的内容时，先在 inode 中查找文件内容所在的所有 block，然后把所有 block 的内容读出来。<br>而对于 FAT 文件系统，它没有 inode，每个 block 中存储着下一个 block 的编号。</p>
+</blockquote>
+<p><strong>Linux与Windows对比</strong>——假设要读取一个文件，Linux的处理方式是:</p>
+<ol>
+<li>在inode区域中找到对应文件</li>
+<li>得出文件所在的不同的block</li>
+<li>设计出最佳路径在硬盘上得到(读出)这些block。</li>
+</ol>
+<p>Windows的处理方式是:</p>
+<ol>
+<li>在分配表中找到对应文件，读取第一个簇。</li>
+<li>根据记录的下一个簇的位置，移动到下一个位置并读取。</li>
+<li>重复第二步直到读完文件。</li>
+</ol>
+<p>这样区别在于，如果文件在磁盘上比较零散，Windows需要绕更多圈寻找，而Linux可以制定读取顺序，一次全部读出。所以，对于Windows，文件摆放的集中有利于提高读取效率，这就是Windows需要磁盘碎片整理的原因。</p>
+<h3 id="D-磁盘碎片"><a href="#D-磁盘碎片" class="headerlink" title="D.磁盘碎片"></a>D.磁盘碎片</h3><p>指一个文件内容所在的 block 过于分散，导致磁盘磁头移动距离过大，从而降低磁盘读写性能。</p>
+<p><em>磁盘碎片整理——用于合并计算机硬盘上存储在不同碎片上的文件和文件夹，从而使这些文件和文件夹中的任意一个都只占据磁盘上的一块空间。将文件首尾相接整齐存储而没有碎片时，磁盘读写速度将加快。</em></p>
+<h3 id="E-目录"><a href="#E-目录" class="headerlink" title="E.目录"></a>E.目录</h3><h4 id="（1）概述"><a href="#（1）概述" class="headerlink" title="（1）概述"></a>（1）概述</h4><p>建立一个目录时，会分配一个 inode 与至少一个 block。block 记录的内容是目录下所有文件的 inode 编号以及文件名。</p>
+<p>可以看到文件的 inode 本身不记录文件名，文件名记录在目录中，因此新增文件、删除文件、更改文件名这些操作与目录的写权限有关。</p>
+<h4 id="（2）挂载"><a href="#（2）挂载" class="headerlink" title="（2）挂载"></a>（2）挂载</h4><p>挂载利用目录作为文件系统的进入点，也就是说，进入目录之后就可以读取文件系统的数据。</p>
+<h4 id="（3）目录配置"><a href="#（3）目录配置" class="headerlink" title="（3）目录配置"></a>（3）目录配置</h4><p>为了使不同 Linux 发行版本的目录结构保持一致性，Filesystem Hierarchy Standard (FHS) 规定了 Linux 的目录结构。最基础的三个目录如下：</p>
+<ul>
+<li>/ (root, 根目录)</li>
+<li>/usr (unix software resource)：所有系统默认软件都会安装到这个目录；</li>
+<li>/var (variable)：存放系统或程序运行过程中的数据文件。</li>
+</ul>
+<p><img src="/2019/08/12/linux基础知识/6.png" alt=""></p>
+<h2 id="4-文件"><a href="#4-文件" class="headerlink" title="4.文件"></a>4.文件</h2><h3 id="A-文件属性"><a href="#A-文件属性" class="headerlink" title="A.文件属性"></a>A.文件属性</h3><p>用户分为三种：文件拥有者、群组以及其它人，对不同的用户有不同的文件权限。</p>
+<p>使用 ls 查看一个文件时，会显示一个文件的信息，例如 <code>drwxr-xr-x 3 root root 17 May 6 00:14 .config</code>，对这个信息的解释如下：</p>
+<ul>
+<li>drwxr-xr-x：文件类型以及权限，第 1 位为文件类型字段，后 9 位为文件权限字段</li>
+<li>3：链接数</li>
+<li>root：文件拥有者</li>
+<li>root：所属群组</li>
+<li>17：文件大小</li>
+<li>May 6 00:14：文件最后被修改的时间</li>
+<li>.config：文件名</li>
+</ul>
+<p>常见的文件类型及其含义有：</p>
+<ul>
+<li>d：目录</li>
+<li>-：文件</li>
+<li>l：链接文件</li>
+</ul>
+<p>9 位的文件权限字段中，每 3 个为一组，共 3 组，每一组分别代表对文件拥有者、所属群组以及其它人的文件权限。一组权限中的 3 位分别为 r、w、x 权限，表示可读、可写、可执行。</p>
+<p>文件时间有以下三种：</p>
+<ul>
+<li>modification time (mtime)：文件的内容更新就会更新；</li>
+<li>status time (ctime)：文件的状态（权限、属性）更新就会更新；</li>
+<li>access time (atime)：读取文件时就会更新。</li>
+</ul>
+<h3 id="B-权限"><a href="#B-权限" class="headerlink" title="B.权限"></a>B.权限</h3><ul>
+<li>文件默认权限：文件默认没有可执行权限，因此为 666，也就是 -rw-rw-rw- 。</li>
+<li>目录默认权限：目录必须要能够进入，也就是必须拥有可执行权限，因此为 777 ，也就是 drwxrwxrwx。</li>
+</ul>
+<h4 id="目录权限"><a href="#目录权限" class="headerlink" title="目录权限"></a>目录权限</h4><p>文件名不是存储在一个文件的内容中，而是存储在一个文件所在的目录中。因此，拥有文件的 w 权限并不能对文件名进行修改。</p>
+<p>目录存储文件列表，一个目录的权限也就是对其文件列表的权限。因此，目录的 r 权限表示可以读取文件列表；w 权限表示可以修改文件列表，具体来说，就是添加删除文件，对文件名进行修改；x 权限可以让该目录成为工作目录，x 权限是 r 和 w 权限的基础，如果不能使一个目录成为工作目录，也就没办法读取文件列表以及对文件列表进行修改了。</p>
+<p><a href="https://blog.csdn.net/u011795345/article/details/78826778" target="_blank" rel="noopener">linux下进行c语言的开发</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/09/java编程基础——排序算法实现/" rel="next" title="java编程基础——排序算法实现">
+                <i class="fa fa-chevron-left"></i> java编程基础——排序算法实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/13/漏洞分析——AXESSH-4-2拒绝服务漏洞/" rel="prev" title="漏洞分析——AXESSH 4.2拒绝服务漏洞">
+                漏洞分析——AXESSH 4.2拒绝服务漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-常用操作及概念"><span class="nav-number">1.</span> <span class="nav-text">1.常用操作及概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-快捷键"><span class="nav-number">1.1.</span> <span class="nav-text">A.快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-帮助指令"><span class="nav-number">1.2.</span> <span class="nav-text">B.帮助指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-关机"><span class="nav-number">1.3.</span> <span class="nav-text">C.关机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-环境变量"><span class="nav-number">1.4.</span> <span class="nav-text">D.环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-Root"><span class="nav-number">1.5.</span> <span class="nav-text">E.Root</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取root权限"><span class="nav-number">1.5.1.</span> <span class="nav-text">获取root权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改ubuntu默认root密码"><span class="nav-number">1.5.2.</span> <span class="nav-text">修改ubuntu默认root密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-Linux平台上的软件包管理"><span class="nav-number">1.6.</span> <span class="nav-text">F.Linux平台上的软件包管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G-发行版"><span class="nav-number">1.7.</span> <span class="nav-text">G.发行版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#H-VIM"><span class="nav-number">1.8.</span> <span class="nav-text">H.VIM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-GNU"><span class="nav-number">1.9.</span> <span class="nav-text">I.GNU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-磁盘"><span class="nav-number">2.</span> <span class="nav-text">2.磁盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-磁盘接口"><span class="nav-number">2.1.</span> <span class="nav-text">A.磁盘接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-磁盘的文件名"><span class="nav-number">2.2.</span> <span class="nav-text">B.磁盘的文件名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-文件系统"><span class="nav-number">3.</span> <span class="nav-text">3.文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-概述"><span class="nav-number">3.1.</span> <span class="nav-text">A.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）FAT系统"><span class="nav-number">3.1.1.</span> <span class="nav-text">（1）FAT系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）EXT系统"><span class="nav-number">3.1.2.</span> <span class="nav-text">（2）EXT系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#关于inode"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">关于inode</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-分区与文件系统"><span class="nav-number">3.2.</span> <span class="nav-text">B.分区与文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-文件读取"><span class="nav-number">3.3.</span> <span class="nav-text">C.文件读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-磁盘碎片"><span class="nav-number">3.4.</span> <span class="nav-text">D.磁盘碎片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-目录"><span class="nav-number">3.5.</span> <span class="nav-text">E.目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）概述"><span class="nav-number">3.5.1.</span> <span class="nav-text">（1）概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）挂载"><span class="nav-number">3.5.2.</span> <span class="nav-text">（2）挂载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）目录配置"><span class="nav-number">3.5.3.</span> <span class="nav-text">（3）目录配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-文件"><span class="nav-number">4.</span> <span class="nav-text">4.文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-文件属性"><span class="nav-number">4.1.</span> <span class="nav-text">A.文件属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-权限"><span class="nav-number">4.2.</span> <span class="nav-text">B.权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目录权限"><span class="nav-number">4.2.1.</span> <span class="nav-text">目录权限</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

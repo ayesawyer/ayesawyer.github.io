@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="java编程实现基本排序算法。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java编程基础——排序算法实现">
+<meta property="og:url" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="java编程实现基本排序算法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/1.webp">
+<meta property="og:updated_time" content="2019-08-15T04:05:33.788Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java编程基础——排序算法实现">
+<meta name="twitter:description" content="java编程实现基本排序算法。">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/">
+
+
+
+
+
+  <title>java编程基础——排序算法实现 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java编程基础——排序算法实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-09T09:35:24+08:00">
+                2019-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/09/java编程基础——排序算法实现/" class="leancloud_visitors" data-flag-title="java编程基础——排序算法实现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>java编程实现基本排序算法。</p>
+<a id="more"></a>
+<p><em>参考链接中都已经总结的很全面了，这里主要列出几种基本排序算法的原理和java实现。</em></p>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><h3 id="A-总结"><a href="#A-总结" class="headerlink" title="A.总结"></a>A.总结</h3><p><img src="/2019/08/09/java编程基础——排序算法实现/1.png" alt=""></p>
+<ul>
+<li>n: 数据规模</li>
+<li>k: “桶”的个数</li>
+<li>In-place: 占用常数内存，不占用额外内存</li>
+<li>Out-place: 占用额外内存</li>
+</ul>
+<h3 id="B-术语解释"><a href="#B-术语解释" class="headerlink" title="B.术语解释"></a>B.术语解释</h3><ul>
+<li>稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面；</li>
+<li>不稳定：如果a原本在b的前面，而a=b，排序之后a可能会出现在b的后面；</li>
+<li>内排序：所有排序操作都在内存中完成；</li>
+<li>外排序：由于数据太大，因此把数据放在磁盘中，而排序通过磁盘和内存的数据传输才能进行；</li>
+<li>时间复杂度： 一个算法执行所耗费的时间。</li>
+<li>空间复杂度：运行完一个程序所需内存的大小。</li>
+</ul>
+<h2 id="2-冒泡排序"><a href="#2-冒泡排序" class="headerlink" title="2.冒泡排序"></a>2.冒泡排序</h2><h3 id="A-算法描述"><a href="#A-算法描述" class="headerlink" title="A.算法描述"></a>A.算法描述</h3><blockquote>
+<p>1、比较相邻的元素。如果第一个比第二个大，就交换它们两个；<br>2、对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；<br>3、针对所有的元素重复以上的步骤，除了最后一个；<br>4、重复步骤1~3，直到排序完成。</p>
+</blockquote>
+<p><strong>时间代价：最佳情况：O(n)   最差情况：O(n2)   平均情况：O(n2)</strong></p>
+<h3 id="B-java实现"><a href="#B-java实现" class="headerlink" title="B.java实现"></a>B.java实现</h3><pre><code>//将数组array从小到大排列
+public static int[] bubbleSort(int[] array) {
+    if (array.length == 0)
+        return array;
+    for (int i = 0; i &lt; array.length; i++)
+        for (int j = 0; j &lt; array.length - 1 - i; j++)
+            if (array[j] &gt; array[j + 1]) {
+                int temp = array[j + 1];
+                array[j + 1] = array[j];
+                array[j] = temp;
+            }
+    return array;
+}
+</code></pre><h2 id="3-选择排序"><a href="#3-选择排序" class="headerlink" title="3.选择排序"></a>3.选择排序</h2><h3 id="A-算法描述-1"><a href="#A-算法描述-1" class="headerlink" title="A.算法描述"></a>A.算法描述</h3><blockquote>
+<p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置;<br>然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾;<br>以此类推，直到所有元素均排序完毕。</p>
+</blockquote>
+<p><strong>表现最稳定的排序算法之一，因为无论什么数据进去都是O(n2)的时间复杂度。</strong>所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。</p>
+<p><img src="/2019/08/09/java编程基础——排序算法实现/1.webp" alt=""></p>
+<h3 id="B-java实现-1"><a href="#B-java实现-1" class="headerlink" title="B.java实现"></a>B.java实现</h3><pre><code>public static void main(String[] args)
+{
+
+    int[] target = {1,9,7,5,467,798,35,47,689,5};
+    int min;
+    int len = target.length;
+
+    for(int j=0; j&lt;len-1; j++){
+        min = j;
+        for(int i=j+1; i&lt;len; i++){
+            if(target[i]&lt;target[min]){
+                min = i;
+            }
+        }
+        if(min!=j){
+            int tep = target[j];
+            target[j] = target[min];
+            target[min] = tep;
+        }
+    }
+}
+</code></pre><h2 id="4-插入排序"><a href="#4-插入排序" class="headerlink" title="4.插入排序"></a>4.插入排序</h2><h3 id="A-算法描述-2"><a href="#A-算法描述-2" class="headerlink" title="A.算法描述"></a>A.算法描述</h3><p>插入排序（Insertion-Sort）的算法描述是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。插入排序在实现上，通常采用in-place排序（即只需用到O(1)的额外空间的排序），因而在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。具体算法描述如下——</p>
+<blockquote>
+<p>从第一个元素开始，该元素可以认为已经被排序；<br>取出下一个元素，在已经排序的元素序列中从后向前扫描；<br>如果该元素（已排序）大于新元素，将该元素移到下一位置；<br>重复步骤3，直到找到已排序的元素小于或者等于新元素的位置；<br>将新元素插入到该位置后；<br>重复步骤2~5。</p>
+</blockquote>
+<p><strong>时间代价：最佳情况：T(n) = O(n2)  最差情况：T(n) = O(n2)  平均情况：T(n) = O(n2)</strong></p>
+<h3 id="B-java实现-2"><a href="#B-java实现-2" class="headerlink" title="B.java实现"></a>B.java实现</h3><pre><code> public static int[] insertionSort(int[] array) {
+    if (array.length == 0)
+        return array;
+    int current;
+    for (int i = 0; i &lt; array.length - 1; i++) {
+        current = array[i + 1];
+        int preIndex = i;
+        while (preIndex &gt;= 0 &amp;&amp; current &lt; array[preIndex]) {
+            array[preIndex + 1] = array[preIndex];
+            preIndex--;
+        }
+        array[preIndex + 1] = current;
+    }
+    return array;
+}
+
+//一种更简洁的实现
+public static void insertSort(int[] numbers)
+{
+    int size = numbers.length;
+    int temp = 0 ;
+    int j =  0;
+
+    for(int i = 0 ; i &lt; size ; i++)
+    {
+        temp = numbers[i];
+        //假如temp比前面的值小，则将前面的值后移
+        for(j = i ; j &gt; 0 &amp;&amp; temp &lt; numbers[j-1] ; j --)
+        {
+            numbers[j] = numbers[j-1];
+        }
+        numbers[j] = temp;
+    }
+ }
+</code></pre><h2 id="5-希尔排序"><a href="#5-希尔排序" class="headerlink" title="5.希尔排序"></a>5.希尔排序</h2><h3 id="A-算法描述-3"><a href="#A-算法描述-3" class="headerlink" title="A.算法描述"></a>A.算法描述</h3><h3 id="B-java实现-3"><a href="#B-java实现-3" class="headerlink" title="B.java实现"></a>B.java实现</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://itimetraveler.github.io/2017/07/18/%E5%85%AB%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%E4%B8%8Ejava%E5%AE%9E%E7%8E%B0/?utm_source=juhe&amp;utm_source=juhe" target="_blank" rel="noopener">八大排序算法总结与java实现</a><br><a href="https://www.jianshu.com/p/8c915179fd02" target="_blank" rel="noopener">必须知道的八大种排序算法【java实现】</a><br><a href="https://www.cnblogs.com/guoyaohua/p/8600214.html" target="_blank" rel="noopener">十大经典排序算法最强总结（含JAVA代码实现）</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/08/漏洞分析——CVE-2016-5108-VIDEOLAN-VLC-MEDIA-PLAYER-2-2-1越界写拒绝服务漏洞/" rel="next" title="漏洞分析——[CVE-2016-5108]VIDEOLAN VLC MEDIA PLAYER 2.2.1越界写拒绝服务漏洞">
+                <i class="fa fa-chevron-left"></i> 漏洞分析——[CVE-2016-5108]VIDEOLAN VLC MEDIA PLAYER 2.2.1越界写拒绝服务漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/12/linux基础知识/" rel="prev" title="linux基础知识">
+                linux基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概述"><span class="nav-number">1.</span> <span class="nav-text">1.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-总结"><span class="nav-number">1.1.</span> <span class="nav-text">A.总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-术语解释"><span class="nav-number">1.2.</span> <span class="nav-text">B.术语解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-冒泡排序"><span class="nav-number">2.</span> <span class="nav-text">2.冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述"><span class="nav-number">2.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现"><span class="nav-number">2.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-选择排序"><span class="nav-number">3.</span> <span class="nav-text">3.选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-1"><span class="nav-number">3.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-1"><span class="nav-number">3.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-插入排序"><span class="nav-number">4.</span> <span class="nav-text">4.插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-2"><span class="nav-number">4.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-2"><span class="nav-number">4.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-希尔排序"><span class="nav-number">5.</span> <span class="nav-text">5.希尔排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-3"><span class="nav-number">5.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-3"><span class="nav-number">5.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

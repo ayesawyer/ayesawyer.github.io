@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="代码审计,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于提升C语言代码审计能力的一些训练经验的探索和总结。">
+<meta name="keywords" content="代码审计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码审计训练-序">
+<meta property="og:url" content="http://yoursite.com/2019/04/15/代码审计训练-序/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于提升C语言代码审计能力的一些训练经验的探索和总结。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/代码审计训练-序/1.png">
+<meta property="og:updated_time" content="2019-04-15T08:06:58.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="代码审计训练-序">
+<meta name="twitter:description" content="对于提升C语言代码审计能力的一些训练经验的探索和总结。">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/15/代码审计训练-序/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/15/代码审计训练-序/">
+
+
+
+
+
+  <title>代码审计训练-序 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/代码审计训练-序/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">代码审计训练-序</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-15T14:50:07+08:00">
+                2019-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/漏洞挖掘-利用/" itemprop="url" rel="index">
+                    <span itemprop="name">漏洞挖掘/利用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/15/代码审计训练-序/" class="leancloud_visitors" data-flag-title="代码审计训练-序">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于提升C语言代码审计能力的一些训练经验的探索和总结。</p>
+<a id="more"></a>
+<h2 id="为什么要训练代码审计能力"><a href="#为什么要训练代码审计能力" class="headerlink" title="为什么要训练代码审计能力"></a>为什么要训练代码审计能力</h2><p>目的——训练挖洞的双技能</p>
+<ul>
+<li>看洞，历史漏洞的git log、bug报告、代码质量报告等；</li>
+<li><strong>识洞</strong>，即<strong>代码审计</strong>，难点也就是在这上面。</li>
+</ul>
+<h2 id="如何训练"><a href="#如何训练" class="headerlink" title="如何训练"></a>如何训练</h2><ol>
+<li><p>根据自己目标定位，<strong>寻找相应的历史漏洞案例进行学习</strong>，比如我给自己定的最初目标就是c语言实现的应用程序中的内存相关漏洞（如堆栈溢出等）。</p>
+</li>
+<li><p>掌握漏洞所在的模块或子系统，但不看完整的漏洞细节描述，<strong>尝试在漏洞版本中找出对应的漏洞</strong>。</p>
+</li>
+<li><p>如果2中未能找出漏洞，就去看漏洞细节描述，对比自己的审计过程，<strong>思考为什么没有找出漏洞</strong>。</p>
+</li>
+<li><p>不断重复上述训练，直至相信：挖洞只是体力消耗，而非能力问题。</p>
+</li>
+<li><p>在坚持进行代码审计一段时间后（1年或者2年），有了<strong>大量的经验</strong>，此时可考虑结合自己审计过程中积累的经验，尝试开发或者改进Fuzzer，进行自动化漏洞挖掘。</p>
+</li>
+</ol>
+<h2 id="寻找训练对象-初"><a href="#寻找训练对象-初" class="headerlink" title="寻找训练对象-初"></a>寻找训练对象-初</h2><p>在最开始寻找训练对象时，是<strong>在<a href="https://cve.mitre.org/" target="_blank" rel="noopener">cve网站</a>上根据关键词进行搜索</strong>，然后从搜索结果中，挨个寻找感兴趣的，搜索查看能否下载到其漏洞版本的软件，然后再进行分析。但由于下述原因，<strong>该方法效率太低</strong>——</p>
+<ul>
+<li>关键词搜索结果太多，而且对于漏洞的细节描述并没有很好的格式，并不能很快的定位到出现的最频繁的具体漏洞类型等信息。</li>
+<li>很多漏洞，都没有寻找到对应的漏洞版本的软件<strong>(主要原因)</strong>。</li>
+<li>有部分漏洞细节中并未指出存在漏洞的具体模块，只是指出了对应软件，这不利于前期的训练。</li>
+</ul>
+<p><img src="/2019/04/15/代码审计训练-序/1.png" alt=""></p>
+<p>针对上述原因中的各条进行思考改进——</p>
+<ol>
+<li><p>可以考虑通过<strong>词频统计工具</strong>，统计得到搜索结果中出现频率较高的关键词，加深对于整体的搜索结果情况的了解。</p>
+</li>
+<li><p>后面2条原因是硬伤，考虑寻找有没有能解决这2个问题的其他网站或库。</p>
+</li>
+</ol>
+<p>在尝试寻找新的训练对象的过程中，意识到<strong>对于那些漏洞细节描述的不是很详细的漏洞</strong>，可以考虑利用开源的<strong>代码审计工具</strong>对其进行审计，然后将审计结果作为类似于参考答案一样的东东，这样应该可以提高分析的完善度。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/microzone/article/details/52847298" target="_blank" rel="noopener"><em>自动化的静态代码审计工具虽然可以在某种程度节省代码审计的人力成本，时间成本。是提高代码审计效率的重要手段。然而需要注意的是，自动化工具并非是完全智能准确的，跟所有的检测扫描工具一样，误报率的存在仍然是必须面对的现实问题。因此，检测结果中显示的漏洞还是需要审计人员，手动验证或者手工进一步确认是否真的存在。</em></a></p>
+</blockquote>
+<h2 id="寻找训练对象-终"><a href="#寻找训练对象-终" class="headerlink" title="寻找训练对象-终"></a>寻找训练对象-终</h2><p>最终寻找确定的训练程序集如下——</p>
+<blockquote>
+<p><strong>(1)<a href="https://www.exploit-db.com/" target="_blank" rel="noopener">exploit-db</a>，提供关键词搜索、漏洞描述、漏洞对应版本应用程序下载、利用脚本EXP等功能</strong>;<br>(2)<a href="https://github.com/fuzzstati0n/fuzzgoat/blob/master/fuzzgoat.c" target="_blank" rel="noopener">fuzzgoat</a>，一个用于测试fuzzers的漏洞C程序;<br>(3)<a href="https://www.kancloud.cn/wizardforcel/ctf-field-guide/141831" target="_blank" rel="noopener">源代码审计</a>;<br>(4)<a href="https://j00ru.vexillium.org/2014/10/secure-2014-slide-deck-and-hex-rays-ida-pro-advisories-published/" target="_blank" rel="noopener">ida6.6 bugs</a>;<br>(5)<a href="http://www.gameofhacks.com/" target="_blank" rel="noopener">gameofhacks</a>，一个测试代码审计能力的游戏平台，但感觉更多涉及的是web相关的安全漏洞，看看能不能寻找或者积累创建一个类似的二进制漏洞代码审计能力的测试平台;</p>
+</blockquote>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>1.下载寻找旧版应用程序的网站</p>
+<blockquote>
+<p>(1)<a href="http://www.oldversion.cn/" target="_blank" rel="noopener">OLDVERSION</a>;<br>(2)<a href="http://www.oldapps.com/" target="_blank" rel="noopener">oldapps</a>;<br>(3)<a href="https://filehippo.com/" target="_blank" rel="noopener">filehippo</a>;</p>
+</blockquote>
+<p>2.其他</p>
+<blockquote>
+<p>(1)<a href="https://paper.seebug.org/789/" target="_blank" rel="noopener">安全研究者的自我修养</a>;<br>(2)<a href="https://4hou.win/wordpress/?p=19493" target="_blank" rel="noopener">一系列用于Fuzzing学习的资源汇总</a>;</p>
+</blockquote>
+<p>3.在审计过程中要多总结和积累，如下述参考链接所示</p>
+<blockquote>
+<p>(1)<a href="https://blog.csdn.net/u010651541/article/details/76165216" target="_blank" rel="noopener">C/C++典型漏洞产生原理与Demo</a>;<br>(2)<a href="https://blog.csdn.net/microzone/article/details/50811216" target="_blank" rel="noopener">C语言代码漏洞审计技巧笔记分享</a>;</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/代码审计/" rel="tag"># 代码审计</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/13/逆向练习8/" rel="next" title="逆向练习8">
+                <i class="fa fa-chevron-left"></i> 逆向练习8
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/16/使用adb在电脑和手机间传文件/" rel="prev" title="使用adb在电脑和手机间传文件">
+                使用adb在电脑和手机间传文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要训练代码审计能力"><span class="nav-number">1.</span> <span class="nav-text">为什么要训练代码审计能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何训练"><span class="nav-number">2.</span> <span class="nav-text">如何训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找训练对象-初"><span class="nav-number">3.</span> <span class="nav-text">寻找训练对象-初</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找训练对象-终"><span class="nav-number">4.</span> <span class="nav-text">寻找训练对象-终</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

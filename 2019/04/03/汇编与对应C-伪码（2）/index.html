@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="教材学习,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于《C++反汇编与逆向分析技术揭秘》第五章~第n章学习过程中的一些汇编代码及对应的c++代码的积累。">
+<meta name="keywords" content="教材学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编与对应C++伪码（2）">
+<meta property="og:url" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于《C++反汇编与逆向分析技术揭秘》第五章~第n章学习过程中的一些汇编代码及对应的c++代码的积累。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/14.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/15.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/16.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/17.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/18.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/19.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/20.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/21.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/22.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/23.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/24.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/25.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/26.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/27.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/28.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/29.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/30.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/31.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/32.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/33.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/34.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/35.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/36.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/37.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/38.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/39.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/40.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/41.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/42.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/43.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/44.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/45.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/46.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/47.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/48.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/49.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/50.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/51.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/52.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/53.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/54.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/58.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/55.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/56.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/57.png">
+<meta property="og:updated_time" content="2019-05-20T08:49:25.641Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="汇编与对应C++伪码（2）">
+<meta name="twitter:description" content="对于《C++反汇编与逆向分析技术揭秘》第五章~第n章学习过程中的一些汇编代码及对应的c++代码的积累。">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/">
+
+
+
+
+
+  <title>汇编与对应C++伪码（2） | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/汇编与对应C-伪码（2）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">汇编与对应C++伪码（2）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-03T16:45:55+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/03/汇编与对应C-伪码（2）/" class="leancloud_visitors" data-flag-title="汇编与对应C++伪码（2）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于《C++反汇编与逆向分析技术揭秘》第五章~第n章学习过程中的一些汇编代码及对应的c++代码的积累。</p>
+<a id="more"></a>
+<h2 id="第五章-流程控制语句的识别"><a href="#第五章-流程控制语句的识别" class="headerlink" title="第五章 流程控制语句的识别"></a>第五章 流程控制语句的识别</h2><h3 id="if-语句"><a href="#if-语句" class="headerlink" title="if 语句"></a>if 语句</h3><p>（1）</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/1.png" alt=""></p>
+<p>（2）</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/2.png" alt=""></p>
+<h3 id="if…else…语句"><a href="#if…else…语句" class="headerlink" title="if…else…语句"></a>if…else…语句</h3><h4 id="（1）if…else…组合-—-Debug-版"><a href="#（1）if…else…组合-—-Debug-版" class="headerlink" title="（1）if…else…组合 — Debug 版"></a>（1）if…else…组合 — Debug 版</h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/3.png" alt=""></p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/4.png" alt=""></p>
+<h4 id="（2）模拟条件表达式转换方式"><a href="#（2）模拟条件表达式转换方式" class="headerlink" title="（2）模拟条件表达式转换方式"></a>（2）模拟条件表达式转换方式</h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/5.png" alt=""></p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/6.png" alt=""></p>
+<p>按 if…else…的逻辑，如果满足 if 条件，则执行 if 语句块 ；否则执行 else 语句块，两者有且仅有一个会执行。所以，如果编译器生成的代码在 0040109C 处的跳转条件成立，则必须到达 else 块的代码开始处。而 004010A5 处有个无条件跳转 jmp，它的作用是绕过 else 块，因为如果能执行到这个 jmp，if 条件必然成立，对应的反汇编代码处的跳转条件必然不能成立，且 if 语句块已经执行完毕。<strong>由此，我们可以将这里的两处跳转指令作为“指路明灯”，准确划分 if 块和 else 块的边界。</strong></p>
+<p>上述debug版代码经过编译优化后代码如下图所示。</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/7.png" alt=""></p>
+<h3 id="用-if-构成的多分支流程"><a href="#用-if-构成的多分支流程" class="headerlink" title="用 if 构成的多分支流程"></a>用 if 构成的多分支流程</h3><h4 id="（1）多分支结构-—-Debug-版"><a href="#（1）多分支结构-—-Debug-版" class="headerlink" title="（1）多分支结构 — Debug 版"></a>（1）多分支结构 — Debug 版</h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/8.png" alt=""></p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/9.png" alt=""></p>
+<p>对上述代码进行手工优化：如果其中一个分支成立，则其他分支结构语句块便会被跳过。因此可将前两个分支语句块转换为单分支 if 结构，在各分支语句块中插入 return 语句，这样既没有破坏程序流程，又可以省略掉 else 语句。由于没有了else，减少了一次 JMP 跳转，使程序执行效率得到提高。其 C++ 代码如下——</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/10.png" alt=""></p>
+<p>开启 O2 编译选项，得到编译器优化后的汇编代码如下——</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/11.png" alt=""></p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/12.png" alt=""></p>
+<p>由于选择的是 O2 优化选项，因此在优化方向上更注重效率，而不是节省空间。既然是对效率的优化，就会尽量减少分支中指令的使用。代码中就省去了 else 对应的 JMP指令，当第一次比较成功后，则直接在执行分支语句块后返回，省去了一次跳转操作，从而提升效率。</p>
+<h3 id="switch-的真相"><a href="#switch-的真相" class="headerlink" title="switch 的真相"></a>switch 的真相</h3><h4 id="（1）比较switch多分支结构和-if…else-if（if-else优化）"><a href="#（1）比较switch多分支结构和-if…else-if（if-else优化）" class="headerlink" title="（1）比较switch多分支结构和 if…else if（if-else优化）"></a><strong>（1）比较switch多分支结构和 if…else if（if-else优化）</strong></h4><p>switch-case的c++代码如下——</p>
+<pre><code>// 略去无关代码
+int nIndex = 1;
+scanf(&quot;%d&quot;, &amp;nIndex);
+switch(nIndex) {
+    case 1: printf(&quot;nIndex == 1&quot;);  break;
+    case 3: printf(&quot;nIndex == 3&quot;);  break;
+    case 100: printf(&quot;nIndex == 100&quot;) ;break;
+}
+</code></pre><p>汇编代码如下图——</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/13.png" alt=""></p>
+<p>对应的if…else if 结构的汇编代码如下——</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/14.png" alt=""></p>
+<p>将二者进行对比分析 ：if…else if 结构会在条件跳转后紧跟语句块 ；而 switch 结构则将所有的条件跳转都放置在了一起，并没有发现 case 语句块的踪影。通过条件跳转指令，跳转到相应 case 语句块中，因此每个 case 的执行是由 switch 比较结果引导“跳”过来的。所有 case 语句块都是连在一起的，这样是为了实现 C 语法的要求，在case 语句块中没有 break 语句时，可以顺序执行后续 case 语句块。</p>
+<h4 id="（2）有序线性优化"><a href="#（2）有序线性优化" class="headerlink" title="（2）有序线性优化"></a><strong>（2）有序线性优化</strong></h4><p>在 switch 分支数小于 4 的情况下，VC++ 6.0 采用模拟 if…else if 的方法。这样做并没有发挥出 switch 的优势，在效率上也没有 if…else if 强。当分支数大于 3，并且 case 的判定值存在明显线性关系组合时，switch 的优化特性便可以凸显出来，如代码清单 5-11 所示。</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/15.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/16.png" alt=""></p>
+<p>上述代码中的 case 地址表信息如下图所示。</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/17.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/18.png" alt=""></p>
+<p>这种 switch 的识别有两个关键点，取数值内容进行比较 ；比较跳转失败后，出现 4 字节的相对比例因子寻址方式。有了这两个特性，就可以从代码中正确分析出 switch 结构。</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/19.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/20.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/21.png" alt=""></p>
+<h3 id="难以构成跳转表的-switch（非线性索引表优化）"><a href="#难以构成跳转表的-switch（非线性索引表优化）" class="headerlink" title="难以构成跳转表的 switch（非线性索引表优化）"></a>难以构成跳转表的 switch（非线性索引表优化）</h3><p><img src="/2019/04/03/汇编与对应C-伪码（2）/22.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/23.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/24.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/25.png" alt=""></p>
+<h3 id="降低判定树的高度（树的优化）"><a href="#降低判定树的高度（树的优化）" class="headerlink" title="降低判定树的高度（树的优化）"></a>降低判定树的高度（树的优化）</h3><h4 id="（1）树结构-switch-片段-—-Debug-版"><a href="#（1）树结构-switch-片段-—-Debug-版" class="headerlink" title="（1）树结构 switch 片段 — Debug 版"></a><strong>（1）树结构 switch 片段 — Debug 版</strong></h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/26.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/27.png" alt=""></p>
+<h4 id="（2）判定树结构片段-—-Release-版"><a href="#（2）判定树结构片段-—-Release-版" class="headerlink" title="（2）判定树结构片段 — Release 版"></a><strong>（2）判定树结构片段 — Release 版</strong></h4><pre><code>.text:00401018  mov eax, [esp+0Ch+var_4]
+; 平衡 scanf 的参数
+.text:0040101C  add esp, 8
+; eax 中保存着 switch 语句的参数，与 35 比较
+.text:0040101F cmp eax, 35
+; 大于 35 跳转到标号 short loc_401080 处
+.text:00401022  jg short loc_401080
+; 等于 35 跳转到标号 short loc_401071 处
+.text:00401024 jz short loc_401071
+; 用 eax 加 -2，进行下标平衡
+.text:00401026  add eax, 0FFFFFFFEh ; switch 9 cases
+; 比较最大 case 值，之前进行了减 2 的对齐下标操作
+; 这里的比较数为 8，考察对齐下标操作后，说明这里的最大 case 值为 10
+.text:00401029  cmp eax, 8
+; 大于 8 跳转到标号 short loc_401093 处
+; IDA 已经识别出这是个 default 分支
+.text:0040102C  ja short loc_401093 ; default
+; 看到这种 4 字节的相对比例因子寻址方式，之前又进行了下标判断比较，
+; 可以肯定这个 off_4010D0 标号的地址为 case 地址表
+.text:0040102E  jmp ds:off_4010D0[eax*4] ; switch jump
+</code></pre><p><img src="/2019/04/03/汇编与对应C-伪码（2）/28.png" alt=""></p>
+<pre><code>.text:00401080 loc_401080:
+.text:00401080  cmp eax, 37
+; 比较是否等于 37，等于则跳转到标号 short loc_4010C0
+.text:00401083  jz short loc_4010C0
+.text:00401085 cmp  eax, 666
+; 比较是否等于 666，等于则跳转到标号 short loc_4010B1
+.text:0040108A jz short loc_4010B1
+.text:0040108C  cmp eax, 10000
+; 比较是否等于 10000，等于则跳转到标号 short loc_4010A2
+.text:00401091 jz short loc_4010A2
+</code></pre><h3 id="do-while-for-的比较"><a href="#do-while-for-的比较" class="headerlink" title="do/while/for 的比较"></a>do/while/for 的比较</h3><h4 id="（1）do-循环"><a href="#（1）do-循环" class="headerlink" title="（1）do 循环"></a><strong>（1）do 循环</strong></h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/29.png" alt=""></p>
+<h4 id="（2）while-循环"><a href="#（2）while-循环" class="headerlink" title="（2）while 循环"></a><strong>（2）while 循环</strong></h4><pre><code>// C++ 源码说明：while 循环完成整数累加和
+int LoopWhile(int nCount){
+int nSum = 0;
+int nIndex = 0;
+// 先执行条件比较，再进入循环体
+while (nIndex &lt;= nCount){
+nSum += nIndex;
+nIndex++;
+}
+return nSum;
+}
+// C++ 源码于对应汇编代码讲解
+int nSum = 0;
+0040B7C8 mov dword ptr [ebp-4],0
+int nIndex = 0;
+0040B7CF mov dword ptr [ebp-8],0
+// C++ 源码对比，判断循环条件
+while (nIndex &lt;= nCount)
+0040B7D6 mov eax,dword ptr [ebp-8]
+0040B7D9 cmp eax,dword ptr [ebp+8]
+; 条件判断比较，使用 JG 指令，大于则跳转到地址 0x0040B7F2 处，和 if 语句一样
+; 地址 0x0040B7F2 为 while 循环结束地址
+0040B7DC jg LoopWhile+42h (0040b7f2)
+{
+// 循环语句块
+nSum += nIndex;
+0040B7DE mov ecx,dword ptr [ebp-4]
+0040B7E1 add ecx,dword ptr [ebp-8]
+0040B7E4 mov dword ptr [ebp-4],ecx
+nIndex++;
+0040B7E7 mov edx,dword ptr [ebp-8]
+0040B7EA add edx,1
+0040B7ED mov dword ptr [ebp-8],edx
+}
+; 执行跳转指令 JMP，跳转到地址 0x0040B7D6 处
+0040B7F0 jmp LoopWhile+26h (0040b7d6)
+return nSum;
+0040B7F2 mov eax,dword ptr [ebp-4]
+</code></pre><h4 id="（3）for-循环"><a href="#（3）for-循环" class="headerlink" title="（3）for 循环"></a><strong>（3）for 循环</strong></h4><pre><code>// C++ 源码说明：for 循环完成整数累加和
+int LoopFor(int nCount){
+int nSum = 0;
+// 初始计数器变量、设置循环条件、设置循环步长
+for (int nIndex = 0; nIndex &lt;= nCount; nIndex++){
+nSum += nIndex;
+}
+return nSum;
+}
+// C++ 源码于对应汇编代码讲解
+int nSum = 0;
+0040B818 mov dword ptr [ebp-4],0
+// C++ 源码对比，for 语句
+for (int nIndex = 0; nIndex &lt;= nCount; nIndex++)
+;=====================================================
+; 初始化计数器变量 — nIndex 1. 赋初值部分
+0040B81F mov dword ptr [ebp-8],0
+; 跳转到地址 0x0040B831 处，跳过步长操作
+0040B826 jmp LoopFor+31h (0040b831)
+;=====================================================
+; 取出计数器变量，用于循环步长 2. 步长计算部分
+0040B828 mov eax,dword ptr [ebp-8]
+; 对计数器变量执行加 1 操作，步长值为 1
+0040B82B add eax,1
+; 将加 1 后的步长值放回计数器变量 — nIndex
+0040B82E mov dword ptr [ebp-8],eax
+;=====================================================
+; 取出计数器变量 nIndex 放入 ecx  3. 条件比较部分
+0040B831 mov ecx,dword ptr [ebp-8]
+; ebp+8 地址处存放数据为参数 nCount，见 C++ 源码说明
+0040B834 cmp ecx,dword ptr [ebp+8]
+; 比较 nIndex 与 nCount，大于则跳转到地址 0x0040B844 处，结束循环
+0040B837 jg LoopFor+44h (0040b844)
+;=====================================================
+{
+// for 循环内执行语句块
+nSum += nIndex;
+mov edx,dword ptr [ebp-4] ; 4. 循环体代码
+0040B83C add edx,dword ptr [ebp-8]
+0040B83F mov dword ptr [ebp-4],edx
+}
+; 跳转到地址 0x0040B828 处，这是一个向上跳
+0040B842 jmp LoopFor+28h (0040b828)
+return nSum;
+// 设置返回值 eax 为 ebp-4，即 nSum
+0040B844 mov eax,dword ptr [ebp-4]
+</code></pre><hr>
+<h2 id="第六章-函数的工作原理"><a href="#第六章-函数的工作原理" class="headerlink" title="第六章 函数的工作原理"></a>第六章 函数的工作原理</h2><h3 id="栈帧的形成与关闭"><a href="#栈帧的形成与关闭" class="headerlink" title="栈帧的形成与关闭"></a>栈帧的形成与关闭</h3><h4 id="栈指针保存与平衡检查"><a href="#栈指针保存与平衡检查" class="headerlink" title="栈指针保存与平衡检查"></a>栈指针保存与平衡检查</h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/30.png" alt=""></p>
+<h3 id="函数的参数"><a href="#函数的参数" class="headerlink" title="函数的参数"></a>函数的参数</h3><p><img src="/2019/04/03/汇编与对应C-伪码（2）/31.png" alt=""></p>
+<h3 id="函数的返回值"><a href="#函数的返回值" class="headerlink" title="函数的返回值"></a>函数的返回值</h3><p><img src="/2019/04/03/汇编与对应C-伪码（2）/32.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/33.png" alt=""></p>
+<hr>
+<h2 id="第七章-变量在内存中的位置和访问方式"><a href="#第七章-变量在内存中的位置和访问方式" class="headerlink" title="第七章 变量在内存中的位置和访问方式"></a>第七章 变量在内存中的位置和访问方式</h2><h3 id="全局变量和局部变量的区别"><a href="#全局变量和局部变量的区别" class="headerlink" title="全局变量和局部变量的区别"></a>全局变量和局部变量的区别</h3><h4 id="全局变量的访问—Debug版"><a href="#全局变量的访问—Debug版" class="headerlink" title="全局变量的访问—Debug版"></a>全局变量的访问—Debug版</h4><pre><code>//C++源码说明：全局变量的访问
+int g_nVariableType=117713190；//定义整型全局变量
+void main（）{
+//从标准输入设备获取数据到g_nVariableType
+scanf（&quot;%d&quot;，＆g_nVariableType）；
+//将g_nVariableType输出到标准输出设备
+printf（&quot;%d\r\n&quot;，g_nVariableType）；
+}
+//C++源码与对应汇编代码讲解
+void main（）{
+；Debug保存环境、栈空间申请初始化略
+scanf（&quot;%d&quot;，＆g_nVariableType）；
+；将全局变量的地址作为参数压入栈，与常量的处理方法相同
+00401028 push offset g_nVariableType（00424a30）
+0040102D push offset string&quot;%d&quot;（00422024）
+00401032 call scanf（00401100）；调用scanf函数
+00401037 add esp，8；平衡scanf函数的两个参数
+printf（&quot;%d\r\n&quot;，g_nVariableType）；
+；取全局变量内容传入eax
+0040103A mov eax，[g_nVariableType（00424a30）]
+0040103F push eax
+00401040 push offset string&quot;%d\r\n&quot;（0042201c）
+00401045 call printf（00401080）；调用printf函数
+0040104A add esp，8；平衡printf函数的两个参数
+}
+；Debug还原环境、栈空间略
+</code></pre><h4 id="全局变量的定义顺序"><a href="#全局变量的定义顺序" class="headerlink" title="全局变量的定义顺序"></a>全局变量的定义顺序</h4><pre><code>//C++源码说明：全局变量的访问
+int g_nVariableType=117713190；//定义整型全局变量
+int g_nVariableType1=117713191；//定义整型全局变量
+void main（）{
+int nOne=1；int nTwo=2；//局部变量定义
+//scanf与printf的使用避免常量传播优化
+scanf（&quot;%d，%d&quot;，＆nOne，＆nTwo）；
+printf（&quot;%d%d\r\n&quot;，nOne, nTwo）；
+scanf（&quot;%d，%d&quot;，＆g_nVariableType，＆g_nVariableType1）；
+printf（&quot;%d%d\r\n&quot;，g_nVariableType, g_nVariableType1）；
+｝
+//C++源码与对应汇编代码讲解
+void main（）{
+；Debug保存环境、栈空间申请初始化略
+int nOne=1；//假设ebp为0x0012FF10
+0040D9D8 mov dword ptr[ebp-4]，1；nOne所在地址0x0012FF0C
+int nTwo=2；
+0040D9DF mov dword ptr[ebp-8]，2；nTwo所在地址0x0012FF08
+；scanf与printf讲解略
+scanf（&quot;%d，%d&quot;，＆g_nVariableType，＆g_nVariableType1）；
+；g_nVariableType1所在地址为0x00424E78
+0040DA10 push offset g_nVariableType1（00424e78）
+；g_nVariableType所在地址为0x00424E4
+0040DA15 push offset g_nVariableType（00424e74）
+0040DA1A push offset string&quot;%d，%d&quot;（00422fe0）
+；其他分析讲解略
+</code></pre><h3 id="局部静态变量的工作方式"><a href="#局部静态变量的工作方式" class="headerlink" title="局部静态变量的工作方式"></a>局部静态变量的工作方式</h3><h4 id="局部静态变量的工作方式—Debug版"><a href="#局部静态变量的工作方式—Debug版" class="headerlink" title="局部静态变量的工作方式—Debug版"></a>局部静态变量的工作方式—Debug版</h4><pre><code>//C++源码说明：全局变量的访问
+void ShowStatic（int nNumber）{
+static int g_snNumber=nNumber；//定义局部静态变量，赋值为参数
+printf（&quot;%d\r\n&quot;，g_snNumber）；//显示静态变量
+}
+void main（）{
+for（int i=0；i＜5；i++）{
+ShowStatic（i）；//循环调用显示局部静态变量的函数，每次传入不同值
+}
+}
+//C++源码与对应汇编代码讲解
+//for循环调用过程讲解略
+//ShowStatic函数内实现过程
+void ShowStatic（int nNumber）{
+；在Debug版下保存环境、开辟栈、初始化部分略
+static int g_snNumber=nNumber；//定义局部静态变量
+0040D9D8 xor eax, eax；清空eax
+；取地址0x004257CC处1字节数据到al中
+0040D9DA mov al，[&apos;ShowStatic&apos;：&apos;2&apos;：$S1（004257cc）]
+；将eax与数值1做位与运算，eax最终结果只能是0或1
+0040D9DF and eax，1
+0040D9E2 test eax, eax
+；比较eax，不等于0则执行跳转，跳转到地址0x0040D9FE处
+0040D9E4 jne ShowStatic+3Eh（0040d9fe）
+；将之前比较是否为0值的地址取出数据到cl中
+0040D9E6 mov cl, byte ptr[&apos;ShowStatic&apos;：&apos;2&apos;：$S1（004257cc）]
+；将cl与数值1做位或运算，cl的最低位将被置1，其他位不变
+0040D9EC or cl，1
+；再将置位后的cl存回地址0x004257CC处
+0040D9EF mov byte ptr[&apos;ShowStatic&apos;：&apos;2&apos;：$S1（004257cc）]，cl
+；取出参数信息放入edx中
+0040D9F5 mov edx, dword ptr[ebp+8]
+；将edx赋值到地址0x004257C8处，即将局部静态变量赋值为edx中保存的数据
+0040D9F8 mov dword ptr[___sbh_sizeHeaderList+4（004257c8）]，edx
+printf（&quot;%d\r\n&quot;，g_snNumber）；//显示局部静态变量中的数据
+；局部静态变量的访问，和全局变量的访问方式一样
+0040D9FE mov eax，[___sbh_sizeHeaderList+4（004257c8）]
+；printf函数调用过程分析略
+</code></pre><h4 id="多个局部静态变量的定义"><a href="#多个局部静态变量的定义" class="headerlink" title="多个局部静态变量的定义"></a>多个局部静态变量的定义</h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/34.png" alt=""></p>
+<hr>
+<h2 id="第八章-数组和指针的寻址"><a href="#第八章-数组和指针的寻址" class="headerlink" title="第八章 数组和指针的寻址"></a>第八章 数组和指针的寻址</h2><h3 id="数组作为参数"><a href="#数组作为参数" class="headerlink" title="数组作为参数"></a>数组作为参数</h3><h4 id="数组作为参数传递"><a href="#数组作为参数传递" class="headerlink" title="数组作为参数传递"></a>数组作为参数传递</h4><pre><code>//C++源码说明：数组作为参数
+//参数类型为字符型数组
+void Show（char szBuff[]）{//参数为字符数组类型
+strcpy（szBuff，&quot;Hello World&quot;）；//复制字符串
+printf（szBuff）；
+}
+void main（）{
+char szHello[20]={0}；//字符数组定义
+Show（szHello）；//将数组作为参数传递
+}
+//C++源码与对应汇编代码讲解
+void main（）{
+；Debug保存环境初始化栈略
+char szHello[20]={0}；
+；ebp-14h为数组szHello首地址，数组初始化为0
+0040B7C8 mov byte ptr[ebp-14h]，0
+0040B7CC xor eax, eax
+0040B7CE mov dword ptr[ebp-13h]，eax
+0040B7D1 mov dword ptr[ebp-0Fh]，eax
+0040B7D4 mov dword ptr[ebp-0Bh]，eax
+0040B7D7 mov dword ptr[ebp-7]，eax
+0040B7DA mov word ptr[ebp-3]，ax
+0040B7DE mov byte ptr[ebp-1]，al
+Show（szHello）；
+0040B7E1 lea ecx，[ebp-14h]；取数组首地址存入ecx
+0040B7E4 push ecx；将ecx作为参数压栈
+0040B7E5 call@ILT+5（Show）（0040100a）；调用Show函数
+0040B7EA add esp，4；平衡参数
+；略
+}
+//Show函数实现部分
+void Show（char szBuff[]）{
+strcpy（szBuff，&quot;Hello World&quot;）；
+；获取常量首地址，并将此地址压入栈中作为strcpy参数
+0040B488 push offset string&quot;Hello World&quot;（0041f01c）
+；取函数参数szBuff地址存入eax中
+0040B48D mov eax, dword ptr[ebp+8]
+；将eax压栈作为strcpy参数
+0040B490 push eax
+0040B491 call strcpy（00404570）
+0040B496 add esp，8
+printf（szBuff）；
+}
+</code></pre><h4 id="识别strlen的内联形式—Release版"><a href="#识别strlen的内联形式—Release版" class="headerlink" title="识别strlen的内联形式—Release版"></a>识别strlen的内联形式—Release版</h4><pre><code>//C++源码对照
+int GetLen（char szBuff[]）{
+return strlen（szBuff）；
+}
+//使用O2选项后的优化代码
+sub_401000 proc near；函数起始处
+arg_0=dword ptr 4；参数标号
+push edi
+mov edi，[esp+4+arg_0]；获取参数内容，向edi中赋值字符串首地址
+or ecx，0FFFFFFFFh；将ecx置为-1，是为了配合repne scasb指令
+xor eax, eax
+；repne/repnz与scas指令结合使用，表示串未结束（ecx！=0）
+；当eax与串元素不相同（ZF=0）时，继续重复执行串搜索指令
+；可用来在字符串中查找和eax值相同的数据位置
+repne scasb；执行该指令后，ecx中保存了字符串长度的补码
+not ecx；先对ecx取反
+dec ecx；对取反后的ecx减1，得到字符串长度
+pop edi
+mov eax, ecx；设置eax为字符串长度，用于函数返回
+retn
+sub_401000 endp；函数终止处
+</code></pre><h4 id="识别strcpy的内联形式—Release版"><a href="#识别strcpy的内联形式—Release版" class="headerlink" title="识别strcpy的内联形式—Release版"></a>识别strcpy的内联形式—Release版</h4><pre><code>；main函数讲解略
+；Show函数实现
+；int__cdecl sub_401000（char*Format）；函数类型识别
+sub_401000 proc near
+Format=dword ptr 4；函数参数识别
+；
+push esi
+push edi
+；===============================================================
+；这段代码似曾相识，就是之前所分析的优化后的求字符串长度函数strlen的内联方式
+mov edi, offset aHelloWorld；&quot;Hello World&quot;
+or ecx，0FFFFFFFFh
+xor eax, eax
+repne scasb
+mov eax，[esp+8+Format]；取参数所在地址存入eax中
+not ecx；对ecx取反，得到字符串长度加1
+；===============================================================
+；执行指令repne scasb后，edi指向字符串末尾，减去ecx重新指向字符串首地址
+sub edi, ecx
+push eax；将保存参数地址eax压栈
+mov edx, ecx；使用edx保存常量字符串长度
+mov esi, edi；将esi设置为常量字符串首地址
+mov edi, eax；将edi设置为参数地址
+shr ecx，2；将ecx右移2位等同于将字符串长度除以4
+；此指令为拷贝字符串，每次复制4字节长度，根据ecx中的数值决定复制次数。将esi
+；中的指向数据每次以4字节复制到edi所指向的内存中，每次复制后，esi与edi自加4
+rep movsd
+mov ecx, edx；重新将字符串长度存入ecx中
+；将ecx与3做位与运算，等同于ecx对4求余
+and ecx，3
+；和rep movsd指令功能类似，不过是按单字节复制字符串
+rep movsb
+call_printf；调用printf函数，参数为之前压入的eax
+add esp，4；平衡栈4字节，只有一个参数
+pop edi
+pop esi
+retn
+sub_401000 endp
+</code></pre><h3 id="数组作为返回值"><a href="#数组作为返回值" class="headerlink" title="数组作为返回值"></a>数组作为返回值</h3><h4 id="局部静态数组—Debug版"><a href="#局部静态数组—Debug版" class="headerlink" title="局部静态数组—Debug版"></a>局部静态数组—Debug版</h4><pre><code>//C++源码说明：局部静态数组的分析[0]
+void ain（）{
+int nOne；
+int nTwo；
+scanf（&quot;%d%d&quot;，＆nOne，＆nTwo）；
+static int g_snArry[5]={nOne, nTwo，0}；//局部静态数组初始化第二项为常量
+//C++源码与对应汇编代码讲解
+void main（）{
+int nOne；
+int nTwo；
+scanf（&quot;%d%d&quot;，＆nOne，＆nTwo）；
+static int g_snArry[5]={nOne, nTwo，0}；
+0040B84D xor edx, edx
+0040B84F mov dl, byte ptr[&apos;main&apos;：&apos;2&apos;：$S1（004237c8）]
+0040B855 and edx，1
+0040B858 test edx, edx
+0040B85A jne main+70h（0040b890）；检测初始化标志位
+0040B85C mov al，[&apos;main&apos;：&apos;2&apos;：$S1（004237c8）]
+0040B861 or al，1
+；将初始化标志位置1
+0040B863 mov[&apos;main&apos;：&apos;2&apos;：$S1（004237c8）]，al
+0040B868 mov ecx, dword ptr[ebp-4]
+0040B86B mov dword ptr[&apos;main&apos;：&apos;2&apos;：$S1+4（004237cc）]，ecx
+0040B871 mov edx, dword ptr[ebp-8]
+0040B874 mov dword ptr[&apos;main&apos;：&apos;2&apos;：$S1+8（004237d0）]，edx
+0040B87A mov dword ptr[&apos;main&apos;：&apos;2&apos;：$S1+0Ch（004237d4）]，0
+0040B884 xor eax, eax
+0040B886 mov[&apos;main&apos;：&apos;2&apos;：$S1+10h（004237d8）]，eax
+0040B88B mov[&apos;main&apos;：&apos;2&apos;：$S1+14h（004237dc）]，eax
+}
+</code></pre><h3 id="下标寻址和指针寻址"><a href="#下标寻址和指针寻址" class="headerlink" title="下标寻址和指针寻址"></a>下标寻址和指针寻址</h3><h4 id="数组的下标寻址和指针寻址的区别—Debug版"><a href="#数组的下标寻址和指针寻址的区别—Debug版" class="headerlink" title="数组的下标寻址和指针寻址的区别—Debug版"></a>数组的下标寻址和指针寻址的区别—Debug版</h4><pre><code>//C++源码说明：两种寻址方式演示
+void main（）{
+char*pChar=NULL；
+char szBuff[]=&quot;Hello&quot;；
+pChar=szBuff；
+printf（&quot;%c&quot;，*pChar）；
+printf（&quot;%c&quot;，szBuff[0]）；
+｝
+//C++源码与对应汇编代码讲解
+void main（）{
+char*pChar=NULL；
+004010F8 mov dword ptr[ebp-4]，0；初始化指针变量为空指针
+char szBuff[]=&quot;Hello&quot;；
+004010FF mov eax，[string&quot;Hello&quot;（00420030）]；初始化数组
+00401104 mov dword ptr[ebp-0Ch]，eax
+00401107 mov cx, word ptr[string&quot;Hello&quot;+4（00420034）]
+0040110E mov word ptr[ebp-8]，cx
+pChar=szBuff；
+00401112 lea edx，[ebp-0Ch]；获取数组首地址，然后使用edx保存
+0040115 mov dword ptr[ebp-4]，edx
+printf（&quot;%c&quot;，*pChar）；//通过指针访问数组
+00401118 mov eax, dword ptr[ebp-4]；取出指针变量中保存的地址数据
+0040111B movsx ecx, byte ptr[eax]；字符型指针的间接访问
+0040111E push ecx；间接访问后传参
+0040111F push offset string&quot;%c&quot;（0042002c）
+00401124 call printf（00401170）
+00401129 add esp，8
+printf（&quot;%c&quot;，szBuff[0]）；//数组下标寻址
+；直接从地址ebp-0Ch处取出1字节的数据
+0040112C movsx edx, byte ptr[ebp-0Ch]
+00401130 push edx；将取出数据作为参数
+00401131 push offset string&quot;%c&quot;（0042002c）
+00401136 call printf（00401170）
+0040113B add esp，8
+｝
+</code></pre><h4 id="数组下标寻址越界访问—Debug版"><a href="#数组下标寻址越界访问—Debug版" class="headerlink" title="数组下标寻址越界访问—Debug版"></a>数组下标寻址越界访问—Debug版</h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/35.png" alt=""></p>
+<h3 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h3><h4 id="二维数组与一维数组对比—Debug版"><a href="#二维数组与一维数组对比—Debug版" class="headerlink" title="二维数组与一维数组对比—Debug版"></a>二维数组与一维数组对比—Debug版</h4><pre><code>//C++源码说明：二维数组、一维数组寻址演示
+void main（）{
+int i=0；
+int j=0；
+int nArray[4]={1，2，3，4}；//一维数组
+int nTwoArray[2][2]={{1，2}，{3，4}}；//二维数组
+scanf（&quot;%d%d&quot;，＆i，＆j）；
+printf（&quot;nArray=%d\r\n&quot;，nArray[i]）；
+printf（&quot;nTwoArray=%d\r\n&quot;，nTwoArray[i][j]）；
+}
+//C++源码与对应汇编代码讲解
+void main（）{
+int i=0；
+0040B878 mov dword ptr[ebp-4]，0；局部变量赋值
+int j=0；
+0040B87F mov dword ptr[ebp-8]，0；局部变量赋值
+int nArray[4]={1，2，3，4}；
+0040B886 mov dword ptr[ebp-18h]，1；一维数组初始化
+0040B88D mov dword ptr[ebp-14h]，2
+0040B894 mov dword ptr[ebp-10h]，3
+0040B89B mov dword ptr[ebp-0Ch]，4
+int nTwoArray[2][2]={{1，2}，{3，4}}；
+0040B8A2 mov dword ptr[ebp-28h]，1；二维数组初始化
+0040B8A9 mov dword ptr[ebp-24h]，2；和一维数组没有任何区别
+；从初始化反汇编代码中无法区分一维数组与二维数组
+0040B8B0 mov dword ptr[ebp-20h]，3
+0040B8B7 mov dword ptr[ebp-1Ch]，4
+scanf（&quot;%d%d&quot;，＆i，＆j）；
+；scanf函数分析讲解略
+printf（&quot;nArray=%d\r\n&quot;，nArray[i]）；
+0040B8D3 mov edx, dword ptr[ebp-4]；获取下标值i并将其保存到edx中
+；此处获取数组中数据的地址偏移，下标值i被保存在edx中，
+；edx*4等同于公式中的sizeof（type）*下标值
+；ebp-18h是数组nArray首地址，寻址到偏移地址处，取出其中数据，存入eax中保存
+0040B8D6 mov eax, dword ptr[ebp+edx*4-18h]
+0040B8DA push eax；用eax来保存寻址到的数据
+0040B8DB push offset string&quot;nArray=%d\r\n&quot;（00420028）
+0040B8E0 call printf（00401170）
+0040B8E5 add esp，8
+printf（&quot;nTwoArray=%d\r\n&quot;，nTwoArray[i][j]）；
+0040B8E8 mov ecx, dword ptr[ebp-4]；获取下标值i并将其保存到ecx中
+；同样是计算偏移，但这里获取的不是数据，而是地址值。与一维数组nArray有些类似
+；同样是使用首地址加偏移，二维数组nTwoArray首地址为ebp-28h
+；ecx*8为偏移，计算公式sizeof（int[2]）*下标值
+；得出一维数组首地址，将结果保存到edx
+0040B8EB lea edx，[ebp+ecx*8-28h]
+0040B8EF mov eax, dword ptr[ebp-8]；获取下标值j并将其保存到eax中
+；此处又回归到一维数组寻址，edx为数组首地址，eax*4为偏移计算
+；sizeof（type）*下标值
+0040B8F2 mov ecx, dword ptr[edx+eax*4]
+0040B8F5 push ecx
+0040B8F6 push offset string&quot;nTwoArray=%d\r\n&quot;（00420f8c）
+0040B8FB call printf（00401170）
+0040B900 add esp，8
+}
+</code></pre><h4 id="使用常量寻址二维数组—Debug版"><a href="#使用常量寻址二维数组—Debug版" class="headerlink" title="使用常量寻址二维数组—Debug版"></a>使用常量寻址二维数组—Debug版</h4><pre><code>//C++源码说明：使用常量寻址二维数组
+void main（）{
+int i=0；
+int nTwoArray[2][2]={{1，2}，{3，4}}；//二维数组
+scanf（&quot;%d&quot;，＆i）；
+printf（&quot;nTwoArray=%d\r\n&quot;，nTwoArray[1][i]）；
+}
+//C++源码与对应汇编代码讲解
+void main（）{
+int i=0；
+0040B878 mov dword ptr[ebp-4]，0//初始化下标i
+int nTwoArray[2][2]={{1，2}，{3，4}}；//数组初始化
+0040B87F mov dword ptr[ebp-14h]，1
+0040B886 mov dword ptr[ebp-10h]，2
+0040B88D mov dword ptr[ebp-0Ch]，3
+0040B894 mov dword ptr[ebp-8]，4
+scanf（&quot;%d&quot;，＆i）；
+；scanf分析略
+printf（&quot;nTwoArray=%d\r\n&quot;，nTwoArray[1][i]）；
+0040B8AC mov ecx, dword ptr[ebp-4]；取下标值i
+；只使用了一次寻址，由于二维下标为1，直接计算出基地址为
+；ebp-14h+sizeof（int[2]）=ebp-14h+8h=ebp-0Ch
+0040B8AF mov edx, dword ptr[ebp+ecx*4-0Ch]
+0040B8B3 push edx
+0040B8B4 push offset string&quot;nTwoArray=%d\r\n&quot;（00420f8c）
+0040B8B9 call printf（00401170）
+0040B8BE add esp，8
+}
+</code></pre><h4 id="一维数组、二维数组初始化及寻址优化—Release版"><a href="#一维数组、二维数组初始化及寻址优化—Release版" class="headerlink" title="一维数组、二维数组初始化及寻址优化—Release版"></a>一维数组、二维数组初始化及寻址优化—Release版</h4><pre><code>；int__cdecl main（int argc, const char**argv, const char**envp）
+_main proc near
+var_28=dword ptr-28h；局部变量标号定义，共10个局部变量
+var_24=dword ptr-24h
+var_20=dword ptr-20h
+var_1C=dword ptr-1Ch
+var_18=dword ptr-18h
+var_14=dword ptr-14h
+var_10=dword ptr-10h
+var_C=dword ptr-0Ch
+var_8=dword ptr-8
+var_4=dword ptr-4
+argc=dword ptr 4
+argv=dword ptr 8
+envp=dword ptr 0Ch
+sub esp，28h；调整栈顶，开辟局部变量栈空间
+xor eax, eax；清空eax
+mov ecx，3；赋值ecx为3
+mov[esp+28h+var_28]，eax；赋值局部变量var_28为0
+mov[esp+28h+var_24]，eax；赋值局部变量var_24为0
+mov eax，4；赋值eax为4
+mov[esp+28h+var_18]，ecx；赋值局部变量var_18为3
+mov[esp+28h+var_14]，eax；赋值局部变量var_14为4
+mov[esp+28h+var_4]，eax；赋值局部变量var_4为4
+mov[esp+28h+var_8]，ecx；赋值局部变量var_8为3
+lea eax，[esp+28h+var_24]；取出变量var_24地址存入eax
+lea ecx，[esp+28h+var_28]；取出变量var_28地址存入ecx
+push eax；将eax压入栈中，作为_scanf函数参数
+mov edx，2；赋值edx为2
+push ecx；将ecx压入栈中，作为_scanf函数参数
+push offset aDD；压入字符串&quot;%d%d&quot;
+mov[esp+34h+var_20]，1；赋值变量var_20为1
+mov[esp+34h+var_1C]，edx；赋值变量var_1C为2
+mov[esp+34h+var_10]，1；赋值变量var_10为1
+mov[esp+34h+var_C]，edx；赋值变量var_C为2
+call_scanf；调用_scanf函数
+；根据以上代码分析，得出两下标变量对应编号分别为：var_24、var_28
+；两数组首地址对应编号为：var_20、var_10
+mov edx，[esp+34h+var_28]；使用edx保存下标变量var_28
+；var_20为基址，edx为下标值，乘以类型大小4获取数据
+；从寻址方式上看，这里是一维数组寻址，
+；其数组类型为占4字节内存空间的数据，将得到的数据存入eax中
+mov eax，[esp+edx*4+34h+var_20]
+push eax；将eax作为_printf函数参数压入栈中
+push offset Format；压入字符串&quot;nArray=%d\r\n&quot;
+call_printf；调用函数_printf
+mov ecx，[esp+3Ch+var_24]；获取下标变量var_24，存入ecx中
+mov edx，[esp+3Ch+var_28]；获取下标变量var_28，存入edx中
+lea eax，[ecx+edx*2]；计算下标值，存入eax中
+；一维数组寻址，使用var_10作为基地址，加上下标值eax乘以类型大小4
+mov ecx，[esp+eax*4+3Ch+var_10]
+push ecx；将ecx作为_printf函数参数压入栈中
+push offset aNtwoarrayD；压入字符串&quot;nTwoArray=%d\r\n&quot;
+call_printf；调用函数_printf
+add esp，44h；平衡栈顶esp
+retn
+_main endp
+</code></pre><h3 id="存放指针类型数据的数组"><a href="#存放指针类型数据的数组" class="headerlink" title="存放指针类型数据的数组"></a>存放指针类型数据的数组</h3><h4 id="指针数组的识别—Debug版"><a href="#指针数组的识别—Debug版" class="headerlink" title="指针数组的识别—Debug版"></a>指针数组的识别—Debug版</h4><pre><code>//C++源码说明：定义指针数组、初始化
+void main（）{
+char*pBuff[3]={//字符串指针数组定义
+&quot;Hello&quot;，//初始化字符串指针数组第1项
+&quot;World&quot;，//初始化字符串指针数组第2项
+&quot;！\r\n&quot;//初始化字符串指针数组第3项
+}；
+for（int i=0；i＜3；i++）{
+printf（pBuff[i]）；//显示输出字符串数组中各项
+}
+}
+//C++源码与对应汇编代码讲解
+void main（）{
+char*pBuff[3]={
+&quot;Hello&quot;，
+；字符串数组初始化，只向数组中第1个成员赋值字符串首地址
+004010F8 mov dword ptr[ebp-0Ch]，offset string&quot;Hello&quot;（00420f84）
+&quot;World&quot;，
+004010FF mov dword ptr[ebp-8]，offset string&quot;World&quot;（00420f94）
+&quot;！\r\n&quot;}；
+00401106 mov dword ptr[ebp-4]，offset string&quot;！\r\n&quot;（0042002c）
+for（int i=0；i＜3；i++）{
+；for循环讲解略
+printf（pBuff[i]）；
+00401125 mov ecx, dword ptr[ebp-10h]；取下标值
+00401128 mov edx, dword ptr[ebp+ecx*4-0Ch]；一维数组寻址
+0040112C push edx；将字符串首地址压入栈
+0040112D call printf（00401160）
+00401132 add esp，4
+}
+}
+</code></pre><h3 id="指向数组的指针变量"><a href="#指向数组的指针变量" class="headerlink" title="指向数组的指针变量"></a>指向数组的指针变量</h3><h4 id="数组指针寻址—Debug版"><a href="#数组指针寻址—Debug版" class="headerlink" title="数组指针寻址—Debug版"></a>数组指针寻址—Debug版</h4><pre><code>//C++源码说明：利用数组指针访问二维数组成员
+void main（）{
+char cArray[3][10]={&quot;Hello&quot;，&quot;World&quot;，&quot;！\r\n&quot;}；
+char（*pArray）[10]=cArray；
+for（int i=0；i＜3；i++）{
+printf（*pArray）；//依次显示二维数组中各一维数组中的字符串信息
+pArray++；
+}
+}
+//C++源码与对应汇编代码讲解
+void main（）{
+char cArray[3][10]={&quot;Hello&quot;，&quot;World&quot;，&quot;！\r\n&quot;}；
+；二维字符数组初始化略
+char（*pArray）[10]=cArray；
+00401119 lea ecx，[ebp-2Ch]；取数组首地址存入ecx中
+；将数组首地址复制到指针变量pArray
+0040111C mov dword ptr[ebp-30h]，ecx
+for（int i=0；i＜3；i++）{
+printf（*pArray）；
+；取出指针pArray保存数据到eax中
+00401137 mov eax, dword ptr[ebp-30h]
+0040113A push eax
+0040113B call printf（00401160）
+00401140 add esp，4
+pArray++；
+；取出指针pArray保存数据到ecx中
+00401143 mov ecx, dword ptr[ebp-30h]
+00401146 add ecx，0Ah；对ecx执行加等于10操作
+；重新赋值指针pArray为ecx中数据
+00401149 mov dword ptr[ebp-30h]，ecx
+}
+}
+</code></pre><h3 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h3><h4 id="函数指针与函数—Debug版"><a href="#函数指针与函数—Debug版" class="headerlink" title="函数指针与函数—Debug版"></a>函数指针与函数—Debug版</h4><pre><code>//C++源码说明：函数指针与函数对比
+void__cdecl Show（）{//函数定义
+printf（&quot;Show\r\n&quot;）；
+}
+void main（）{
+void（__cdecl*pShow）（void）=Show；//函数指针赋值
+pShow（）；//使用函数指针调用函数
+Show（）；//直接调用函数
+}
+//C++源码与对应汇编代码讲解
+void main（）{
+void（__cdecl*pShow）（void）=Show；
+；函数名称即为函数首地址，这是一个常量地址值
+0040B90E mov dword ptr[ebp-38h]，offset@ILT+15（Show）（00401014）
+0040B915 mov edx, dword ptr[ebp-38h]
+0040B918 mov dword ptr[ebp-38h]，edx
+pShow（）；
+0040B91B mov esi, esp
+0040B91D call dword ptr[ebp-38h]；间接调用函数
+0040B920 cmp esi, esp；栈平衡检查，Debug下特有
+0040B922 call__chkesp（004012d0）；栈平衡检查，Debug下特有
+Show（）；
+0040B927 call@ILT+15（Show）（00401014）；直接调用函数
+}
+</code></pre><h4 id="带参数与返回值的函数指针—Debug版"><a href="#带参数与返回值的函数指针—Debug版" class="headerlink" title="带参数与返回值的函数指针—Debug版"></a>带参数与返回值的函数指针—Debug版</h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/36.png" alt=""></p>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p><em>代码清单8-17中的函数指针调用只是多了参数的传递、返回值的接收，和代码清单8-16中的函数指针并无实质区别。它们有着共同特征—都是**</em>间接调用函数，<em>**这是识别函数指针的关键点。</em></p>
+<hr>
+<h2 id="第九章-结构体和类"><a href="#第九章-结构体和类" class="headerlink" title="第九章 结构体和类"></a>第九章 结构体和类</h2><h3 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h3><h4 id="访问类对象的数据成员—Debug版"><a href="#访问类对象的数据成员—Debug版" class="headerlink" title="访问类对象的数据成员—Debug版"></a>访问类对象的数据成员—Debug版</h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/37.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/38.png" alt=""></p>
+<h4 id="使用-stdcall调用方式的成员函数—Debug版"><a href="#使用-stdcall调用方式的成员函数—Debug版" class="headerlink" title="使用__stdcall调用方式的成员函数—Debug版"></a>使用__stdcall调用方式的成员函数—Debug版</h4><pre><code>//C++源码说明：数组和局部变量的定义以及初始化
+class CTest{
+public：
+void__stdcall SetNumber（int nNumber）{//修改其调用方式
+m_nInt=nNumber；
+}
+public：
+int m_nInt；//公有数据成员
+}；
+void main（）{
+CTest Test；
+Test.SetNumber（5）；//调用__stdcall成员函数
+printf（&quot;CTest：%d\r\n&quot;，Test.m_nInt）；//获取成员数据
+}
+//C++源码与对应汇编代码讲解
+//成员函数调用过程，其他略
+Test.SetNumber（5）；
+0040B808 push 5
+0040B80A lea eax，[ebp-8]；获取对象首地址并存入eax中
+0040B80D push eax；将eax作为参数压栈
+0040B80E call@ILT+15（CTest：SetNumber）（00401014）
+//成员函数SetNumber的实现过程
+void__stdcall SetNumber（int nNumber）{
+；Debug初始化过程略
+m_nInt=nNumber；
+0040B7C8 mov eax, dword ptr[ebp+8]；取出this指针并存入eax中
+0040B7CB mov ecx, dword ptr[ebp+0Ch]；取出参数nNumber并存入ecx中
+0040B7CE mov dword ptr[eax]，ecx；使用eax取出成员并赋值
+}
+</code></pre><h3 id="静态数据成员"><a href="#静态数据成员" class="headerlink" title="静态数据成员"></a>静态数据成员</h3><h4 id="在成员函数中使用静态数据成员与普通数据成员—Debug版"><a href="#在成员函数中使用静态数据成员与普通数据成员—Debug版" class="headerlink" title="在成员函数中使用静态数据成员与普通数据成员—Debug版"></a>在成员函数中使用静态数据成员与普通数据成员—Debug版</h4><p>在成员函数中使用这两种数据成员时，由于静态数据成员属于全局变量，并且不属于任何对象，因此访问时无需this指针。而普通的数据成员属于对象所有，访问时需要使用this指针。</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/39.png" alt=""></p>
+<h3 id="对象作为函数参数"><a href="#对象作为函数参数" class="headerlink" title="对象作为函数参数"></a>对象作为函数参数</h3><h4 id="对象作为函数的参数—Debug版"><a href="#对象作为函数的参数—Debug版" class="headerlink" title="对象作为函数的参数—Debug版"></a>对象作为函数的参数—Debug版</h4><pre><code>//C++源码说明：参数为对象的函数调用
+class CFunTest{
+public：
+int m_nOne；
+int m_nTwo；
+}；
+void ShowFunTest（CFunTest FunTest）{//参数为类CFunTest的对象
+printf（&quot;%d%d\r\n&quot;，FunTest.m_nOne, FunTest.m_nTwo）；
+}
+void main（）{
+CFunTest FunTest；
+FunTest.m_nOne=1；
+FunTest.m_nTwo=2；
+ShowFunTest（FunTest）；
+}
+//C++源码与对应汇编代码讲解
+//main函数实现
+void main（）{
+CFunTest FunTest；
+；注意，这里没有任何调用默认构造函数的汇编代码
+FunTest.m_nOne=1；
+00401098 mov dword ptr[ebp-8]，1；数据成员m_nOne所在地址为ebp-8
+FunTest.m_nTwo=2；
+0040109F mov dword ptr[ebp-4]，2；数据成员m_nTwo所在地址ebp-4
+ShowFunTest（FunTest）；
+004010A6 mov eax, dword ptr[ebp-4]
+004010A9 push eax；传入数据成员m_nTwo
+004010AA mov ecx, dword ptr[ebp-8]
+004010AD push ecx；传入数据成员m_nOne
+004010AE call@ILT+10（ShowFunTest）（0040100f）
+004010B3 add esp，8
+}
+void ShowFunTest（CFunTest FunTest）{
+printf（&quot;%d%d\r\n&quot;，FunTest.m_nOne, FunTest.m_nTwo）；
+；取出数据成员m_nTwo作为printf函数的第三个参数
+00401038 mov eax, dword ptr[ebp+0Ch]
+0040103B push eax
+；取出数据成员m_nOne作为printf函数的第二个参数
+0040103C mov ecx, dword ptr[ebp+8]
+0040103F push ecx
+00401040 push offset string&quot;%d%d\r\n&quot;（0042001c）
+00401045 call printf（00401120）
+0040104A add esp，0Ch
+}
+</code></pre><h4 id="含有数组数据成员的对象传参—Debug版"><a href="#含有数组数据成员的对象传参—Debug版" class="headerlink" title="含有数组数据成员的对象传参—Debug版"></a>含有数组数据成员的对象传参—Debug版</h4><pre><code>//C++源码说明：此代码为代码清单9-5的修改版，添加了数组成员char m_szName[32]
+class CFunTest{
+public：
+int m_nOne；
+int m_nTwo；
+char m_szName[32]；//定义数组类型的数据成员
+}；
+void ShowFunTest（CFunTest FunTest）{
+//显示对象中各数据成员的信息
+printf（&quot;%d%d%s\r\n&quot;，FunTest.m_nOne, FunTest.m_nTwo, FunTest.m_szName）；
+}
+void main（）{
+CFunTest FunTest；
+FunTest.m_nOne=1；
+FunTest.m_nTwo=2；
+strcpy（FunTest.m_szName，&quot;Name&quot;）；//赋值数据成员数组
+ShowFunTest（FunTest）；
+}
+//C++源码与对应汇编代码讲解
+void ShowFunTest（CFunTest FunTest）{
+；初始化部分略
+printf（&quot;%d%d%s\r\n&quot;，FunTest.m_nOne, FunTest.m_nTwo, FunTest.m_szName）；
+00401038 lea eax，[ebp+10h]；取成员m_szName的地址
+0040103B push eax；将成员m_szName的地址作为参数压栈
+0040103C mov ecx, dword ptr[ebp+0Ch]；取成员m_nTwo中的数据
+0040103F push ecx
+00401040 mov edx, dword ptr[ebp+8]；取成员m_nOne中的数据
+00401043 push edx
+00401044 push offset string&quot;%d%d%s\r\n&quot;（0042002c）
+00401049 call printf（00401120）
+0040104E add esp，10h
+}
+//C++源码对照，main函数分析
+void main（）{
+CFunTest FunTest；
+；没有任何调用默认构造函数的汇编代码
+FunTest.m_nOne=1；
+0040B7E8 mov dword ptr[ebp-28h]，1；数据成员m_nOne所在地址为ebp-28h
+FunTest.m_nTwo=2；
+0040B7EF mov dword ptr[ebp-24h]，2；数据成员m_nTwo所在地址为ebp-24h
+strcpy（FunTest.m_szName，&quot;Name&quot;）；
+0040B7F1 push offset string&quot;Name&quot;（0041302c）
+0040B7F6 lea eax，[ebp-20h]；数组成员m_szName所在地址为ebp-20h
+0040B7FE push eax
+0040B7FF call strcpy（00404650）
+ShowFunTest（FunTest）；
+0040B804 add esp，0FFFFFFE0h；调整栈顶，抬高32字节
+0040B807 mov ecx，0Ah；设置循环次数为10
+0040B80C lea esi，[ebp-28h]；获取对象的首地址并保存到esi中
+0040B80F mov edi, esp；设置edi为当前栈顶
+；执行10次4字节内存复制，将esi所指向的数据复制到edi中，类似memcpy的内联方式
+0040B811 rep movs dword ptr[edi]，dword ptr[esi]
+0040B813 call@ILT+10（ShowFunTest）（0040100f）
+0040B818 add esp，28h
+}
+</code></pre><h4 id="对象作为参数的资源释放错误—Debug版"><a href="#对象作为参数的资源释放错误—Debug版" class="headerlink" title="对象作为参数的资源释放错误—Debug版"></a>对象作为参数的资源释放错误—Debug版</h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/40.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/41.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/42.png" alt=""></p>
+<h3 id="对象作为返回值"><a href="#对象作为返回值" class="headerlink" title="对象作为返回值"></a>对象作为返回值</h3><h4 id="对象作为返回值—Debug版"><a href="#对象作为返回值—Debug版" class="headerlink" title="对象作为返回值—Debug版"></a>对象作为返回值—Debug版</h4><pre><code>//C++源码说明：在函数内定义对象并将其作为返回值
+class CReturn{
+public：
+int m_nNumber；
+int m_nArry[10]；//定义两个数据成员，该类的大小为44字节
+}；
+CReturn GetCReturn（）{
+CReturn RetObj；
+RetObj.m_nNumber=0；
+for（int i=0；i＜10；i++）{
+RetObj.m_nArry[i]=i+1；
+}
+return RetObj；//返回局部对象
+}
+void main（int argc, char*argv[]）{
+CReturn objA；
+objA=GetCReturn（）；
+printf（&quot;%d%d%d&quot;，objA.m_nNumber, objA.m_nArry[0]，objA.m_nArry[9]）；
+}
+//构造函数与析构函数讲解略
+//main函数代码分析
+void main（int argc, char*argv[]）{
+00401290 push ebp
+00401291 mov ebp, esp
+00401293 sub esp，0C4h；预留返回对象的栈空间
+00401299 push ebx
+0040129A push esi
+0040129B push edi
+0040129C lea edi，[ebp-0C4h]
+004012A2 mov ecx，31h
+004012A7 mov eax，0CCCCCCCCh
+004012AC rep stos dword ptr[edi]
+CReturn objA；
+objA=GetCReturn（）；
+004012AE lea eax，[ebp-84h]；获取返回对象的栈空间首地址
+；将返回对象的首地址压入栈中，用于保存返回对象的数据
+004012B4 push eax
+；调用函数GetCReturn，见下文对GetCReturn的实现过程的分析
+004012B5 call@ILT+45（GetCReturn）（00401032）
+004012BA add esp，4
+；函数调用结束后，eax中保存着地址ebp-84h，即返回对象的首地址
+004012BD mov esi, eax；将返回对象的首地址存入esi中
+004012BF mov ecx，0Bh；设置循环次数
+004012C4 lea edi，[ebp-58h]；获取临时对象的首地址
+；每次从返回对象中复制4字节数据到临时对象的地址中，共复制11次
+004012 C7 rep movs dword ptr[edi]，dword ptr[esi]
+004012C9 mov ecx，0Bh；重新设置复制次数
+004012CE lea esi，[ebp-58h]；获取临时对象的首地址
+004012D1 lea edi，[ebp-2Ch]；获取对象objA的首地址
+；将数据复制到对象objA中
+004012D4 rep movs dword ptr[edi]，dword ptr[esi]
+printf（&quot;%d%d%d&quot;，objA.m_nNumber, objA.m_nArry[0]，objA.m_nArry[9]）；
+}
+//GetCReturn的实现过程分析
+CReturn GetCReturn（）{
+0040CE90 push ebp
+0040CE91 mov ebp, esp
+0040CE93 sub esp，70h；调整栈空间，预留临时返回对象与局部对象的内存空间
+0040CE96 push ebx
+0040CE97 push esi
+0040CE98 push edi
+0040CE99 lea edi，[ebp-70h]
+0040CE9C mov ecx，1Ch
+0040CEA1 mov eax，0CCCCCCCCh
+0040CEA6 rep stos dword ptr[edi]
+CReturn RetObj；
+RetObj.m_nNumber=0；
+；为数据成员nNumber赋值0，地址ebp-2Ch便是对象RetObj的首地址
+0040CEA8 mov dword ptr[ebp-2Ch]，0
+for（int i=0；i＜10；i++）{
+RetObj.m_nArry[i]=i+1；
+}
+0040CED4 jmp GetCReturn+28h（0040ceb8）；for循环分析略，直接看退出函
+；数时的处理
+return RetObj；
+0040CED6 mov ecx，0Bh；设置循环次数为11次
+0040CEDB lea esi，[ebp-2Ch]；获取局部对象的首地址
+0040CEDE mov edi, dword ptr[ebp+8]；获取返回对象的首地址
+；将局部对象RetObj中的数据复制到返回对象中
+0040CEE1 rep movs dword ptr[edi]，dword ptr[esi]
+0040CEE3 mov eax, dword ptr[ebp+8]；获取返回对象的首地址并保存到eax中，
+；作为返回值
+}
+</code></pre><p><em>因为在这个示例中不存在函数返回后为对象的引用赋值，所以这里的返回对象是临时存在的，也就是C++中的临时对象，作用域仅限于单条语句。</em></p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/43.png" alt=""></p>
+<h4 id="还原对象数据—Release版"><a href="#还原对象数据—Release版" class="headerlink" title="还原对象数据—Release版"></a>还原对象数据—Release版</h4><p><img src="/2019/04/03/汇编与对应C-伪码（2）/44.png" alt=""></p>
+<p>根据代码清单中<code>main</code>函数的参数传递，以及函数<code>sub_401000</code>中对参数的使用过程，可以判断出函数<code>sub_401000</code>的参数为一个对象指针。根据使用的过程得知，该对象中定义了两个数据成员，它们分别占2字节和4字节的内存大小。可将此对象还原成结构体，代码如下所示。</p>
+<pre><code>struct tagUnknow{
+    short m_sShort；//占2字节
+    int m_nInt；//占4字节
+}；
+</code></pre><hr>
+<h2 id="第十章-关于构造函数和析构函数"><a href="#第十章-关于构造函数和析构函数" class="headerlink" title="第十章 关于构造函数和析构函数"></a>第十章 关于构造函数和析构函数</h2><h3 id="构造函数的出现时机"><a href="#构造函数的出现时机" class="headerlink" title="构造函数的出现时机"></a>构造函数的出现时机</h3><h4 id="局部对象"><a href="#局部对象" class="headerlink" title="局部对象"></a>局部对象</h4><h5 id="无参构造函数的调用过程—Debug版"><a href="#无参构造函数的调用过程—Debug版" class="headerlink" title="无参构造函数的调用过程—Debug版"></a>无参构造函数的调用过程—Debug版</h5><p><img src="/2019/04/03/汇编与对应C-伪码（2）/45.png" alt=""></p>
+<h4 id="堆对象"><a href="#堆对象" class="headerlink" title="堆对象"></a>堆对象</h4><h5 id="构造函数返回值的使用—Debug版"><a href="#构造函数返回值的使用—Debug版" class="headerlink" title="构造函数返回值的使用—Debug版"></a>构造函数返回值的使用—Debug版</h5><p><img src="/2019/04/03/汇编与对应C-伪码（2）/46.png" alt=""></p>
+<p>在使用new申请了堆空间以后，需要调用构造函数，以完成对象的数据成员初始化过程。如果堆空间申请失败，则会避开构造函数的调用。因为在C++语法中，如果new运算执行成功，返回值为对象的首地址，否则为NULL。因此，需要编译器检查堆空间的申请结果，产生一个<strong>双分支结构</strong>，以决定是否触发构造函数。<strong>在识别堆对象的构造函数时，应重点分析此双分支结构，找到new运算的调用后，可立即在下文寻找判定new返回值的代码，在判定成功（new的返回值非0）的分支处可迅速定位并得到构造函数</strong>。</p>
+<h4 id="参数对象"><a href="#参数对象" class="headerlink" title="参数对象"></a>参数对象</h4><h5 id="深拷贝构造函数—Debug版"><a href="#深拷贝构造函数—Debug版" class="headerlink" title="深拷贝构造函数—Debug版"></a>深拷贝构造函数—Debug版</h5><p><img src="/2019/04/03/汇编与对应C-伪码（2）/47.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/48.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/49.png" alt=""></p>
+<p>在执行函数Show之前，先进入到CMyString的拷贝构造函数中。在拷贝构造函数中，我们使用深拷贝方式。这时数据成员this-＞m_pString和obj.m_pString所保存的地址不同，但其中的数据内容却是相同的。</p>
+<p>由于使用了<strong>深拷贝方式</strong>，对对象中的数据成员所指向的堆空间数据也进行了数据复制，因此当参数对象被销毁时，释放的堆空间数据是拷贝对象所制作的数据副本，对源对象没有任何影响。</p>
+<h4 id="返回对象"><a href="#返回对象" class="headerlink" title="返回对象"></a>返回对象</h4><h5 id="返回对象的构造函数使用—Debug版"><a href="#返回对象的构造函数使用—Debug版" class="headerlink" title="返回对象的构造函数使用—Debug版"></a>返回对象的构造函数使用—Debug版</h5><p><img src="/2019/04/03/汇编与对应C-伪码（2）/50.png" alt=""></p>
+<h4 id="全局对象与静态对象"><a href="#全局对象与静态对象" class="headerlink" title="全局对象与静态对象"></a>全局对象与静态对象</h4><h5 id="全局对象构造代理函数的分析—Debug版"><a href="#全局对象构造代理函数的分析—Debug版" class="headerlink" title="全局对象构造代理函数的分析—Debug版"></a>全局对象构造代理函数的分析—Debug版</h5><p><img src="/2019/04/03/汇编与对应C-伪码（2）/51.png" alt=""></p>
+<h3 id="析构函数的出现时机"><a href="#析构函数的出现时机" class="headerlink" title="析构函数的出现时机"></a>析构函数的出现时机</h3><h4 id="局部对象-1"><a href="#局部对象-1" class="headerlink" title="局部对象"></a>局部对象</h4><h5 id="局部对象的析构函数调用—Debug版"><a href="#局部对象的析构函数调用—Debug版" class="headerlink" title="局部对象的析构函数调用—Debug版"></a>局部对象的析构函数调用—Debug版</h5><pre><code>//C++源码说明：局部对象的析构函数调用
+class CNumber{
+public：
+CNumber（）{
+m_nNumber=1；
+}
+～CNumber（）{
+printf（&quot;～CNumber\r\n&quot;）；
+}
+int m_nNumber；
+}；
+void main（int argc, char*argv[]）{
+CNumber Number；
+}//退出函数后调用析构函数
+//C++源码与对应汇编代码讲解
+void main（int argc, char*argv[]）{
+CNumber Number；
+}
+004015B0 lea ecx，[ebp-4]；获取对象的首地址，作为this指针
+004015B3 call@ILT+40（CNumber：～CNumber）（0040102d）；调用析构函数
+；析构函数的实现过程
+～CNumber（）{
+；函数入口代码略
+00401629 pop ecx；还原this指针到ecx中
+0040162A mov dword ptr[ebp-4]，ecx；使用临时空间保存this指针
+printf（&quot;～CNumber\r\n&quot;）；
+0040162D push offset string&quot;～CNumber\r\n&quot;（00426038）
+00401632 call printf（00401650）
+00401637 add esp，4
+}
+；函数出口代码略，无返回值
+</code></pre><h4 id="堆对象-1"><a href="#堆对象-1" class="headerlink" title="堆对象"></a>堆对象</h4><h5 id="堆对象析构函数的调用—Debug版"><a href="#堆对象析构函数的调用—Debug版" class="headerlink" title="堆对象析构函数的调用—Debug版"></a>堆对象析构函数的调用—Debug版</h5><p><img src="/2019/04/03/汇编与对应C-伪码（2）/52.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/53.png" alt=""><br><img src="/2019/04/03/汇编与对应C-伪码（2）/54.png" alt=""></p>
+<p>补充：mov指令的注意事项如下图所示。</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/58.png" alt=""></p>
+<h5 id="多个堆对象的申请与释放—Debug版"><a href="#多个堆对象的申请与释放—Debug版" class="headerlink" title="多个堆对象的申请与释放—Debug版"></a>多个堆对象的申请与释放—Debug版</h5><p><img src="/2019/04/03/汇编与对应C-伪码（2）/55.png" alt=""></p>
+<h5 id="堆对象的构造代理函数—Debug版"><a href="#堆对象的构造代理函数—Debug版" class="headerlink" title="堆对象的构造代理函数—Debug版"></a>堆对象的构造代理函数—Debug版</h5><p>堆对象的构造代理函数一共使用了5个参数，详细分析如代码清单10-10所示。</p>
+<p><img src="/2019/04/03/汇编与对应C-伪码（2）/56.png" alt=""></p>
+<h5 id="堆对象释放函数分析—Debug版"><a href="#堆对象释放函数分析—Debug版" class="headerlink" title="堆对象释放函数分析—Debug版"></a>堆对象释放函数分析—Debug版</h5><p><img src="/2019/04/03/汇编与对应C-伪码（2）/57.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/教材学习/" rel="tag"># 教材学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/03/《C-反汇编与逆向分析技术揭秘》笔记（2）/" rel="next" title="《C++反汇编与逆向分析技术揭秘》笔记（2）">
+                <i class="fa fa-chevron-left"></i> 《C++反汇编与逆向分析技术揭秘》笔记（2）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/05/逆向练习7/" rel="prev" title="逆向练习7">
+                逆向练习7 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章-流程控制语句的识别"><span class="nav-number">1.</span> <span class="nav-text">第五章 流程控制语句的识别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if-语句"><span class="nav-number">1.1.</span> <span class="nav-text">if 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if…else…语句"><span class="nav-number">1.2.</span> <span class="nav-text">if…else…语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）if…else…组合-—-Debug-版"><span class="nav-number">1.2.1.</span> <span class="nav-text">（1）if…else…组合 — Debug 版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）模拟条件表达式转换方式"><span class="nav-number">1.2.2.</span> <span class="nav-text">（2）模拟条件表达式转换方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用-if-构成的多分支流程"><span class="nav-number">1.3.</span> <span class="nav-text">用 if 构成的多分支流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）多分支结构-—-Debug-版"><span class="nav-number">1.3.1.</span> <span class="nav-text">（1）多分支结构 — Debug 版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch-的真相"><span class="nav-number">1.4.</span> <span class="nav-text">switch 的真相</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）比较switch多分支结构和-if…else-if（if-else优化）"><span class="nav-number">1.4.1.</span> <span class="nav-text">（1）比较switch多分支结构和 if…else if（if-else优化）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）有序线性优化"><span class="nav-number">1.4.2.</span> <span class="nav-text">（2）有序线性优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#难以构成跳转表的-switch（非线性索引表优化）"><span class="nav-number">1.5.</span> <span class="nav-text">难以构成跳转表的 switch（非线性索引表优化）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#降低判定树的高度（树的优化）"><span class="nav-number">1.6.</span> <span class="nav-text">降低判定树的高度（树的优化）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）树结构-switch-片段-—-Debug-版"><span class="nav-number">1.6.1.</span> <span class="nav-text">（1）树结构 switch 片段 — Debug 版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）判定树结构片段-—-Release-版"><span class="nav-number">1.6.2.</span> <span class="nav-text">（2）判定树结构片段 — Release 版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#do-while-for-的比较"><span class="nav-number">1.7.</span> <span class="nav-text">do/while/for 的比较</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）do-循环"><span class="nav-number">1.7.1.</span> <span class="nav-text">（1）do 循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）while-循环"><span class="nav-number">1.7.2.</span> <span class="nav-text">（2）while 循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）for-循环"><span class="nav-number">1.7.3.</span> <span class="nav-text">（3）for 循环</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-函数的工作原理"><span class="nav-number">2.</span> <span class="nav-text">第六章 函数的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈帧的形成与关闭"><span class="nav-number">2.1.</span> <span class="nav-text">栈帧的形成与关闭</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈指针保存与平衡检查"><span class="nav-number">2.1.1.</span> <span class="nav-text">栈指针保存与平衡检查</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数的参数"><span class="nav-number">2.2.</span> <span class="nav-text">函数的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数的返回值"><span class="nav-number">2.3.</span> <span class="nav-text">函数的返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七章-变量在内存中的位置和访问方式"><span class="nav-number">3.</span> <span class="nav-text">第七章 变量在内存中的位置和访问方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局变量和局部变量的区别"><span class="nav-number">3.1.</span> <span class="nav-text">全局变量和局部变量的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局变量的访问—Debug版"><span class="nav-number">3.1.1.</span> <span class="nav-text">全局变量的访问—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局变量的定义顺序"><span class="nav-number">3.1.2.</span> <span class="nav-text">全局变量的定义顺序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部静态变量的工作方式"><span class="nav-number">3.2.</span> <span class="nav-text">局部静态变量的工作方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局部静态变量的工作方式—Debug版"><span class="nav-number">3.2.1.</span> <span class="nav-text">局部静态变量的工作方式—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多个局部静态变量的定义"><span class="nav-number">3.2.2.</span> <span class="nav-text">多个局部静态变量的定义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八章-数组和指针的寻址"><span class="nav-number">4.</span> <span class="nav-text">第八章 数组和指针的寻址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组作为参数"><span class="nav-number">4.1.</span> <span class="nav-text">数组作为参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组作为参数传递"><span class="nav-number">4.1.1.</span> <span class="nav-text">数组作为参数传递</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#识别strlen的内联形式—Release版"><span class="nav-number">4.1.2.</span> <span class="nav-text">识别strlen的内联形式—Release版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#识别strcpy的内联形式—Release版"><span class="nav-number">4.1.3.</span> <span class="nav-text">识别strcpy的内联形式—Release版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组作为返回值"><span class="nav-number">4.2.</span> <span class="nav-text">数组作为返回值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局部静态数组—Debug版"><span class="nav-number">4.2.1.</span> <span class="nav-text">局部静态数组—Debug版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下标寻址和指针寻址"><span class="nav-number">4.3.</span> <span class="nav-text">下标寻址和指针寻址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组的下标寻址和指针寻址的区别—Debug版"><span class="nav-number">4.3.1.</span> <span class="nav-text">数组的下标寻址和指针寻址的区别—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组下标寻址越界访问—Debug版"><span class="nav-number">4.3.2.</span> <span class="nav-text">数组下标寻址越界访问—Debug版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多维数组"><span class="nav-number">4.4.</span> <span class="nav-text">多维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二维数组与一维数组对比—Debug版"><span class="nav-number">4.4.1.</span> <span class="nav-text">二维数组与一维数组对比—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用常量寻址二维数组—Debug版"><span class="nav-number">4.4.2.</span> <span class="nav-text">使用常量寻址二维数组—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一维数组、二维数组初始化及寻址优化—Release版"><span class="nav-number">4.4.3.</span> <span class="nav-text">一维数组、二维数组初始化及寻址优化—Release版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存放指针类型数据的数组"><span class="nav-number">4.5.</span> <span class="nav-text">存放指针类型数据的数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#指针数组的识别—Debug版"><span class="nav-number">4.5.1.</span> <span class="nav-text">指针数组的识别—Debug版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指向数组的指针变量"><span class="nav-number">4.6.</span> <span class="nav-text">指向数组的指针变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组指针寻址—Debug版"><span class="nav-number">4.6.1.</span> <span class="nav-text">数组指针寻址—Debug版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数指针"><span class="nav-number">4.7.</span> <span class="nav-text">函数指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数指针与函数—Debug版"><span class="nav-number">4.7.1.</span> <span class="nav-text">函数指针与函数—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#带参数与返回值的函数指针—Debug版"><span class="nav-number">4.7.2.</span> <span class="nav-text">带参数与返回值的函数指针—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对比"><span class="nav-number">4.7.3.</span> <span class="nav-text">对比</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第九章-结构体和类"><span class="nav-number">5.</span> <span class="nav-text">第九章 结构体和类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#this指针"><span class="nav-number">5.1.</span> <span class="nav-text">this指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#访问类对象的数据成员—Debug版"><span class="nav-number">5.1.1.</span> <span class="nav-text">访问类对象的数据成员—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-stdcall调用方式的成员函数—Debug版"><span class="nav-number">5.1.2.</span> <span class="nav-text">使用__stdcall调用方式的成员函数—Debug版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态数据成员"><span class="nav-number">5.2.</span> <span class="nav-text">静态数据成员</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在成员函数中使用静态数据成员与普通数据成员—Debug版"><span class="nav-number">5.2.1.</span> <span class="nav-text">在成员函数中使用静态数据成员与普通数据成员—Debug版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象作为函数参数"><span class="nav-number">5.3.</span> <span class="nav-text">对象作为函数参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象作为函数的参数—Debug版"><span class="nav-number">5.3.1.</span> <span class="nav-text">对象作为函数的参数—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#含有数组数据成员的对象传参—Debug版"><span class="nav-number">5.3.2.</span> <span class="nav-text">含有数组数据成员的对象传参—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象作为参数的资源释放错误—Debug版"><span class="nav-number">5.3.3.</span> <span class="nav-text">对象作为参数的资源释放错误—Debug版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象作为返回值"><span class="nav-number">5.4.</span> <span class="nav-text">对象作为返回值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象作为返回值—Debug版"><span class="nav-number">5.4.1.</span> <span class="nav-text">对象作为返回值—Debug版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#还原对象数据—Release版"><span class="nav-number">5.4.2.</span> <span class="nav-text">还原对象数据—Release版</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-关于构造函数和析构函数"><span class="nav-number">6.</span> <span class="nav-text">第十章 关于构造函数和析构函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数的出现时机"><span class="nav-number">6.1.</span> <span class="nav-text">构造函数的出现时机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局部对象"><span class="nav-number">6.1.1.</span> <span class="nav-text">局部对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#无参构造函数的调用过程—Debug版"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">无参构造函数的调用过程—Debug版</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆对象"><span class="nav-number">6.1.2.</span> <span class="nav-text">堆对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#构造函数返回值的使用—Debug版"><span class="nav-number">6.1.2.1.</span> <span class="nav-text">构造函数返回值的使用—Debug版</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数对象"><span class="nav-number">6.1.3.</span> <span class="nav-text">参数对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#深拷贝构造函数—Debug版"><span class="nav-number">6.1.3.1.</span> <span class="nav-text">深拷贝构造函数—Debug版</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回对象"><span class="nav-number">6.1.4.</span> <span class="nav-text">返回对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#返回对象的构造函数使用—Debug版"><span class="nav-number">6.1.4.1.</span> <span class="nav-text">返回对象的构造函数使用—Debug版</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局对象与静态对象"><span class="nav-number">6.1.5.</span> <span class="nav-text">全局对象与静态对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#全局对象构造代理函数的分析—Debug版"><span class="nav-number">6.1.5.1.</span> <span class="nav-text">全局对象构造代理函数的分析—Debug版</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#析构函数的出现时机"><span class="nav-number">6.2.</span> <span class="nav-text">析构函数的出现时机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局部对象-1"><span class="nav-number">6.2.1.</span> <span class="nav-text">局部对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#局部对象的析构函数调用—Debug版"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">局部对象的析构函数调用—Debug版</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆对象-1"><span class="nav-number">6.2.2.</span> <span class="nav-text">堆对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#堆对象析构函数的调用—Debug版"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">堆对象析构函数的调用—Debug版</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多个堆对象的申请与释放—Debug版"><span class="nav-number">6.2.2.2.</span> <span class="nav-text">多个堆对象的申请与释放—Debug版</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆对象的构造代理函数—Debug版"><span class="nav-number">6.2.2.3.</span> <span class="nav-text">堆对象的构造代理函数—Debug版</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆对象释放函数分析—Debug版"><span class="nav-number">6.2.2.4.</span> <span class="nav-text">堆对象释放函数分析—Debug版</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

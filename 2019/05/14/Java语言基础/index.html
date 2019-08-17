@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Java语言基础的学习和整理。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java语言基础">
+<meta property="og:url" content="http://yoursite.com/2019/05/14/Java语言基础/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="Java语言基础的学习和整理。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/05/14/Java语言基础/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/14/Java语言基础/2.png">
+<meta property="og:updated_time" content="2019-08-07T03:27:34.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java语言基础">
+<meta name="twitter:description" content="Java语言基础的学习和整理。">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/14/Java语言基础/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/14/Java语言基础/">
+
+
+
+
+
+  <title>Java语言基础 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/Java语言基础/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java语言基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-14T20:28:23+08:00">
+                2019-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/05/14/Java语言基础/" class="leancloud_visitors" data-flag-title="Java语言基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Java语言基础的学习和整理。</p>
+<a id="more"></a>
+<h1 id="Java编程简介"><a href="#Java编程简介" class="headerlink" title="Java编程简介"></a>Java编程简介</h1><h2 id="Java语言基础——Java平台上的面向对象编程"><a href="#Java语言基础——Java平台上的面向对象编程" class="headerlink" title="Java语言基础——Java平台上的面向对象编程"></a>Java语言基础——Java平台上的面向对象编程</h2><p><strong>OOP——<a href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1" target="_blank" rel="noopener">面向对象程序设计</a>（Object-oriented programming）</strong>：对象则指的是类的实例。OOP将对象作为程序的基本单元，将程序和数据封装其中，以提高软件的重用性、灵活性和扩展性。对象里的程序可以访问及经常修改对象相关连的数据。在面向对象程序编程里，计算机程序会被设计成彼此相关的对象。</p>
+<hr>
+<h3 id="Java-平台概述"><a href="#Java-平台概述" class="headerlink" title="Java 平台概述"></a>Java 平台概述</h3><h4 id="Java语言"><a href="#Java语言" class="headerlink" title="Java语言"></a>Java语言</h4><ol>
+<li>Java语言是C语言的一种衍生语言，所以它的语法规则与C非常相似。例如，代码块被模块化为方法并用花括号<code>{</code>和<code>}</code>分隔，变量在使用之前需要进行声明。</li>
+<li>在结构上，Java 语言以包作为开头。包是 Java 语言的名称空间机制。包中包含类，而类中包含方法、变量、常量等。</li>
+</ol>
+<h4 id="Java-API"><a href="#Java-API" class="headerlink" title="Java API"></a>Java API</h4><blockquote>
+<p>大部分 Java 开发人员常常查阅<a href="https://docs.oracle.com/javase/8/docs/api/" target="_blank" rel="noopener">官方在线 Java API 文档</a>— 也称为 Javadoc。</p>
+</blockquote>
+<p><img src="/2019/05/14/Java语言基础/1.png" alt=""></p>
+<blockquote>
+<p>如上图，默认情况下，会在 Javadoc 中看到 3 个窗格。左上侧的窗格将显示该 API 中的所有包，左下侧的窗格将显示每个包中的类。（右侧）主窗格将显示当前选择的包或类的详细信息。例如，如果单击左上侧窗格中的 java.util 包，然后单击它下方列出的 ArrayList 类，就会在右侧窗格中看到 ArrayList 的详细信息，包括对它的用途、使用方式及其方法的描述。</p>
+</blockquote>
+<h4 id="Java相关文件"><a href="#Java相关文件" class="headerlink" title="Java相关文件"></a>Java相关文件</h4><p><img src="/2019/05/14/Java语言基础/2.png" alt=""></p>
+<p>字节码是一组将在 Java 虚拟机 (JVM) 上运行的指令。JVM 像 CPU 解释汇编语言指令一样解释字节码。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/nmgrd/article/details/70194425" target="_blank" rel="noopener">通过一个.class文件探究java的字节码文件结构</a></p>
+</blockquote>
+<h4 id="垃圾收集器（Java的内存回收管理机制）"><a href="#垃圾收集器（Java的内存回收管理机制）" class="headerlink" title="垃圾收集器（Java的内存回收管理机制）"></a>垃圾收集器（Java的内存回收管理机制）</h4><p>Java 平台不会强迫您时刻关注内存分配（或使用第三方库来完成此工作），而是提供了开箱即用的内存管理功能。Java 应用程序在运行时创建了一个对象实例时，JVM 会自动从<strong>堆</strong>为该对象分配内存空间— 堆是一个专门为您的程序留用的内存池。<strong>Java 垃圾收集器</strong>在后台运行，跟踪记录应用程序不再需要哪些对象，并回收它们占用的内存。这种内存处理方法称为<strong>隐式内存管理</strong>，因为它不要求编写任何内存处理代码。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/u010355144/article/details/45476951" target="_blank" rel="noopener">java内存管理机制+垃圾回收机制</a></p>
+</blockquote>
+<h4 id="Java开发环境"><a href="#Java开发环境" class="headerlink" title="Java开发环境"></a>Java开发环境</h4><h5 id="JDK-Java-Development-Kit"><a href="#JDK-Java-Development-Kit" class="headerlink" title="JDK(Java Development Kit)"></a>JDK(Java Development Kit)</h5><p>JDK中包含以下内容——</p>
+<ul>
+<li>一个包含预构建的实用程序的完整类库（可帮助完成大部分常见的应用程序开发任务）</li>
+<li>编译器和其他工具</li>
+</ul>
+<h5 id="Java-运行时环境-JRE"><a href="#Java-运行时环境-JRE" class="headerlink" title="Java 运行时环境(JRE)"></a>Java 运行时环境(JRE)</h5><p>JRE包含运行使用 Java 语言编写的程序所需的 JVM、代码库和运行用 Java 语言编写的程序所需的组件。</p>
+<hr>
+<h3 id="面向对象编程OOP的概念和原理"><a href="#面向对象编程OOP的概念和原理" class="headerlink" title="面向对象编程OOP的概念和原理"></a>面向对象编程<code>OOP</code>的概念和原理</h3><h4 id="什么是对象？"><a href="#什么是对象？" class="headerlink" title="什么是对象？"></a>什么是对象？</h4><ol>
+<li>面向对象的语言遵循的编程模式不同于结构化编程语言（如C）。</li>
+<li>结构化编程范例是高度面向数据的：您拥有数据结构，然后程序指令会处理该数据。</li>
+<li>面向对象的语言（比如 Java 语言）将数据和程序指令组合到对象中。</li>
+<li>对象是一个独立的实体，它仅包含<strong>属性（“名词”）</strong>和<strong>行为（“动词”）</strong>，不含其他任何东西。</li>
+<li>在面向对象的语言中，数据和程序逻辑被组合在一起，而不是<em>通过字段（属性）提供一个数据结构，并将该结构传递给处理它的所有程序逻辑（行为）</em>。</li>
+<li>这种组合可能出现在完全不同的粒度级别上，从细粒度的对象（比如 Number）到粗粒度的对象（比如一个大型银行应用程序中的 FundsTransfer 服务）。</li>
+</ol>
+<h5 id="父对象和子对象"><a href="#父对象和子对象" class="headerlink" title="父对象和子对象"></a>父对象和子对象</h5><ol>
+<li>父对象用作派生更复杂的子对象的结构基础。</li>
+<li>子对象看起来类似于父对象，但更加特殊化。</li>
+<li>在面向对象的范例中，可以重用父对象的通用属性和行为，也可以向子对象添加不同的属性和行为。</li>
+</ol>
+<h4 id="OOP的优势"><a href="#OOP的优势" class="headerlink" title="OOP的优势"></a>OOP的优势</h4><p><strong>封装、继承和多态性</strong></p>
+<h4 id="Java不是纯面向对象的语言"><a href="#Java不是纯面向对象的语言" class="headerlink" title="Java不是纯面向对象的语言"></a><a href="https://www.breakyizhan.com/java/3903.html" target="_blank" rel="noopener">Java不是纯面向对象的语言</a></h4><p>有两种性质可区分 Java 语言与纯粹的面向对象语言。</p>
+<blockquote>
+<p>首先，Java 语言是对象和原语类型的 一种混合。<br>其次，可以使用 Java 编写代码，将一个对象的内部情况向其他任何使用它的对象公开。</p>
+</blockquote>
+<hr>
+<h3 id="Java语言入门"><a href="#Java语言入门" class="headerlink" title="Java语言入门"></a>Java语言入门</h3><h4 id="Java中的保留字-关键字"><a href="#Java中的保留字-关键字" class="headerlink" title="Java中的保留字/关键字"></a>Java中的保留字/关键字</h4><p>像任何编程语言一样，Java 语言指定了一些编译器认为具有特殊意义的关键字。出于该原因，您不能使用它们来命名您的 Java 构造。</p>
+<ul>
+<li>abstract</li>
+<li>assert</li>
+<li>boolean</li>
+<li>break</li>
+<li>byte</li>
+<li>case</li>
+<li>catch</li>
+<li>char</li>
+<li>class</li>
+<li>const</li>
+<li>continue</li>
+<li>default</li>
+<li>do</li>
+<li>double</li>
+<li>else</li>
+<li>enum</li>
+<li>extends</li>
+<li>final</li>
+<li>finally</li>
+<li>float</li>
+<li>for</li>
+<li>goto</li>
+<li>if</li>
+<li>implements</li>
+<li>import</li>
+<li>instanceof</li>
+<li>int</li>
+<li>interface</li>
+<li>long</li>
+<li>native</li>
+<li>new</li>
+<li>package</li>
+<li>private</li>
+<li>protected</li>
+<li>public</li>
+<li>return</li>
+<li>short</li>
+<li>static</li>
+<li>strictfp</li>
+<li>super</li>
+<li>switch</li>
+<li>synchronized</li>
+<li>this</li>
+<li>throw</li>
+<li>throws</li>
+<li>transient</li>
+<li>try</li>
+<li>void</li>
+<li>volatile</li>
+<li>while</li>
+</ul>
+<p>也不能使用 true、false 和 null（严格意义上讲，它们是字面常量(值的源代码表示)而不是关键字）来命名 Java 构造。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/13/教我兄弟学Android逆向03-课后作业/" rel="next" title="教我兄弟学Android逆向03-课后作业">
+                <i class="fa fa-chevron-left"></i> 教我兄弟学Android逆向03-课后作业
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/20/教我兄弟学Android逆向04-课后作业/" rel="prev" title="教我兄弟学Android逆向04-课后作业">
+                教我兄弟学Android逆向04-课后作业 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java编程简介"><span class="nav-number">1.</span> <span class="nav-text">Java编程简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java语言基础——Java平台上的面向对象编程"><span class="nav-number">1.1.</span> <span class="nav-text">Java语言基础——Java平台上的面向对象编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-平台概述"><span class="nav-number">1.1.1.</span> <span class="nav-text">Java 平台概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java语言"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Java语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-API"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">Java API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java相关文件"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">Java相关文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾收集器（Java的内存回收管理机制）"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">垃圾收集器（Java的内存回收管理机制）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java开发环境"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">Java开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JDK-Java-Development-Kit"><span class="nav-number">1.1.1.5.1.</span> <span class="nav-text">JDK(Java Development Kit)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java-运行时环境-JRE"><span class="nav-number">1.1.1.5.2.</span> <span class="nav-text">Java 运行时环境(JRE)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象编程OOP的概念和原理"><span class="nav-number">1.1.2.</span> <span class="nav-text">面向对象编程OOP的概念和原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是对象？"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">什么是对象？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#父对象和子对象"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">父对象和子对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OOP的优势"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">OOP的优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java不是纯面向对象的语言"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">Java不是纯面向对象的语言</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java语言入门"><span class="nav-number">1.1.3.</span> <span class="nav-text">Java语言入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java中的保留字-关键字"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Java中的保留字/关键字</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

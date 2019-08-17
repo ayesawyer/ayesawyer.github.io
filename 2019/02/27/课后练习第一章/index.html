@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="教材学习,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于《逆向工程实战》的1.3/1.4/1.7/1.9节练习的尝试（x86/x64）。">
+<meta name="keywords" content="教材学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="课后练习第一章">
+<meta property="og:url" content="http://yoursite.com/2019/02/27/课后练习第一章/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于《逆向工程实战》的1.3/1.4/1.7/1.9节练习的尝试（x86/x64）。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/课后练习第一章/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/课后练习第一章/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/课后练习第一章/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/课后练习第一章/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/课后练习第一章/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/课后练习第一章/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/课后练习第一章/7.png">
+<meta property="og:updated_time" content="2019-03-21T07:41:17.034Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="课后练习第一章">
+<meta name="twitter:description" content="对于《逆向工程实战》的1.3/1.4/1.7/1.9节练习的尝试（x86/x64）。">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/27/课后练习第一章/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/27/课后练习第一章/">
+
+
+
+
+
+  <title>课后练习第一章 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/课后练习第一章/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">课后练习第一章</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T09:49:19+08:00">
+                2019-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/27/课后练习第一章/" class="leancloud_visitors" data-flag-title="课后练习第一章">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于《逆向工程实战》的1.3/1.4/1.7/1.9节练习的尝试（x86/x64）。</p>
+<a id="more"></a>
+<h3 id="一、基础知识补充"><a href="#一、基础知识补充" class="headerlink" title="一、基础知识补充"></a>一、基础知识补充</h3><p>1.C函数调用过程原理及函数栈帧分析——</p>
+<p>A.栈</p>
+<blockquote>
+<p>栈是一种LIFO形式的数据结构，所有的数据都是后进先出。<br>这种形式的数据结构正好满足我们调用函数的方式: 父函数调用子函数，父函数在前，子函数在后；返回时，子函数先返回，父函数后返回。<br>栈支持两种基本操作，push和pop。<br>push将数据压入栈中。<br>pop将栈中的数据弹出并存储到指定寄存器或者内存中。<br>pop操作后，栈中的数据并没有被清空，只是该数据我们无法直接访问。<br>栈的生长方向是从高地址到低地址的，也就是说，栈基址ebp的值是大于或等于(栈初始化)栈顶地址esp的。</p>
+</blockquote>
+<p>（1）push操作示例：push $0x50</p>
+<p><img src="/2019/02/27/课后练习第一章/1.png" alt=""></p>
+<p>也就是说，push操作首先会将esp的值减4，然后再将0x50存入此时的栈顶（esp指向的位置）。</p>
+<p>（2）pop操作示例：pop eax</p>
+<p><img src="/2019/02/27/课后练习第一章/2.png" alt=""></p>
+<p>pop操作会将此时esp指向的位置处的值先出栈，然后再将esp的值加4。</p>
+<p>B.栈帧</p>
+<blockquote>
+<p>栈帧，也就是stack frame，其本质就是一种栈，只是这种栈专门用于保存函数调用过程中的各种信息（参数，返回地址，本地变量等）。<br>栈帧有栈顶和栈底之分，其中栈顶的地址最低，栈底的地址最高，SP(栈指针)就是一直指向栈顶的。<br>在x86-32bit中，我们用 %ebp 指向栈底，也就是基址指针；用 %esp 指向栈顶，也就是栈指针。<br>下面是一个栈帧的示意图：</p>
+</blockquote>
+<p><img src="/2019/02/27/课后练习第一章/3.png" alt=""></p>
+<p>一般来说，我们将 %ebp 到 %esp 之间区域当做栈帧（也有人认为该从函数参数开始，不过这不影响分析）。并不是整个栈空间只有一个栈帧，每调用一个函数，就会生成一个新的栈帧。</p>
+<p>C.实例</p>
+<pre><code>int MyFunction(int x, int y, int z)
+{
+    int a, b, c;
+    a = 10;
+    b = 5;
+    c = 2;
+    ...
+}
+
+int TestFunction()
+{
+    int x = 1, y = 2, z = 3;
+    MyFunction1(1, 2, 3);
+    ...
+}
+</code></pre><p>（1）函数调用</p>
+<p>汇编代码如下——</p>
+<pre><code>_MyFunction:
+push %ebp            ; //保存%ebp的值
+movl %esp, $ebp      ; //将%esp的值赋给%ebp，使新的%ebp指向栈顶
+movl -12(%esp), %esp ; //分配额外空间给本地变量
+movl $10, -4(%ebp)   ; 
+movl $5,  -8(%ebp)   ; 
+movl $2,  -12(%ebp)  ; 
+</code></pre><p>栈分布如下图——</p>
+<p><img src="/2019/02/27/课后练习第一章/4.png" alt=""></p>
+<p><img src="/2019/02/27/课后练习第一章/5.png" alt=""></p>
+<p>（2）函数返回</p>
+<pre><code>_MyFunction:
+push %ebp
+movl %esp, %ebp      //这两条指令建立了一个新的函数栈帧，通常被称为函数序言
+movl -12(%esp), %esp
+...
+mov %ebp, %esp
+pop %ebp
+ret
+</code></pre><p><img src="/2019/02/27/课后练习第一章/6.png" alt=""></p>
+<p>2.关于栈这种数据结构的编程题目</p>
+<p>(1)实现栈的push、pop序列；</p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/ttltry-air/archive/2012/08/14/2638855.html" target="_blank" rel="noopener">https://www.cnblogs.com/ttltry-air/archive/2012/08/14/2638855.html</a></p>
+</blockquote>
+<p>(2)栈&amp;队列面试题之实现一个栈；</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_34328833/article/details/52494407" target="_blank" rel="noopener">https://blog.csdn.net/qq_34328833/article/details/52494407</a></p>
+</blockquote>
+<h3 id="1-3"><a href="#1-3" class="headerlink" title="1.3"></a>1.3</h3><pre><code>01: mov   edi, [ebp+8]      //取局部变量到edi中，该变量存在[ebp+8]处
+02: mov   edx, edi
+03: xor   eax, eax          //eax=0
+04: or    ecx, 0FFFFFFFFh   //ecx=ffffffffh(即-1)
+05: repne scasb             //循环查询edi中是否有与eax中的值相同的内容，这里eax=0，所以可以推断是查找字符串的结尾数据，故存在[ebp+8]处的应该是一个字符串。
+06: add   ecx, 2            
+07: neg   ecx               //这两步计算之后，ecx中存放的数值就是[ebp+8]处字符串的长度(不包括结尾处的&apos;0&apos;)，可以假设ecx的数值验证。
+08: mov   al, [ebp+0ch]     //取局部变量到al中，该变量存在[ebp+0c]处
+09: mov   edi, edx          //edx中存放的是字符串[ebp+8]的地址
+10: rep   stosb             //将eax中的值初始化到es：[edi] 指向的地址，一次初始化一个byte，循环执行的次数为ecx中的值(即edi中字符串的长度)，故可推出[ebp+0c]处的变量是和[ebp+8]处字符串长度相同的字符串数据。
+11: mov   eax, edx          //将初始化赋值后的字符串变量[ebp+8]赋值给eax作为返回值
+</code></pre><p>第6行和第7行也可以用以下两行代码代替：</p>
+<pre><code>not ecx                    //得到搜索次数，也就是字符串的完整长度
+dec ecx                    //-1得到字符串不包含末尾0的长度
+</code></pre><p>综上，此段汇编代码完成了字符串变量初始化赋值的操作。</p>
+<h3 id="1-4"><a href="#1-4" class="headerlink" title="1.4"></a>1.4</h3><p>1.(1)根据所学的CALL和RET指令，描述你将如何读出EIP的值？</p>
+<blockquote>
+<p>不是很理解题目的要求，因为call和ret指令都具有设置EIP的值的能力，而在实际程序执行过程中，eip的值是在不断变化的，也就是每执行一条指令，EIP的值都会发生变化，所以感觉实时读取EIP的值是无法通过CALL和RET实现的。<br>可以考虑在<code>ret</code>指令执行前执行<code>pop eax</code>，此时eax中的内容就是即将存入EIP寄存器的内容。</p>
+</blockquote>
+<p>  (2)为什么不能用MOV EAX, EIP来实现？</p>
+<blockquote>
+<p>在用mov指令进行寄存器与寄存器之间的数据传送时；<br>代码段寄存器CS及指令指针寄存器EIP不参加数的传送；<br>其中CS可以作为源操作数参加传送,但不能作为目的操作数参加传送；<br>eip是特殊寄存器不能直接对其进行赋值操作。</p>
+</blockquote>
+<p>2.把EIP设为0xAABBCCDD，给出至少两种代码序列：</p>
+<pre><code>(1)
+push AABBCCDDh
+ret
+
+(2)
+call AABB CCDDh
+
+(3)
+jmp AABB CCDDh
+</code></pre><p>3.在前面的例子函数addme中，如果在执行RET之前没有正确恢复栈指针，会出现什么情况？</p>
+<blockquote>
+<p>程序会转到此时ESP所指地址空间继续执行。</p>
+</blockquote>
+<p>4.前面介绍过的所有调用惯例中，返回值都是储存在32位寄存器（EAX）中。如果返回值用一个32位寄存器放不下怎么办？写一个程序来验证你的答案。不同编译器采用的机制也有所不同吗？</p>
+<blockquote>
+<p>对于小于4个字节的数据函数将返回值存储在eax中；<br>5~8个字节对象的情况调用惯例都是采用eax和edx的联合返回方式进行，eax存放低32位，edx存放高32位。<br><a href="https://blog.csdn.net/qq405180763/article/details/39252693" target="_blank" rel="noopener">https://blog.csdn.net/qq405180763/article/details/39252693</a></p>
+</blockquote>
+<h3 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h3><ol>
+<li>在尝试第一题的过程中，在分析过程中画出包括参数和局部变量在内的栈布局时遇到了问题，发现自己的基础还不够扎实，于是在基础部分中对于栈上的数据操作以及函数调用时的栈操作进行了学习。</li>
+<li>在分析汇编代码的栈数据操作时的经验积累：</li>
+</ol>
+<p><img src="/2019/02/27/课后练习第一章/7.png" alt=""></p>
+<blockquote>
+<p>如上图所示，在执行完call指令，即调用完函数返回之后，此时无论执行call指令之前esp指向栈空间的哪个地方，返回之后esp都是位于ebp-130h的位置（正如红框框出来的DllMain函数最开始的布局一样）。<br>注意push入栈操作时esp值要减4，pop出栈时要加4。</p>
+</blockquote>
+<h3 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h3><p>参考链接：</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/a363344923/article/details/42192685" target="_blank" rel="noopener">https://blog.csdn.net/a363344923/article/details/42192685</a></p>
+</blockquote>
+<p>不同的函数调用约定对于函数名的描述方式也不同(C编译器的函数名修饰规则如下)：</p>
+<blockquote>
+<p>对于<code>__stdcall</code>调用约定，编译器和链接器会在输出函数名前加上一个下划线前缀，函数名后面加上一个“@”符号和其参数的字节数，例如<code>_functionname@number</code>。<br><code>__cdecl</code>调用约定仅在输出函数名前加上一个下划线前缀，例如<code>_functionname</code>。<br><code>__fastcall</code>调用约定在输出函数名前加上一个“@”符号，后面也是一个“@”符号和其参数的字节数，例如<code>@functionname@number</code> 。</p>
+</blockquote>
+<h3 id="第四题"><a href="#第四题" class="headerlink" title="第四题"></a>第四题</h3><ol>
+<li><p>strlen——计算字符串的长度</p>
+<p> mov   edi, [ebp+8]      //假设[ebp+8]中存放的是待计算长度的字符串变量<br> mov   edx, edi<br> xor   eax, eax          //eax=0<br> or    ecx, 0FFFFFFFFh   //ecx=ffffffffh(即-1)<br> repne scasb             //循环查询edi中是否有与eax中的值相同的内容，这里eax=0，所以可以推断是查找字符串的结尾数据。<br> not   ecx<br> dec   ecx               //此时ecx中存放的就是字符串的长度<br> mov   eax, ecx</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>strchr——查找某字符在字符串中首次出现的位置</p>
+<p> mov   edi, [ebp+8]      //假设[ebp+8]中存放的是待处理的字符串变量<br> mov   edx, edi<br> mov   eax, 61h          //待查找的字符’a’<br> or    ecx, 0FFFFFFFFh   //ecx=ffffffffh(即-1)<br> repne scasb             //循环查询edi中是否有与eax中的值相同的内容。<br> not   ecx               //此时ecx中存放的就是‘a’在字符串中的位置<br> mov   eax, ecx</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>memcpy——复制 src 所指的内存内容的前 num 个字节到 dest 所指的内存地址上</p>
+<p> mov   ecx, num          //num<br> mov   edx, [ebp+8]      //dest<br> mov   al, [ebp+0ch]     //src<br> mov   edi, edx          //src<br> rep   stosb             //将eax中的值初始化到es：[edi] 指向的地址，一次初始化一个byte，循环执行的次数为ecx中的值。<br> mov   eax, edx          //将初始化赋值后的字符串变量[ebp+8]赋值给eax作为返回值</p>
+</li>
+</ol>
+<ol start="4">
+<li>memset——将指定内存的前n个字节设置为特定的值</li>
+</ol>
+<p>——同上，实现功能的关键语句：<code>rep   stosb</code></p>
+<ol start="5">
+<li><p>strcmp——比较字符串（区分大小写）</p>
+<p> mov ebx, _String1             //第一个字符串的基址<br> mov edx，_String2            //第二个字符串的基址<br> xor esi， esi                //初始化索引值</p>
+<p> loc_123:<br> mov eax, _String1[esi<em>4]    //取字符并比较<br> sub eax，_String2[esi</em>4]<br> inc esi<br> jz loc_123                   //如果相等则继续比较下一个字符<br> …                          //如果不相等此时eax中存的就是返回值（两个字符的差值）</p>
+</li>
+</ol>
+<ol start="6">
+<li>strset——将字符串中的所有字符都设置为一个指定字符（strset() 不会生成新字符串，而是修改原有字符串，因此它只能操作字符数组，不能操作字符串指针指向的字符串，因为字符串指针指向字符串常量，常量不能被修改）</li>
+</ol>
+<pre><code>mov   edi, _String      
+mov   edx, edi
+xor   eax, eax          
+or    ecx, 0FFFFFFFFh   
+repne scasb             
+not   ecx           
+dec   ecx               //先判断字符串数组的长度，此时ecx中存放的就是字符串的长度         
+mov   edx, _String      //字符串数组的基址
+mov   al, &apos;a&apos;    
+mov   edi, edx          //src
+rep   stosb             //将eax中的值初始化到es：[edi] 指向的地址，一次初始化一个byte，循环执行的次数为ecx中的值。
+mov   eax, edx          //将初始化赋值后的字符串赋值给eax作为返回值
+</code></pre><h3 id="第五题（待续）"><a href="#第五题（待续）" class="headerlink" title="第五题（待续）"></a>第五题（待续）</h3><h3 id="1-9"><a href="#1-9" class="headerlink" title="1.9"></a>1.9</h3><p>1.给出两种x64上获得指令指针的方法；</p>
+<ul>
+<li>使用x64上特有的RIP寻址，即<code>mov rax，qword ptr cs:loc_xxx</code>或<code>mov rax, [rip]</code>；</li>
+<li>在ret指令执行前pop栈顶数据；</li>
+</ul>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>1.基础部分：</p>
+<blockquote>
+<p><a href="https://segmentfault.com/a/1190000007977460" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007977460</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/教材学习/" rel="tag"># 教材学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/26/Android-Studio使用/" rel="next" title="Android Studio使用">
+                <i class="fa fa-chevron-left"></i> Android Studio使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/28/libFuzzer学习/" rel="prev" title="libFuzzer学习">
+                libFuzzer学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、基础知识补充"><span class="nav-number">1.</span> <span class="nav-text">一、基础知识补充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3"><span class="nav-number">2.</span> <span class="nav-text">1.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4"><span class="nav-number">3.</span> <span class="nav-text">1.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一题"><span class="nav-number">4.</span> <span class="nav-text">第一题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三题"><span class="nav-number">5.</span> <span class="nav-text">第三题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四题"><span class="nav-number">6.</span> <span class="nav-text">第四题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五题（待续）"><span class="nav-number">7.</span> <span class="nav-text">第五题（待续）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9"><span class="nav-number">8.</span> <span class="nav-text">1.9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">9.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
