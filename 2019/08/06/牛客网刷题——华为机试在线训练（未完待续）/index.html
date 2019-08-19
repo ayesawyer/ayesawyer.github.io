@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/06/牛客网刷题——华为机试在线训练（未完待续）/4.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/06/牛客网刷题——华为机试在线训练（未完待续）/5.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/06/牛客网刷题——华为机试在线训练（未完待续）/6.png">
-<meta property="og:updated_time" content="2019-08-14T14:22:35.999Z">
+<meta property="og:updated_time" content="2019-08-19T13:09:06.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="牛客网刷题——华为机试在线训练（未完待续）">
 <meta name="twitter:description" content="华为机试在线训练部分题目练习和记录。">
@@ -592,6 +592,97 @@ public static void main(String[] args){
 <li>对于编程的简化。</li>
 </ul>
 <p><img src="/2019/08/06/牛客网刷题——华为机试在线训练（未完待续）/6.png" alt=""></p>
+<h2 id="5-进制转换"><a href="#5-进制转换" class="headerlink" title="5.进制转换"></a>5.进制转换</h2><h3 id="题目描述-4"><a href="#题目描述-4" class="headerlink" title="题目描述"></a>题目描述</h3><p>写出一个程序，接受一个十六进制的数，输出该数值的十进制表示。（多组同时输入 ） </p>
+<p><strong>输入描述：</strong></p>
+<blockquote>
+<p>输入一个十六进制的数值字符串。</p>
+</blockquote>
+<p><strong>输出描述：</strong></p>
+<blockquote>
+<p>输出该数值的十进制字符串。</p>
+</blockquote>
+<p><strong>示例：</strong></p>
+<blockquote>
+<p>输入：0xA<br>输出：10</p>
+</blockquote>
+<h3 id="编程-4"><a href="#编程-4" class="headerlink" title="编程"></a>编程</h3><pre><code>import java.util.*;
+import java.lang.*;
+
+public class Main{
+public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    while(sc.hasNext()){
+        String tar = sc.nextLine().replace(&quot;0x&quot;,&quot;&quot;);
+        String str = Integer.valueOf(tar,16).toString();
+        System.out.println(str);
+    }
+}
+}
+</code></pre><h3 id="讨论-4"><a href="#讨论-4" class="headerlink" title="讨论"></a>讨论</h3><p>java进制转换——在java.lang包中的Integer类有相应的转换方法：</p>
+<ul>
+<li>toBinaryString(int)：转换为二进制</li>
+<li>toHexString(int i)：转换为十六进制</li>
+<li>toOctalString(int i)：转换为八进制</li>
+</ul>
+<p>以上是十进制转化成2，8，16进制。进制之间的任意转化则需要借助十进制作为中间变量。先把其他进制转化为十进制，再把十进制转化为其他进制。</p>
+<pre><code>//例如十六进制转化为二进制。
+//先把十六进制转化为十进制。
+String str = Integer.valueOf(&quot;FFFF&quot;,16).toString();
+//再把十进制转化为二进制。
+Integer.toBinaryString(str);
+</code></pre><blockquote>
+<p><a href="https://blog.csdn.net/u012289441/article/details/46636937" target="_blank" rel="noopener">java 进制转换(利用API)</a></p>
+</blockquote>
+<h2 id="6-质数因子"><a href="#6-质数因子" class="headerlink" title="6.质数因子"></a>6.质数因子</h2><h3 id="题目描述-5"><a href="#题目描述-5" class="headerlink" title="题目描述"></a>题目描述</h3><p>功能:输入一个正整数，按照从小到大的顺序输出它的所有质数的因子（如180的质数因子为2 2 3 3 5 ）,最后一个数后面也要有空格。</p>
+<p>详细描述：</p>
+<blockquote>
+<p>函数接口说明：<br>public String getResult(long ulDataInput)<br>输入参数：<br>long ulDataInput：输入的正整数<br>返回值：<br>String </p>
+</blockquote>
+<p><strong>输入描述：</strong></p>
+<blockquote>
+<p>输入一个long型整数</p>
+</blockquote>
+<p><strong>输出描述：</strong></p>
+<blockquote>
+<p>按照从小到大的顺序输出它的所有质数的因子，以空格隔开。最后一个数后面也要有空格。</p>
+</blockquote>
+<p><strong>示例：</strong></p>
+<blockquote>
+<p>输入：180<br>输出：2 2 3 3 5</p>
+</blockquote>
+<h3 id="编程-5"><a href="#编程-5" class="headerlink" title="编程"></a>编程</h3><pre><code>import java.util.Scanner;
+
+public class Main {
+
+public static void main(String[] args) {
+
+    Scanner sc = new Scanner(System.in);
+    long data = sc.nextLong();
+    for (int i = 2; i &lt; data + 1; i++) {
+        while (data % i == 0) {
+            System.out.print(i + &quot; &quot;);
+            data = data / i;
+        }
+    }
+}
+}
+</code></pre><h3 id="讨论-5"><a href="#讨论-5" class="headerlink" title="讨论"></a>讨论</h3><p>1.注意<code>System.out.print()</code>和<code>System.out.printIn()</code>的区别，后者输出之后会自动换行。</p>
+<p>2.判断一个数是否是质数。</p>
+<pre><code>public static boolean isPrime(int n) {
+    if (n &lt;= 3) {
+        return n &gt; 1;
+    }
+    int sqrt = (int)Math.sqrt(n);
+    for (int i = 2; i &lt;= sqrt; i++) {
+        if(n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+</code></pre><blockquote>
+<p><a href="https://blog.csdn.net/afei__/article/details/80638460" target="_blank" rel="noopener">判断一个数是不是质数(素数)，3种方式介绍</a></p>
+</blockquote>
 
       
     </div>
@@ -793,7 +884,7 @@ public static void main(String[] args){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-字符串最后一个单词的长度"><span class="nav-number">1.</span> <span class="nav-text">1.字符串最后一个单词的长度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程"><span class="nav-number">1.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论"><span class="nav-number">1.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-计算字符个数"><span class="nav-number">2.</span> <span class="nav-text">2.计算字符个数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程-1"><span class="nav-number">2.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论-1"><span class="nav-number">2.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-明明的随机数"><span class="nav-number">3.</span> <span class="nav-text">3.明明的随机数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-2"><span class="nav-number">3.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程-2"><span class="nav-number">3.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论-2"><span class="nav-number">3.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-字符串分隔"><span class="nav-number">4.</span> <span class="nav-text">4.字符串分隔</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-3"><span class="nav-number">4.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程-3"><span class="nav-number">4.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论-3"><span class="nav-number">4.3.</span> <span class="nav-text">讨论</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-字符串最后一个单词的长度"><span class="nav-number">1.</span> <span class="nav-text">1.字符串最后一个单词的长度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程"><span class="nav-number">1.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论"><span class="nav-number">1.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-计算字符个数"><span class="nav-number">2.</span> <span class="nav-text">2.计算字符个数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程-1"><span class="nav-number">2.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论-1"><span class="nav-number">2.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-明明的随机数"><span class="nav-number">3.</span> <span class="nav-text">3.明明的随机数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-2"><span class="nav-number">3.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程-2"><span class="nav-number">3.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论-2"><span class="nav-number">3.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-字符串分隔"><span class="nav-number">4.</span> <span class="nav-text">4.字符串分隔</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-3"><span class="nav-number">4.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程-3"><span class="nav-number">4.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论-3"><span class="nav-number">4.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-进制转换"><span class="nav-number">5.</span> <span class="nav-text">5.进制转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-4"><span class="nav-number">5.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程-4"><span class="nav-number">5.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论-4"><span class="nav-number">5.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-质数因子"><span class="nav-number">6.</span> <span class="nav-text">6.质数因子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-5"><span class="nav-number">6.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程-5"><span class="nav-number">6.2.</span> <span class="nav-text">编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论-5"><span class="nav-number">6.3.</span> <span class="nav-text">讨论</span></a></li></ol></li></ol></div>
             
 
           </div>

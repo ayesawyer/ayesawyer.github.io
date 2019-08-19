@@ -103,8 +103,12 @@
 <meta property="og:description" content="java编程实现基本排序算法。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/1.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/1.webp">
-<meta property="og:updated_time" content="2019-08-15T04:05:33.788Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/1.gif">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/2.gif">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/3.gif">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/4.gif">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/java编程基础——排序算法实现/5.gif">
+<meta property="og:updated_time" content="2019-08-19T13:57:55.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java编程基础——排序算法实现">
 <meta name="twitter:description" content="java编程实现基本排序算法。">
@@ -412,6 +416,7 @@
 <h2 id="2-冒泡排序"><a href="#2-冒泡排序" class="headerlink" title="2.冒泡排序"></a>2.冒泡排序</h2><h3 id="A-算法描述"><a href="#A-算法描述" class="headerlink" title="A.算法描述"></a>A.算法描述</h3><blockquote>
 <p>1、比较相邻的元素。如果第一个比第二个大，就交换它们两个；<br>2、对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；<br>3、针对所有的元素重复以上的步骤，除了最后一个；<br>4、重复步骤1~3，直到排序完成。</p>
 </blockquote>
+<p><img src="/2019/08/09/java编程基础——排序算法实现/1.gif" alt=""></p>
 <p><strong>时间代价：最佳情况：O(n)   最差情况：O(n2)   平均情况：O(n2)</strong></p>
 <h3 id="B-java实现"><a href="#B-java实现" class="headerlink" title="B.java实现"></a>B.java实现</h3><pre><code>//将数组array从小到大排列
 public static int[] bubbleSort(int[] array) {
@@ -430,7 +435,7 @@ public static int[] bubbleSort(int[] array) {
 <p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置;<br>然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾;<br>以此类推，直到所有元素均排序完毕。</p>
 </blockquote>
 <p><strong>表现最稳定的排序算法之一，因为无论什么数据进去都是O(n2)的时间复杂度。</strong>所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。</p>
-<p><img src="/2019/08/09/java编程基础——排序算法实现/1.webp" alt=""></p>
+<p><img src="/2019/08/09/java编程基础——排序算法实现/2.gif" alt=""></p>
 <h3 id="B-java实现-1"><a href="#B-java实现-1" class="headerlink" title="B.java实现"></a>B.java实现</h3><pre><code>public static void main(String[] args)
 {
 
@@ -456,6 +461,7 @@ public static int[] bubbleSort(int[] array) {
 <blockquote>
 <p>从第一个元素开始，该元素可以认为已经被排序；<br>取出下一个元素，在已经排序的元素序列中从后向前扫描；<br>如果该元素（已排序）大于新元素，将该元素移到下一位置；<br>重复步骤3，直到找到已排序的元素小于或者等于新元素的位置；<br>将新元素插入到该位置后；<br>重复步骤2~5。</p>
 </blockquote>
+<p><img src="/2019/08/09/java编程基础——排序算法实现/3.gif" alt=""></p>
 <p><strong>时间代价：最佳情况：T(n) = O(n2)  最差情况：T(n) = O(n2)  平均情况：T(n) = O(n2)</strong></p>
 <h3 id="B-java实现-2"><a href="#B-java实现-2" class="headerlink" title="B.java实现"></a>B.java实现</h3><pre><code> public static int[] insertionSort(int[] array) {
     if (array.length == 0)
@@ -491,7 +497,23 @@ public static void insertSort(int[] numbers)
         numbers[j] = temp;
     }
  }
-</code></pre><h2 id="5-希尔排序"><a href="#5-希尔排序" class="headerlink" title="5.希尔排序"></a>5.希尔排序</h2><h3 id="A-算法描述-3"><a href="#A-算法描述-3" class="headerlink" title="A.算法描述"></a>A.算法描述</h3><h3 id="B-java实现-3"><a href="#B-java实现-3" class="headerlink" title="B.java实现"></a>B.java实现</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+</code></pre><h2 id="5-希尔排序"><a href="#5-希尔排序" class="headerlink" title="5.希尔排序"></a>5.希尔排序</h2><h3 id="A-算法描述-3"><a href="#A-算法描述-3" class="headerlink" title="A.算法描述"></a>A.算法描述</h3><h3 id="B-java实现-3"><a href="#B-java实现-3" class="headerlink" title="B.java实现"></a>B.java实现</h3><h2 id="6-归并排序"><a href="#6-归并排序" class="headerlink" title="6.归并排序"></a>6.归并排序</h2><h3 id="A-算法描述-4"><a href="#A-算法描述-4" class="headerlink" title="A.算法描述"></a>A.算法描述</h3><p>和选择排序一样，归并排序的性能不受输入数据的影响，但表现比选择排序好的多，因为始终都是O(nlogn）的时间复杂度。代价是需要额外的内存空间。</p>
+<p>归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。<strong>归并排序是一种稳定的排序方法。</strong>将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为2-路归并。 具体算法描述如下——</p>
+<ul>
+<li>把长度为n的输入序列分成两个长度为n/2的子序列；</li>
+<li>对这两个子序列分别采用归并排序；</li>
+<li>将两个排序好的子序列合并成一个最终的排序序列。</li>
+</ul>
+<p><img src="/2019/08/09/java编程基础——排序算法实现/4.gif" alt=""></p>
+<p><strong>最佳情况：T(n) = O(n)  最差情况：T(n) = O(nlogn)  平均情况：T(n) = O(nlogn)</strong></p>
+<h3 id="B-java实现-4"><a href="#B-java实现-4" class="headerlink" title="B.java实现"></a>B.java实现</h3><h2 id="7-快速排序"><a href="#7-快速排序" class="headerlink" title="7.快速排序"></a>7.快速排序</h2><h3 id="A-算法描述-5"><a href="#A-算法描述-5" class="headerlink" title="A.算法描述"></a>A.算法描述</h3><p>快速排序（Quicksort）是对冒泡排序的一种改进，借用了分治的思想。</p>
+<p>快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。快速排序使用分治法来把一个串（list）分为两个子串（sub-lists）。具体算法描述如下：</p>
+<blockquote>
+<p>从数列中挑出一个元素，称为 “基准”（pivot）；<br>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；<br>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</p>
+</blockquote>
+<p><img src="/2019/08/09/java编程基础——排序算法实现/5.gif" alt=""></p>
+<p><strong>最佳情况：T(n) = O(nlogn)   最差情况：T(n) = O(n2)   平均情况：T(n) = O(nlogn)</strong>快速排序是不稳定的，其时间代价很大程度上取决于取的“基准”（pivot），所以在此基础上又很多改进算法。</p>
+<h3 id="B-java实现-5"><a href="#B-java实现-5" class="headerlink" title="B.java实现"></a>B.java实现</h3><h2 id="8-堆排序"><a href="#8-堆排序" class="headerlink" title="8.堆排序"></a>8.堆排序</h2><h3 id="A-算法描述-6"><a href="#A-算法描述-6" class="headerlink" title="A.算法描述"></a>A.算法描述</h3><h3 id="B-java实现-6"><a href="#B-java实现-6" class="headerlink" title="B.java实现"></a>B.java实现</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
 <p><a href="https://itimetraveler.github.io/2017/07/18/%E5%85%AB%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%E4%B8%8Ejava%E5%AE%9E%E7%8E%B0/?utm_source=juhe&amp;utm_source=juhe" target="_blank" rel="noopener">八大排序算法总结与java实现</a><br><a href="https://www.jianshu.com/p/8c915179fd02" target="_blank" rel="noopener">必须知道的八大种排序算法【java实现】</a><br><a href="https://www.cnblogs.com/guoyaohua/p/8600214.html" target="_blank" rel="noopener">十大经典排序算法最强总结（含JAVA代码实现）</a></p>
 </blockquote>
 
@@ -695,7 +717,7 @@ public static void insertSort(int[] numbers)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概述"><span class="nav-number">1.</span> <span class="nav-text">1.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-总结"><span class="nav-number">1.1.</span> <span class="nav-text">A.总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-术语解释"><span class="nav-number">1.2.</span> <span class="nav-text">B.术语解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-冒泡排序"><span class="nav-number">2.</span> <span class="nav-text">2.冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述"><span class="nav-number">2.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现"><span class="nav-number">2.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-选择排序"><span class="nav-number">3.</span> <span class="nav-text">3.选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-1"><span class="nav-number">3.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-1"><span class="nav-number">3.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-插入排序"><span class="nav-number">4.</span> <span class="nav-text">4.插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-2"><span class="nav-number">4.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-2"><span class="nav-number">4.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-希尔排序"><span class="nav-number">5.</span> <span class="nav-text">5.希尔排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-3"><span class="nav-number">5.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-3"><span class="nav-number">5.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概述"><span class="nav-number">1.</span> <span class="nav-text">1.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-总结"><span class="nav-number">1.1.</span> <span class="nav-text">A.总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-术语解释"><span class="nav-number">1.2.</span> <span class="nav-text">B.术语解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-冒泡排序"><span class="nav-number">2.</span> <span class="nav-text">2.冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述"><span class="nav-number">2.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现"><span class="nav-number">2.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-选择排序"><span class="nav-number">3.</span> <span class="nav-text">3.选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-1"><span class="nav-number">3.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-1"><span class="nav-number">3.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-插入排序"><span class="nav-number">4.</span> <span class="nav-text">4.插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-2"><span class="nav-number">4.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-2"><span class="nav-number">4.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-希尔排序"><span class="nav-number">5.</span> <span class="nav-text">5.希尔排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-3"><span class="nav-number">5.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-3"><span class="nav-number">5.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-归并排序"><span class="nav-number">6.</span> <span class="nav-text">6.归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-4"><span class="nav-number">6.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-4"><span class="nav-number">6.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-快速排序"><span class="nav-number">7.</span> <span class="nav-text">7.快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-5"><span class="nav-number">7.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-5"><span class="nav-number">7.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-堆排序"><span class="nav-number">8.</span> <span class="nav-text">8.堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-算法描述-6"><span class="nav-number">8.1.</span> <span class="nav-text">A.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-java实现-6"><span class="nav-number">8.2.</span> <span class="nav-text">B.java实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
