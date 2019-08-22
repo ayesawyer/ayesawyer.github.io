@@ -108,7 +108,8 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/12/linux基础知识/4.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/12/linux基础知识/5.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/12/linux基础知识/6.png">
-<meta property="og:updated_time" content="2019-08-15T12:51:06.896Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/linux基础知识/1.jpg">
+<meta property="og:updated_time" content="2019-08-22T14:03:41.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux基础知识">
 <meta name="twitter:description" content="对于Linux操作系统相关基础知识进行复习和整理。">
@@ -675,8 +676,296 @@ $ sudo apt-get remove package-name
 <li>文件默认权限：文件默认没有可执行权限，因此为 666，也就是 -rw-rw-rw- 。</li>
 <li>目录默认权限：目录必须要能够进入，也就是必须拥有可执行权限，因此为 777 ，也就是 drwxrwxrwx。</li>
 </ul>
-<h4 id="目录权限"><a href="#目录权限" class="headerlink" title="目录权限"></a>目录权限</h4><p>文件名不是存储在一个文件的内容中，而是存储在一个文件所在的目录中。因此，拥有文件的 w 权限并不能对文件名进行修改。</p>
+<p>可以通过 umask 设置或者查看默认权限，通常以掩码的形式来表示，例如 002 表示其它用户的权限去除了一个 2 的权限，也就是写权限，因此建立新文件时默认的权限为 -rw-rw-r–。</p>
+<h4 id="（1）目录权限"><a href="#（1）目录权限" class="headerlink" title="（1）目录权限"></a>（1）目录权限</h4><p>文件名不是存储在一个文件的内容中，而是存储在一个文件所在的目录中。因此，拥有文件的 w 权限并不能对文件名进行修改。</p>
 <p>目录存储文件列表，一个目录的权限也就是对其文件列表的权限。因此，目录的 r 权限表示可以读取文件列表；w 权限表示可以修改文件列表，具体来说，就是添加删除文件，对文件名进行修改；x 权限可以让该目录成为工作目录，x 权限是 r 和 w 权限的基础，如果不能使一个目录成为工作目录，也就没办法读取文件列表以及对文件列表进行修改了。</p>
+<h3 id="C-链接"><a href="#C-链接" class="headerlink" title="C.链接"></a>C.链接</h3><p>为解决文件的共享使用，Linux 系统引入了两种链接：<strong>实体链接/硬链接 (hard link)</strong> 与<strong>软链接（又称符号链接，即 soft link 或 symbolic link）</strong>。链接为 Linux 系统解决了文件的共享使用，还带来了隐藏文件路径、增加权限安全及节省存储等好处。</p>
+<p><img src="/2019/08/12/linux基础知识/1.jpg" alt=""></p>
+<h4 id="（1）实体链接-硬链接"><a href="#（1）实体链接-硬链接" class="headerlink" title="（1）实体链接/硬链接"></a>（1）实体链接/硬链接</h4><p>若一个 inode 号对应多个文件名，则称这些文件为硬链接。换言之，硬链接就是同一个文件使用了多个别名。硬链接可由命令 link 或 ln 创建。如下是对文件 oldfile 创建硬链接的命令。</p>
+<blockquote>
+<p>link oldfile newfile<br>ln oldfile newfile</p>
+</blockquote>
+<p>由于硬链接是有着相同 inode 号仅文件名不同的文件，因此硬链接存在以下几点特性：</p>
+<ul>
+<li>文件有相同的 inode 及 data block；</li>
+<li>只能对已存在的文件进行创建；</li>
+<li>不能交叉文件系统进行硬链接的创建；</li>
+<li>不能对目录进行创建，只可对文件创建；</li>
+<li>删除一个硬链接文件并不影响其他有相同 inode 号的文件。</li>
+</ul>
+<h4 id="（2）软链接"><a href="#（2）软链接" class="headerlink" title="（2）软链接"></a>（2）软链接</h4><p>软链接与硬链接不同，若文件用户数据块中存放的内容是另一文件的路径名的指向，则该文件就是软连接。软链接就是一个普通文件，只是数据块内容有点特殊。软链接有着自己的 inode 号以及用户数据块。因此软链接的创建与使用没有类似硬链接的诸多限制：</p>
+<ul>
+<li>软链接有自己的文件属性及权限等；</li>
+<li>可对不存在的文件或目录创建软链接；</li>
+<li>软链接可交叉文件系统；</li>
+<li>软链接可对文件或目录创建；</li>
+<li>创建软链接时，链接计数 i_nlink 不会增加；</li>
+<li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接（即 dangling link，若被指向路径文件被重新创建，死链接可恢复为正常的软链接）。</li>
+</ul>
+<blockquote>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/index.html#fig2" target="_blank" rel="noopener">Linux 的文件与目录</a></p>
+</blockquote>
+<h3 id="D-文件操作相关Linux命令"><a href="#D-文件操作相关Linux命令" class="headerlink" title="D.文件操作相关Linux命令"></a>D.文件操作相关Linux命令</h3><h4 id="（1）文件与目录的基本操作"><a href="#（1）文件与目录的基本操作" class="headerlink" title="（1）文件与目录的基本操作"></a>（1）文件与目录的基本操作</h4><blockquote>
+<p>ls——列出文件或者目录的信息，目录的信息就是其中包含的文件。</p>
+</blockquote>
+<pre><code># ls [-aAdfFhilnrRSt] file|dir
+-a ：列出全部的文件
+-d ：仅列出目录本身
+-l ：以长数据串行列出，包含文件的属性与权限等等数据
+</code></pre><blockquote>
+<p>cd——更换当前目录。</p>
+</blockquote>
+<pre><code>cd [相对路径或绝对路径]
+</code></pre><blockquote>
+<p>mkdir——创建目录。</p>
+</blockquote>
+<pre><code># mkdir [-mp] 目录名称
+-m ：配置目录权限
+-p ：递归创建目录
+</code></pre><blockquote>
+<p>rmdir——删除目录，目录必须为空。</p>
+</blockquote>
+<pre><code>rmdir [-p] 目录名称
+-p ：递归删除目录
+</code></pre><blockquote>
+<p>touch——更新文件时间或者建立新文件。</p>
+</blockquote>
+<pre><code># touch [-acdmt] filename
+-a ： 更新 atime
+-c ： 更新 ctime，若该文件不存在则不建立新文件
+-m ： 更新 mtime
+-d ： 后面可以接更新日期而不使用当前日期，也可以使用 --date=&quot;日期或时间&quot;
+-t ： 后面可以接更新时间而不使用当前时间，格式为[YYYYMMDDhhmm]
+</code></pre><blockquote>
+<p>cp——复制文件。如果源文件有两个以上，则目的文件一定要是目录才行。</p>
+</blockquote>
+<pre><code>cp [-adfilprsu] source destination
+-a ：相当于 -dr --preserve=all
+-d ：若来源文件为链接文件，则复制链接文件属性而非文件本身
+-i ：若目标文件已经存在时，在覆盖前会先询问
+-p ：连同文件的属性一起复制过去
+-r ：递归复制
+-u ：destination 比 source 旧才更新 destination，或 destination 不存在的情况下才复制
+--preserve=all ：除了 -p 的权限相关参数外，还加入 SELinux 的属性, links, xattr 等也复制了
+</code></pre><blockquote>
+<p>rm——删除文件。</p>
+</blockquote>
+<pre><code># rm [-fir] 文件或目录
+-r ：递归删除
+</code></pre><blockquote>
+<p>mv——移动文件。</p>
+</blockquote>
+<pre><code># mv [-fiu] source destination
+# mv [options] source1 source2 source3 .... directory
+-f ： force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖
+</code></pre><h4 id="（2）修改权限"><a href="#（2）修改权限" class="headerlink" title="（2）修改权限"></a>（2）修改权限</h4><blockquote>
+<p>可以将一组权限用数字来表示，此时一组权限的 3 个位当做二进制数字的位，从左到右每个位的权值为 4、2、1，即每个权限对应的数字权值为 r : 4、w : 2、x : 1。</p>
+</blockquote>
+<pre><code># chmod [-R] xyz dirname/filename
+</code></pre><blockquote>
+<p>示例：将 .bashrc 文件的权限修改为 -rwxr-xr–。</p>
+</blockquote>
+<pre><code># chmod 754 .bashrc
+</code></pre><blockquote>
+<p>也可以使用符号来设定权限。</p>
+</blockquote>
+<pre><code># chmod [ugoa]  [+-=] [rwx] dirname/filename
+- u：拥有者
+- g：所属群组
+- o：其他人
+- a：所有人
+- +：添加权限
+- -：移除权限
+- =：设定权限
+</code></pre><blockquote>
+<p>示例：为 .bashrc 文件的所有用户添加写权限。</p>
+</blockquote>
+<pre><code># chmod a+w .bashrc
+</code></pre><h4 id="（3）链接"><a href="#（3）链接" class="headerlink" title="（3）链接"></a>（3）链接</h4><pre><code># ln [-sf] source_filename dist_filename
+-s ：默认是实体链接，加 -s 为符号链接
+-f ：如果目标文件存在时，先删除目标文件
+</code></pre><p>1.实体链接：在目录下创建一个条目，记录着文件名与 inode 编号，这个 inode 就是源文件的 inode。删除任意一个条目，文件还是存在，只要引用数量不为 0。有以下限制：不能跨越文件系统、不能对目录进行链接。</p>
+<pre><code># ln /etc/crontab .
+# ll -i /etc/crontab crontab
+34474855 -rw-r--r--. 2 root root 451 Jun 10 2014 crontab
+34474855 -rw-r--r--. 2 root root 451 Jun 10 2014 /etc/crontab
+</code></pre><p>2.符号链接文件保存着源文件所在的绝对路径，在读取时会定位到源文件上，可以理解为 Windows 的快捷方式。当源文件被删除了，链接文件就打不开了。因为记录的是路径，所以可以为目录建立符号链接。</p>
+<pre><code># ll -i /etc/crontab /root/crontab2
+34474855 -rw-r--r--. 2 root root 451 Jun 10 2014 /etc/crontab
+53745909 lrwxrwxrwx. 1 root root 12 Jun 23 22:31 /root/crontab2 -&gt; /etc/crontab
+</code></pre><h4 id="（4）获取文件内容"><a href="#（4）获取文件内容" class="headerlink" title="（4）获取文件内容"></a>（4）获取文件内容</h4><blockquote>
+<p>cat——取得文件内容。</p>
+</blockquote>
+<pre><code># cat [-AbEnTv] filename
+-n ：打印出行号，连同空白行也会有行号，-b 不会
+</code></pre><blockquote>
+<p>tac——是 cat 的反向操作，从最后一行开始打印。</p>
+</blockquote>
+<blockquote>
+<p>more——和 cat 不同的是它可以一页一页查看文件内容，比较适合大文件的查看。</p>
+</blockquote>
+<blockquote>
+<p>less——和 more 类似，但是多了一个向前翻页的功能。</p>
+</blockquote>
+<blockquote>
+<p>head——取得文件前几行。</p>
+</blockquote>
+<pre><code># head [-n number] filename
+-n ：后面接数字，代表显示几行的意思
+</code></pre><blockquote>
+<p>tail——是 head 的反向操作，只是取得是后几行。</p>
+</blockquote>
+<blockquote>
+<p>od——以字符或者十六进制的形式显示二进制文件。</p>
+</blockquote>
+<h4 id="（5）指令与文件搜索"><a href="#（5）指令与文件搜索" class="headerlink" title="（5）指令与文件搜索"></a>（5）指令与文件搜索</h4><blockquote>
+<p>which——指令搜索。</p>
+</blockquote>
+<pre><code># which [-a] command
+-a ：将所有指令列出，而不是只列第一个
+</code></pre><blockquote>
+<p>whereis——文件搜索。速度比较快，因为它只搜索几个特定的目录。</p>
+</blockquote>
+<pre><code># whereis [-bmsu] dirname/filename
+</code></pre><blockquote>
+<p>locate——文件搜索。可以用关键字或者正则表达式进行搜索。locate 使用 /var/lib/mlocate/ 这个数据库来进行搜索，它存储在内存中，并且每天更新一次，所以无法用 locate 搜索新建的文件。可以使用 updatedb 来立即更新数据库。</p>
+</blockquote>
+<pre><code># locate [-ir] keyword
+-r：正则表达式
+</code></pre><blockquote>
+<p>find——文件搜索。可以使用文件的属性和权限进行搜索。</p>
+</blockquote>
+<pre><code># find [basedir] [option]
+example: find . -name &quot;shadow*&quot;
+
+① 与时间有关的选项
+
+-mtime  n ：列出在 n 天前的那一天修改过内容的文件
+-mtime +n ：列出在 n 天之前 (不含 n 天本身) 修改过内容的文件
+-mtime -n ：列出在 n 天之内 (含 n 天本身) 修改过内容的文件
+-newer file ： 列出比 file 更新的文件
++4、4 和 -4 的指示的时间范围如下：
+
+② 与文件拥有者和所属群组有关的选项
+
+-uid n
+-gid n
+-user name
+-group name
+-nouser ：搜索拥有者不存在 /etc/passwd 的文件
+-nogroup：搜索所属群组不存在于 /etc/group 的文件
+
+③ 与文件权限和名称有关的选项
+
+-name filename
+-size [+-]SIZE：搜寻比 SIZE 还要大 (+) 或小 (-) 的文件。这个 SIZE 的规格有：c: 代表 byte，k: 代表 1024bytes。所以，要找比 50KB 还要大的文件，就是 -size +50k
+-type TYPE
+-perm mode  ：搜索权限等于 mode 的文件
+-perm -mode ：搜索权限包含 mode 的文件
+-perm /mode ：搜索权限包含任一 mode 的文件
+</code></pre><h2 id="5-压缩与打包"><a href="#5-压缩与打包" class="headerlink" title="5.压缩与打包"></a>5.压缩与打包</h2><h3 id="A-压缩文件名"><a href="#A-压缩文件名" class="headerlink" title="A.压缩文件名"></a>A.压缩文件名</h3><p>Linux 底下有很多压缩文件名，常见的如下：</p>
+<table>
+<thead>
+<tr>
+<th>扩展名</th>
+<th>压缩程序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*.Z</td>
+<td>compress</td>
+</tr>
+<tr>
+<td>*.zip</td>
+<td>zip</td>
+</tr>
+<tr>
+<td>*.gz</td>
+<td>gzip</td>
+</tr>
+<tr>
+<td>*.bz2</td>
+<td>bzip2</td>
+</tr>
+<tr>
+<td>*.xz</td>
+<td>xz</td>
+</tr>
+<tr>
+<td>*.tar</td>
+<td>tar 程序打包的数据，没有经过压缩</td>
+</tr>
+<tr>
+<td>*.tar.gz</td>
+<td>tar 程序打包的文件，经过 gzip 的压缩</td>
+</tr>
+<tr>
+<td>*.tar.bz2</td>
+<td>tar 程序打包的文件，经过 bzip2 的压缩</td>
+</tr>
+<tr>
+<td>*.tar.xz</td>
+<td>tar 程序打包的文件，经过 xz 的压缩</td>
+</tr>
+</tbody>
+</table>
+<h3 id="B-压缩指令"><a href="#B-压缩指令" class="headerlink" title="B.压缩指令"></a>B.压缩指令</h3><blockquote>
+<p>gzip——gzip 是 Linux 使用最广的压缩指令，可以解开 compress、zip 与 gzip 所压缩的文件。经过 gzip 压缩过，源文件就不存在了。有 9 个不同的压缩等级可以使用。可以使用 zcat、zmore、zless 来读取压缩文件的内容。</p>
+</blockquote>
+<pre><code>$ gzip [-cdtv#] filename
+-c ：将压缩的数据输出到屏幕上
+-d ：解压缩
+-t ：检验压缩文件是否出错
+-v ：显示压缩比等信息
+-# ： # 为数字的意思，代表压缩等级，数字越大压缩比越高，默认为 6
+</code></pre><blockquote>
+<p>bzip2——提供比 gzip 更高的压缩比。查看命令：bzcat、bzmore、bzless、bzgrep。</p>
+</blockquote>
+<pre><code>$ bzip2 [-cdkzv#] filename
+-k ：保留源文件
+</code></pre><blockquote>
+<p>xz——提供比 bzip2 更佳的压缩比。可以看到，gzip、bzip2、xz 的压缩比不断优化。不过要注意的是，压缩比越高，压缩的时间也越长。查看命令：xzcat、xzmore、xzless、xzgrep。</p>
+</blockquote>
+<pre><code>$ xz [-dtlkc#] filename
+</code></pre><h3 id="C-打包"><a href="#C-打包" class="headerlink" title="C.打包"></a>C.打包</h3><p>压缩指令只能对一个文件进行压缩，而打包能够将多个文件打包成一个大文件。tar 不仅可以用于打包，也可以使用 gzip、bzip2、xz 将打包文件进行压缩。</p>
+<pre><code>$ tar [-z|-j|-J] [cv] [-f 新建的 tar 文件] filename...  ==打包压缩
+$ tar [-z|-j|-J] [tv] [-f 已有的 tar 文件]  ==查看
+$ tar [-z|-j|-J] [xv] [-f 已有的 tar 文件] [-C 目录]==解压缩
+-z ：使用 zip；
+-j ：使用 bzip2；
+-J ：使用 xz；
+-c ：新建打包文件；
+-t ：查看打包文件里面有哪些文件；
+-x ：解打包或解压缩的功能；
+-v ：在压缩/解压缩的过程中，显示正在处理的文件名；
+-f : filename：要处理的文件；
+-C 目录 ： 在特定目录解压缩。
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:center">使用方式</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">打包压缩</td>
+<td>tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称</td>
+</tr>
+<tr>
+<td style="text-align:center">查 看</td>
+<td>tar -jtv -f filename.tar.bz2</td>
+</tr>
+<tr>
+<td style="text-align:center">解压缩</td>
+<td>tar -jxv -f filename.tar.bz2 -C 要解压缩的目录</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-Bash"><a href="#6-Bash" class="headerlink" title="6.Bash"></a>6.Bash</h2><blockquote>
+<p><a href="https://www.cnblogs.com/skywang12345/archive/2013/05/30/3106570.html" target="_blank" rel="noopener">Linux bash总结(一) 基础部分(适合初学者学习和非初学者参考)</a><br><a href="https://blog.csdn.net/sujz12345/article/details/54565056" target="_blank" rel="noopener">Linux之bash介绍</a></p>
+</blockquote>
 <p><a href="https://blog.csdn.net/u011795345/article/details/78826778" target="_blank" rel="noopener">linux下进行c语言的开发</a></p>
 
       
@@ -879,7 +1168,7 @@ $ sudo apt-get remove package-name
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-常用操作及概念"><span class="nav-number">1.</span> <span class="nav-text">1.常用操作及概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-快捷键"><span class="nav-number">1.1.</span> <span class="nav-text">A.快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-帮助指令"><span class="nav-number">1.2.</span> <span class="nav-text">B.帮助指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-关机"><span class="nav-number">1.3.</span> <span class="nav-text">C.关机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-环境变量"><span class="nav-number">1.4.</span> <span class="nav-text">D.环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-Root"><span class="nav-number">1.5.</span> <span class="nav-text">E.Root</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取root权限"><span class="nav-number">1.5.1.</span> <span class="nav-text">获取root权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改ubuntu默认root密码"><span class="nav-number">1.5.2.</span> <span class="nav-text">修改ubuntu默认root密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-Linux平台上的软件包管理"><span class="nav-number">1.6.</span> <span class="nav-text">F.Linux平台上的软件包管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G-发行版"><span class="nav-number">1.7.</span> <span class="nav-text">G.发行版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#H-VIM"><span class="nav-number">1.8.</span> <span class="nav-text">H.VIM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-GNU"><span class="nav-number">1.9.</span> <span class="nav-text">I.GNU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-磁盘"><span class="nav-number">2.</span> <span class="nav-text">2.磁盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-磁盘接口"><span class="nav-number">2.1.</span> <span class="nav-text">A.磁盘接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-磁盘的文件名"><span class="nav-number">2.2.</span> <span class="nav-text">B.磁盘的文件名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-文件系统"><span class="nav-number">3.</span> <span class="nav-text">3.文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-概述"><span class="nav-number">3.1.</span> <span class="nav-text">A.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）FAT系统"><span class="nav-number">3.1.1.</span> <span class="nav-text">（1）FAT系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）EXT系统"><span class="nav-number">3.1.2.</span> <span class="nav-text">（2）EXT系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#关于inode"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">关于inode</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-分区与文件系统"><span class="nav-number">3.2.</span> <span class="nav-text">B.分区与文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-文件读取"><span class="nav-number">3.3.</span> <span class="nav-text">C.文件读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-磁盘碎片"><span class="nav-number">3.4.</span> <span class="nav-text">D.磁盘碎片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-目录"><span class="nav-number">3.5.</span> <span class="nav-text">E.目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）概述"><span class="nav-number">3.5.1.</span> <span class="nav-text">（1）概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）挂载"><span class="nav-number">3.5.2.</span> <span class="nav-text">（2）挂载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）目录配置"><span class="nav-number">3.5.3.</span> <span class="nav-text">（3）目录配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-文件"><span class="nav-number">4.</span> <span class="nav-text">4.文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-文件属性"><span class="nav-number">4.1.</span> <span class="nav-text">A.文件属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-权限"><span class="nav-number">4.2.</span> <span class="nav-text">B.权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目录权限"><span class="nav-number">4.2.1.</span> <span class="nav-text">目录权限</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-常用操作及概念"><span class="nav-number">1.</span> <span class="nav-text">1.常用操作及概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-快捷键"><span class="nav-number">1.1.</span> <span class="nav-text">A.快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-帮助指令"><span class="nav-number">1.2.</span> <span class="nav-text">B.帮助指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-关机"><span class="nav-number">1.3.</span> <span class="nav-text">C.关机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-环境变量"><span class="nav-number">1.4.</span> <span class="nav-text">D.环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-Root"><span class="nav-number">1.5.</span> <span class="nav-text">E.Root</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取root权限"><span class="nav-number">1.5.1.</span> <span class="nav-text">获取root权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改ubuntu默认root密码"><span class="nav-number">1.5.2.</span> <span class="nav-text">修改ubuntu默认root密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-Linux平台上的软件包管理"><span class="nav-number">1.6.</span> <span class="nav-text">F.Linux平台上的软件包管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G-发行版"><span class="nav-number">1.7.</span> <span class="nav-text">G.发行版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#H-VIM"><span class="nav-number">1.8.</span> <span class="nav-text">H.VIM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-GNU"><span class="nav-number">1.9.</span> <span class="nav-text">I.GNU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-磁盘"><span class="nav-number">2.</span> <span class="nav-text">2.磁盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-磁盘接口"><span class="nav-number">2.1.</span> <span class="nav-text">A.磁盘接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-磁盘的文件名"><span class="nav-number">2.2.</span> <span class="nav-text">B.磁盘的文件名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-文件系统"><span class="nav-number">3.</span> <span class="nav-text">3.文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-概述"><span class="nav-number">3.1.</span> <span class="nav-text">A.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）FAT系统"><span class="nav-number">3.1.1.</span> <span class="nav-text">（1）FAT系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）EXT系统"><span class="nav-number">3.1.2.</span> <span class="nav-text">（2）EXT系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#关于inode"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">关于inode</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-分区与文件系统"><span class="nav-number">3.2.</span> <span class="nav-text">B.分区与文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-文件读取"><span class="nav-number">3.3.</span> <span class="nav-text">C.文件读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-磁盘碎片"><span class="nav-number">3.4.</span> <span class="nav-text">D.磁盘碎片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-目录"><span class="nav-number">3.5.</span> <span class="nav-text">E.目录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）概述"><span class="nav-number">3.5.1.</span> <span class="nav-text">（1）概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）挂载"><span class="nav-number">3.5.2.</span> <span class="nav-text">（2）挂载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）目录配置"><span class="nav-number">3.5.3.</span> <span class="nav-text">（3）目录配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-文件"><span class="nav-number">4.</span> <span class="nav-text">4.文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-文件属性"><span class="nav-number">4.1.</span> <span class="nav-text">A.文件属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-权限"><span class="nav-number">4.2.</span> <span class="nav-text">B.权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）目录权限"><span class="nav-number">4.2.1.</span> <span class="nav-text">（1）目录权限</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-链接"><span class="nav-number">4.3.</span> <span class="nav-text">C.链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）实体链接-硬链接"><span class="nav-number">4.3.1.</span> <span class="nav-text">（1）实体链接/硬链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）软链接"><span class="nav-number">4.3.2.</span> <span class="nav-text">（2）软链接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-文件操作相关Linux命令"><span class="nav-number">4.4.</span> <span class="nav-text">D.文件操作相关Linux命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）文件与目录的基本操作"><span class="nav-number">4.4.1.</span> <span class="nav-text">（1）文件与目录的基本操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）修改权限"><span class="nav-number">4.4.2.</span> <span class="nav-text">（2）修改权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）链接"><span class="nav-number">4.4.3.</span> <span class="nav-text">（3）链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（4）获取文件内容"><span class="nav-number">4.4.4.</span> <span class="nav-text">（4）获取文件内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（5）指令与文件搜索"><span class="nav-number">4.4.5.</span> <span class="nav-text">（5）指令与文件搜索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-压缩与打包"><span class="nav-number">5.</span> <span class="nav-text">5.压缩与打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-压缩文件名"><span class="nav-number">5.1.</span> <span class="nav-text">A.压缩文件名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-压缩指令"><span class="nav-number">5.2.</span> <span class="nav-text">B.压缩指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-打包"><span class="nav-number">5.3.</span> <span class="nav-text">C.打包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Bash"><span class="nav-number">6.</span> <span class="nav-text">6.Bash</span></a></li></ol></div>
             
 
           </div>
