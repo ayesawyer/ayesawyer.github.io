@@ -105,7 +105,14 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/2.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/1.webp">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/3.png">
-<meta property="og:updated_time" content="2019-08-23T09:57:38.610Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/8.png">
+<meta property="og:updated_time" content="2019-08-24T03:22:01.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安全面经。。。">
 <meta name="twitter:description" content="对于在网上找到的面经中的问题的整理和回答。">
@@ -523,6 +530,53 @@ execute([‘/system/bin/sh’,’-c’,’echo  “hello” &gt; /sdcard/check.t
 <blockquote>
 <p><a href="https://blog.csdn.net/lintax/article/details/70988565" target="_blank" rel="noopener">Android root检测方法小结</a><br><a href="https://blog.csdn.net/applek_Case/article/details/79491166" target="_blank" rel="noopener">Android 判断手机是否有root权限</a><br><a href="https://www.jianshu.com/p/f9f39704e30c" target="_blank" rel="noopener">Android检查手机是否被root</a></p>
 </blockquote>
+<h3 id="E-dex文件结构"><a href="#E-dex文件结构" class="headerlink" title="E.dex文件结构"></a>E.dex文件结构</h3><h4 id="（1）Android应用编译"><a href="#（1）Android应用编译" class="headerlink" title="（1）Android应用编译"></a>（1）Android应用编译</h4><p><img src="/2019/07/18/安全面经。。。/4.png" alt=""></p>
+<h4 id="（2）dex文件"><a href="#（2）dex文件" class="headerlink" title="（2）dex文件"></a>（2）dex文件</h4><p><strong>dex文件作用</strong>——记录整个工程中所有类的信息。</p>
+<p><strong>dex文件结构</strong>——</p>
+<p><img src="/2019/07/18/安全面经。。。/1.jpg" alt=""></p>
+<p><img src="/2019/07/18/安全面经。。。/5.png" alt=""></p>
+<p><strong>在010Editor中查看dex文件头</strong>——</p>
+<p><img src="/2019/07/18/安全面经。。。/6.png" alt=""></p>
+<p><strong>一张图搞懂dex</strong>——</p>
+<p><img src="/2019/07/18/安全面经。。。/2.jpg" alt=""></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/tabactivity/article/details/78950379?utm_source=blogxgwz6" target="_blank" rel="noopener">dex文件解析(第三篇)</a></p>
+</blockquote>
+<h3 id="F-APK防护"><a href="#F-APK防护" class="headerlink" title="F.APK防护"></a>F.APK防护</h3><h4 id="（1）概述"><a href="#（1）概述" class="headerlink" title="（1）概述"></a>（1）概述</h4><blockquote>
+<p><a href="http://jiagu.360.cn/1101141392.php?dtid=1101141786&amp;did=1101262105" target="_blank" rel="noopener">纯干货：Android APP 防破解进化史</a></p>
+</blockquote>
+<ul>
+<li>原始社会时期——代码混淆</li>
+<li>奴隶社会时期——自我校验（签名、或计算自己应用dex的md5值等）</li>
+<li>封建社会时期——dex文件变形</li>
+<li>资本主义社会时期——Dex保护（隐藏dex文件；对dex文件结构进行变形）、So保护（修改Elf头、节表；选择开源加壳工具）</li>
+<li>社会主义时期——这个时期，技术的发展与普及让人人都是开发者成为可能。而破解者的破解技术和手段也在随之变化。单一的应用保护措施已经无法有效的应对破解者的攻击，所以还需要从多重维度和深度对应用进行加固保护（比如解决资本主义时期提到的几种保护措施中遗留的很多问题如下图）。</li>
+</ul>
+<p><img src="/2019/07/18/安全面经。。。/7.png" alt=""></p>
+<h4 id="（2）DEX保护"><a href="#（2）DEX保护" class="headerlink" title="（2）DEX保护"></a>（2）DEX保护</h4><h5 id="DEX文件隐藏"><a href="#DEX文件隐藏" class="headerlink" title="DEX文件隐藏"></a>DEX文件隐藏</h5><p>基本流程如下图所示——</p>
+<p><img src="/2019/07/18/安全面经。。。/8.png" alt=""></p>
+<h5 id="DEX字节码变形"><a href="#DEX字节码变形" class="headerlink" title="DEX字节码变形"></a>DEX字节码变形</h5><p>该方法主要是对classes.dex文件的所有method部分的数据进行加密，以随机的名称存储在隐蔽的文件夹中，应用运行时将这部分数据解密出来，映射到内存中，通过修改codeoff指针重新指向这些method，同时还采用各种复杂的Anti-debugging技术来阻碍人工分析和调试，通过只解密恢复当前执行代码的策略来防止内存dump。</p>
+<h5 id="VMProtect"><a href="#VMProtect" class="headerlink" title="VMProtect"></a>VMProtect</h5><p>与其它大部分的保护程序不同，VMProtect可修改程序的源代码[2]。VMProtect可将被保护文件中的部分代码转化到在虚拟机（以下称作VM）上运行的程序（以下称作bytecode）中。</p>
+<p>Vmprotect使用虚拟一个不同于x86的CPU来执行转化后的程序，这个CPU只支持简单运算以及最简单的无条件跳转指令，因此为了实现x86一条指令同样的功能，Vmp的CPU需要执行多条指令。这样令代码的阅读者需要阅读大量的代码才能知道其中的程序逻辑。</p>
+<p>转化成Vmp Cpu 指令数据(bytecode)使用了简单的数据加密，阅读者不解密是无法了解bytecode的指令意义</p>
+<p>VMP的 CPU 解释模拟程序，有用代码只有大概500条x86指令，但是使用了大量的垃圾指令，将其解释程序塞满了2000多条x86指令，同时将程序的正常逻辑打乱，不借助代码优化工具，人类的眼睛看起来会非常的费力。</p>
+<p>将其主要特征整理如下——</p>
+<ul>
+<li>将由编译器生成的本机代码（native code）转换成字节码（ByteCode）；</li>
+<li>将控制权交由虚拟机，由虚拟机来控制执行；</li>
+<li>转换后的字节码非常难以阅读，增加了破解的复杂度。</li>
+</ul>
+<blockquote>
+<p><a href="http://safe.it168.com/a2014/0912/1665/000001665968.shtml" target="_blank" rel="noopener">LBE安全大师张勇：软件加固技术浅析</a><br><a href="https://www.jianshu.com/p/856bf5b437aa" target="_blank" rel="noopener">Android APK加固技术方案调研</a></p>
+</blockquote>
+<h4 id="（3）资源加密"><a href="#（3）资源加密" class="headerlink" title="（3）资源加密"></a>（3）资源加密</h4><p>资源文件加密保护，从字面来看，无非是对APP中的资源文件进行加密（文件名/文件路径加密），在APP运行时对资源文件进行解密恢复，从而使应用正常访问资源文件。由于资源文件被加密，因此通过对APP进行反编译并不能看到真正的资源文件，从而保证资源文件的安全性。虽然资源文件加密保护大体思路如此，但是实现方案和效果则可能不同。</p>
+<h5 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h5><p>最简单的方法，按照Proguard的做法，直接在源码级别修改，将代码以及xml的R.string.name中替换到R.string.a，icon.png重命名为a.png 然后再交给Android编译。</p>
+<h5 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h5><p>直接修改resources.arsc的二进制数据，不改变打包流程，只要在生成resources.arsc之后修改它，同时重命名资源文件。</p>
+<h5 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h5><p>修改aapt来实现资源文件命名的混淆。让aapt在编译资源时生成混淆后的正确的resource.arsc文件，同时修改资源文件名称。</p>
+<h5 id="方案四"><a href="#方案四" class="headerlink" title="方案四"></a>方案四</h5><p>自己实现一个类似于资源打包器aapt的安装包解压、压缩打包器。</p>
+<blockquote>
+<p><a href="http://science.china.com.cn/2016-11/10/content_9150192.htm" target="_blank" rel="noopener">Android apk资源保护方案研究分析</a><br><a href="http://mrljdx.com/2015/12/18/%E8%B5%84%E6%BA%90%E6%B7%B7%E6%B7%86%E6%96%B9%E6%A1%88%E4%B9%8B%E5%BE%AE%E4%BF%A1vs%E7%BE%8E%E5%9B%A2/" target="_blank" rel="noopener">资源混淆方案之微信vs美团</a><br><a href="https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&amp;mid=208135658&amp;idx=1&amp;sn=ac9bd6b4927e9e82f9fa14e396183a8f#rd" target="_blank" rel="noopener">安装包立减1M–微信Android资源混淆打包工具</a></p>
+</blockquote>
 
       
     </div>
@@ -718,7 +772,7 @@ execute([‘/system/bin/sh’,’-c’,’echo  “hello” &gt; /sdcard/check.t
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网易"><span class="nav-number">1.</span> <span class="nav-text">网易</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-关于x86汇编"><span class="nav-number">1.1.</span> <span class="nav-text">A.关于x86汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）常用的跳转指令"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）常用的跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）堆和栈的区别"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）堆和栈的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）函数调用过程"><span class="nav-number">1.1.3.</span> <span class="nav-text">（3）函数调用过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-软件断点和硬件断点"><span class="nav-number">1.2.</span> <span class="nav-text">B.软件断点和硬件断点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）硬件断点"><span class="nav-number">1.2.1.</span> <span class="nav-text">（1）硬件断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）软件断点"><span class="nav-number">1.2.2.</span> <span class="nav-text">（2）软件断点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-webview组件远程代码执行漏洞原理"><span class="nav-number">1.3.</span> <span class="nav-text">C.webview组件远程代码执行漏洞原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-root判断"><span class="nav-number">1.4.</span> <span class="nav-text">D.root判断</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网易"><span class="nav-number">1.</span> <span class="nav-text">网易</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-关于x86汇编"><span class="nav-number">1.1.</span> <span class="nav-text">A.关于x86汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）常用的跳转指令"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）常用的跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）堆和栈的区别"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）堆和栈的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）函数调用过程"><span class="nav-number">1.1.3.</span> <span class="nav-text">（3）函数调用过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-软件断点和硬件断点"><span class="nav-number">1.2.</span> <span class="nav-text">B.软件断点和硬件断点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）硬件断点"><span class="nav-number">1.2.1.</span> <span class="nav-text">（1）硬件断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）软件断点"><span class="nav-number">1.2.2.</span> <span class="nav-text">（2）软件断点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-webview组件远程代码执行漏洞原理"><span class="nav-number">1.3.</span> <span class="nav-text">C.webview组件远程代码执行漏洞原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-root判断"><span class="nav-number">1.4.</span> <span class="nav-text">D.root判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-dex文件结构"><span class="nav-number">1.5.</span> <span class="nav-text">E.dex文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）Android应用编译"><span class="nav-number">1.5.1.</span> <span class="nav-text">（1）Android应用编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）dex文件"><span class="nav-number">1.5.2.</span> <span class="nav-text">（2）dex文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-APK防护"><span class="nav-number">1.6.</span> <span class="nav-text">F.APK防护</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）概述"><span class="nav-number">1.6.1.</span> <span class="nav-text">（1）概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）DEX保护"><span class="nav-number">1.6.2.</span> <span class="nav-text">（2）DEX保护</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DEX文件隐藏"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">DEX文件隐藏</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DEX字节码变形"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">DEX字节码变形</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#VMProtect"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">VMProtect</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）资源加密"><span class="nav-number">1.6.3.</span> <span class="nav-text">（3）资源加密</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方案一"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案二"><span class="nav-number">1.6.3.2.</span> <span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案三"><span class="nav-number">1.6.3.3.</span> <span class="nav-text">方案三</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案四"><span class="nav-number">1.6.3.4.</span> <span class="nav-text">方案四</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
