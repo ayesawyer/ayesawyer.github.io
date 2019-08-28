@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="ARM,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="常用指令的积累，ARM寻址方式，ARM64和ARM32的不同，一小段ARM64汇编指令的翻译。">
+<meta name="keywords" content="ARM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARM汇编基本指令">
+<meta property="og:url" content="http://yoursite.com/2019/08/26/arm汇编基本指令/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="常用指令的积累，ARM寻址方式，ARM64和ARM32的不同，一小段ARM64汇编指令的翻译。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/arm汇编基本指令/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/arm汇编基本指令/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/arm汇编基本指令/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/26/arm汇编基本指令/4.png">
+<meta property="og:updated_time" content="2019-08-28T03:48:47.946Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ARM汇编基本指令">
+<meta name="twitter:description" content="常用指令的积累，ARM寻址方式，ARM64和ARM32的不同，一小段ARM64汇编指令的翻译。">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/26/arm汇编基本指令/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/26/arm汇编基本指令/">
+
+
+
+
+
+  <title>ARM汇编基本指令 | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/arm汇编基本指令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ARM汇编基本指令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-26T10:26:48+08:00">
+                2019-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/26/arm汇编基本指令/" class="leancloud_visitors" data-flag-title="ARM汇编基本指令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>常用指令的积累，ARM寻址方式，ARM64和ARM32的不同，一小段ARM64汇编指令的翻译。</p>
+<a id="more"></a>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h2><p>前期在学习《逆向工程实战》的过程中学习了ARM汇编（32位）<a href="https://ayesawyer.github.io/2019/03/15/%E3%80%8A%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E3%80%8B%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" target="_blank" rel="noopener">相关基础知识和指令</a>。在这篇博客中主要是对实际过程中碰到的一些指令含义的记录，以及对ARM64和ARM32的不同之处的学习，同时在最后的实战部分，将一小段ARM64汇编指令翻译成对应的c语言程序。</p>
+<h2 id="2-指令积累"><a href="#2-指令积累" class="headerlink" title="2.指令积累"></a>2.指令积累</h2><h3 id="A-MSR与MRS"><a href="#A-MSR与MRS" class="headerlink" title="A.MSR与MRS"></a>A.MSR与MRS</h3><blockquote>
+<p><strong>MRS</strong><br><strong>MRS{条件} 通用寄存器，程序状态寄存器（CPSR 或SPSR）</strong></p>
+</blockquote>
+<p>MRS指令用于将程序状态寄存器的内容传送到通用寄存器中。该指令一般用于以下两种情况： </p>
+<p>（1）当需要改变程序状态寄存器的内容时，可用MRS将程序状态寄存器的内容读入通用寄存器，修改后再写回程序状态寄存器。<br>（2）当在异常处理或进程切换时，需要保存程序状态寄存器的值，可先用该指令读出程序状态寄存器的值，然后保存。</p>
+<pre><code>指令示例：
+MRS R0，CPSR  //传送CPSR的内容到R0
+MRS R0，SPSR  //传送SPSR的内容到R0
+</code></pre><blockquote>
+<p><strong>MSR</strong><br><strong>MSR{条件} 程序状态寄存器（CPSR或SPSR）_&lt;域&gt;，操作数</strong></p>
+</blockquote>
+<p>MSR指令用于将操作数的内容传送到程序状态寄存器的特定域中。其中，操作数可以为通用寄存器或立即数。&lt;域&gt;用于设置程序状态寄存器中需要操作的位，32位的程序状态寄存器可分为4个域：</p>
+<p>（1）位[31：24]为条件标志位域，用f表示；<br>（2）位[23：16]为状态位域，用s表示；<br>（3）位[15：8]为扩展位域，用x表示；<br>（4）位[7：0]为控制位域，用c表示；</p>
+<p>该指令通常用于恢复或改变程序状态寄存器的内容，在使用时，一般要在MSR指令中指明将要操作的域。</p>
+<pre><code>指令示例：
+MSR CPSR，R0//传送R0的内容到CPSR
+MSR SPSR，R0//传送R0的内容到SPSR
+MSR CPSR_c，R0   //传送R0的内容到SPSR，但仅仅修改CPSR中的控制位域
+</code></pre><h3 id="B-BIC"><a href="#B-BIC" class="headerlink" title="B.BIC"></a>B.BIC</h3><blockquote>
+<p><strong>BIC</strong><br><strong>BIC{条件}{S}  目的寄存器，操作数1，操作数2</strong>  //注意指令后面加了<code>S</code>表示运算结果会影响CPSR寄存器的条件位，也就是说指令执行完后更新flag标志位。</p>
+</blockquote>
+<p>BIC指令用于清除操作数1的某些位，并把结果放置到目的寄存器中。操作数1应是一个寄存器，操作数2可以是一个寄存器、被移位的寄存器、或一个立即数。操作数2为32位的掩码，如果在掩码中置了某一位1，则清除这一位。未设置的掩码位保持不变。</p>
+<pre><code>bic r0,r0,#0x1f
+//0x1f=11111b
+//其含义：清除r0的bit[4:0]位。
+</code></pre><h3 id="C-LDR与STR"><a href="#C-LDR与STR" class="headerlink" title="C.LDR与STR"></a>C.LDR与STR</h3><blockquote>
+<p><strong>LDR</strong><br><strong>LDR{条件} 目的寄存器，&lt;存储器地址&gt;</strong></p>
+</blockquote>
+<p>LDR指令用于从存储器中将一个32位的字数据传送到目的寄存器中。该指令通常用于从存储器中读取32位的字数据到通用寄存器，然后对数据进行处理。当程序计数器PC作为目的寄存器时，指令从存储器中读取的字数据被当作目的地址，从而可以实现程序流程的跳转。</p>
+<pre><code>指令示例：
+LDR   R0，[R1]  ；将存储器地址为R1的字数据读入寄存器R0。
+LDR   R0，[R1，R2] ；将存储器地址为R1+R2的字数据读入寄存器R0。
+LDR   R0，[R1，＃8] ；将存储器地址为R1+8的字数据读入寄存器R0。
+LDR   R0，[R1，R2] ！   ；将存储器地址为R1+R2的字数据读入寄存器R0，并将新地址R1＋R2写入R1。
+LDR   R0，[R1，＃8] ！  ；将存储器地址为R1+8的字数据读入寄存器R0，并将新地址R1＋8写入R1。
+LDR   R0，[R1]，R2  ；将存储器地址为R1的字数据读入寄存器R0，并将新地址R1＋R2写入R1。
+LDR   R0，[R1，R2，LSL＃2]！   ；将存储器地址为R1＋R2×4的字数据读入寄存器R0，并将新地址R1＋R2×4写入R1。
+LDR   R0，[R1]，R2，LSL＃2 ；将存储器地址为R1的字数据读入寄存器R0，并将新地址R1＋R2×4写入R1
+</code></pre><p><strong>注意（1）：ldr和ldr.w之间的区别——.W是可选的指令宽度说明符.它不会影响指令的行为,它只是确保生成32位Thumb指令，我们看到.w后缀就可以判断当前指令为Thumb指令。</strong></p>
+<p><strong>注意（2）：ldr、ldrb、ldrh的区别——依次为读一个32位的字数据，读一个8位的字节数据，读一个16位的半字数据。</strong></p>
+<blockquote>
+<p><strong>STR</strong><br><strong>STR{条件} 源寄存器，&lt;存储器地址&gt;</strong></p>
+</blockquote>
+<p>STR指令用于从源寄存器中将一个32位的字数据传送到存储器中。该指令在程序设计中比较常用，且寻址方式灵活多样，使用方式可参考指令LDR。</p>
+<pre><code>指令示例：
+STR   R0，[R1]，＃8；将R0中的字数据写入以R1为地址的存储器中，并将新地址R1＋8写入R1。
+STR   R0，[R1，＃8]；将R0中的字数据写入以R1＋8为地址的存储器中。
+</code></pre><h2 id="3-ARM64与ARM32"><a href="#3-ARM64与ARM32" class="headerlink" title="3.ARM64与ARM32"></a>3.ARM64与ARM32</h2><p><strong>二者之间的区别主要体现在以下几个方面——</strong></p>
+<h3 id="A-架构"><a href="#A-架构" class="headerlink" title="A.架构"></a>A.架构</h3><ul>
+<li>Arm32位是ARMV7架构；</li>
+<li>ARM64位采用ARMv8架构。</li>
+</ul>
+<h3 id="B-指令编码长度"><a href="#B-指令编码长度" class="headerlink" title="B.指令编码长度"></a>B.指令编码长度</h3><ul>
+<li>A32模式（ARM instruction sets），指令固定的编码长度为32bit；</li>
+<li>T32模式（Thumb instruction sets），指令可以编码成16bit长，也可编码成32bit长；</li>
+<li>A64模式（AArch64 instruction sets）,指令固定的编码长度为32bit</li>
+</ul>
+<h3 id="C-当前指令的地址（PC）"><a href="#C-当前指令的地址（PC）" class="headerlink" title="C.当前指令的地址（PC）"></a>C.当前指令的地址（PC）</h3><p>由于ARM指令的三级流水线执行<em>（ARM处理器使用流水线来增加处理器指令流的速度，这样可使几个操作同时进行，并使处理与存储器系统之间的操作更加流畅连续）</em>，程序计数器R15(PC)总是指向“正在取指”的指令，如下图，而不是指向“正在执行”的指令或者正在“译码”的指令。</p>
+<p><img src="/2019/08/26/arm汇编基本指令/1.png" alt=""></p>
+<ul>
+<li>在ARM32状态下，当前执行指令的地址通常是pc-8，而在Thumb状态下通常是pc-4。</li>
+<li>在AARCH64状态下，当前执行指令的地址通常是pc。</li>
+</ul>
+<blockquote>
+<p>Program counter<br>   The current Program Counter (PC) cannot be referred to by number as if part of the general register file and therefore cannot be used as the source or destination of arithmetic instructions, or as the base, index or transfer register of load and store instructions.<br>   The only instructions that read the PC are those whose function it is to compute a PC-relative address (ADR, ADRP, literal load, and direct branches), and the branch-and-link instructions that store a return address in the link register (BL and BLR). The only way to modify the program counter is using branch, exception generation and exception return instructions.<br>   Where the PC is read by an instruction to compute a PC-relative address, then its value is the address of that instruction. Unlike A32 and T32, there is no implied offset of 4 or 8 bytes.</p>
+</blockquote>
+<p><strong>在ARM64下，PC的值只能间接读取或改变——</strong></p>
+<ol>
+<li>64位可读取PC值的情况有：计算相对地址，如adr，adrp，文字池加载以及直接分支；子程序返回地址，比如bl，blr</li>
+<li>可修改pc的方式为：使用控制流指令，如条件跳转、无条件跳转、异常生成和异常返回指令。</li>
+</ol>
+<h3 id="D-参数的传递和访问"><a href="#D-参数的传递和访问" class="headerlink" title="D.参数的传递和访问"></a>D.参数的传递和访问</h3><ul>
+<li><p>arm32下，前4个参数是通过r0~r3传递，大于4个的参数通过栈来传递（即第4个参数需要通过sp访问，第5个参数需要通过sp + 4 访问，第n个参数需要通过sp + 4*(n-4)访问）。</p>
+</li>
+<li><p>arm64下，前8个参数是通过x0~x7传递，大于8个的参数通过栈来传递（第8个参数需要通过sp访问，第9个参数需要通过sp + 8 访问，第n个参数需要通过sp + 8*(n-8)访问）。</p>
+</li>
+</ul>
+<h3 id="E-寄存器和寻址"><a href="#E-寄存器和寻址" class="headerlink" title="E.寄存器和寻址"></a>E.寄存器和寻址</h3><h4 id="（1）寻址"><a href="#（1）寻址" class="headerlink" title="（1）寻址"></a>（1）寻址</h4><p>ARM微处理器采用的是精简指令集，指令间的组合灵活。ARM微处理器支持九种寻址方式，分别是：立即寻址、寄存器寻址、寄存器间接寻址、寄存器移位寻址、基址寻址、多寄存器寻址、堆栈寻址、块拷贝寻址、相对寻址。</p>
+<blockquote>
+<p><strong>立即寻址</strong></p>
+</blockquote>
+<p>指令的地址字段指出的不是操作数的地址，而是操作数本身。注意：立即数只能作为源操作数，不能作为目的操作数。</p>
+<pre><code>MOV R0 0x10；
+</code></pre><blockquote>
+<p><strong>寄存器寻址</strong></p>
+</blockquote>
+<p>当操作数不放在内存中，而是放在CPU的通用寄存器中时，可采用寄存器寻址方式。</p>
+<pre><code>MOV R0 R1；
+</code></pre><blockquote>
+<p><strong>寄存器间接寻址</strong></p>
+</blockquote>
+<p>寄存器间接寻址方式与寄存器寻址方式的区别在于：指令格式中的寄存器内容不是操作数，而是操作数的地址，该地址指明的操作数在内存中。</p>
+<pre><code>MOV R0 R1；   //此时R1中存放的是操作数的地址
+</code></pre><blockquote>
+<p><strong>寄存器移位寻址（ARM指令集特有的寻址方式）</strong></p>
+</blockquote>
+<p>在操作前对源寄存器操作数进行移位操作。支持以下5种移位操作：</p>
+<p>LSL： 逻辑左移，移位后寄存器空出的低位补0。<br>LSR： 逻辑右移，移位后寄存器空出的高位补0。<br>ASR： 算术右移，移位过程中符号位保持不变，如果源操作数为正数，则移位后寄存器空出的高位补0；否则补1。<br>ROR： 循环右移，移位后移出的低位填入移位空出的高位。<br>RRX： 带扩展的循环右移，操作数右移一位，移位后寄存器空出的高位用C标志的值填充。</p>
+<pre><code>MOV　R0,　R1, LSL #2   //R0=R1*4（逻辑左移2位）
+</code></pre><blockquote>
+<p><strong>基址寻址</strong></p>
+</blockquote>
+<p>基址寻址是将基址寄存器与偏移量相加，形成操作数的有效地址，所需的操作数保存在有效地址所指向的存储单元中。基址寻址多用于查表、数据访问等操作。</p>
+<pre><code>LDR　R0, [R1, #-4]   //R0=[R1-4]
+</code></pre><blockquote>
+<p><strong>多寄存器寻址</strong></p>
+</blockquote>
+<p>多寄存器寻址一条指令最多可以完成16个通用寄存器值的传送。比如LDMIA和LDMIB指令，LDM是数据加载指令，指令的后缀IA表示每次执行完加载操作后寄存器的值自增1个字；指令的后缀IB表示每次执行加载操作前寄存器的值自增1个字；还有两条指令后缀DA和DB，分别表示在指令操作后和操作前寄存器的值自减1个字。ARM32指令集中，字表示一个32位的数字，注意：该条指令的源寄存器与目的寄存器位置。</p>
+<pre><code>LDMIA R0, {R1, R2, R3, R4}   //R1=[R0], R2=[R0+4], R3=[R0+8], R4=[R0+12]
+</code></pre><blockquote>
+<p><strong>堆栈寻址（ARM32位指令集特有的寻址方式）</strong></p>
+</blockquote>
+<p><em>注意:这里列出的指令是ARM32支持的批量压栈和出栈指令，thumb指令模式下的出栈和压栈指令是POP/PUSH。在ARM64下对于栈操作限制严格，这两种栈操作指令都不再支持，只有LDP/STP这一对双寄存器栈操作指令。</em></p>
+<p>堆栈寻址是ARM指令集特有的一种寻址方式，堆栈寻址需要使用特定的指令来完成。堆栈寻址的指令有LDMFA/STMFA、LDMEA/STMEA、LDMFD/STMFD、LDMED/STMED。LDM和STM为指令前缀，表示多寄存器寻址。FA(Full Ascending stack)、FD(Full Descending stack)、EA、ED为指令后缀，其中：FA表示满递增堆栈，堆栈向高地址生长，堆栈指针指向下一个要放入的空地址；<strong>FD表示满递减堆栈，堆栈向低地址生长，堆栈指针指向最后一个入栈的有效数据数据项；</strong> EA表示空递增堆栈，堆栈向高地址生长；ED空递减堆栈，堆栈向低地址生长。</p>
+<pre><code>STMFD  SP!, {R1-R7, LR}   //将R1-R7, LR入栈，多用于保护子程序现场
+LDMFD  SP!, {R1-R7, LR}   //将数据出栈，放入R1-R7, LR寄存器。多用于恢复子程序现场
+</code></pre><blockquote>
+<p><strong>块拷贝寻址</strong></p>
+</blockquote>
+<p>块拷贝寻址可实现连续地址数据从存储器的某一位置拷贝到另一位置。块拷贝寻址的指令有LDMIA/STMIA、LDMDA/STMDA、LDMIB/STMIB、LDMDB/STMDB。指令前缀和指令后缀前面已经介绍了。</p>
+<pre><code>STMIA  R0!, {R1-R3}   //从R0寄存器指向的存储单元中读取3个字到R1-R3寄存器
+LDMIA  R0!, {R1-R3}   //存储R1-R3寄存器的内容到R0寄存器指向的存储单元
+</code></pre><blockquote>
+<p><strong>相对寻址</strong></p>
+</blockquote>
+<p>相对寻址以程序计数器PC的当前值为基地址，指令中的地址标作为偏移量，将两者相加之后得到操作数的有效地址。例如——</p>
+<pre><code>BL NEXT
+   ....
+NEXT：
+   ....
+</code></pre><h4 id="（2）ARM32寄存器"><a href="#（2）ARM32寄存器" class="headerlink" title="（2）ARM32寄存器"></a>（2）ARM32寄存器</h4><p>ARM32微处理器有两种工作状态：ARM32状态与Thumb状态。处理器可以在两种状态之间随意切换，当处理器处于ARM状态时，会执行32位对齐的ARM指令；当处于Thumb状态时，会执行16位对齐的Thumb指令。<strong>ARM32指令集与Thumb指令集切换方法，是在BX和BLX指令跳转时，判断目标地址最低位是否为1。</strong></p>
+<ul>
+<li>如果为1，跳转时将CPSR寄存器标志T置位，并将目标地址处的代码解释位Thumb代码，处理器切换到Thumb状态；</li>
+<li>如果为0，跳转时将CPSR寄存器标志T复位，并将目标地址处的代码解释位ARM32代码，处理器切换到ARM32状态。</li>
+</ul>
+<p>Thumb状态下对寄存器的命名与ARM32有部分差异，它们的关系如下图所示。</p>
+<p><img src="/2019/08/26/arm汇编基本指令/2.png" alt=""></p>
+<h4 id="（3）ARM64寄存器"><a href="#（3）ARM64寄存器" class="headerlink" title="（3）ARM64寄存器"></a>（3）ARM64寄存器</h4><p>ARM64位参数调用规则遵循AAPCS64，规定堆栈为满递减堆栈。对于ARM64架构的CPU, 以 X 开头的就是64位的寄存器, 以 W 开头的就是32位的寄存器, 其中32位寄存器就是64位寄存器的低32位部分。</p>
+<ul>
+<li>X0~X7：用于传递子程序参数和结果，使用时不需要保存，多余参数采用堆栈传递，64位返回结果采用X0表示，128位返回结果采用X1:X0表示。 </li>
+<li>X8：用于保存子程序返回地址， 尽量不要使用 。 </li>
+<li>X9~X15：临时寄存器，使用时不需要保存。 </li>
+<li>X16~X17：子程序内部调用寄存器，使用时不需要保存，尽量不要使用。 </li>
+<li>X18：平台寄存器，它的使用与平台相关，尽量不要使用。 </li>
+<li>X19~X28：临时寄存器，使用时必须保存。 </li>
+<li>X29：帧指针寄存器FP（栈底指针），用于连接栈帧，使用时需要保存。 </li>
+<li>X30：链接寄存器LR </li>
+<li>X31：堆栈指针寄存器SP或零寄存器ZXR</li>
+</ul>
+<h3 id="F-栈操作"><a href="#F-栈操作" class="headerlink" title="F.栈操作"></a>F.栈操作</h3><p>ARM32中的LDM、STM、PUSH、POP指令，在ARM64中并不存在。取而代之的是LDP、STP指令，例如，用IDA Pro逆向的某个ARM64 SO库函数的开头和结尾：</p>
+<pre><code>STP  X24, X23, [SP,#var_40]!
+STP  X22, X21, [SP,#0x40+var_30]
+STP  X20, X19, [SP,#0x40+var_20]
+STP  X29, X30, [SP,#0x40+var_10]
+ADD  X29, SP, #0x40+var_10
+....
+SUB  SP, X29, #0x30
+LDP  X29, X30, [SP,#0x150+var_120]
+LDP  X20, X19, [SP,#0x150+var_130]
+LDP  X22, X21, [SP,#0x150+var_140]
+LDP  X24, X23, [SP+0x150+var_150],#0x40
+RET
+</code></pre><h3 id="G-软中断进行系统调用"><a href="#G-软中断进行系统调用" class="headerlink" title="G.软中断进行系统调用"></a>G.<a href="https://baike.baidu.com/item/%E8%BD%AF%E4%B8%AD%E6%96%AD/3572546?fr=aladdin" target="_blank" rel="noopener">软中断</a>进行系统调用</h3><blockquote>
+<p>关于软中断</p>
+</blockquote>
+<p>软中断是利用硬件中断的概念，用软件方式进行模拟，实现宏观上的异步执行效果。很多情况下，软中断和”信号”有些类似。<strong>软中断是实现系统API函数调用的手段。</strong></p>
+<p>软中断调用时将返回地址和CPU状态寄存器内容压栈，修改特权级，根据中断号查找中断向量表，找到ISR中断服务例程地址，跳转执行。函数调用和软中断调用的区别是，软中断多了修改特权级和查找中断向量表的功能，其他部分完全一样。</p>
+<p>有了软中断，就可以实现应用程序的动态加载。就像WINDOWS/Linux那样，应用程序和系统程序分别开发，不在一起编译连接，应用程序通过软中断调用系统提供的功能。</p>
+<h4 id="（1）ARM32"><a href="#（1）ARM32" class="headerlink" title="（1）ARM32"></a>（1）ARM32</h4><p>在使用软中断进行系统调时，系统调用号通过R7寄存器传递，用SWI指令产生软中断，实现从用户模式到管理模式的切换。例如，调用exit(0)的汇编代码如下：</p>
+<pre><code>MOV R0, #0  //参数0
+MOv R7, #1  //系统功能号1为 exit
+SWI #0  //执行 exit(0)
+</code></pre><h4 id="（2）ARM64"><a href="#（2）ARM64" class="headerlink" title="（2）ARM64"></a>（2）ARM64</h4><p>在使用软中断进行系统调时，系统调用号通过x8寄存器传递，用svc指令产生软中断，实现从用户模式到管理模式的切换。例如：</p>
+<pre><code>mov x0, 123 // exit code
+mov x8, 93  // sys_exit() is at index 93 in kernel functions table
+svc #0  // generate kernel call sys_exit(123);
+</code></pre><h2 id="4-ARM64常用指令"><a href="#4-ARM64常用指令" class="headerlink" title="4.ARM64常用指令"></a>4.ARM64常用指令</h2><p><img src="/2019/08/26/arm汇编基本指令/3.png" alt=""></p>
+<p>ARM指令所有指令都是带有条件的，默认是AL即无条件执行，当指令带有默认条件时不需要明确写出。ARM指令包含4位的条件码列表如下——</p>
+<p><img src="/2019/08/26/arm汇编基本指令/4.png" alt=""></p>
+<p><strong>这里对ARM64下的栈操作指令进行补充说明——</strong></p>
+<p><em>由于在ARM64下，对于栈的操作都是要16个字节对齐的，所以都是双寄存器读写操作。</em></p>
+<blockquote>
+<p><strong>stp 写入指令</strong></p>
+</blockquote>
+<p>将数据从两个寄存器中读出来, 写入到栈中</p>
+<blockquote>
+<p><strong>ldp 读取指令</strong></p>
+</blockquote>
+<p>将数据从栈中读取出来, 存到两个寄存器中</p>
+<pre><code>//汇编代码--堆栈操作练习
+//使用32字节空间作为这段程序的栈空间, 然后利用栈将x0, x1的值进行交换
+
+sub sp, sp, #0x20 ; 拉伸栈空间32(20 = 2*16)个字节
+stp x0 , x1, [sp, #0x10] ; sp往上加16(10 = 1 * 16)个字节,存放x0 和 x1
+ldp x1 , x0, [sp, #0x10] ; 将sp偏移16个字节的值取出来,放入x1 和 x0
+
+//注意: 拉伸栈空间是往低地址拉伸, 拉伸的字节数只能是16的倍数, 否则会崩溃(对照上面 16字节对齐理解 )
+//第二,三句代码: sp指向的地址不会变, 只是将x0, x1的值从相应地址存入或读取.
+</code></pre><h2 id="5-简单翻译"><a href="#5-简单翻译" class="headerlink" title="5.简单翻译"></a>5.简单翻译</h2><p><strong>汇编代码如下</strong>——我们可以从寄存器判断这是一段ARM64汇编程序</p>
+<pre><code>cbz x2, flag2
+mov w8, #0x41
+mov x9, x2
+
+flag1:
+ldrb w10, [x1], #1
+subs x9, x9, #1
+eor w10, w10, w8
+strb w10, [x0], #1
+b.ne flag1
+
+flag2:
+mov w0, w2
+ret
+</code></pre><p><strong>翻译如下</strong>——</p>
+<pre><code>//3个变量：x2（int a）、x9=x2（int i）、起始地址为x1的字符串/字符数组str
+
+int j = 0;
+if(a!=0){
+    for(int i=a; i&gt;0; i--){
+       str[j++] = str[j++] ^ &apos;A&apos;;
+    }
+}
+return a;
+</code></pre><h2 id="6-参考"><a href="#6-参考" class="headerlink" title="6.参考"></a>6.参考</h2><blockquote>
+<p><a href="https://blog.csdn.net/SoaringLee_fighting/article/details/83959057" target="_blank" rel="noopener">【arm】ARM32和AARCH64的几点区别</a><br><a href="https://blog.csdn.net/soaringlee_fighting/article/details/82800919" target="_blank" rel="noopener">【arm】arm32位和arm64位架构、寄存器和指令差异分析总结</a><br><a href="https://blog.csdn.net/SoaringLee_fighting/article/details/81287824" target="_blank" rel="noopener">【arm】ARM寄存器以及使用说明</a><br><a href="http://d0m021ng.github.io/2017/03/11/Mobile%20Security/ARM32-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" target="_blank" rel="noopener">ARM32 汇编语言</a><br><a href="http://d0m021ng.github.io/2017/03/17/Mobile%20Security/ARM64-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" target="_blank" rel="noopener">ARM64 汇编语言</a><br><a href="https://www.jianshu.com/p/2f4a5f74ac7a" target="_blank" rel="noopener">ARM64 汇编——寄存器和指令</a><br><a href="https://www.jianshu.com/p/b5aeee0ecd9a" target="_blank" rel="noopener">初识汇编(三)</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ARM/" rel="tag"># ARM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/21/Android-App常见安全漏洞/" rel="next" title="Android App常见安全漏洞">
+                <i class="fa fa-chevron-left"></i> Android App常见安全漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">97</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前言"><span class="nav-number">1.</span> <span class="nav-text">1.前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-指令积累"><span class="nav-number">2.</span> <span class="nav-text">2.指令积累</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-MSR与MRS"><span class="nav-number">2.1.</span> <span class="nav-text">A.MSR与MRS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-BIC"><span class="nav-number">2.2.</span> <span class="nav-text">B.BIC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-LDR与STR"><span class="nav-number">2.3.</span> <span class="nav-text">C.LDR与STR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-ARM64与ARM32"><span class="nav-number">3.</span> <span class="nav-text">3.ARM64与ARM32</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-架构"><span class="nav-number">3.1.</span> <span class="nav-text">A.架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-指令编码长度"><span class="nav-number">3.2.</span> <span class="nav-text">B.指令编码长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-当前指令的地址（PC）"><span class="nav-number">3.3.</span> <span class="nav-text">C.当前指令的地址（PC）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-参数的传递和访问"><span class="nav-number">3.4.</span> <span class="nav-text">D.参数的传递和访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-寄存器和寻址"><span class="nav-number">3.5.</span> <span class="nav-text">E.寄存器和寻址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）寻址"><span class="nav-number">3.5.1.</span> <span class="nav-text">（1）寻址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）ARM32寄存器"><span class="nav-number">3.5.2.</span> <span class="nav-text">（2）ARM32寄存器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）ARM64寄存器"><span class="nav-number">3.5.3.</span> <span class="nav-text">（3）ARM64寄存器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-栈操作"><span class="nav-number">3.6.</span> <span class="nav-text">F.栈操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G-软中断进行系统调用"><span class="nav-number">3.7.</span> <span class="nav-text">G.软中断进行系统调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）ARM32"><span class="nav-number">3.7.1.</span> <span class="nav-text">（1）ARM32</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）ARM64"><span class="nav-number">3.7.2.</span> <span class="nav-text">（2）ARM64</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-ARM64常用指令"><span class="nav-number">4.</span> <span class="nav-text">4.ARM64常用指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-简单翻译"><span class="nav-number">5.</span> <span class="nav-text">5.简单翻译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-参考"><span class="nav-number">6.</span> <span class="nav-text">6.参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
