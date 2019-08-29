@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hook,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="对Android平台上的注入和Hook的原理解析，在文末也顺带提了一下Android的反调试技术。">
+<meta name="keywords" content="Hook">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 注入和Hook">
+<meta property="og:url" content="http://yoursite.com/2019/08/28/Android-注入和Hook/index.html">
+<meta property="og:site_name" content="Aye&#39;s house">
+<meta property="og:description" content="对Android平台上的注入和Hook的原理解析，在文末也顺带提了一下Android的反调试技术。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/08/28/Android-注入和Hook/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/28/Android-注入和Hook/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/28/Android-注入和Hook/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/28/Android-注入和Hook/2.png">
+<meta property="og:updated_time" content="2019-08-29T09:48:32.882Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 注入和Hook">
+<meta name="twitter:description" content="对Android平台上的注入和Hook的原理解析，在文末也顺带提了一下Android的反调试技术。">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/28/Android-注入和Hook/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/28/Android-注入和Hook/">
+
+
+
+
+
+  <title>Android 注入和Hook | Aye's house</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aye's house</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/Android-注入和Hook/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ayesawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aye's house">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android 注入和Hook</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-28T11:02:33+08:00">
+                2019-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/28/Android-注入和Hook/" class="leancloud_visitors" data-flag-title="Android 注入和Hook">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对Android平台上的注入和Hook的原理解析，在文末也顺带提了一下Android的反调试技术。</p>
+<a id="more"></a>
+<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h1><p>我们平时说的HOOK其实是注入和HOOK加在一起，HOOK之前一般都是先注入自己的so，再替换原函数，执行注入函数。</p>
+<blockquote>
+<p>注入的本质：进程的暂停（含控制权的交接），去执行你想要的操作后，进程再恢复运行；<br>Hook的本质：先注入再替换；先HOOK住目标函数，再执行替换的注入代码。</p>
+</blockquote>
+<h1 id="2-注入"><a href="#2-注入" class="headerlink" title="2.注入"></a>2.注入</h1><h2 id="A-基本原理"><a href="#A-基本原理" class="headerlink" title="A.基本原理"></a>A.基本原理</h2><p>进程注入就是将一段代码拷贝到目标进程，然后让目标进程执行这段代码的技术。由于这样的代码构造起来比较复杂，所以实际情况下，只将很少的代码注入到目标进程，而将真正做事的代码放到一个共享库中，即.so文件。被注入的那段代码只负责加载这个.so，并执行里面的函数。</p>
+<h2 id="B-分类"><a href="#B-分类" class="headerlink" title="B.分类"></a>B.分类</h2><h3 id="（1）so注入"><a href="#（1）so注入" class="headerlink" title="（1）so注入"></a>（1）so注入</h3><h4 id="静态注入"><a href="#静态注入" class="headerlink" title="静态注入"></a>静态注入</h4><p>静态注入，静态解析ELF文件，增加一个依赖SO，或新增一个section节（注入代码在section字段），代码节是自己的注入代码，然后修复ELF文件结构。</p>
+<h4 id="动态注入"><a href="#动态注入" class="headerlink" title="动态注入"></a>动态注入</h4><p><strong>由于Android是基于linux内核的操作系统，所以Android下的注入也是基于Linux下的系统调用函数<code>ptrace()</code>实现的。</strong>即在获得root权限后，通过ptrace()系统调用将stub（桩代码）注入到指定pid的进程中。</p>
+<h5 id="A-ptrace函数"><a href="#A-ptrace函数" class="headerlink" title="A.ptrace函数"></a>A.ptrace函数</h5><p>ptrace函数的原型如下所示，其中request为行为参数，该参数决定了ptrace函数的行为，pid参数为远程进程的ID，addr参数与data参数在不同的request参数取值下表示不同的含义。</p>
+<blockquote>
+<p>long ptrace(enum __ptrace_request request, pid_t pid, void <em>addr, void </em>data);</p>
+</blockquote>
+<p>ptrace注入进程的过程中需要使用到的request参数(部分)——</p>
+<pre><code>PTRACE_ATTACH，表示附加到指定远程进程;
+PTRACE_DETACH，表示从指定远程进程分离
+PTRACE_GETREGS，表示读取远程进程当前寄存器环境
+PTRACE_SETREGS，表示设置远程进程的寄存器环境
+PTRACE_CONT，表示使远程进程继续运行
+PTRACE_PEEKTEXT，从远程进程指定内存地址读取一个word大小的数据
+PTRACE_POKETEXT，往远程进程指定内存地址写入一个word大小的数据
+PTRACE_TRACEME，表示本进程将被其父进程跟踪，交付给这个进程的所有信号（除SIGKILL之外），都将使其停止，父进程将通过wait()获知这一情况。
+</code></pre><h5 id="B-ptrace注入"><a href="#B-ptrace注入" class="headerlink" title="B.ptrace注入"></a>B.ptrace注入</h5><p>有两种实现ptrace注入模块到远程进程的方法。</p>
+<blockquote>
+<p><strong>方法一</strong>：直接远程调用dlopen\dlsym等函数加载被注入模块并执行指定的代码。其主要流程如下——</p>
+</blockquote>
+<p><em>假设我们需要注入到远程的/system/bin/surfaceflinger进程，并且在该进程中注入/data/libhello.so模块，执行该模块的hook_entry方法。</em></p>
+<ul>
+<li>获取待注入进程的pid，即获取/system/bin/surfaceflinger进程的pid；</li>
+<li>attach到远程进程；</li>
+<li>保存寄存器环境；</li>
+<li>远程调用mmap来远程分配内存空间（获取到远程mmap函数的地址；构造mmap参数，并远程调用mmap函数；得到分配的内存空间的初始地址，并将注入模块写入该内存）；</li>
+<li>远程打开/data/libhello.so模块（获取到远程dlopen函数的地址；构造dlopen参数，并远程调用dlopen函数）；</li>
+<li>远程调用dlsym函数来实现对注入的libhello.so模块的hook_entry方法的调用；</li>
+<li>关闭远程调用，恢复寄存器环境并detach进程。</li>
+</ul>
+<blockquote>
+<p><strong>方法二</strong>：使用ptrace将shellcode注入到远程进程的内存空间中，然后通过执行shellcode加载远程进程模块。其主要流程如下——</p>
+</blockquote>
+<ul>
+<li>在目标进程中分配内存，用来写shellcode和参数； </li>
+<li>往目标进程中写入shellcode, shellcode会调用dlopen来载入我们的library；</li>
+<li>运行目标进程中的shellcode。</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/hp910315/article/details/77335058" target="_blank" rel="noopener">Android ptrace进程注入原理</a><br><a href="https://blog.csdn.net/jinzhuojun/article/details/9900105" target="_blank" rel="noopener">Android中的so注入(inject)和挂钩(hook) - For both x86 and arm</a></p>
+</blockquote>
+<h5 id="C-GDB-ptrace调试原理"><a href="#C-GDB-ptrace调试原理" class="headerlink" title="C.GDB ptrace调试原理"></a>C.GDB ptrace调试原理</h5><p><strong>gdb就是基于ptrace这个系统调用来做的。</strong>其<strong>原理</strong>是利用ptrace系统调用，在被调试程序和gdb之间建立追踪关系。然后所有发送给被调试程序（被追踪线程）的信号（除SIGKILL）都会被gdb截获，gdb根据截获的信号，查看被调试程序相应的内存地址，并控制被调试的程序继续运行。GDB常用的使用方法有断点设置和单步调试。</p>
+<blockquote>
+<p>gdb的2种调试模式——</p>
+</blockquote>
+<p><strong>gdb启动应用程序</strong>——通过fork函数创建一个新进程，在子进程中执行ptrace(PTRACE_TRACEME, 0, 0, 0)函数，然后通过execv()调用准备调试的程序。</p>
+<p><strong>attach到现有进程</strong>——debugger可以调用ptrace(PTRACE_ATTACH，pid,…)，建立自己与进程号为pid的进程间的跟踪关系。即利用PTRACE_ATTACH，使自己变成被调试程序的父进程(用ps可以看到)。用attach建立起来的跟踪关系，可以调用ptrace(PTRACE_DETACH，pid,…)来解除。注意attach进程时的权限问题，如一个非root权限的进程是不能attach到一个root进程上的。</p>
+<blockquote>
+<p>断点原理——</p>
+</blockquote>
+<ol>
+<li>断点的实现原理，就是在指定的位置插入断点指令，当被调试的程序运行到断点的时候，产生SIGTRAP信号。该信号被gdb捕获并进行断点命中判定，当gdb判断出这次SIGTRAP是断点命中之后就会转入等待用户输入进行下一步处理，否则继续。 </li>
+<li>断点的设置原理: 在程序中设置断点，就是先将该位置的原来的指令保存，然后向该位置写入int 3。当执行到int 3的时候，发生软中断，内核会给子进程发出SIGTRAP信号，当然这个信号会被转发给父进程。然后用保存的指令替换int3,等待恢复运行。</li>
+<li>断点命中判定:gdb把所有的断点位置都存放在一个链表中，命中判定即把被调试程序当前停止的位置和链表中的断点位置进行比较，看是断点产生的信号，还是无关信号。</li>
+</ol>
+<blockquote>
+<p>单步跟踪原理——</p>
+</blockquote>
+<p>ptrace本身支持单步功能，调用ptrace(PTRACE_SINGLESTEP，pid,…)即可。</p>
+<h5 id="D-参考"><a href="#D-参考" class="headerlink" title="D.参考"></a>D.参考</h5><blockquote>
+<p><a href="https://blog.csdn.net/edonlii/article/details/8717029" target="_blank" rel="noopener">ptrace运行原理及使用详解</a><br><a href="https://www.cnblogs.com/xsln/p/ptrace.html" target="_blank" rel="noopener">GDB调试原理——ptrace系统调用</a><br><a href="http://oenhan.com/gdb-principle" target="_blank" rel="noopener">GDB工作原理和内核实现</a><br><a href="https://www.iteye.com/blog/andrew913-415704" target="_blank" rel="noopener">inux 下的几种信号解释</a></p>
+</blockquote>
+<h3 id="（2）dex注入"><a href="#（2）dex注入" class="headerlink" title="（2）dex注入"></a>（2）dex注入</h3><p>多基于so注入实现，具体步骤及参考如下——</p>
+<ol>
+<li>将.so注入目标进程，执行.so文件中的某个函数。</li>
+<li>在这个函数里先获得一个JNIEnv指针，通过这个指针就可以调JNI函数了。</li>
+<li>反射得到当前应用进程的PathClassLoader，用这个ClassLoader来构造一个DexClassLoader对象。Dex文件路径作为一个参数传入DexClassLoader的构造函数，另一个重要的参数是，一个具有可写权限的文件夹路径。因为在做dex优化时，需要生成优化过的dex文件，这跟生成/data/dalvik-cache/下的dex文件是一个道理。</li>
+<li>通过这个DexClassLoader对象，来加载目标类，然后反射目标类中的目标函数。最终调用之。</li>
+</ol>
+<blockquote>
+<p><a href="https://bbs.pediy.com/thread-166480.htm" target="_blank" rel="noopener">[原创]手机毒霸去广告功能分析三：java代码（dex）注入</a></p>
+</blockquote>
+<h1 id="3-Hook"><a href="#3-Hook" class="headerlink" title="3.Hook"></a>3.Hook</h1><h2 id="A-概述"><a href="#A-概述" class="headerlink" title="A.概述"></a>A.概述</h2><p>Hook的五大核心问题如下——</p>
+<ol>
+<li><strong>如何附加目标</strong>：Ptrace</li>
+<li><strong>注入的临时代码放哪里</strong>：mmap函数可以分配一段临时的内存来存放</li>
+<li><strong>如何找到内存中加载的mmap函数地址，目标so的函数地址，以及加载hook.so的地址</strong>：使用dlopen/dlsym函数</li>
+<li><strong>HOOK的实质为什么是注入</strong>：其实就是钩住目标函数，执行的是替换的注入代码</li>
+<li><strong>HOOK为什么需要对ELF文件有深入理解</strong>：HOOK的常用方法就是替换目标函数，即函数重定向，把原本进程要执行的老函数地址，重定向到新函数地址，新函数运行后，再回到原本进程去运行，所以此时ELF文件结构的解析就尤为重要，如symbol符号、got表等等。</li>
+</ol>
+<h2 id="B-分类-1"><a href="#B-分类-1" class="headerlink" title="B.分类"></a>B.分类</h2><p>Android平台上的Hook主要可以分为以下几类——</p>
+<ul>
+<li>java层的Hook（包括Dalvik Hook、ART Hook）</li>
+<li>native层的Hook（即so Hook，包括got Hook、inline Hook）</li>
+</ul>
+<p>接下来先放一张so Hook的两种技术的对比图，然后对其基本原理进行简介。</p>
+<p><img src="/2019/08/28/Android-注入和Hook/1.png" alt=""></p>
+<h3 id="（1）got-Hook"><a href="#（1）got-Hook" class="headerlink" title="（1）got Hook"></a>（1）got Hook</h3><h4 id="linux的延时绑定策略"><a href="#linux的延时绑定策略" class="headerlink" title="linux的延时绑定策略"></a>linux的延时绑定策略</h4><p>这个策略是为了解决原本静态编译时要把各种系统API的具体实现代码都编译进当前ELF文件里导致文件巨大臃肿的问题。</p>
+<p>在动态链接的ELF程序里调用共享库的函数时，第一次调用时先去查找PLT表中相应的项目，而PLT表中再跳跃到GOT表中希望得到该函数的实际地址，但这时GOT表中指向的是PLT中那条跳跃指令下面的代码，最终会执行_dl_runtime_resolve()并执行目标函数。第二次调用时也是PLT跳转到GOT表，但是GOT中对应项目已经在第一次_dl_runtime_resolve()中被修改为函数实际地址，因此第二次及以后的调用直接就去执行目标函数，不用再去执行_dl_runtime_resolve()了。</p>
+<h4 id="原理及特点"><a href="#原理及特点" class="headerlink" title="原理及特点"></a>原理及特点</h4><blockquote>
+<p>基本原理</p>
+</blockquote>
+<p>PLT Hook通过直接修改GOT表，使得在调用该共享库的函数时跳转到的是用户自定义的Hook功能代码。</p>
+<blockquote>
+<p>特点</p>
+</blockquote>
+<ol>
+<li>可以大量Hook那些系统API，但是难以精准Hook住某次函数调用。</li>
+<li>对于一些so内部自定义的函数无法Hook到。因为这些函数不在PLT表和GOT表里。</li>
+<li>PLT Hook在hook目标函数时，如果需要回调原来的函数，那就在Hook后的功能函数中直接调用目标函数即可。</li>
+</ol>
+<blockquote>
+<p>应用方向</p>
+</blockquote>
+<p>开发者的利器，对自家开发的APP的性能监控。</p>
+<blockquote>
+<p>开源工具</p>
+</blockquote>
+<p>爱奇艺开源的<a href="https://github.com/iqiyi/xHook" target="_blank" rel="noopener">xHook</a>工具库，这个工具库主要是用于开发者开发时把该项目集成进自己的APP，然后使用这个工具库来帮助开发者监控APK运行时那些他们关心的性能数据。<strong>比如通过hook malloc来监控内存分配等</strong>。由于这个库是被开发者集成进了APP中，所以它对于这个app的监控是<strong>不需要Root权限</strong>的。</p>
+<h3 id="（2）inline-Hook"><a href="#（2）inline-Hook" class="headerlink" title="（2）inline Hook"></a>（2）inline Hook</h3><blockquote>
+<p>基本原理</p>
+</blockquote>
+<p>在代码段中插入跳转指令，从而把程序执行流程引向用户需要的功能代码中去，以此达到Hook的效果。（arm、thumb模式下的原理图如下。）</p>
+<p><img src="/2019/08/28/Android-注入和Hook/1.jpg" alt=""></p>
+<p><img src="/2019/08/28/Android-注入和Hook/2.jpg" alt=""></p>
+<blockquote>
+<p>基本步骤</p>
+</blockquote>
+<ol>
+<li>在想要Hook的目标代码处备份下面的几条指令，然后插入跳转指令，把程序流程转移到一个stub段上去。</li>
+<li>在stub代码段上先把所有寄存器的状态保存好，并调用用户自定义的Hook功能函数，然后把所有寄存器的状态恢复并跳转到备份代码处。</li>
+<li>在备份代码处把当初备份的那几条指令都执行一下，然后跳转到当初备份代码位置的下面接着执行程序。</li>
+</ol>
+<blockquote>
+<p>难点</p>
+</blockquote>
+<ol>
+<li>对于不同指令模式的兼容（thumb/thumb-2、arm32、arm64）；</li>
+<li>PC相关指令的修复（如何正确的还原执行备份代码）。</li>
+</ol>
+<blockquote>
+<p>特点</p>
+</blockquote>
+<ol>
+<li>完全不受函数是否在PLT表中的限制，直接在目标so中的任意代码位置都可进行Hook。这个Hook精准度是汇编指令级的。</li>
+<li>对Hook功能函数的限制较小。</li>
+<li>相对于PLT Hook的强制批量Hook的特性，Native Hook要灵活许多。当想要进行批量Hook一些系统API时也可以直接去找内存里对应的如libc.so这些库，对它们中的API进行Hook，这样的话，所有对这个API的调用也就都被批量Hook了。</li>
+</ol>
+<blockquote>
+<p>应用方向</p>
+</blockquote>
+<p>适合APP逆向人员，软件分析人员，CTF Android逆向解题等。</p>
+<blockquote>
+<p>开源框架</p>
+</blockquote>
+<ol>
+<li><a href="https://github.com/ele7enxxh/Android-Inline-Hook" target="_blank" rel="noopener">Android-Inline-Hook</a></li>
+<li><a href="https://github.com/GToad/Android_Inline_Hook" target="_blank" rel="noopener">Android_Inline_Hook</a></li>
+</ol>
+<blockquote>
+<p>参考</p>
+</blockquote>
+<ol>
+<li><a href="https://blog.csdn.net/beyond702/article/details/51425491" target="_blank" rel="noopener">Arm Inline hook的简易原理图</a></li>
+<li><a href="https://gtoad.github.io/2018/07/05/Android-Native-Hook/" target="_blank" rel="noopener">Android Native Hook技术路线概述</a></li>
+<li><a href="https://gtoad.github.io/2018/07/06/Android-Native-Hook-Practice/" target="_blank" rel="noopener">Android Native Hook工具实践</a></li>
+<li><a href="https://gtoad.github.io/2018/09/20/Android-Native-Hook-Practice-Arm64/" target="_blank" rel="noopener">ARM64下的Android Native Hook工具实践</a></li>
+<li><a href="https://gtoad.github.io/2018/07/13/Android-Inline-Hook-Fix/" target="_blank" rel="noopener">Android Inline Hook中的指令修复详解</a></li>
+<li><a href="http://ele7enxxh.com/Android-Arm-Inline-Hook.html" target="_blank" rel="noopener">Android Arm Inline Hook</a></li>
+</ol>
+<h1 id="4-Android平台上常用Hook注入框架"><a href="#4-Android平台上常用Hook注入框架" class="headerlink" title="4.Android平台上常用Hook注入框架"></a>4.Android平台上常用Hook注入框架</h1><h2 id="A-Xposed（java层）"><a href="#A-Xposed（java层）" class="headerlink" title="A.Xposed（java层）"></a>A.Xposed（java层）</h2><h3 id="（1）原理"><a href="#（1）原理" class="headerlink" title="（1）原理"></a>（1）原理</h3><p>Xposed框架核心思想在于将java层普通函数注册成本地JNI方法，以此来变相实现hook机制。</p>
+<p>通过替换/system/bin/app_process程序控制zygote进程，使得app_process在启动过程中会加载XposedBridge.jar这个jar包，从而完成对Zygote进程及其创建的Dalvik虚拟机的劫持。</p>
+<p>在Android系统中，应用程序进程都是由Zygote进程孵化出来的，而Zygote进程是由Init进程启动的。Zygote进程在启动时会创建一个Dalvik虚拟机实例，每当它孵化一个新的应用程序进程时，都会将这个Dalvik虚拟机实例复制到新的应用程序进程里面去，从而使得每一个应用程序进程都有一个独立的Dalvik虚拟机实例。这也是Xposed选择替换app_process的原因。</p>
+<h3 id="（2）检测是否被xposed-hook"><a href="#（2）检测是否被xposed-hook" class="headerlink" title="（2）检测是否被xposed hook"></a>（2）检测是否被xposed hook</h3><ol>
+<li>Xposed的某个类对象中的三个成员变量中存储了Xposed hook的相关信息，支付宝用反射机制获取到这些变量，检测里面是否包含“alipay”、“taobao”等字样；</li>
+<li>检测getprop ro.secure是否为1 &amp;&amp; /system/bin和/system/xbin目录下是否包含有su二进制程序；</li>
+<li>cat /proc/pid/maps中是否hack、inject、hook、call等字样；</li>
+<li>主动抛出异常，检测堆栈信息里是否有Xposed等字样。</li>
+</ol>
+<h2 id="B-Cydia-Substrate（java层-native层）"><a href="#B-Cydia-Substrate（java层-native层）" class="headerlink" title="B.Cydia Substrate（java层+native层）"></a>B.Cydia Substrate（java层+native层）</h2><p>没怎么用过，后续用过再补介绍。</p>
+<h2 id="C-Frida（java层-native层）"><a href="#C-Frida（java层-native层）" class="headerlink" title="C.Frida（java层+native层）"></a>C.Frida（java层+native层）</h2><p>同没怎么用过，但其基本原理类似于IDA等调试器的原理，也是要在手机端安装运行一个server实现端口转发，用于和调试器通信。</p>
+<h1 id="5-Android反调试技术"><a href="#5-Android反调试技术" class="headerlink" title="5.Android反调试技术"></a>5.Android反调试技术</h1><p>主要参考自——<a href="https://gtoad.github.io/2017/06/25/Android-Anti-Debug/" target="_blank" rel="noopener">Android反调试技术整理与实践</a>和<a href="http://www.bigfog.info/2018/05/28/%E5%AE%89%E5%8D%93%E5%8F%8D%E8%B0%83%E8%AF%95%E6%A3%80%E6%B5%8B%E6%8A%80%E6%9C%AF/" target="_blank" rel="noopener">安卓反调试检测技术</a></p>
+<h2 id="基于时间的检测"><a href="#基于时间的检测" class="headerlink" title="基于时间的检测"></a>基于时间的检测</h2><blockquote>
+<p>原理</p>
+</blockquote>
+<p>通过在代码不同的地方获取时间值，从而可以求出这个过程中的执行时间。如果两个时间值相差过大，则说明中间的代码流程被调试了。</p>
+<blockquote>
+<p>特点</p>
+</blockquote>
+<p>这个方法一个不好的特点是需要一定的代码跨度，因此可能需要暴露部分代码逻辑。因为如果两个时间的取值点非常非常近，那很可能调试者在两者之间没有断点从而迅速跳过。</p>
+<h2 id="基于文件的检测"><a href="#基于文件的检测" class="headerlink" title="基于文件的检测"></a>基于文件的检测</h2><ol>
+<li>/proc/pid/status 和 /proc/pid/task/pid/status：普通状态下，TracerPid这项应该为0；调试状态下为调试进程的PID。</li>
+<li>/proc/pid/stat 和 /proc/pid/task/pid/stat：调试状态下，括号后面的第一个字母应该为t。</li>
+<li>/proc/pid/wchan 和 /proc/pid/task/pid/wchan：调试状态下，里面内容为ptrace_stop。</li>
+</ol>
+<h2 id="检测调试工具是否存在"><a href="#检测调试工具是否存在" class="headerlink" title="检测调试工具是否存在"></a>检测调试工具是否存在</h2><h3 id="调试器检测"><a href="#调试器检测" class="headerlink" title="调试器检测"></a>调试器检测</h3><p>isDebuggerConnected():安卓系统在android.os.Debug类中提供了isDebuggerConected()方法，用于检测是否有调试器链接。返回值为true则表示被调试。</p>
+<h3 id="调试端口检测"><a href="#调试端口检测" class="headerlink" title="调试端口检测"></a>调试端口检测</h3><p>netstat命令经常用来查看正在运行应用的本地端口号,pid,uid等信息。而执行cat /proc/net/tcp 也可以来查看正在运行应用的本地端口号。读取/proc/net/tcp的内容，查找23946端口(IDA调试的默认端口)，如果找到了该端口则说明进程正在被调试。</p>
+<h3 id="进程名称检测"><a href="#进程名称检测" class="headerlink" title="进程名称检测"></a>进程名称检测</h3><p>利用ps命令列出所有进程，然后遍历查找，查找固定的进程名，如android_server gdb_server android_x64/86_server mac_server/64等。</p>
+<h3 id="父进程检测"><a href="#父进程检测" class="headerlink" title="父进程检测"></a>父进程检测</h3><p>检测当前进程的父进程是否是调试进程。</p>
+<h2 id="Ptrace自己"><a href="#Ptrace自己" class="headerlink" title="Ptrace自己"></a>Ptrace自己</h2><p>由于Linux下每个进程同一时刻最多只能被一个进程调试，因此APP可以通过自己ptrace自己的方式来抢先占坑。</p>
+<h2 id="断点扫描"><a href="#断点扫描" class="headerlink" title="断点扫描"></a>断点扫描</h2><p>IDA等调试器在调试时候的原理是向断点地址插入breakpoint汇编指令，而把原来的指令暂时备份到别处。因此，本方法通过扫描自身so的代码部分中是否存在breakpoint指令即可。</p>
+<p>一般来说Android App有arm模式和thumb模式，因此需要都检查一下以下断点指令：</p>
+<ul>
+<li>Arm：0x01，0x00，0x9f，0xef</li>
+<li>Thumb16：0x01，0xde</li>
+<li>Thumb32：0xf0，0xf7，0x00，0xa0</li>
+</ul>
+<h2 id="信号处理"><a href="#信号处理" class="headerlink" title="信号处理"></a>信号处理</h2><p><img src="/2019/08/28/Android-注入和Hook/2.png" alt=""></p>
+<h2 id="多进程-线程"><a href="#多进程-线程" class="headerlink" title="多进程/线程"></a>多进程/线程</h2><p>本方法需要结合上述的一些方法才行，本身并不是一个具体的反调试技术，而是一种编程策略。其思想在于启动一个守护进程/线程来检测主逻辑进程/线程是否被调试，如果被调试就杀死主逻辑进程/线程；或者两个线程/进程互相检测是否被调试或存活等。</p>
+<p>子进程/线程对主进程/线程的保护仅如下方法有效：</p>
+<ul>
+<li>基于文件的检测</li>
+<li>断点扫描</li>
+<li>检测调试工具是否存在</li>
+<li>基于时间的检测（极少）</li>
+</ul>
+<p>其它方法可能依然更适合主线程/进程自己实现。</p>
+<h2 id="虚拟机-模拟器检测"><a href="#虚拟机-模拟器检测" class="headerlink" title="虚拟机/模拟器检测"></a>虚拟机/模拟器检测</h2><p><em>后期有时间可以尝试实现一个包含上述反调试机制的APK，如开源项目<a href="https://github.com/GToad/Android_Anti_Debug" target="_blank" rel="noopener">GToad/Android_Anti_Debug</a>所示。</em></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hook/" rel="tag"># Hook</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/26/arm汇编基本指令/" rel="next" title="ARM汇编基本指令">
+                <i class="fa fa-chevron-left"></i> ARM汇编基本指令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ayesawyer">
+          <p class="site-author-name" itemprop="name">ayesawyer</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ayesawyer" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luo-double-kua.github.io/" title="隔壁xxx的小窝" target="_blank">隔壁xxx的小窝</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-概述"><span class="nav-number">1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-注入"><span class="nav-number">2.</span> <span class="nav-text">2.注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-基本原理"><span class="nav-number">2.1.</span> <span class="nav-text">A.基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-分类"><span class="nav-number">2.2.</span> <span class="nav-text">B.分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）so注入"><span class="nav-number">2.2.1.</span> <span class="nav-text">（1）so注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态注入"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">静态注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态注入"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">动态注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-ptrace函数"><span class="nav-number">2.2.1.2.1.</span> <span class="nav-text">A.ptrace函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#B-ptrace注入"><span class="nav-number">2.2.1.2.2.</span> <span class="nav-text">B.ptrace注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-GDB-ptrace调试原理"><span class="nav-number">2.2.1.2.3.</span> <span class="nav-text">C.GDB ptrace调试原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#D-参考"><span class="nav-number">2.2.1.2.4.</span> <span class="nav-text">D.参考</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）dex注入"><span class="nav-number">2.2.2.</span> <span class="nav-text">（2）dex注入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Hook"><span class="nav-number">3.</span> <span class="nav-text">3.Hook</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-概述"><span class="nav-number">3.1.</span> <span class="nav-text">A.概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-分类-1"><span class="nav-number">3.2.</span> <span class="nav-text">B.分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）got-Hook"><span class="nav-number">3.2.1.</span> <span class="nav-text">（1）got Hook</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linux的延时绑定策略"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">linux的延时绑定策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理及特点"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">原理及特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）inline-Hook"><span class="nav-number">3.2.2.</span> <span class="nav-text">（2）inline Hook</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Android平台上常用Hook注入框架"><span class="nav-number">4.</span> <span class="nav-text">4.Android平台上常用Hook注入框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Xposed（java层）"><span class="nav-number">4.1.</span> <span class="nav-text">A.Xposed（java层）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）原理"><span class="nav-number">4.1.1.</span> <span class="nav-text">（1）原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）检测是否被xposed-hook"><span class="nav-number">4.1.2.</span> <span class="nav-text">（2）检测是否被xposed hook</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-Cydia-Substrate（java层-native层）"><span class="nav-number">4.2.</span> <span class="nav-text">B.Cydia Substrate（java层+native层）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-Frida（java层-native层）"><span class="nav-number">4.3.</span> <span class="nav-text">C.Frida（java层+native层）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Android反调试技术"><span class="nav-number">5.</span> <span class="nav-text">5.Android反调试技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于时间的检测"><span class="nav-number">5.1.</span> <span class="nav-text">基于时间的检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于文件的检测"><span class="nav-number">5.2.</span> <span class="nav-text">基于文件的检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检测调试工具是否存在"><span class="nav-number">5.3.</span> <span class="nav-text">检测调试工具是否存在</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#调试器检测"><span class="nav-number">5.3.1.</span> <span class="nav-text">调试器检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试端口检测"><span class="nav-number">5.3.2.</span> <span class="nav-text">调试端口检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程名称检测"><span class="nav-number">5.3.3.</span> <span class="nav-text">进程名称检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父进程检测"><span class="nav-number">5.3.4.</span> <span class="nav-text">父进程检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ptrace自己"><span class="nav-number">5.4.</span> <span class="nav-text">Ptrace自己</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#断点扫描"><span class="nav-number">5.5.</span> <span class="nav-text">断点扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号处理"><span class="nav-number">5.6.</span> <span class="nav-text">信号处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多进程-线程"><span class="nav-number">5.7.</span> <span class="nav-text">多进程/线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机-模拟器检测"><span class="nav-number">5.8.</span> <span class="nav-text">虚拟机/模拟器检测</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ayesawyer</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>  访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("yWdQWaFa2z2MWDKsMNEzvv3E-gzGzoHsz", "e6INbOXP7UPpJUnKlgxhNb52");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
