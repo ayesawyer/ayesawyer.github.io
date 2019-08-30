@@ -112,7 +112,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/2.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/7.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/8.png">
-<meta property="og:updated_time" content="2019-08-24T03:22:01.487Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/安全面经。。。/11.png">
+<meta property="og:updated_time" content="2019-08-30T10:02:10.880Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安全面经。。。">
 <meta name="twitter:description" content="对于在网上找到的面经中的问题的整理和回答。">
@@ -577,6 +580,82 @@ execute([‘/system/bin/sh’,’-c’,’echo  “hello” &gt; /sdcard/check.t
 <blockquote>
 <p><a href="http://science.china.com.cn/2016-11/10/content_9150192.htm" target="_blank" rel="noopener">Android apk资源保护方案研究分析</a><br><a href="http://mrljdx.com/2015/12/18/%E8%B5%84%E6%BA%90%E6%B7%B7%E6%B7%86%E6%96%B9%E6%A1%88%E4%B9%8B%E5%BE%AE%E4%BF%A1vs%E7%BE%8E%E5%9B%A2/" target="_blank" rel="noopener">资源混淆方案之微信vs美团</a><br><a href="https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&amp;mid=208135658&amp;idx=1&amp;sn=ac9bd6b4927e9e82f9fa14e396183a8f#rd" target="_blank" rel="noopener">安装包立减1M–微信Android资源混淆打包工具</a></p>
 </blockquote>
+<h2 id="2019秋招"><a href="#2019秋招" class="headerlink" title="2019秋招"></a>2019秋招</h2><p><em>这里就不分公司了，把碰到的问题总结一下。</em></p>
+<h3 id="A-关于OD断点"><a href="#A-关于OD断点" class="headerlink" title="A.关于OD断点"></a>A.关于OD断点</h3><h4 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h4><ul>
+<li>普通断点（F2-访问断点）</li>
+<li>内存断点（内存访问断点、内存写入断点）</li>
+<li>硬件断点</li>
+<li>API断点（本质是CC断点）</li>
+<li>条件断点（本质是一个CC断点（CC是红色，条件是粉色），选到某行，快捷键 shift + F2。弹出的框中输入条件，如 EAX==400000，EAX==400000 || ECX == 6，EAX==400000 &amp;&amp; ECX == 6，满足条件，就断。）</li>
+</ul>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><blockquote>
+<p>F2断点/CC断点</p>
+</blockquote>
+<p>原理是将断下的指令地址处的第一个字节设置为0xCC，当然这是OD帮我们做的，而0xCC对应的汇编指令为int3，是专门用来调试的中断指令。当CPU执行到int3指令时，会触发异常代码为EXCEPTION_BREAKPOINT的异常，这样OD就能够接收到这个异常，然后进行相应的处理，这也是CC断点也叫int3断点的原因。</p>
+<p>好处是可以设置任意个，缺点是容易被会检测出来。</p>
+<blockquote>
+<p>内存断点</p>
+</blockquote>
+<ul>
+<li>将设置的内存断点的地址记录下来</li>
+<li>对这个地址的内存页面修改其属性</li>
+<li>如果是内存写断点，就修改为PAGE_READ（可读，可执行）</li>
+<li>如果是内存访问断点，就修改为PAGE_NOACCESS（不可访问）</li>
+<li>只要访问到这个页面就会产生相应的异常，然后由OD来判断是否与记录的断点一致，从而是否中断下来</li>
+</ul>
+<blockquote>
+<p>硬件断点</p>
+</blockquote>
+<p>这是计算机硬件提供给我们的功能．<br>硬件断点和DRx调试寄存器有关。从Inter CPU体系架构手册中，可以找到DRx调试寄存器的介绍。DRx调试寄存器总共有8个，从DRx0到DRx7。每个寄存器的特性如下：</p>
+<ul>
+<li>DR0－DR3：调试 地址寄存器，保存需要监视的地址，如设置硬件断点；</li>
+<li>DR4－DR5：保留，未公开具体作用；</li>
+<li>DR6：调试 寄存器组 状态寄存器；</li>
+<li>DR7：调试寄存器组 控制寄存器。</li>
+</ul>
+<p>硬件断点原理是使用4个调试寄存器（DR0,DR1,DR2,DR3）来设定地址，以及DR7设定状态，比如：对这个401000是硬件读还是写，或者是执行；是对 字节还是对字，或者是双字。因此最多只能设置4个断点。</p>
+<p>OllyDbg支持调试寄存器，其称为硬件断点。设置方法是在指定的代码行单击鼠标右键，执行设置断点、硬件执行命令。</p>
+<p>硬件断点优点是速度快，在 INT3断点容易被发现的地方，使用硬件断点来代替会有很好的效果，缺点就是最多只能设置4个断点。 　　</p>
+<h3 id="B-IDA和OllyDbg的反汇编原理和差异"><a href="#B-IDA和OllyDbg的反汇编原理和差异" class="headerlink" title="B.IDA和OllyDbg的反汇编原理和差异"></a>B.IDA和OllyDbg的反汇编原理和差异</h3><h4 id="反编译流程"><a href="#反编译流程" class="headerlink" title="反编译流程"></a>反编译流程</h4><p>反编译，是将可执行文件本身转换并还原成高级语言源程序的操作。</p>
+<p><img src="/2019/07/18/安全面经。。。/9.png" alt=""></p>
+<h4 id="IDA的反汇编流程"><a href="#IDA的反汇编流程" class="headerlink" title="IDA的反汇编流程"></a>IDA的反汇编流程</h4><ol>
+<li>首先，确定需要进行反编译的代码区域（指令和数据混杂在一起）。以反编译可执行文件为例，可执行文件必须要符合可执行文件的通用格式，如window所使用的可移植可执行格式（ProtableExecutable,PE）或者Linux系统下常用的可执行和链接格式（Executableandlinkingformat,ELF）。这些格式通常含有特定的规则，IDA根据这些规则确定可执行文件中包含的代码和代码入口点（指令地址）的部分位置；</li>
+</ol>
+<ol start="2">
+<li>然后，获取到指令的起始地址后，IDA会进一步读取该地址所包含的值，并执行一次表查找，将二进制操作码的值和它的汇编语言的助记符对应起来；</li>
+</ol>
+<ol start="3">
+<li>接下来，IDA获取指令并解码任何所需要的操作数，同时对它们的汇编语言等价形式进行格式匹配（如X86汇编语言所使用的的两种主要格式Intel和AT&amp;T格式），并将其在反汇编代码中输出；</li>
+</ol>
+<ol start="4">
+<li>最后，输出一条指令，继续反汇编下一条指令，并重复上述过程，直到反汇编完文件中的所有指令。</li>
+</ol>
+<p><strong>对于大多数的反汇编工具而言，主要的反汇编思想都是和上述差不多的，区别在于它们采取的用于选择下一条指令的算法的不同，线性扫描和递归下降是两种最主要的反汇编算法。采用了线性扫描的工具有GNU调试器（gdb）、WinDbg等，而IDA是一种典型的递归下降反汇编器（Ollydbg也是）。</strong></p>
+<h4 id="差异"><a href="#差异" class="headerlink" title="差异"></a>差异</h4><h5 id="线性扫描和递归下降"><a href="#线性扫描和递归下降" class="headerlink" title="线性扫描和递归下降"></a>线性扫描和递归下降</h5><p>现线性扫描的一大特点就是简单方便，但是它存在一个问题：它无法知道整个程序的执行流。</p>
+<p>递归下降反汇编算法的主要优点在于它具有区分代码与数据的强大能力，作为一种基于控制流的算法，它很少会在反汇编过程中错误地将数据值作为代码处理；其主要缺点在于它无法处理间接代码路径，如利用指针表来查找目标地址的跳转或调用。这个缺点是可以改进的，通过采用一些用于识别指向代码的指针的启发式方法，递归下降反汇编器就能够提供所有代码，并清楚地区分代码与数据。<strong>IDA就是在采用了递归下降算法的同时，增加了一些启发式方法来提高反汇编的准确性。</strong></p>
+<p><strong>递归下降反汇编对于不同的指令的处理如下图所示</strong>——</p>
+<p><img src="/2019/07/18/安全面经。。。/10.png" alt=""></p>
+<h5 id="IDA和Ollydbg"><a href="#IDA和Ollydbg" class="headerlink" title="IDA和Ollydbg"></a>IDA和Ollydbg</h5><p>二者的差异主要体现在——</p>
+<ul>
+<li>目标不同：Ollydbg主要针对32位的windows平台下的可执行文件exe；而IDA不仅可以反汇编exe、还可以反汇编elf、dex等可执行文件。</li>
+<li>效果不同：Ollydbg的反汇编效果没有IDA好，估计是虽然采用了同样的递归下降算法，但其并没有像IDA一样增加一些启发式方法优化反汇编效果。</li>
+</ul>
+<h3 id="C-恶意软件分析流程"><a href="#C-恶意软件分析流程" class="headerlink" title="C.恶意软件分析流程"></a>C.恶意软件分析流程</h3><p>恶意代码分析是由浅入深，逐步深入的过程。初步分析目标是分析恶意代码的自启动特征以尽快的提供清除恶意代码的措施，然后是分析恶意代码的触发条件以便判断分析对象是否早本机进行了破坏活动，然后就是分析恶意代码的破坏功能，如果分析对象已经进行了破坏活动，需要提出恢复措施，然后再分析恶意代码的实现方式等其他特性。具体分析流程见下图。</p>
+<p><img src="/2019/07/18/安全面经。。。/11.png" alt=""></p>
+<h3 id="D-函数运行相关"><a href="#D-函数运行相关" class="headerlink" title="D.函数运行相关"></a>D.函数运行相关</h3><h4 id="C语言中的常量存储"><a href="#C语言中的常量存储" class="headerlink" title="C语言中的常量存储"></a>C语言中的常量存储</h4><p>局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区</p>
+<ul>
+<li>局部变量存储在栈中</li>
+<li>全局变量、静态变量（全局和局部静态变量）存储在静态存储区</li>
+<li>new申请的内存是在堆中</li>
+<li>字符串常量也是存储在静态存储区</li>
+</ul>
+<p>栈中的变量内存会随着定义所在区间的结束自动释放；<br>而对于堆，需要手动free，否则它就一直存在，直到程序结束；<br>对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。</p>
+<pre><code>char *c=&quot;hello world&quot;;
+//&quot;hello world&quot;这个字符串被当作常量而且被放置在此程序的内存静态区。
+//c为一个字符型指针，若为局部变量，则存储在栈内，该指针变量里面存了个地址，该地址为字符串中第一个字母h的地址
+</code></pre><h4 id="x86函数的调用和返回"><a href="#x86函数的调用和返回" class="headerlink" title="x86函数的调用和返回"></a>x86函数的调用和返回</h4><blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/27339191" target="_blank" rel="noopener">x86-64 下函数调用及栈帧原理</a></p>
+</blockquote>
 
       
     </div>
@@ -772,7 +851,7 @@ execute([‘/system/bin/sh’,’-c’,’echo  “hello” &gt; /sdcard/check.t
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网易"><span class="nav-number">1.</span> <span class="nav-text">网易</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-关于x86汇编"><span class="nav-number">1.1.</span> <span class="nav-text">A.关于x86汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）常用的跳转指令"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）常用的跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）堆和栈的区别"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）堆和栈的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）函数调用过程"><span class="nav-number">1.1.3.</span> <span class="nav-text">（3）函数调用过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-软件断点和硬件断点"><span class="nav-number">1.2.</span> <span class="nav-text">B.软件断点和硬件断点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）硬件断点"><span class="nav-number">1.2.1.</span> <span class="nav-text">（1）硬件断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）软件断点"><span class="nav-number">1.2.2.</span> <span class="nav-text">（2）软件断点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-webview组件远程代码执行漏洞原理"><span class="nav-number">1.3.</span> <span class="nav-text">C.webview组件远程代码执行漏洞原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-root判断"><span class="nav-number">1.4.</span> <span class="nav-text">D.root判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-dex文件结构"><span class="nav-number">1.5.</span> <span class="nav-text">E.dex文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）Android应用编译"><span class="nav-number">1.5.1.</span> <span class="nav-text">（1）Android应用编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）dex文件"><span class="nav-number">1.5.2.</span> <span class="nav-text">（2）dex文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-APK防护"><span class="nav-number">1.6.</span> <span class="nav-text">F.APK防护</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）概述"><span class="nav-number">1.6.1.</span> <span class="nav-text">（1）概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）DEX保护"><span class="nav-number">1.6.2.</span> <span class="nav-text">（2）DEX保护</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DEX文件隐藏"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">DEX文件隐藏</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DEX字节码变形"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">DEX字节码变形</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#VMProtect"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">VMProtect</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）资源加密"><span class="nav-number">1.6.3.</span> <span class="nav-text">（3）资源加密</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方案一"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案二"><span class="nav-number">1.6.3.2.</span> <span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案三"><span class="nav-number">1.6.3.3.</span> <span class="nav-text">方案三</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案四"><span class="nav-number">1.6.3.4.</span> <span class="nav-text">方案四</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#网易"><span class="nav-number">1.</span> <span class="nav-text">网易</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-关于x86汇编"><span class="nav-number">1.1.</span> <span class="nav-text">A.关于x86汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）常用的跳转指令"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）常用的跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）堆和栈的区别"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）堆和栈的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）函数调用过程"><span class="nav-number">1.1.3.</span> <span class="nav-text">（3）函数调用过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-软件断点和硬件断点"><span class="nav-number">1.2.</span> <span class="nav-text">B.软件断点和硬件断点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）硬件断点"><span class="nav-number">1.2.1.</span> <span class="nav-text">（1）硬件断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）软件断点"><span class="nav-number">1.2.2.</span> <span class="nav-text">（2）软件断点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-webview组件远程代码执行漏洞原理"><span class="nav-number">1.3.</span> <span class="nav-text">C.webview组件远程代码执行漏洞原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-root判断"><span class="nav-number">1.4.</span> <span class="nav-text">D.root判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-dex文件结构"><span class="nav-number">1.5.</span> <span class="nav-text">E.dex文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）Android应用编译"><span class="nav-number">1.5.1.</span> <span class="nav-text">（1）Android应用编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）dex文件"><span class="nav-number">1.5.2.</span> <span class="nav-text">（2）dex文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-APK防护"><span class="nav-number">1.6.</span> <span class="nav-text">F.APK防护</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）概述"><span class="nav-number">1.6.1.</span> <span class="nav-text">（1）概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）DEX保护"><span class="nav-number">1.6.2.</span> <span class="nav-text">（2）DEX保护</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DEX文件隐藏"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">DEX文件隐藏</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DEX字节码变形"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">DEX字节码变形</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#VMProtect"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">VMProtect</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）资源加密"><span class="nav-number">1.6.3.</span> <span class="nav-text">（3）资源加密</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方案一"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案二"><span class="nav-number">1.6.3.2.</span> <span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案三"><span class="nav-number">1.6.3.3.</span> <span class="nav-text">方案三</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案四"><span class="nav-number">1.6.3.4.</span> <span class="nav-text">方案四</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2019秋招"><span class="nav-number">2.</span> <span class="nav-text">2019秋招</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-关于OD断点"><span class="nav-number">2.1.</span> <span class="nav-text">A.关于OD断点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类型"><span class="nav-number">2.1.1.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">2.1.2.</span> <span class="nav-text">原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-IDA和OllyDbg的反汇编原理和差异"><span class="nav-number">2.2.</span> <span class="nav-text">B.IDA和OllyDbg的反汇编原理和差异</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#反编译流程"><span class="nav-number">2.2.1.</span> <span class="nav-text">反编译流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IDA的反汇编流程"><span class="nav-number">2.2.2.</span> <span class="nav-text">IDA的反汇编流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#差异"><span class="nav-number">2.2.3.</span> <span class="nav-text">差异</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#线性扫描和递归下降"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">线性扫描和递归下降</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#IDA和Ollydbg"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">IDA和Ollydbg</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-恶意软件分析流程"><span class="nav-number">2.3.</span> <span class="nav-text">C.恶意软件分析流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-函数运行相关"><span class="nav-number">2.4.</span> <span class="nav-text">D.函数运行相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C语言中的常量存储"><span class="nav-number">2.4.1.</span> <span class="nav-text">C语言中的常量存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x86函数的调用和返回"><span class="nav-number">2.4.2.</span> <span class="nav-text">x86函数的调用和返回</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

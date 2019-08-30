@@ -98,19 +98,19 @@
 <meta name="keywords" content="Hook">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 注入和Hook">
-<meta property="og:url" content="http://yoursite.com/2019/08/28/Android-注入和Hook/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/08/29/Android-注入和Hook/index.html">
 <meta property="og:site_name" content="Aye&#39;s house">
 <meta property="og:description" content="对Android平台上的注入和Hook的原理解析，在文末也顺带提了一下Android的反调试技术。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/08/28/Android-注入和Hook/1.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/28/Android-注入和Hook/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/08/28/Android-注入和Hook/2.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/08/28/Android-注入和Hook/2.png">
-<meta property="og:updated_time" content="2019-08-29T09:48:32.882Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/Android-注入和Hook/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/Android-注入和Hook/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/Android-注入和Hook/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/Android-注入和Hook/2.png">
+<meta property="og:updated_time" content="2019-08-30T08:28:49.364Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 注入和Hook">
 <meta name="twitter:description" content="对Android平台上的注入和Hook的原理解析，在文末也顺带提了一下Android的反调试技术。">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/28/Android-注入和Hook/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/29/Android-注入和Hook/1.png">
 
 
 
@@ -139,7 +139,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/28/Android-注入和Hook/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/29/Android-注入和Hook/">
 
 
 
@@ -288,7 +288,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/Android-注入和Hook/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/Android-注入和Hook/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ayesawyer">
@@ -317,8 +317,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-28T11:02:33+08:00">
-                2019-08-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-29T11:02:33+08:00">
+                2019-08-29
               </time>
             
 
@@ -357,7 +357,7 @@
 
           
           
-             <span id="/2019/08/28/Android-注入和Hook/" class="leancloud_visitors" data-flag-title="Android 注入和Hook">
+             <span id="/2019/08/29/Android-注入和Hook/" class="leancloud_visitors" data-flag-title="Android 注入和Hook">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -485,7 +485,7 @@ PTRACE_TRACEME，表示本进程将被其父进程跟踪，交付给这个进程
 <li>native层的Hook（即so Hook，包括got Hook、inline Hook）</li>
 </ul>
 <p>接下来先放一张so Hook的两种技术的对比图，然后对其基本原理进行简介。</p>
-<p><img src="/2019/08/28/Android-注入和Hook/1.png" alt=""></p>
+<p><img src="/2019/08/29/Android-注入和Hook/1.png" alt=""></p>
 <h3 id="（1）got-Hook"><a href="#（1）got-Hook" class="headerlink" title="（1）got Hook"></a>（1）got Hook</h3><h4 id="linux的延时绑定策略"><a href="#linux的延时绑定策略" class="headerlink" title="linux的延时绑定策略"></a>linux的延时绑定策略</h4><p>这个策略是为了解决原本静态编译时要把各种系统API的具体实现代码都编译进当前ELF文件里导致文件巨大臃肿的问题。</p>
 <p>在动态链接的ELF程序里调用共享库的函数时，第一次调用时先去查找PLT表中相应的项目，而PLT表中再跳跃到GOT表中希望得到该函数的实际地址，但这时GOT表中指向的是PLT中那条跳跃指令下面的代码，最终会执行_dl_runtime_resolve()并执行目标函数。第二次调用时也是PLT跳转到GOT表，但是GOT中对应项目已经在第一次_dl_runtime_resolve()中被修改为函数实际地址，因此第二次及以后的调用直接就去执行目标函数，不用再去执行_dl_runtime_resolve()了。</p>
 <h4 id="原理及特点"><a href="#原理及特点" class="headerlink" title="原理及特点"></a>原理及特点</h4><blockquote>
@@ -512,8 +512,8 @@ PTRACE_TRACEME，表示本进程将被其父进程跟踪，交付给这个进程
 <p>基本原理</p>
 </blockquote>
 <p>在代码段中插入跳转指令，从而把程序执行流程引向用户需要的功能代码中去，以此达到Hook的效果。（arm、thumb模式下的原理图如下。）</p>
-<p><img src="/2019/08/28/Android-注入和Hook/1.jpg" alt=""></p>
-<p><img src="/2019/08/28/Android-注入和Hook/2.jpg" alt=""></p>
+<p><img src="/2019/08/29/Android-注入和Hook/1.jpg" alt=""></p>
+<p><img src="/2019/08/29/Android-注入和Hook/2.jpg" alt=""></p>
 <blockquote>
 <p>基本步骤</p>
 </blockquote>
@@ -596,7 +596,7 @@ PTRACE_TRACEME，表示本进程将被其父进程跟踪，交付给这个进程
 <li>Thumb16：0x01，0xde</li>
 <li>Thumb32：0xf0，0xf7，0x00，0xa0</li>
 </ul>
-<h2 id="信号处理"><a href="#信号处理" class="headerlink" title="信号处理"></a>信号处理</h2><p><img src="/2019/08/28/Android-注入和Hook/2.png" alt=""></p>
+<h2 id="信号处理"><a href="#信号处理" class="headerlink" title="信号处理"></a>信号处理</h2><p><img src="/2019/08/29/Android-注入和Hook/2.png" alt=""></p>
 <h2 id="多进程-线程"><a href="#多进程-线程" class="headerlink" title="多进程/线程"></a>多进程/线程</h2><p>本方法需要结合上述的一些方法才行，本身并不是一个具体的反调试技术，而是一种编程策略。其思想在于启动一个守护进程/线程来检测主逻辑进程/线程是否被调试，如果被调试就杀死主逻辑进程/线程；或者两个线程/进程互相检测是否被调试或存活等。</p>
 <p>子进程/线程对主进程/线程的保护仅如下方法有效：</p>
 <ul>
