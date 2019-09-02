@@ -114,7 +114,8 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/03/漏洞分析——MEDIACODER-0-8-43-5852-M3U缓冲区溢出漏洞/9.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/03/漏洞分析——MEDIACODER-0-8-43-5852-M3U缓冲区溢出漏洞/10.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/03/漏洞分析——MEDIACODER-0-8-43-5852-M3U缓冲区溢出漏洞/12.png">
-<meta property="og:updated_time" content="2019-07-04T09:01:19.330Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/漏洞分析——MEDIACODER-0-8-43-5852-M3U缓冲区溢出漏洞/13.png">
+<meta property="og:updated_time" content="2019-09-02T09:46:02.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漏洞分析——MEDIACODER 0.8.43.5852 - .M3U缓冲区溢出漏洞">
 <meta name="twitter:description" content="对于0.8.43.5852版的软件MEDIACODER中存在的栈溢出漏洞的分析。">
@@ -507,7 +508,21 @@
 <li><code>!analyze -v</code></li>
 <li><code>!exchain</code></li>
 </ul>
-<h2 id="5-参考"><a href="#5-参考" class="headerlink" title="5.参考"></a>5.参考</h2><h3 id="A-关于SEH"><a href="#A-关于SEH" class="headerlink" title="A.关于SEH"></a>A.关于SEH</h3><blockquote>
+<h2 id="5-参考"><a href="#5-参考" class="headerlink" title="5.参考"></a>5.参考</h2><h3 id="A-关于SEH"><a href="#A-关于SEH" class="headerlink" title="A.关于SEH"></a>A.关于SEH</h3><p><strong>SEH以链表的形式存储在栈中，每一条SEH记录大小为8字节，包含2个元素：</strong></p>
+<ul>
+<li>指向下一条记录地址的指针（4字节）</li>
+<li>指向处理当前异常的代码地址的指针（4字节）</li>
+</ul>
+<p><strong>下图为一个简单的SEH链条结构：</strong></p>
+<p><img src="/2019/07/03/漏洞分析——MEDIACODER-0-8-43-5852-M3U缓冲区溢出漏洞/13.png" alt=""></p>
+<p><strong>通过栈溢出覆盖SEH结构实现漏洞利用的基本步骤如下——</strong></p>
+<ol>
+<li>通过溢出覆盖栈中SEH，将指向下一条记录的指针覆盖为shellcode地址，将指向当前SEH处理函数的指针指向一个带有“POP POP RET”操作的函数；</li>
+<li>触发一个SEH；</li>
+<li>应用程序处理SEH时调用了“POP POP RET”指令，将指向下一条记录的指针作为EIP内容；</li>
+<li>跳到shellcode地址，执行shellcode。</li>
+</ol>
+<blockquote>
 <p><a href="https://www.cnblogs.com/lanrenxinxin/p/4631836.html" target="_blank" rel="noopener">Windows SEH学习 x86</a><br><a href="https://blog.csdn.net/FrankieWang008/article/details/17390671" target="_blank" rel="noopener">SEH分析笔记（X64篇）</a><br><a href="https://huobengle.iteye.com/blog/1381961" target="_blank" rel="noopener">栈溢出中利用SEH</a><br><a href="http://blog.nsfocus.net/tutorial-overflow/" target="_blank" rel="noopener">【干货分享】看教程学溢出之SEH利用</a></p>
 </blockquote>
 <h3 id="B-关于Access-Violation（非法访问）"><a href="#B-关于Access-Violation（非法访问）" class="headerlink" title="B.关于Access Violation（非法访问）"></a>B.关于Access Violation（非法访问）</h3><blockquote>
