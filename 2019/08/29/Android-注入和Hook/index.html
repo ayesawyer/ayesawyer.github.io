@@ -106,7 +106,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/29/Android-注入和Hook/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/08/29/Android-注入和Hook/2.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/08/29/Android-注入和Hook/2.png">
-<meta property="og:updated_time" content="2019-08-30T08:28:49.364Z">
+<meta property="og:updated_time" content="2019-09-09T08:08:20.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 注入和Hook">
 <meta name="twitter:description" content="对Android平台上的注入和Hook的原理解析，在文末也顺带提了一下Android的反调试技术。">
@@ -417,7 +417,7 @@ PTRACE_POKETEXT，往远程进程指定内存地址写入一个word大小的数�
 PTRACE_TRACEME，表示本进程将被其父进程跟踪，交付给这个进程的所有信号（除SIGKILL之外），都将使其停止，父进程将通过wait()获知这一情况。
 </code></pre><h5 id="B-ptrace注入"><a href="#B-ptrace注入" class="headerlink" title="B.ptrace注入"></a>B.ptrace注入</h5><p>有两种实现ptrace注入模块到远程进程的方法。</p>
 <blockquote>
-<p><strong>方法一</strong>：直接远程调用dlopen\dlsym等函数加载被注入模块并执行指定的代码。其主要流程如下——</p>
+<p><strong>方法一</strong>：直接远程调用dlopen\dlsym等函数加载被注入模块并执行指定的代码（dlopen以指定模式打开指定的动态连接库文件，并返回一个句柄给调用进程，dlsym根据动态链接库操作句柄与符号，返回符号对应的地址，不但可以获取函数地址，也可以获取变量地址）。其主要流程如下——</p>
 </blockquote>
 <p><em>假设我们需要注入到远程的/system/bin/surfaceflinger进程，并且在该进程中注入/data/libhello.so模块，执行该模块的hook_entry方法。</em></p>
 <ul>
@@ -429,6 +429,7 @@ PTRACE_TRACEME，表示本进程将被其父进程跟踪，交付给这个进程
 <li>远程调用dlsym函数来实现对注入的libhello.so模块的hook_entry方法的调用；</li>
 <li>关闭远程调用，恢复寄存器环境并detach进程。</li>
 </ul>
+<p><strong>如何获取远程函数的地址？——mmap函数是在”/system/lib/libc.so”模块中，dlopen、dlsym与dlclose函数均是在”/system/bin/linker”模块中；读取”/proc/pid/maps”可以获取到系统模块在本地进程和远程进程的加载基地址；要获取远程进程内存空间中mmap等函数的虚拟地址，可通过计算本地进程中mmap等函数相对于模块的地址偏移，然后使用此地址偏移加上远程进程对应模块的基地址，这个地址就是远程进程内存空间中对应函数的虚拟地址。</strong></p>
 <blockquote>
 <p><strong>方法二</strong>：使用ptrace将shellcode注入到远程进程的内存空间中，然后通过执行shellcode加载远程进程模块。其主要流程如下——</p>
 </blockquote>
